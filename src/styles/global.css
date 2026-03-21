@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1a1a2e;
+  --color-primary: #0b0f19;
   --color-accent: #e94560;
-  --color-surface: #16213e;
-  --color-muted: #0f3460;
+  --color-surface: #111827;
+  --color-surface-light: #1a2235;
+  --color-muted: #1e293b;
   --color-gold: #f5a623;
+  --color-border: #1e293b;
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
@@ -16,45 +18,53 @@
   }
 
   body {
-    @apply bg-primary text-white font-sans min-h-screen;
+    @apply bg-primary text-gray-200 font-sans min-h-screen;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold leading-tight;
+    @apply font-bold leading-tight text-white;
   }
 
   a {
     @apply transition-colors duration-200;
   }
+
+  ::selection {
+    @apply bg-accent/30 text-white;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-accent hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-200;
+    @apply bg-accent hover:bg-red-700 text-white font-semibold py-2.5 px-6 rounded-lg transition-all duration-200 inline-flex items-center justify-center;
   }
 
   .btn-secondary {
-    @apply bg-surface hover:bg-muted text-white font-semibold py-2 px-6 rounded-lg border border-gray-600 transition-all duration-200;
+    @apply bg-surface-light hover:bg-muted text-white font-semibold py-2.5 px-6 rounded-lg border border-border transition-all duration-200 inline-flex items-center justify-center;
   }
 
   .card {
-    @apply bg-surface rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300;
+    @apply bg-surface border border-border rounded-xl overflow-hidden transition-all duration-300;
+  }
+
+  .card:hover {
+    border-color: rgba(233, 69, 96, 0.3);
   }
 
   .badge {
-    @apply inline-block text-xs font-bold uppercase px-2 py-1 rounded;
+    @apply inline-block text-xs font-bold uppercase px-2.5 py-1 rounded;
   }
 
   .badge-new {
-    @apply inline-block text-xs font-bold uppercase px-2 py-1 rounded bg-accent text-white;
+    @apply inline-block text-xs font-bold uppercase px-2.5 py-1 rounded bg-accent text-white;
   }
 
   .badge-out-of-stock {
-    @apply inline-block text-xs font-bold uppercase px-2 py-1 rounded bg-gray-700 text-gray-300;
+    @apply inline-block text-xs font-bold uppercase px-2.5 py-1 rounded bg-gray-800 text-gray-400;
   }
 
   .prose {
-    @apply text-gray-300 leading-relaxed;
+    @apply text-gray-400 leading-relaxed;
   }
 
   .prose h2 {
@@ -83,10 +93,24 @@
 
   .prose th,
   .prose td {
-    @apply border border-gray-700 px-4 py-2 text-left;
+    @apply border border-border px-4 py-2 text-left;
   }
 
   .prose th {
-    @apply bg-surface font-semibold;
+    @apply bg-surface font-semibold text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-primary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-muted);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
   }
 }

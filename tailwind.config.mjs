@@ -4,10 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#1a1a2e',
+        primary: '#0b0f19',
         accent: '#e94560',
-        surface: '#16213e',
-        muted: '#0f3460',
+        surface: '#111827',
+        'surface-light': '#1a2235',
+        muted: '#1e293b',
+        border: '#1e293b',
         gold: '#f5a623',
       },
       fontFamily: {

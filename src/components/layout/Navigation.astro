@@ -1,82 +1,68 @@
 ---
-import { productCategories, topMenuLinks } from '@data/navigation';
+import { productCategories, footerSupport, footerService } from '@data/navigation';
 
 const currentPath = Astro.url.pathname;
 ---
 
-<nav id="sidebar-nav" class="fixed inset-y-0 left-0 z-50 w-72 bg-surface border-r border-gray-700 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 flex flex-col">
-  <!-- Logo -->
-  <div class="p-5 border-b border-gray-700">
-    <a href="/" class="flex items-center gap-2">
-      <img src="/images/logo.svg" alt="IGET Vape Original — Australia's #1 online vape shop" class="h-12 w-auto" loading="eager" />
+<nav id="sidebar-nav" class="fixed inset-y-0 left-0 z-50 w-72 bg-surface border-r border-border transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-60 flex flex-col">
+  <!-- Logo area -->
+  <div class="p-4 border-b border-border">
+    <a href="/" class="flex items-center justify-center">
+      <img src="/images/logo.svg" alt="IGET Vape Original — Australia's #1 online vape shop" class="h-10 w-auto" loading="eager" />
+    </a>
+  </div>
+
+  <!-- Sale banner (mobile only) -->
+  <div class="lg:hidden">
+    <a href="/mix-and-match" class="block">
+      <div class="bg-gradient-to-r from-accent/20 to-accent/5 px-4 py-3 text-center border-b border-border">
+        <span class="text-accent font-bold text-sm">🔥 SALE — Mix & Match & Save!</span>
+      </div>
     </a>
   </div>
 
   <!-- Category Links -->
-  <div class="flex-1 overflow-y-auto py-4">
-    <ul class="space-y-0.5 px-3">
+  <div class="flex-1 overflow-y-auto py-3">
+    <ul class="space-y-0.5 px-2">
       {productCategories.map(cat => (
         <li>
           <a
             href={cat.href}
             class:list={[
-              'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
+              'block px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200',
               currentPath.startsWith(cat.href)
-                ? 'bg-accent text-white shadow-lg shadow-accent/20'
-                : 'text-gray-300 hover:bg-muted hover:text-white',
-            ]}
-          >
-            <svg class="w-4 h-4 flex-shrink-0 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-            <span>{cat.name}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
-
-    <!-- Divider -->
-    <div class="mx-5 my-4 border-t border-gray-700/50"></div>
-
-    <!-- Pages section -->
-    <ul class="space-y-0.5 px-3">
-      {topMenuLinks.map(link => (
-        <li>
-          <a
-            href={link.href}
-            class:list={[
-              'block px-4 py-2.5 rounded-lg text-sm transition-colors',
-              currentPath === link.href
-                ? 'bg-accent/20 text-accent font-medium'
+                ? 'bg-accent/15 text-accent'
                 : 'text-gray-400 hover:bg-muted hover:text-white',
             ]}
           >
-            {link.name}
+            {cat.name}
           </a>
         </li>
       ))}
     </ul>
   </div>
 
-  <!-- Footer info -->
-  <div class="p-4 border-t border-gray-700 space-y-2">
-    <div class="flex items-center gap-2 text-xs text-gray-400">
-      <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-      </svg>
-      <span>$30 Flat Rate Shipping</span>
+  <!-- Footer links in sidebar -->
+  <div class="border-t border-border px-4 py-4 space-y-4">
+    <div>
+      <h4 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Customer Support</h4>
+      <ul class="space-y-1.5">
+        {footerSupport.map(link => (
+          <li>
+            <a href={link.href} class="text-xs text-gray-500 hover:text-accent transition-colors">{link.name}</a>
+          </li>
+        ))}
+      </ul>
     </div>
-    <div class="flex items-center gap-2 text-xs text-gray-400">
-      <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-      </svg>
-      <span>Australia-Wide Delivery</span>
-    </div>
-    <div class="flex items-center gap-2 text-xs text-gray-400">
-      <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-      </svg>
-      <span>100% Authentic Products</span>
+    <div>
+      <h4 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Customer Service</h4>
+      <ul class="space-y-1.5">
+        {footerService.map(link => (
+          <li>
+            <a href={link.href} class="text-xs text-gray-500 hover:text-accent transition-colors">{link.name}</a>
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 </nav>

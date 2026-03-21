@@ -109,19 +109,19 @@ const articleSchema = {
     />
 
     <!-- Tags -->
-    <div class="flex flex-wrap gap-2 mb-10 pt-6 border-t border-gray-700">
+    <div class="flex flex-wrap gap-2 mb-10 pt-6 border-t border-border">
       {post.tags.map(tag => (
-        <span class="text-xs bg-surface border border-gray-700 text-gray-400 px-3 py-1.5 rounded-full">{tag}</span>
+        <span class="text-xs bg-surface border border-border text-gray-400 px-3 py-1.5 rounded-full">{tag}</span>
       ))}
     </div>
 
     <!-- Related Posts -->
     {related.length > 0 && (
-      <section class="mt-10 pt-10 border-t border-gray-700">
+      <section class="mt-10 pt-10 border-t border-border">
         <h2 class="text-xl font-bold mb-6">Related Articles</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
           {related.map(r => (
-            <a href={`/blog/${r.slug}`} class="group block card border border-gray-700/50 hover:border-accent/50 transition-all overflow-hidden">
+            <a href={`/blog/${r.slug}`} class="group block card border border-border/50 hover:border-accent/50 transition-all overflow-hidden">
               <div class="aspect-video overflow-hidden bg-surface">
                 <img src={r.image} alt={r.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="400" height="225" />
               </div>
