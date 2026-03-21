@@ -92,6 +92,23 @@ import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
   </div>
 
   <script>
+    function showFormError(msg: string) {
+      let el = document.getElementById('form-error');
+      if (!el) {
+        el = document.createElement('div');
+        el.id = 'form-error';
+        el.className = 'bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 text-sm flex items-start gap-3';
+        const form = document.getElementById('contact-form');
+        form?.prepend(el);
+      }
+      el.innerHTML = `
+        <svg class="w-5 h-5 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+        <span>${msg}</span>
+      `;
+      el.classList.remove('hidden');
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     const form = document.getElementById('contact-form') as HTMLFormElement;
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -129,12 +146,12 @@ import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
             </div>
           `;
         } else {
-          alert(result.error || 'Failed to send message. Please try again.');
+          showFormError(result.error || 'Failed to send message. Please try again.');
           btn.disabled = false;
           btn.textContent = originalText;
         }
       } catch (err) {
-        alert('Network error. Please check your connection and try again.');
+        showFormError('Network error. Please check your connection and try again.');
         btn.disabled = false;
         btn.textContent = originalText;
       }

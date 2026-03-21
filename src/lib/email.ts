@@ -1,6 +1,14 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
+let _resend: Resend | null = null;
+function getResend(): Resend {
+  if (!_resend) {
+    const key = import.meta.env.RESEND_API_KEY;
+    if (!key) throw new Error('RESEND_API_KEY is not configured');
+    _resend = new Resend(key);
+  }
+  return _resend;
+}
 
 const FROM_EMAIL = 'IGET Vapes <info@igetvapeshub.com>';
 const REPLY_TO = 'info@igetvapeshub.com';
@@ -147,13 +155,17 @@ export async function sendContactEmail(data: ContactEmailData) {
     ${ctaButton('Reply to Customer', `mailto:${escapeHtml(data.email)}`)}
   `);
 
-  await resend.emails.send({
+  const adminResult = await getResend().emails.send({
     from: FROM_EMAIL,
     to: ADMIN_EMAIL,
     replyTo: data.email,
     subject: `New Contact: ${subjectLabel} — from ${data.name}`,
     html: adminHtml,
   });
+
+  if (adminResult.error) {
+    throw new Error(`Resend admin email failed: ${adminResult.error.message}`);
+  }
 
   // ── Customer confirmation ──
   const customerHtml = emailShell(`
@@ -168,13 +180,17 @@ export async function sendContactEmail(data: ContactEmailData) {
     ${ctaButton('Browse Products', 'https://igetvapesoriginal.com')}
   `);
 
-  await resend.emails.send({
+  const customerResult = await getResend().emails.send({
     from: FROM_EMAIL,
     to: data.email,
     replyTo: REPLY_TO,
     subject: `We received your message — IGET Vapes Australia`,
     html: customerHtml,
   });
+
+  if (customerResult.error) {
+    console.error('Customer confirmation email failed:', customerResult.error.message);
+  }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -336,7 +352,7 @@ export async function sendOrderEmails(data: OrderEmailData) {
     </table>
   `);
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM_EMAIL,
     to: data.email,
     replyTo: REPLY_TO,
@@ -361,7 +377,7 @@ export async function sendOrderEmails(data: OrderEmailData) {
     ${ctaButton(`Reply to ${escapeHtml(data.firstName)}`, `mailto:${escapeHtml(data.email)}`)}
   `);
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM_EMAIL,
     to: ADMIN_EMAIL,
     replyTo: data.email,

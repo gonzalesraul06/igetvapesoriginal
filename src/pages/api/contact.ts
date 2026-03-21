@@ -46,8 +46,9 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (err: any) {
-    console.error('Contact form error:', err);
-    return new Response(JSON.stringify({ error: 'Failed to send message. Please try again.' }), {
+    const msg = err?.message || 'Unknown error';
+    console.error('Contact form error:', msg, err);
+    return new Response(JSON.stringify({ error: msg.includes('RESEND_API_KEY') ? 'Email service not configured. Please contact us directly at info@igetvapeshub.com.' : 'Failed to send message. Please try again or email us at info@igetvapeshub.com.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
