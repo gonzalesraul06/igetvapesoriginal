@@ -209,7 +209,7 @@ const localBusinessSchema = {
       Shop the Best Selection of IGET Vapes at<br class="hidden lg:block" />
       <span class="text-accent">Australia's #1 Trusted Online Vape Shop</span>
     </h1>
-    <p class="mt-3 text-gray-500 text-sm sm:text-base max-w-2xl">Premium disposable vapes from IGET & Alibarbar. Over 150 flavours with fast, discreet delivery Australia-wide.</p>
+    <p class="mt-3 text-text-muted text-sm sm:text-base max-w-2xl">Premium disposable vapes from IGET & Alibarbar. Over 150 flavours with fast, discreet delivery Australia-wide.</p>
   </section>
 
   <!-- Trust signals bar -->
@@ -271,7 +271,7 @@ const localBusinessSchema = {
             ]}>
               {cat.name}
             </h2>
-            <p class="text-gray-300 text-xs mt-1 line-clamp-1 hidden sm:block">{cat.description}</p>
+            <p class="text-white/70 text-xs mt-1 line-clamp-1 hidden sm:block">{cat.description}</p>
             <div class="flex items-center gap-3 mt-3">
               <span class="bg-accent hover:bg-accent-dark text-white font-semibold py-2 px-5 rounded-lg text-xs transition-colors shadow-sm">Shop Now</span>
               <span class="text-white/80 text-sm font-bold">From ${cat.price}</span>
@@ -290,21 +290,21 @@ const localBusinessSchema = {
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0H6.375c-.621 0-1.125-.504-1.125-1.125V14.25m17.25 4.5V6.75a3 3 0 00-3-3H6.375c-.621 0-1.125.504-1.125 1.125v14.25"/></svg>
         </div>
         <h3 class="text-base font-bold mb-1">Fast Shipping</h3>
-        <p class="text-sm text-gray-500">From $10 AUD. Same-day dispatch for orders placed before 2pm AEST.</p>
+        <p class="text-sm text-text-muted">From $10 AUD. Same-day dispatch for orders placed before 2pm AEST.</p>
       </div>
       <div class="card-flat p-6 text-center">
         <div class="w-12 h-12 bg-accent/10 text-accent rounded-xl flex items-center justify-center mx-auto mb-3">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
         </div>
         <h3 class="text-base font-bold mb-1">Genuine Products</h3>
-        <p class="text-sm text-gray-500">Every vape authenticated. Sourced directly from authorised distributors.</p>
+        <p class="text-sm text-text-muted">Every vape authenticated. Sourced directly from authorised distributors.</p>
       </div>
       <div class="card-flat p-6 text-center">
         <div class="w-12 h-12 bg-accent/10 text-accent rounded-xl flex items-center justify-center mx-auto mb-3">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>
         </div>
         <h3 class="text-base font-bold mb-1">Best Prices</h3>
-        <p class="text-sm text-gray-500">Starting from $30 AUD. Save more with our Mix & Match bundle deals.</p>
+        <p class="text-sm text-text-muted">Starting from $30 AUD. Save more with our Mix & Match bundle deals.</p>
       </div>
     </div>
   </section>
@@ -346,12 +346,12 @@ const localBusinessSchema = {
     <h2 class="text-xl font-bold mb-6">Frequently Asked Questions</h2>
     <div class="space-y-2">
       {faqs.map((faq, i) => (
-        <details class="group bg-white border border-border rounded-xl hover:border-gray-300 transition-colors" id={`faq-${i}`}>
+        <details class="group bg-white border border-border rounded-xl hover:border-muted transition-colors" id={`faq-${i}`}>
           <summary class="p-4 lg:p-5 cursor-pointer flex items-center justify-between text-sm font-semibold text-text hover:text-accent transition-colors list-none">
             <span class="pr-4">{faq.q}</span>
-            <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="w-5 h-5 text-text-muted group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
-          <div class="px-4 pb-4 lg:px-5 lg:pb-5 text-gray-600 text-sm leading-relaxed border-t border-border pt-3">
+          <div class="px-4 pb-4 lg:px-5 lg:pb-5 text-text-muted text-sm leading-relaxed border-t border-border pt-3">
             {faq.a}
           </div>
         </details>

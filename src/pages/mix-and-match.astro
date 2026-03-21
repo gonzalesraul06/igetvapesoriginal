@@ -20,14 +20,14 @@ const bundles = [
   <Breadcrumbs items={[{ name: 'Mix & Match' }]} />
 
   <h1 class="text-3xl lg:text-4xl font-extrabold mb-3">Mix & Match — Save More</h1>
-  <p class="text-gray-700 mb-8 max-w-2xl">Pick any combination of flavours across all our product ranges and save on bulk orders. The more you buy, the more you save!</p>
+  <p class="text-text-muted mb-8 max-w-2xl">Pick any combination of flavours across all our product ranges and save on bulk orders. The more you buy, the more you save!</p>
 
   <!-- Discount tiers -->
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
     {bundles.map(bundle => (
       <div class="card p-6 text-center border border-border hover:border-accent transition-colors">
         <div class="text-3xl font-extrabold text-accent mb-1">{bundle.discount}% OFF</div>
-        <p class="text-gray-700">{bundle.label} or more</p>
+        <p class="text-text-muted">{bundle.label} or more</p>
       </div>
     ))}
   </div>
@@ -47,7 +47,7 @@ const bundles = [
         />
         <div>
           <h3 class="font-semibold text-sm">{p.data.name}</h3>
-          <p class="text-xs text-gray-600">{p.data.flavours.filter(f => f.inStock).length} flavours in stock • From {formatPrice(p.data.price)}</p>
+          <p class="text-xs text-text-muted">{p.data.flavours.filter(f => f.inStock).length} flavours in stock • From {formatPrice(p.data.price)}</p>
         </div>
       </a>
     ))}
@@ -60,17 +60,17 @@ const bundles = [
       <div>
         <div class="text-3xl mb-2">1️⃣</div>
         <h3 class="font-semibold mb-1">Choose Your Flavours</h3>
-        <p class="text-sm text-gray-600">Browse any category and add flavours to your cart</p>
+        <p class="text-sm text-text-muted">Browse any category and add flavours to your cart</p>
       </div>
       <div>
         <div class="text-3xl mb-2">2️⃣</div>
         <h3 class="font-semibold mb-1">Hit the Quantity</h3>
-        <p class="text-sm text-gray-600">Add 3, 5, or 10+ items for increasing discounts</p>
+        <p class="text-sm text-text-muted">Add 3, 5, or 10+ items for increasing discounts</p>
       </div>
       <div>
         <div class="text-3xl mb-2">3️⃣</div>
         <h3 class="font-semibold mb-1">Save Automatically</h3>
-        <p class="text-sm text-gray-600">Discount applied at checkout — no code needed</p>
+        <p class="text-sm text-text-muted">Discount applied at checkout — no code needed</p>
       </div>
     </div>
   </div>

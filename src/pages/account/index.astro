@@ -15,17 +15,17 @@ import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
       <form class="space-y-4">
         <div>
           <label for="login-email" class="block text-sm font-medium mb-1">Email</label>
-          <input type="email" id="login-email" name="email" required class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:border-accent focus:outline-none" />
+          <input type="email" id="login-email" name="email" required class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" />
         </div>
         <div>
           <label for="login-password" class="block text-sm font-medium mb-1">Password</label>
-          <input type="password" id="login-password" name="password" required class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:border-accent focus:outline-none" />
+          <input type="password" id="login-password" name="password" required class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" />
         </div>
         <button type="submit" class="btn-primary w-full py-3">Log In</button>
       </form>
       <div class="mt-4 text-center text-sm">
         <a href="/account/lost-password" class="text-accent hover:underline">Lost your password?</a>
-        <span class="text-gray-500 mx-2">|</span>
+        <span class="text-text-muted mx-2">|</span>
         <a href="/account/signup" class="text-accent hover:underline">Create an account</a>
       </div>
     </div>
@@ -36,15 +36,15 @@ import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <a href="/account/orders" class="card p-6 hover:border-accent border border-transparent transition-colors">
         <h3 class="font-semibold mb-1">Orders</h3>
-        <p class="text-sm text-gray-600">View your order history</p>
+        <p class="text-sm text-text-muted">View your order history</p>
       </a>
       <a href="/account" class="card p-6 hover:border-accent border border-transparent transition-colors">
         <h3 class="font-semibold mb-1">Account Details</h3>
-        <p class="text-sm text-gray-600">Edit your profile</p>
+        <p class="text-sm text-text-muted">Edit your profile</p>
       </a>
       <button id="logout-btn" class="card p-6 text-left hover:border-accent border border-transparent transition-colors">
         <h3 class="font-semibold mb-1">Logout</h3>
-        <p class="text-sm text-gray-600">Sign out of your account</p>
+        <p class="text-sm text-text-muted">Sign out of your account</p>
       </button>
     </div>
   </div>

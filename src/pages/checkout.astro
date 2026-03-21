@@ -3,52 +3,57 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Checkout — IGET Vapes Australia" noindex={true}>
-  <h1 class="text-3xl font-extrabold mb-6">Checkout</h1>
+  <div class="section-sm">
+  <h1 class="text-3xl font-extrabold mb-2 text-text">Checkout</h1>
+  <p class="text-text-muted text-sm mb-8">Complete your order details below. All fields marked are required.</p>
 
-  <div id="checkout-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div id="checkout-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
     <!-- Order form -->
     <div>
-      <h2 class="text-xl font-bold mb-4">Shipping Details</h2>
+      <h2 class="text-lg font-bold mb-4 text-text flex items-center gap-2">
+        <span class="w-7 h-7 rounded-full bg-accent text-white text-xs font-bold flex items-center justify-center">1</span>
+        Shipping Details
+      </h2>
       <form id="checkout-form" class="space-y-4">
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label for="first-name" class="block text-sm font-medium mb-1">First Name</label>
-            <input type="text" id="first-name" name="firstName" required placeholder="John" class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-accent focus:outline-none" />
+            <label for="first-name" class="block text-sm font-medium text-text mb-1">First Name</label>
+            <input type="text" id="first-name" name="firstName" required placeholder="John" class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" />
           </div>
           <div>
-            <label for="last-name" class="block text-sm font-medium mb-1">Last Name</label>
-            <input type="text" id="last-name" name="lastName" required placeholder="Smith" class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-accent focus:outline-none" />
+            <label for="last-name" class="block text-sm font-medium text-text mb-1">Last Name</label>
+            <input type="text" id="last-name" name="lastName" required placeholder="Smith" class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" />
           </div>
         </div>
 
         <div>
-          <label for="checkout-email" class="block text-sm font-medium mb-1">Email Address</label>
-          <input type="email" id="checkout-email" name="email" required placeholder="john@example.com.au" class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-accent focus:outline-none" />
+          <label for="checkout-email" class="block text-sm font-medium text-text mb-1">Email Address</label>
+          <input type="email" id="checkout-email" name="email" required placeholder="john@example.com.au" class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" />
         </div>
 
         <div>
-          <label for="phone" class="block text-sm font-medium mb-1">Phone Number</label>
-          <input type="tel" id="phone" name="phone" required placeholder="04XX XXX XXX" class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-accent focus:outline-none" />
+          <label for="phone" class="block text-sm font-medium text-text mb-1">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required placeholder="04XX XXX XXX" class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" />
         </div>
 
         <div>
-          <label for="address" class="block text-sm font-medium mb-1">Street Address</label>
-          <input type="text" id="address" name="address" required placeholder="123 George Street" class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-accent focus:outline-none" />
+          <label for="address" class="block text-sm font-medium text-text mb-1">Street Address</label>
+          <input type="text" id="address" name="address" required placeholder="123 George Street" class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" />
         </div>
 
         <div>
-          <label for="address2" class="block text-sm font-medium mb-1">Apartment / Unit / Suite <span class="text-gray-400">(optional)</span></label>
-          <input type="text" id="address2" name="address2" placeholder="Unit 4, Level 2" class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-accent focus:outline-none" />
+          <label for="address2" class="block text-sm font-medium text-text mb-1">Apartment / Unit / Suite <span class="text-text-muted">(optional)</span></label>
+          <input type="text" id="address2" name="address2" placeholder="Unit 4, Level 2" class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" />
         </div>
 
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label for="city" class="block text-sm font-medium mb-1">Suburb</label>
-            <input type="text" id="city" name="city" required placeholder="Sydney" class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-accent focus:outline-none" />
+            <label for="city" class="block text-sm font-medium text-text mb-1">Suburb</label>
+            <input type="text" id="city" name="city" required placeholder="Sydney" class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" />
           </div>
           <div>
-            <label for="state" class="block text-sm font-medium mb-1">State / Territory</label>
-            <select id="state" name="state" required class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 focus:border-accent focus:outline-none">
+            <label for="state" class="block text-sm font-medium text-text mb-1">State / Territory</label>
+            <select id="state" name="state" required class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all">
               <option value="">Select State</option>
               <option value="ACT">Australian Capital Territory (ACT)</option>
               <option value="NSW">New South Wales (NSW)</option>
@@ -63,46 +68,49 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         </div>
 
         <div>
-          <label for="postcode" class="block text-sm font-medium mb-1">Postcode</label>
-          <input type="text" id="postcode" name="postcode" required pattern="[0-9]{4}" maxlength="4" inputmode="numeric" placeholder="2000" class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-accent focus:outline-none" />
+          <label for="postcode" class="block text-sm font-medium text-text mb-1">Postcode</label>
+          <input type="text" id="postcode" name="postcode" required pattern="[0-9]{4}" maxlength="4" inputmode="numeric" placeholder="2000" class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" />
         </div>
 
         <div>
-          <label for="notes" class="block text-sm font-medium mb-1">Order Notes <span class="text-gray-400">(optional)</span></label>
-          <textarea id="notes" name="notes" rows="2" placeholder="Any special delivery instructions..." class="w-full bg-primary border border-border rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-accent focus:outline-none resize-none"></textarea>
+          <label for="notes" class="block text-sm font-medium text-text mb-1">Order Notes <span class="text-text-muted">(optional)</span></label>
+          <textarea id="notes" name="notes" rows="2" placeholder="Any special delivery instructions..." class="w-full bg-white border border-border rounded-xl px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none resize-none transition-all"></textarea>
         </div>
 
-        <div class="pt-4">
-          <h2 class="text-xl font-bold mb-3">Payment Method</h2>
-          <p class="text-sm text-gray-500 mb-4">All payments are processed manually. You will receive payment instructions via email after placing your order.</p>
+        <div class="pt-6">
+          <h2 class="text-lg font-bold mb-3 text-text flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full bg-accent text-white text-xs font-bold flex items-center justify-center">2</span>
+            Payment Method
+          </h2>
+          <p class="text-sm text-text-muted mb-4">All payments are processed manually. You will receive payment instructions via email after placing your order.</p>
           <div class="space-y-3">
-            <label class="flex items-center gap-3 p-4 border border-border rounded-lg cursor-pointer hover:border-accent transition-colors">
-              <input type="radio" name="payment" value="bank-transfer" checked class="text-accent w-4 h-4" />
+            <label class="flex items-center gap-3 p-4 border border-border rounded-xl cursor-pointer hover:border-accent/50 hover:bg-accent/5 transition-all has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+              <input type="radio" name="payment" value="bank-transfer" checked class="text-accent w-4 h-4 accent-accent" />
               <div class="flex items-center gap-3 flex-1">
-                <svg class="w-5 h-5 text-gray-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                <svg class="w-5 h-5 text-text-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                 <div>
-                  <span class="font-medium text-gray-900">Bank Transfer (EFT)</span>
-                  <p class="text-xs text-gray-500">Direct deposit to our Australian bank account</p>
+                  <span class="font-medium text-text">Bank Transfer (EFT)</span>
+                  <p class="text-xs text-text-muted">Direct deposit to our Australian bank account</p>
                 </div>
               </div>
             </label>
-            <label class="flex items-center gap-3 p-4 border border-border rounded-lg cursor-pointer hover:border-accent transition-colors">
-              <input type="radio" name="payment" value="payid" class="text-accent w-4 h-4" />
+            <label class="flex items-center gap-3 p-4 border border-border rounded-xl cursor-pointer hover:border-accent/50 hover:bg-accent/5 transition-all has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+              <input type="radio" name="payment" value="payid" class="text-accent w-4 h-4 accent-accent" />
               <div class="flex items-center gap-3 flex-1">
-                <svg class="w-5 h-5 text-gray-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                <svg class="w-5 h-5 text-text-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                 <div>
-                  <span class="font-medium text-gray-900">PayID</span>
-                  <p class="text-xs text-gray-500">Instant transfer via PayID — fast & secure</p>
+                  <span class="font-medium text-text">PayID</span>
+                  <p class="text-xs text-text-muted">Instant transfer via PayID — fast & secure</p>
                 </div>
               </div>
             </label>
-            <label class="flex items-center gap-3 p-4 border border-border rounded-lg cursor-pointer hover:border-accent transition-colors">
-              <input type="radio" name="payment" value="bitcoin" class="text-accent w-4 h-4" />
+            <label class="flex items-center gap-3 p-4 border border-border rounded-xl cursor-pointer hover:border-accent/50 hover:bg-accent/5 transition-all has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+              <input type="radio" name="payment" value="bitcoin" class="text-accent w-4 h-4 accent-accent" />
               <div class="flex items-center gap-3 flex-1">
-                <svg class="w-5 h-5 text-gray-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <svg class="w-5 h-5 text-text-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 <div>
-                  <span class="font-medium text-gray-900">Bitcoin (BTC)</span>
-                  <p class="text-xs text-gray-500">Pay with cryptocurrency — wallet address provided after order</p>
+                  <span class="font-medium text-text">Bitcoin (BTC)</span>
+                  <p class="text-xs text-text-muted">Pay with cryptocurrency — wallet address provided after order</p>
                 </div>
               </div>
             </label>
@@ -110,58 +118,62 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         </div>
 
         <!-- Payment instruction notice -->
-        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-2">
+        <div class="bg-accent/5 border border-accent/15 rounded-xl p-4 mt-2">
           <div class="flex gap-3">
-            <svg class="w-5 h-5 text-blue-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <svg class="w-5 h-5 text-accent mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <div>
-              <p class="text-sm font-semibold text-blue-900">How payment works</p>
-              <p class="text-sm text-blue-700 mt-1">After placing your order, you'll receive a confirmation email with detailed payment instructions for your selected method. Your order will be processed once payment is confirmed.</p>
+              <p class="text-sm font-semibold text-text">How payment works</p>
+              <p class="text-sm text-text-muted mt-1">After placing your order, you'll receive a confirmation email with detailed payment instructions for your selected method. Your order will be processed once payment is confirmed.</p>
             </div>
           </div>
         </div>
 
-        <button type="submit" class="btn-primary w-full py-3 text-base mt-6">Place Order</button>
+        <button type="submit" class="btn-accent w-full py-3.5 text-base mt-6 rounded-xl">Place Order</button>
       </form>
     </div>
 
     <!-- Order summary -->
     <div>
-      <div class="card p-6 sticky top-20">
-        <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+      <div class="bg-surface rounded-2xl p-6 sticky top-24 border border-border">
+        <h2 class="text-lg font-bold mb-4 text-text flex items-center gap-2">
+          <svg class="w-5 h-5 text-text-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          Order Summary
+        </h2>
         <div id="checkout-items" class="space-y-3 mb-4">
-          <p class="text-gray-600">Loading cart...</p>
+          <p class="text-text-muted">Loading cart...</p>
         </div>
-        <div class="border-t border-border pt-4 space-y-2 text-sm">
-          <div class="flex justify-between text-gray-600">
+        <div class="border-t border-border pt-4 space-y-2.5 text-sm">
+          <div class="flex justify-between text-text-muted">
             <span>Subtotal</span>
-            <span id="checkout-subtotal">$0.00</span>
+            <span id="checkout-subtotal" class="font-medium text-text">$0.00</span>
           </div>
-          <div class="flex justify-between text-gray-600">
-            <span>Shipping <span id="checkout-shipping-state" class="text-xs text-gray-400"></span></span>
-            <span id="checkout-shipping">Select state</span>
+          <div class="flex justify-between text-text-muted">
+            <span>Shipping <span id="checkout-shipping-state" class="text-xs"></span></span>
+            <span id="checkout-shipping" class="font-medium text-text">Select state</span>
           </div>
-          <div id="checkout-minimum-warning" class="hidden p-3 bg-yellow-50 border border-yellow-300 rounded-lg text-center">
-            <p class="text-yellow-700 text-sm font-medium">Minimum order is $250 AUD. Add <span id="checkout-remaining">$0</span> more to proceed.</p>
+          <div id="checkout-minimum-warning" class="hidden p-3 bg-accent/5 border border-accent/20 rounded-xl text-center">
+            <p class="text-accent text-sm font-medium">Minimum order is $250 AUD. Add <span id="checkout-remaining" class="font-bold">$0</span> more to proceed.</p>
             <a href="/" class="text-accent text-sm hover:underline mt-1 inline-block">Continue Shopping &rarr;</a>
           </div>
-          <div class="flex justify-between text-lg font-bold pt-2 border-t border-border">
+          <div class="flex justify-between text-lg font-bold pt-3 border-t border-border text-text">
             <span>Total (AUD)</span>
             <span id="checkout-total">$0.00</span>
           </div>
         </div>
 
         <!-- Shipping rates info -->
-        <div class="mt-4 p-3 bg-gray-50 rounded-lg">
-          <p class="text-xs font-semibold text-gray-600 mb-2">Shipping Rates by State</p>
-          <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-500">
-            <span>ACT / NSW / VIC</span><span class="text-right font-medium">$10</span>
-            <span>QLD / SA</span><span class="text-right font-medium">$15</span>
-            <span>WA / TAS</span><span class="text-right font-medium">$20</span>
-            <span>NT</span><span class="text-right font-medium">$25</span>
+        <div class="mt-4 p-3 bg-white rounded-xl border border-border">
+          <p class="text-xs font-semibold text-text mb-2">Shipping Rates by State</p>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-text-muted">
+            <span>ACT / NSW / VIC</span><span class="text-right font-medium text-text">$10</span>
+            <span>QLD / SA</span><span class="text-right font-medium text-text">$15</span>
+            <span>WA / TAS</span><span class="text-right font-medium text-text">$20</span>
+            <span>NT</span><span class="text-right font-medium text-text">$25</span>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <script>
@@ -179,14 +191,14 @@ import BaseLayout from '@layouts/BaseLayout.astro';
       if (!container) return;
 
       if (items.length === 0) {
-        container.innerHTML = '<p class="text-gray-600">Your cart is empty. <a href="/" class="text-accent hover:underline">Continue shopping</a></p>';
+        container.innerHTML = '<p class="text-text-muted">Your cart is empty. <a href="/" class="text-accent hover:underline font-medium">Continue shopping</a></p>';
         return;
       }
 
       container.innerHTML = items.map(item => `
-        <div class="flex justify-between text-sm">
-          <span class="text-gray-700">${item.name} &times; ${item.quantity}</span>
-          <span>$${(item.price * item.quantity).toFixed(2)}</span>
+        <div class="flex justify-between items-center text-sm">
+          <span class="text-text">${item.name} <span class="text-text-muted">&times; ${item.quantity}</span></span>
+          <span class="font-medium text-text">$${(item.price * item.quantity).toFixed(2)}</span>
         </div>
       `).join('');
 
@@ -298,7 +310,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                   <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                 </div>
                 <h2 class="text-2xl font-bold mb-2">Order Placed Successfully!</h2>
-                <p class="text-gray-600 mb-1">Your order reference:</p>
+                <p class="text-text-muted mb-1">Your order reference:</p>
                 <p class="text-xl font-extrabold text-accent mb-4">${result.orderRef}</p>
 
                 <div class="bg-blue-50 border border-blue-200 rounded-xl p-5 text-left mb-6">
@@ -312,9 +324,9 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                   </div>
                 </div>
 
-                <div class="bg-gray-50 rounded-xl p-4 mb-6">
-                  <p class="text-sm font-semibold text-gray-700 mb-2">What happens next?</p>
-                  <div class="text-sm text-gray-600 space-y-1 text-left max-w-sm mx-auto">
+                <div class="bg-surface rounded-xl p-4 mb-6">
+                  <p class="text-sm font-semibold text-text mb-2">What happens next?</p>
+                  <div class="text-sm text-text-muted space-y-1 text-left max-w-sm mx-auto">
                     <p><span class="font-bold text-accent">1.</span> Check your email for payment instructions</p>
                     <p><span class="font-bold text-accent">2.</span> Complete payment via ${paymentLabel}</p>
                     <p><span class="font-bold text-accent">3.</span> We confirm payment &amp; ship your order</p>
