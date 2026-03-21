@@ -161,5 +161,73 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
     cartItems.subscribe(renderCheckout);
     renderCheckout();
+
+    // Handle checkout form submission
+    const checkoutForm = document.getElementById('checkout-form') as HTMLFormElement;
+    checkoutForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = checkoutForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Placing Order...';
+
+      try {
+        const formData = new FormData(checkoutForm);
+        const items = Object.values(cartItems.get());
+        const subtotal = getCartTotal();
+
+        const payload = {
+          firstName: formData.get('firstName'),
+          lastName: formData.get('lastName'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          address: formData.get('address'),
+          city: formData.get('city'),
+          state: formData.get('state'),
+          postcode: formData.get('postcode'),
+          payment: formData.get('payment'),
+          items: items.map(i => ({ name: i.name, quantity: i.quantity, price: i.price })),
+          subtotal,
+          shipping: SHIPPING_COST,
+          total: subtotal + SHIPPING_COST,
+        };
+
+        const res = await fetch('/api/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          // Clear cart
+          cartItems.set({});
+          // Show success
+          const container = document.getElementById('checkout-container');
+          if (container) {
+            container.innerHTML = `
+              <div class="col-span-full text-center py-12">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
+                  <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h2 class="text-2xl font-bold mb-2">Order Placed Successfully!</h2>
+                <p class="text-gray-600 mb-2">Your order reference: <strong>${result.orderRef}</strong></p>
+                <p class="text-gray-600 mb-6">We've sent a confirmation email with your order details.</p>
+                <a href="/" class="btn-primary px-6 py-3">Continue Shopping</a>
+              </div>
+            `;
+          }
+        } else {
+          alert(result.error || 'Failed to place order. Please try again.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      } catch (err) {
+        alert('Network error. Please check your connection and try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
   </script>
 </BaseLayout>

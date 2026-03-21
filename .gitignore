@@ -2,6 +2,8 @@ node_modules
 dist/
 .astro/
 .vercel/
+.env
+.env.*
 build-log*.txt
 scrape_output.txt
 descriptions_scraped.json

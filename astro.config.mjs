@@ -1,10 +1,12 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   site: 'https://igetvapesoriginal.com',
-  output: 'static',
+  output: 'hybrid',
+  adapter: cloudflare(),
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/account/') && !page.includes('/checkout'),
