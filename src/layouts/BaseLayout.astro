@@ -14,9 +14,12 @@ interface Props {
   canonical?: string;
   type?: 'website' | 'product';
   noindex?: boolean;
+  keywords?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
-const { title, description, image, canonical, type, noindex } = Astro.props;    
+const { title, description, image, canonical, type, noindex, keywords, publishedTime, modifiedTime } = Astro.props;    
 ---
 
 <!doctype html>
@@ -29,6 +32,9 @@ const { title, description, image, canonical, type, noindex } = Astro.props;
       canonical={canonical}
       type={type}
       noindex={noindex}
+      keywords={keywords}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
     />
   </head>
   <body>

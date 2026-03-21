@@ -21,6 +21,36 @@ const related = blogPosts
   .filter(p => p.category === post.category && p.slug !== post.slug)
   .slice(0, 3);
 
+// Map blog post tags/content to relevant product categories for internal linking
+const productCategoryMap: Array<{ name: string; href: string; desc: string }> = [];
+const contentLower = (post.content + ' ' + post.tags.join(' ')).toLowerCase();
+if (contentLower.includes('jnr cruiser') || contentLower.includes('jnr-cruiser')) {
+  productCategoryMap.push({ name: 'JNR Cruiser 12000 Puffs', href: '/products/jnr-cruiser', desc: 'From $65 — 25ml capacity' });
+}
+if (contentLower.includes('iget one') || contentLower.includes('iget-one')) {
+  productCategoryMap.push({ name: 'IGET One 12000 Puffs', href: '/products/iget-one', desc: 'From $55 — Dense vapour' });
+}
+if (contentLower.includes('bar pro') || contentLower.includes('iget-bar-pro') || contentLower.includes('iget bar pro')) {
+  productCategoryMap.push({ name: 'IGET Bar Pro 10000 Puffs', href: '/products/iget-bar-pro', desc: 'From $48 — 26 flavours' });
+}
+if (contentLower.includes('s3') || contentLower.includes('pod system') || contentLower.includes('refillable')) {
+  productCategoryMap.push({ name: 'IGET S3 Pod System', href: '/products/iget-bar-plus-s3', desc: 'From $48 — Refillable pods' });
+}
+if (contentLower.includes('alibarbar ingot') || contentLower.includes('alibarbar-ingot') || contentLower.includes('ingot 9000')) {
+  productCategoryMap.push({ name: 'Alibarbar Ingot 9000 Puffs', href: '/products/alibarbar-ingot', desc: 'From $40 — 33 flavours' });
+}
+if (contentLower.includes('ice adjust') || contentLower.includes('alibarbar-ice-adjust')) {
+  productCategoryMap.push({ name: 'Alibarbar Ice Adjust 12000', href: '/products/alibarbar-ice-adjust', desc: 'From $50 — Adjustable ice' });
+}
+// If no specific matches, show the top 3 best sellers
+if (productCategoryMap.length === 0) {
+  productCategoryMap.push(
+    { name: 'IGET Bar Pro 10000 Puffs', href: '/products/iget-bar-pro', desc: "Australia's #1 seller — $48" },
+    { name: 'JNR Cruiser 12000 Puffs', href: '/products/jnr-cruiser', desc: 'Maximum performance — $65' },
+    { name: 'Alibarbar Ingot 9000 Puffs', href: '/products/alibarbar-ingot', desc: 'Best value — $40' },
+  );
+}
+
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -87,7 +117,7 @@ const articleSchema = {
     <div class="aspect-video rounded-2xl overflow-hidden bg-surface mb-10">
       <img
         src={post.image}
-        alt={post.title}
+        alt={`${post.title} — IGET Vapes Blog Australia`}
         class="w-full h-full object-cover"
         loading="eager"
         width="800"
@@ -123,7 +153,7 @@ const articleSchema = {
           {related.map(r => (
             <a href={`/blog/${r.slug}`} class="group block card border border-border/50 hover:border-accent/50 transition-all overflow-hidden">
               <div class="aspect-video overflow-hidden bg-surface">
-                <img src={r.image} alt={r.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="400" height="225" />
+                <img src={r.image} alt={`${r.title} — ${r.category} Guide`} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="400" height="225" />
               </div>
               <div class="p-4">
                 <span class="text-xs text-accent">{r.category}</span>
@@ -134,6 +164,21 @@ const articleSchema = {
         </div>
       </section>
     )}
+
+    <!-- Shop Related Products CTA -->
+    <section class="mt-10 pt-10 border-t border-border">
+      <h2 class="text-xl font-bold mb-2">Shop Related Products</h2>
+      <p class="text-sm text-text-muted mb-5">Browse the vapes mentioned in this article — all 100% authentic with fast Australia-wide delivery.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {productCategoryMap.slice(0, 3).map(cat => (
+          <a href={cat.href} class="group block bg-surface rounded-xl border border-border hover:border-accent/50 p-5 transition-all">
+            <h3 class="font-bold text-sm group-hover:text-accent transition-colors">{cat.name}</h3>
+            <p class="text-xs text-text-muted mt-1">{cat.desc}</p>
+            <span class="inline-block mt-3 text-xs text-accent font-medium">Shop Now →</span>
+          </a>
+        ))}
+      </div>
+    </section>
 
     <!-- Back to Blog -->
     <div class="mt-10 text-center">

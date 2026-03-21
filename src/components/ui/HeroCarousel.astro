@@ -20,7 +20,7 @@ const { slides } = Astro.props;
       class:list={['carousel-slide absolute inset-0 transition-opacity duration-500', i === 0 ? 'opacity-100' : 'opacity-0']}
       data-index={i}
     >
-      <img src={slide.image} alt={slide.title} class="w-full h-64 sm:h-80 lg:h-96 object-cover" loading={i === 0 ? 'eager' : 'lazy'} />
+      <img src={slide.image} alt={`${slide.title} — IGET Vapes Australia`} class="w-full h-64 sm:h-80 lg:h-96 object-cover" loading={i === 0 ? 'eager' : 'lazy'} />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 lg:p-10">
         <h2 class="text-2xl lg:text-4xl font-extrabold mb-2">{slide.title}</h2>
         <p class="text-white/80 mb-4 max-w-md">{slide.subtitle}</p>

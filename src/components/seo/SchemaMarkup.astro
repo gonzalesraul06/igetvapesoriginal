@@ -1,6 +1,6 @@
 ---
 interface Props {
-  type: 'organization' | 'website' | 'product' | 'collection' | 'breadcrumb';
+  type: 'organization' | 'website' | 'product' | 'collection' | 'breadcrumb' | 'faq' | 'itemlist' | 'localbusiness';
   data?: Record<string, unknown>;
 }
 
@@ -14,23 +14,41 @@ function getSchema() {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'IGET Vapes Original',
+        alternateName: 'IGET Vapes Australia',
         url: siteUrl,
         logo: `${siteUrl}/images/logo.svg`,
-        description: 'Australia\'s #1 trusted online vape shop. Buy genuine IGET vapes, Alibarbar vapes & disposable vapes with fast Australia-wide delivery. Over 150 premium flavours.',
+        description: 'Australia\'s #1 trusted online vape shop. Buy genuine IGET vapes, Alibarbar vapes & disposable vapes with fast Australia-wide delivery. Over 150 premium flavours from $30.',
         email: 'info@igetvapeshub.com',
-        contactPoint: { '@type': 'ContactPoint', contactType: 'Customer Support', email: 'info@igetvapeshub.com', areaServed: 'AU', availableLanguage: 'English' },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'Customer Support',
+          email: 'info@igetvapeshub.com',
+          areaServed: 'AU',
+          availableLanguage: 'English',
+          contactOption: 'TollFree',
+        },
         sameAs: [],
+        areaServed: {
+          '@type': 'Country',
+          name: 'Australia',
+        },
+        knowsAbout: ['IGET Vapes', 'Alibarbar Vapes', 'Disposable Vapes', 'Vaping', 'Electronic Cigarettes'],
       };
     case 'website':
       return {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'IGET Vapes Original',
+        alternateName: 'IGET Vapes Australia — Buy Disposable Vapes Online',
         url: siteUrl,
         description: 'Buy IGET vapes & Alibarbar vapes online in Australia. 150+ disposable vape flavours with fast delivery. JNR Cruiser, IGET Bar Pro, IGET One, S3, Alibarbar Ingot & Ice Adjust.',
+        inLanguage: 'en-AU',
         potentialAction: {
           '@type': 'SearchAction',
-          target: `${siteUrl}/products/{search_term_string}`,
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${siteUrl}/products/{search_term_string}`,
+          },
           'query-input': 'required name=search_term_string',
         },
       };
@@ -41,17 +59,37 @@ function getSchema() {
         name: data.name,
         image: data.image,
         description: data.description,
+        sku: data.sku ?? '',
+        mpn: data.mpn ?? '',
         brand: { '@type': 'Brand', name: data.brand ?? 'IGET' },
+        category: data.category ?? 'Disposable Vapes',
         offers: {
           '@type': 'Offer',
           price: data.price,
           priceCurrency: 'AUD',
           availability: data.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
           url: data.url,
+          seller: { '@type': 'Organization', name: 'IGET Vapes Original' },
+          shippingDetails: {
+            '@type': 'OfferShippingDetails',
+            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'AU' },
+            deliveryTime: {
+              '@type': 'ShippingDeliveryTime',
+              handlingTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 2, unitCode: 'DAY' },
+              transitTime: { '@type': 'QuantitativeValue', minValue: 2, maxValue: 7, unitCode: 'DAY' },
+            },
+          },
+          hasMerchantReturnPolicy: {
+            '@type': 'MerchantReturnPolicy',
+            applicableCountry: 'AU',
+            returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+          },
         },
         aggregateRating: {
           '@type': 'AggregateRating',
-          ratingValue: data.rating ?? '5',
+          ratingValue: data.rating ?? '4.9',
+          bestRating: '5',
+          worstRating: '1',
           reviewCount: data.reviewCount ?? '115',
         },
       };
@@ -62,6 +100,7 @@ function getSchema() {
         name: data.name,
         description: data.description,
         url: data.url,
+        isPartOf: { '@type': 'WebSite', name: 'IGET Vapes Original', url: siteUrl },
       };
     case 'breadcrumb':
       return {
@@ -73,6 +112,56 @@ function getSchema() {
           name: item.name,
           item: item.url,
         })),
+      };
+    case 'faq':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: (data.questions as Array<{ q: string; a: string }>)?.map(faq => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a,
+          },
+        })),
+      };
+    case 'itemlist':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: data.name,
+        description: data.description,
+        numberOfItems: (data.items as unknown[])?.length ?? 0,
+        itemListElement: (data.items as Array<{ name: string; url: string; image?: string; price?: number; position?: number }>)?.map((item, i) => ({
+          '@type': 'ListItem',
+          position: item.position ?? i + 1,
+          name: item.name,
+          url: item.url,
+          ...(item.image ? { image: item.image } : {}),
+        })),
+      };
+    case 'localbusiness':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'OnlineStore',
+        name: 'IGET Vapes Original',
+        url: siteUrl,
+        description: 'Buy genuine IGET vapes & Alibarbar vapes online in Australia. 150+ flavours, fast Australia-wide delivery. Australia\'s #1 trusted online vape shop.',
+        email: 'info@igetvapeshub.com',
+        currenciesAccepted: 'AUD',
+        paymentAccepted: 'Bank Transfer, Bitcoin, PayID',
+        priceRange: '$30 - $65',
+        areaServed: {
+          '@type': 'Country',
+          name: 'Australia',
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.9',
+          bestRating: '5',
+          reviewCount: '150',
+        },
       };
     default:
       return null;

@@ -67,7 +67,7 @@ const blogSchema = {
           <div class="aspect-video overflow-hidden bg-surface">
             <img
               src={post.image}
-              alt={post.title}
+              alt={`${post.title} — ${post.category}`}
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading={idx < 6 ? 'eager' : 'lazy'}
               width="400"

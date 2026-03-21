@@ -5,6 +5,7 @@ import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
 import ProductGrid from '@components/ui/ProductGrid.astro';
 import SchemaMarkup from '@components/seo/SchemaMarkup.astro';
 import { formatPrice } from '@utils/formatPrice';
+import { productCategories } from '@data/navigation';
 
 export async function getStaticPaths() {
   const products = await getCollection('products');
@@ -454,6 +455,25 @@ const productGroupSchema = {
       set:html={seo.seoContent}
     />
   )}
+
+  <!-- Explore Other Models -->
+  <div class="mb-10">
+    <h2 class="text-xl font-bold mb-5">Explore Other Models</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+      {productCategories.filter(c => c.slug !== product.slug && c.slug !== 'mix-and-match').map(c => (
+        <a href={c.href} class="group bg-surface rounded-xl border border-border hover:border-accent/50 p-4 text-center transition-all">
+          <span class="block text-xs sm:text-sm font-semibold group-hover:text-accent transition-colors leading-tight">
+            {c.name.replace(/\d+\sPUFFS|SAVE$/g, '').trim()}
+          </span>
+        </a>
+      ))}
+      <a href="/mix-and-match" class="group bg-accent/10 rounded-xl border border-accent/30 hover:border-accent p-4 text-center transition-all">
+        <span class="block text-xs sm:text-sm font-semibold text-accent group-hover:text-accent-dark transition-colors leading-tight">
+          Mix & Match Deals
+        </span>
+      </a>
+    </div>
+  </div>
 
   <!-- Back to all products -->
   <div class="text-center">

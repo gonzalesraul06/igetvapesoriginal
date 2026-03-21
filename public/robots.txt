@@ -1,8 +1,62 @@
+# ══════════════════════════════════════════════
+# IGET Vapes Original — robots.txt
+# https://igetvapesoriginal.com
+# ══════════════════════════════════════════════
+
+# Default: allow all crawlers
 User-agent: *
 Allow: /
-
-Sitemap: https://igetvapesoriginal.com/sitemap-index.xml
-
 Disallow: /account/
 Disallow: /checkout
 Disallow: /api/
+Crawl-delay: 1
+
+# Google
+User-agent: Googlebot
+Allow: /
+Disallow: /account/
+Disallow: /checkout
+Disallow: /api/
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Disallow: /account/
+Disallow: /checkout
+Disallow: /api/
+Crawl-delay: 2
+
+# AI Crawlers — allow for AEO/GEO visibility
+User-agent: GPTBot
+Allow: /
+Disallow: /account/
+Disallow: /checkout
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+# Sitemaps
+Sitemap: https://igetvapesoriginal.com/sitemap-index.xml
+
+# LLM discovery
+# See https://igetvapesoriginal.com/llms.txt

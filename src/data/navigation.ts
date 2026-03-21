@@ -26,6 +26,7 @@ export const footerSupport = [
   { name: 'Privacy Policy', href: '/privacy-policy' },
   { name: 'Terms & Conditions', href: '/terms-and-conditions' },
   { name: 'Delivery Locations', href: '/delivery' },
+  { name: 'Sitemap', href: '/sitemap' },
 ] as const;
 
 export const footerService = [

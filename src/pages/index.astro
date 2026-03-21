@@ -184,18 +184,27 @@ const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'Store',
   name: 'IGET Vapes Original',
-  description: 'Australia\'s #1 online vape shop — buy IGET vapes, Alibarbar vapes, disposable vapes online with fast delivery Australia-wide.',
+  alternateName: 'IGET Vapes Australia',
+  description: 'Australia\'s #1 online vape shop — buy genuine IGET vapes, Alibarbar vapes & disposable vapes online with fast delivery to Sydney, Melbourne, Brisbane, Perth, Adelaide & all of Australia.',
   url: 'https://igetvapesoriginal.com',
   areaServed: { '@type': 'Country', name: 'Australia' },
-  priceRange: '$$',
+  priceRange: '$30 - $65',
   currenciesAccepted: 'AUD',
-  paymentAccepted: 'Credit Card, Debit Card',
+  paymentAccepted: 'Bank Transfer, Bitcoin, PayID',
+  email: 'info@igetvapeshub.com',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    bestRating: '5',
+    reviewCount: '150',
+  },
 };
 ---
 
 <BaseLayout
   title={seoTitle}
   description={seoDescription}
+  keywords="iget vapes, buy vapes online australia, disposable vapes australia, alibarbar, iget bar pro, iget bar, iget one, jnr cruiser, alibarbar flavours, alibarbar vape flavours, vape shop australia, cheap vapes, vape shop near me, buy vape online, online vape shop, iget vape australia, iget bar australia, disposable vapes near me"
 >
   <SchemaMarkup type="organization" />
   <SchemaMarkup type="website" />

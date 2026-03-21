@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+import SchemaMarkup from '@components/seo/SchemaMarkup.astro';
+import { blogPosts } from '@data/blog-posts';
+
+const products = await getCollection('products');
+const siteUrl = 'https://igetvapesoriginal.com';
+---
+
+<BaseLayout
+  title="Sitemap — IGET Vapes Australia | All Pages & Products"
+  description="Browse the complete sitemap of IGET Vapes Original. Find all product categories, individual flavours, blog posts, and informational pages on Australia's #1 online vape shop."
+>
+  <SchemaMarkup type="breadcrumb" data={{ items: [{ name: 'Home', url: siteUrl }, { name: 'Sitemap', url: `${siteUrl}/sitemap` }] }} />
+  <Breadcrumbs items={[{ name: 'Sitemap' }]} />
+
+  <h1 class="text-3xl font-extrabold mb-3">Sitemap</h1>
+  <p class="text-text-muted mb-10 max-w-2xl">Browse every page on IGET Vapes Original — Australia's #1 online vape shop. Find product categories, individual flavours, blog guides, and informational pages.</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Main Pages -->
+    <div>
+      <h2 class="text-lg font-bold mb-4 text-accent">Main Pages</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/" class="text-text hover:text-accent transition-colors">Home — Buy IGET Vapes Online</a></li>
+        <li><a href="/about" class="text-text hover:text-accent transition-colors">About Us</a></li>
+        <li><a href="/contact" class="text-text hover:text-accent transition-colors">Contact Us</a></li>
+        <li><a href="/blog" class="text-text hover:text-accent transition-colors">Blog — Guides & Reviews</a></li>
+        <li><a href="/mix-and-match" class="text-text hover:text-accent transition-colors">Mix & Match Deals</a></li>
+        <li><a href="/delivery" class="text-text hover:text-accent transition-colors">Delivery Locations</a></li>
+      </ul>
+    </div>
+
+    <!-- Policies & Info -->
+    <div>
+      <h2 class="text-lg font-bold mb-4 text-accent">Policies & Information</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/shipping-policy" class="text-text hover:text-accent transition-colors">Shipping Policy</a></li>
+        <li><a href="/payment-methods" class="text-text hover:text-accent transition-colors">Payment Methods</a></li>
+        <li><a href="/privacy-policy" class="text-text hover:text-accent transition-colors">Privacy Policy</a></li>
+        <li><a href="/terms-and-conditions" class="text-text hover:text-accent transition-colors">Terms & Conditions</a></li>
+      </ul>
+    </div>
+
+    <!-- Product Categories -->
+    <div>
+      <h2 class="text-lg font-bold mb-4 text-accent">Product Categories</h2>
+      <ul class="space-y-2 text-sm">
+        {products.map(product => (
+          <li>
+            <a href={`/products/${product.data.slug}`} class="text-text hover:text-accent transition-colors font-medium">
+              {product.data.name}
+            </a>
+            <span class="text-text-muted text-xs ml-1">({product.data.flavours.length} flavours)</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- All Products by Category -->
+    {products.map(product => (
+      <div>
+        <h2 class="text-lg font-bold mb-4 text-accent">{product.data.name}</h2>
+        <ul class="space-y-1.5 text-sm">
+          {product.data.flavours.map((flavour: any) => (
+            <li>
+              <a
+                href={`/products/${product.data.slug}/${flavour.slug}`}
+                class="text-text hover:text-accent transition-colors"
+              >
+                {flavour.name}
+              </a>
+              {!flavour.inStock && <span class="text-xs text-text-muted ml-1">(Sold Out)</span>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    <!-- Blog Posts -->
+    <div>
+      <h2 class="text-lg font-bold mb-4 text-accent">Blog Posts</h2>
+      <ul class="space-y-2 text-sm">
+        {blogPosts.map(post => (
+          <li>
+            <a href={`/blog/${post.slug}`} class="text-text hover:text-accent transition-colors">
+              {post.title}
+            </a>
+            <span class="text-text-muted text-xs ml-1">({post.category})</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
