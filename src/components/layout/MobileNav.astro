@@ -1,4 +1,4 @@
----
+﻿---
 const currentPath = Astro.url.pathname;
 
 const navItems = [
@@ -10,7 +10,7 @@ const navItems = [
 ];
 ---
 
-<nav class="fixed bottom-0 left-0 right-0 z-30 bg-surface border-t border-border lg:hidden safe-area-bottom">
+<nav class="fixed bottom-0 left-0 right-0 z-30 bg-surface border-t border-gray-200 lg:hidden safe-area-bottom">
   <div class="flex items-center justify-around py-2 px-1">
     {navItems.map(item => {
       const isCart = item.href === '#cart';
@@ -19,37 +19,35 @@ const navItems = [
 
       return isCart ? (
         <button
-          id="mobile-cart-toggle"
-          class="flex flex-col items-center gap-0.5 px-3 py-1.5 text-xs text-gray-400 hover:text-white transition-colors relative"
+          class="mobile-cart-btn flex flex-col items-center gap-0.5 px-3 py-1.5 text-xs text-gray-800 hover:text-blue-600 transition-colors relative"
           aria-label="Open Cart"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={item.icon} />
           </svg>
-          <span>{item.name}</span>
-          <span id="mobile-cart-count" class="absolute -top-0.5 right-1 bg-accent text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+          <span class="font-medium">{item.name}</span>
+          <span id="mobile-cart-count" class="absolute -top-0.5 right-1 bg-red-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
         </button>
       ) : isMenu ? (
         <button
-          id="mobile-menu-toggle"
-          class="flex flex-col items-center gap-0.5 px-3 py-1.5 text-xs text-gray-400 hover:text-white transition-colors"
+          class="mobile-nav-menu-btn flex flex-col items-center gap-0.5 px-3 py-1.5 text-xs text-gray-800 hover:text-blue-600 transition-colors"
           aria-label="Open Menu"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={item.icon} />
           </svg>
-          <span>{item.name}</span>
+          <span class="font-medium">{item.name}</span>
         </button>
       ) : (
         <a
           href={item.href}
           class:list={[
-            'flex flex-col items-center gap-0.5 px-3 py-1.5 text-xs transition-colors',
-            isActive ? 'text-accent' : 'text-gray-400 hover:text-white',
+            'flex flex-col items-center gap-0.5 px-3 py-1.5 text-xs transition-colors font-medium',
+            isActive ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600',     
           ]}
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={item.icon} />
           </svg>
           <span>{item.name}</span>
         </a>
@@ -59,14 +57,16 @@ const navItems = [
 </nav>
 
 <script>
-  // Mobile cart toggle
-  document.getElementById('mobile-cart-toggle')?.addEventListener('click', () => {
-    document.getElementById('cart-toggle')?.click();
+  document.querySelectorAll('.mobile-cart-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('cart-toggle')?.click();
+    });
   });
 
-  // Mobile menu toggle - opens the sidebar
-  document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
-    document.getElementById('menu-toggle')?.click();
+  document.querySelectorAll('.mobile-nav-menu-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('mobile-menu-toggle')?.click();
+    });
   });
 
   // Sync cart count to mobile nav

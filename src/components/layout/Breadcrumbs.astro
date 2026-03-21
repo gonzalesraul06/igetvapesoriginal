@@ -11,7 +11,7 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<nav aria-label="Breadcrumb" class="text-sm text-gray-400 mb-4">
+<nav aria-label="Breadcrumb" class="text-sm text-gray-600 mb-4">
   <ol class="flex flex-wrap items-center gap-1">
     <li>
       <a href="/" class="hover:text-accent">Home</a>
@@ -22,7 +22,7 @@ const { items } = Astro.props;
         {item.href && i < items.length - 1 ? (
           <a href={item.href} class="hover:text-accent">{item.name}</a>
         ) : (
-          <span class="text-gray-300">{item.name}</span>
+          <span class="text-gray-700">{item.name}</span>
         )}
       </li>
     ))}

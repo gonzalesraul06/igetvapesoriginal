@@ -41,7 +41,7 @@ const itemId = `${categorySlug}-${slug}`;
   <!-- Info -->
   <div class="p-3">
     <a href={productUrl} class="block">
-      <h3 class="text-xs font-semibold truncate hover:text-accent text-gray-200">{name}</h3>
+      <h3 class="text-xs font-semibold truncate hover:text-accent text-gray-800">{name}</h3>
     </a>
     <div class="flex items-center justify-between mt-1.5">
       <span class="text-base font-bold text-accent">{formatPrice(price)}</span>
@@ -52,13 +52,13 @@ const itemId = `${categorySlug}-${slug}`;
       <div class="mt-2.5 flex items-center gap-1.5">
         <div class="flex items-center border border-border rounded overflow-hidden">
           <button
-            class="qty-dec w-7 h-7 flex items-center justify-center text-gray-400 hover:text-white hover:bg-muted transition-colors text-xs"
+            class="qty-dec w-7 h-7 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-muted transition-colors text-xs"
             data-item-id={itemId}
             aria-label="Decrease quantity"
           >−</button>
-          <span class="qty-val w-7 h-7 flex items-center justify-center text-xs text-gray-200" data-item-id={itemId}>1</span>
+          <span class="qty-val w-7 h-7 flex items-center justify-center text-xs text-gray-800" data-item-id={itemId}>1</span>
           <button
-            class="qty-inc w-7 h-7 flex items-center justify-center text-gray-400 hover:text-white hover:bg-muted transition-colors text-xs"
+            class="qty-inc w-7 h-7 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-muted transition-colors text-xs"
             data-item-id={itemId}
             aria-label="Increase quantity"
           >+</button>
@@ -77,7 +77,7 @@ const itemId = `${categorySlug}-${slug}`;
         </button>
       </div>
     ) : (
-      <button disabled class="mt-2.5 w-full py-1.5 text-xs bg-gray-800 text-gray-500 rounded cursor-not-allowed">
+      <button disabled class="mt-2.5 w-full py-1.5 text-xs bg-gray-100 text-gray-500 rounded cursor-not-allowed">
         Sold Out
       </button>
     )}

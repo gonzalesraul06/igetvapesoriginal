@@ -23,7 +23,7 @@ const { slides } = Astro.props;
       <img src={slide.image} alt={slide.title} class="w-full h-64 sm:h-80 lg:h-96 object-cover" loading={i === 0 ? 'eager' : 'lazy'} />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 lg:p-10">
         <h2 class="text-2xl lg:text-4xl font-extrabold mb-2">{slide.title}</h2>
-        <p class="text-gray-200 mb-4 max-w-md">{slide.subtitle}</p>
+        <p class="text-gray-800 mb-4 max-w-md">{slide.subtitle}</p>
         <a href={slide.href} class="btn-primary w-fit">{slide.cta}</a>
       </div>
     </div>

@@ -4,16 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#0b0f19',
+        primary: '#ffffff',
         accent: '#e94560',
-        surface: '#111827',
-        'surface-light': '#1a2235',
-        muted: '#1e293b',
-        border: '#1e293b',
-        gold: '#f5a623',
+        surface: '#f9f9f9',
+        'surface-light': '#f1f1f1',
+        muted: '#e5e5e5',
+        border: '#eaeaea',
+        gold: '#fbbc04',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Montserrat', 'Arial', 'system-ui', 'sans-serif'],
       },
     },
   },

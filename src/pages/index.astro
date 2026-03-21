@@ -243,7 +243,7 @@ const localBusinessSchema = {
               <span class="badge-new w-fit mb-2 text-[10px]">{cat.badge}</span>
             )}
             <h2 class:list={[
-              'font-extrabold uppercase tracking-wide text-white',
+              'font-extrabold uppercase tracking-wide text-gray-900',
               idx === 0 ? 'text-xl lg:text-2xl' : 'text-sm lg:text-base',
             ]}>
               {cat.name}
@@ -281,7 +281,7 @@ const localBusinessSchema = {
       <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 mt-4 not-prose">
         {['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide', 'Gold Coast', 'Canberra', 'Hobart', 'Darwin', 'Cairns', 'Townsville', 'Newcastle'].map(city => (
           <div class="bg-primary rounded-lg px-3 py-2 text-center text-xs">
-            <span class="text-gray-300">{city}</span>
+            <span class="text-gray-700">{city}</span>
           </div>
         ))}
       </div>
@@ -299,7 +299,7 @@ const localBusinessSchema = {
             <span>{faq.q}</span>
             <svg class="w-4 h-4 text-gray-500 group-open:rotate-180 transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
-          <div class="px-4 pb-4 text-gray-400 text-sm leading-relaxed border-t border-border pt-3">
+          <div class="px-4 pb-4 text-gray-600 text-sm leading-relaxed border-t border-border pt-3">
             {faq.a}
           </div>
         </details>

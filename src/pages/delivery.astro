@@ -18,13 +18,13 @@ const states = [
   <Breadcrumbs items={[{ name: 'Delivery Locations' }]} />
 
   <h1 class="text-3xl font-extrabold mb-3">Delivery Locations</h1>
-  <p class="text-gray-300 mb-8 max-w-2xl">We deliver Australia-wide with a flat rate of $30 per order. Whether you're in a capital city or a regional area, we've got you covered.</p>
+  <p class="text-gray-700 mb-8 max-w-2xl">We deliver Australia-wide with a flat rate of $30 per order. Whether you're in a capital city or a regional area, we've got you covered.</p>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
     {states.map(state => (
       <div class="card p-4">
         <h2 class="font-bold text-accent mb-2">{state.name}</h2>
-        <ul class="space-y-1 text-sm text-gray-300">
+        <ul class="space-y-1 text-sm text-gray-700">
           {state.cities.map(city => (
             <li class="flex items-center gap-1.5">
               <span class="text-green-400 text-xs">✓</span>
@@ -39,6 +39,6 @@ const states = [
 
   <div class="card p-6 mt-8">
     <h2 class="text-xl font-bold mb-3">Can't Find Your Location?</h2>
-    <p class="text-gray-300 text-sm">We deliver to all Australian postcodes via Australia Post. If your area isn't listed above, don't worry — we still ship to you! Delivery times to remote areas may be slightly longer (7-10 business days).</p>
+    <p class="text-gray-700 text-sm">We deliver to all Australian postcodes via Australia Post. If your area isn't listed above, don't worry — we still ship to you! Delivery times to remote areas may be slightly longer (7-10 business days).</p>
   </div>
 </BaseLayout>

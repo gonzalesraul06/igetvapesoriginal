@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0b0f19;
+  --color-primary: #ffffff;
   --color-accent: #e94560;
-  --color-surface: #111827;
-  --color-surface-light: #1a2235;
-  --color-muted: #1e293b;
-  --color-gold: #f5a623;
-  --color-border: #1e293b;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --color-surface: #f9f9f9;
+  --color-surface-light: #f1f1f1;
+  --color-muted: #e5e5e5;
+  --color-gold: #fbbc04;
+  --color-border: #eaeaea;
+  --font-sans: 'Montserrat', 'Arial', system-ui, sans-serif;
 }
 
 @layer base {
@@ -18,11 +18,11 @@
   }
 
   body {
-    @apply bg-primary text-gray-200 font-sans min-h-screen;
+    @apply bg-primary text-gray-800 font-sans min-h-screen;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold leading-tight text-white;
+    @apply font-bold leading-tight text-gray-900;
   }
 
   a {
@@ -30,17 +30,17 @@
   }
 
   ::selection {
-    @apply bg-accent/30 text-white;
+    @apply bg-accent/30 text-gray-900;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-accent hover:bg-red-700 text-white font-semibold py-2.5 px-6 rounded-lg transition-all duration-200 inline-flex items-center justify-center;
+    @apply bg-[#111111] hover:bg-[#333333] text-white font-semibold py-2.5 px-6 rounded-lg transition-all duration-200 inline-flex items-center justify-center;
   }
 
   .btn-secondary {
-    @apply bg-surface-light hover:bg-muted text-white font-semibold py-2.5 px-6 rounded-lg border border-border transition-all duration-200 inline-flex items-center justify-center;
+    @apply bg-surface-light hover:bg-muted text-gray-800 font-semibold py-2.5 px-6 rounded-lg border border-border transition-all duration-200 inline-flex items-center justify-center;
   }
 
   .card {
@@ -60,19 +60,19 @@
   }
 
   .badge-out-of-stock {
-    @apply inline-block text-xs font-bold uppercase px-2.5 py-1 rounded bg-gray-800 text-gray-400;
+    @apply inline-block text-xs font-bold uppercase px-2.5 py-1 rounded bg-gray-200 text-gray-600;
   }
 
   .prose {
-    @apply text-gray-400 leading-relaxed;
+    @apply text-gray-700 leading-relaxed;
   }
 
   .prose h2 {
-    @apply text-2xl text-white mt-8 mb-4;
+    @apply text-2xl text-gray-900 mt-8 mb-4;
   }
 
   .prose h3 {
-    @apply text-xl text-white mt-6 mb-3;
+    @apply text-xl text-gray-900 mt-6 mb-3;
   }
 
   .prose p {
@@ -97,7 +97,7 @@
   }
 
   .prose th {
-    @apply bg-surface font-semibold text-white;
+    @apply bg-surface font-semibold text-gray-900;
   }
 
   ::-webkit-scrollbar {

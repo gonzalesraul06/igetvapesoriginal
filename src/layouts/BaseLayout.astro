@@ -1,6 +1,5 @@
----
+﻿---
 import SEOHead from '@components/seo/SEOHead.astro';
-import Navigation from '@components/layout/Navigation.astro';
 import Header from '@components/layout/Header.astro';
 import Footer from '@components/layout/Footer.astro';
 import MobileNav from '@components/layout/MobileNav.astro';
@@ -17,7 +16,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description, image, canonical, type, noindex } = Astro.props;
+const { title, description, image, canonical, type, noindex } = Astro.props;    
 ---
 
 <!doctype html>
@@ -34,15 +33,12 @@ const { title, description, image, canonical, type, noindex } = Astro.props;
   </head>
   <body>
     <AgeGateModal />
-    <div class="flex min-h-screen">
-      <Navigation />
-      <div class="flex-1 flex flex-col min-w-0">
-        <Header />
-        <main class="flex-1 px-4 py-6 lg:px-8 pb-20 lg:pb-6">
-          <slot />
-        </main>
-        <Footer />
-      </div>
+    <div class="min-h-screen flex flex-col bg-surface">
+      <Header />
+      <main class="flex-1 w-full flex flex-col max-w-[1400px] mx-auto pb-20 lg:pb-0">     
+        <slot />
+      </main>
+      <Footer />
     </div>
     <CartDrawer />
     <MobileNav />
@@ -50,9 +46,10 @@ const { title, description, image, canonical, type, noindex } = Astro.props;
     <script is:inline>
       var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
       (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        var s1=document.createElement("script"),s0=document.getElementsByTagName
+("script")[0];
         s1.async=true;
-        s1.src='https://embed.tawk.to/69beb4c7cfaccd1c358252af/1jk8f4bah';
+        s1.src='https://embed.tawk.to/69beb4c7cfaccd1c358252af/1jk8f4bah';      
         s1.charset='UTF-8';
         s1.setAttribute('crossorigin','*');
         s0.parentNode.insertBefore(s1,s0);

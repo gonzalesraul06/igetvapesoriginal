@@ -3,7 +3,7 @@
   <!-- Header -->
   <div class="flex items-center justify-between p-4 border-b border-border">
     <h2 class="text-lg font-bold">Shopping Cart</h2>
-    <button id="cart-close" class="p-2 text-gray-400 hover:text-white" aria-label="Close cart">
+    <button id="cart-close" class="p-2 text-gray-600 hover:text-gray-900" aria-label="Close cart">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
@@ -12,16 +12,16 @@
 
   <!-- Cart items -->
   <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4">
-    <p id="cart-empty" class="text-gray-400 text-center py-8">Your cart is empty</p>
+    <p id="cart-empty" class="text-gray-600 text-center py-8">Your cart is empty</p>
   </div>
 
   <!-- Footer with total -->
   <div id="cart-footer" class="border-t border-border p-4 hidden">
-    <div class="flex justify-between text-sm text-gray-400 mb-1">
+    <div class="flex justify-between text-sm text-gray-600 mb-1">
       <span>Subtotal</span>
       <span id="cart-subtotal">$0.00</span>
     </div>
-    <div class="flex justify-between text-sm text-gray-400 mb-3">
+    <div class="flex justify-between text-sm text-gray-600 mb-3">
       <span>Shipping</span>
       <span>$30.00</span>
     </div>
@@ -102,11 +102,11 @@
         <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded object-cover" />
         <div class="flex-1 min-w-0">
           <p class="text-sm font-medium truncate">${item.name}</p>
-          <p class="text-xs text-gray-400">${item.categoryName}</p>
+          <p class="text-xs text-gray-600">${item.categoryName}</p>
           <div class="flex items-center gap-2 mt-1">
-            <button data-action="dec" data-id="${item.id}" class="w-6 h-6 rounded bg-surface text-gray-300 hover:text-white text-sm flex items-center justify-center">−</button>
+            <button data-action="dec" data-id="${item.id}" class="w-6 h-6 rounded bg-surface text-gray-700 hover:text-gray-900 text-sm flex items-center justify-center">−</button>
             <span class="text-sm">${item.quantity}</span>
-            <button data-action="inc" data-id="${item.id}" class="w-6 h-6 rounded bg-surface text-gray-300 hover:text-white text-sm flex items-center justify-center">+</button>
+            <button data-action="inc" data-id="${item.id}" class="w-6 h-6 rounded bg-surface text-gray-700 hover:text-gray-900 text-sm flex items-center justify-center">+</button>
           </div>
         </div>
         <div class="text-right">

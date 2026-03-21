@@ -352,7 +352,7 @@ const productGroupSchema = {
     <h1 class="text-3xl lg:text-4xl font-extrabold mb-2">
       {seo.h1} — <span class="text-accent">{seo.h1Accent}</span>
     </h1>
-    <div class="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
+    <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
       <span>{product.puffs.toLocaleString()} Puffs</span>
       <span>•</span>
       <span>From {formatPrice(product.price)}</span>
@@ -366,7 +366,7 @@ const productGroupSchema = {
       )}
       {product.isNew && <span class="badge-new">New</span>}
     </div>
-    <p class="text-gray-300 text-lg leading-relaxed max-w-4xl">{seo.intro}</p>
+    <p class="text-gray-700 text-lg leading-relaxed max-w-4xl">{seo.intro}</p>
   </div>
 
   <!-- Quick Spec Highlights -->
@@ -375,8 +375,8 @@ const productGroupSchema = {
       {seo.highlights.map((h: {icon: string; label: string; value: string}) => (
         <div class="bg-surface rounded-xl p-4 text-center border border-border">
           <div class="text-2xl mb-1">{h.icon}</div>
-          <div class="text-xs text-gray-400">{h.label}</div>
-          <div class="font-bold text-white text-lg">{h.value}</div>
+          <div class="text-xs text-gray-600">{h.label}</div>
+          <div class="font-bold text-gray-900 text-lg">{h.value}</div>
         </div>
       ))}
     </div>
@@ -396,7 +396,7 @@ const productGroupSchema = {
   {seo.buyingGuide && (
     <div class="bg-surface rounded-2xl p-6 lg:p-8 border border-border mb-10">
       <h2 class="text-xl font-bold mb-3">Buying Guide — {product.name}</h2>
-      <p class="text-gray-300 leading-relaxed">{seo.buyingGuide}</p>
+      <p class="text-gray-700 leading-relaxed">{seo.buyingGuide}</p>
     </div>
   )}
 
@@ -407,8 +407,8 @@ const productGroupSchema = {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {seo.features.map((f: {title: string; desc: string}) => (
           <div class="bg-surface rounded-xl p-5 border border-border">
-            <h3 class="font-bold text-white mb-2">{f.title}</h3>
-            <p class="text-gray-300 text-sm leading-relaxed">{f.desc}</p>
+            <h3 class="font-bold text-gray-900 mb-2">{f.title}</h3>
+            <p class="text-gray-700 text-sm leading-relaxed">{f.desc}</p>
           </div>
         ))}
       </div>
@@ -424,9 +424,9 @@ const productGroupSchema = {
           <details class="bg-surface rounded-xl border border-border group">
             <summary class="p-5 cursor-pointer flex items-center justify-between font-semibold hover:text-accent transition-colors list-none text-sm">
               <span>{faq.q}</span>
-              <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              <svg class="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </summary>
-            <div class="px-5 pb-5 text-gray-300 text-sm leading-relaxed border-t border-border/50 pt-4">
+            <div class="px-5 pb-5 text-gray-700 text-sm leading-relaxed border-t border-border/50 pt-4">
               {faq.a}
             </div>
           </details>
@@ -438,7 +438,7 @@ const productGroupSchema = {
   <!-- Related Blog Links -->
   {seo.relatedLinks.length > 0 && (
     <div class="flex flex-wrap gap-3 mb-10">
-      <span class="text-sm text-gray-400 py-2">Related Guides:</span>
+      <span class="text-sm text-gray-600 py-2">Related Guides:</span>
       {seo.relatedLinks.map((link: {text: string; href: string}) => (
         <a href={link.href} class="text-sm bg-surface border border-border text-accent hover:border-accent px-4 py-2 rounded-full transition-colors">{link.text}</a>
       ))}
@@ -448,9 +448,9 @@ const productGroupSchema = {
   <!-- SEO Content Block -->
   {seo.seoContent && (
     <div class="bg-surface rounded-2xl p-6 lg:p-8 border border-border mb-10
-      [&_p]:text-gray-300 [&_p]:leading-relaxed [&_p]:mb-4 [&_p:last-child]:mb-0
-      [&_strong]:text-white
-      [&_a]:text-accent [&_a]:underline [&_a]:hover:text-white"
+      [&_p]:text-gray-700 [&_p]:leading-relaxed [&_p]:mb-4 [&_p:last-child]:mb-0
+      [&_strong]:text-gray-900
+      [&_a]:text-accent [&_a]:underline [&_a]:hover:text-gray-900"
       set:html={seo.seoContent}
     />
   )}

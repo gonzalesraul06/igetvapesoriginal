@@ -40,6 +40,10 @@ const ogImage = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 <link rel="alternate" hreflang="en-au" href={canonicalUrl} />
 <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
 <!-- AI / ChatGPT Discovery -->
 <meta name="citation_title" content={fullTitle} />
 <meta name="citation_author" content="IGET Vapes Original" />
@@ -66,4 +70,3 @@ const ogImage = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 <!-- Preconnect for performance -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />

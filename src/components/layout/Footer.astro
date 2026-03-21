@@ -8,11 +8,11 @@ import { footerSupport, footerService, siteConfig } from '@data/navigation';
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
       <!-- Customer Support -->
       <div>
-        <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Customer Support</h3>
+        <h3 class="text-gray-900 font-bold text-sm uppercase tracking-wider mb-4">Customer Support</h3>
         <ul class="space-y-2.5">
           {footerSupport.map(link => (
             <li>
-              <a href={link.href} class="text-gray-400 hover:text-accent text-sm transition-colors">{link.name}</a>
+              <a href={link.href} class="text-gray-600 hover:text-accent text-sm transition-colors">{link.name}</a>
             </li>
           ))}
         </ul>
@@ -20,11 +20,11 @@ import { footerSupport, footerService, siteConfig } from '@data/navigation';
 
       <!-- Customer Service -->
       <div>
-        <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Customer Service</h3>
+        <h3 class="text-gray-900 font-bold text-sm uppercase tracking-wider mb-4">Customer Service</h3>
         <ul class="space-y-2.5">
           {footerService.map(link => (
             <li>
-              <a href={link.href} class="text-gray-400 hover:text-accent text-sm transition-colors">{link.name}</a>
+              <a href={link.href} class="text-gray-600 hover:text-accent text-sm transition-colors">{link.name}</a>
             </li>
           ))}
         </ul>
