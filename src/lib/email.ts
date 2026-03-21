@@ -33,6 +33,7 @@ export interface OrderEmailData {
   state: string;
   postcode: string;
   payment: string;
+  notes: string;
   items: { name: string; quantity: number; price: number }[];
   subtotal: number;
   shipping: number;
@@ -182,9 +183,22 @@ export async function sendContactEmail(data: ContactEmailData) {
 
 const paymentLabels: Record<string, string> = {
   'bank-transfer': 'Bank Transfer (EFT)',
-  'crypto': 'Cryptocurrency',
   'payid': 'PayID',
+  'bitcoin': 'Bitcoin (BTC)',
 };
+
+function getPaymentInstructions(method: string): string {
+  switch (method) {
+    case 'bank-transfer':
+      return `We will send you our <strong>Australian bank account details</strong> shortly. Please complete the EFT transfer and reply to this email with your payment receipt.`;
+    case 'payid':
+      return `We will send you our <strong>PayID details</strong> shortly. Simply transfer the exact amount via your banking app using PayID and reply with confirmation.`;
+    case 'bitcoin':
+      return `We will send you a <strong>Bitcoin (BTC) wallet address</strong> and the exact amount shortly. Please complete the transfer and reply with the transaction hash.`;
+    default:
+      return `We will send you payment details shortly. Please follow the instructions and reply with your payment confirmation.`;
+  }
+}
 
 function buildOrderTable(data: OrderEmailData): string {
   const rows = data.items.map((item, i) => `
@@ -268,11 +282,34 @@ export async function sendOrderEmails(data: OrderEmailData) {
           <div style="background:${BRAND_BG};border-radius:8px;padding:16px 20px;">
             <p style="margin:0;font-size:14px;font-weight:600;color:${BRAND_BLACK};">${escapeHtml(paymentMethod)}</p>
           </div>
+          ${data.notes ? `
+          ${subheading('Order Notes')}
+          <div style="background:${BRAND_BG};border-radius:8px;padding:16px 20px;">
+            <p style="margin:0;font-size:13px;color:#555;">${escapeHtml(data.notes)}</p>
+          </div>` : ''}
         </td>
       </tr>
     </table>
 
     ${divider()}
+
+    <!-- Payment instructions -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;margin:20px 0;">
+      <tr><td style="padding:24px 28px;">
+        <table role="presentation" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="vertical-align:top;padding-right:12px;">
+              <span style="font-size:24px;">&#9993;</span>
+            </td>
+            <td>
+              <p style="margin:0 0 8px;font-size:16px;font-weight:700;color:#1e3a5f;">Payment Instructions</p>
+              <p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:#1e40af;">${getPaymentInstructions(data.payment)}</p>
+              <p style="margin:0;font-size:13px;color:#3b82f6;">Your order will be processed once payment is confirmed.</p>
+            </td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
 
     <!-- What's next -->
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:linear-gradient(135deg, ${BRAND_BLACK} 0%, #222 100%);border-radius:10px;margin:20px 0;">
@@ -280,16 +317,19 @@ export async function sendOrderEmails(data: OrderEmailData) {
         <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:${BRAND_WHITE};">What happens next?</p>
         <table role="presentation" cellpadding="0" cellspacing="0">
           <tr>
-            <td style="padding:6px 0;font-size:13px;color:rgba(255,255,255,0.8);"><span style="color:${BRAND_ACCENT};font-weight:700;margin-right:8px;">1.</span> We confirm your payment</td>
+            <td style="padding:6px 0;font-size:13px;color:rgba(255,255,255,0.8);"><span style="color:${BRAND_ACCENT};font-weight:700;margin-right:8px;">1.</span> Check this email for payment instructions above</td>
           </tr>
           <tr>
-            <td style="padding:6px 0;font-size:13px;color:rgba(255,255,255,0.8);"><span style="color:${BRAND_ACCENT};font-weight:700;margin-right:8px;">2.</span> Your order is packed &amp; shipped</td>
+            <td style="padding:6px 0;font-size:13px;color:rgba(255,255,255,0.8);"><span style="color:${BRAND_ACCENT};font-weight:700;margin-right:8px;">2.</span> Complete payment via ${escapeHtml(paymentMethod)}</td>
           </tr>
           <tr>
-            <td style="padding:6px 0;font-size:13px;color:rgba(255,255,255,0.8);"><span style="color:${BRAND_ACCENT};font-weight:700;margin-right:8px;">3.</span> Tracking details sent to your email</td>
+            <td style="padding:6px 0;font-size:13px;color:rgba(255,255,255,0.8);"><span style="color:${BRAND_ACCENT};font-weight:700;margin-right:8px;">3.</span> We confirm payment &amp; pack your order</td>
           </tr>
           <tr>
-            <td style="padding:6px 0;font-size:13px;color:rgba(255,255,255,0.8);"><span style="color:${BRAND_ACCENT};font-weight:700;margin-right:8px;">4.</span> Delivered in 2&ndash;5 business days</td>
+            <td style="padding:6px 0;font-size:13px;color:rgba(255,255,255,0.8);"><span style="color:${BRAND_ACCENT};font-weight:700;margin-right:8px;">4.</span> Tracking details sent to your email</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 0;font-size:13px;color:rgba(255,255,255,0.8);"><span style="color:${BRAND_ACCENT};font-weight:700;margin-right:8px;">5.</span> Delivered in 2&ndash;5 business days Australia-wide</td>
           </tr>
         </table>
       </td></tr>
@@ -308,13 +348,15 @@ export async function sendOrderEmails(data: OrderEmailData) {
   const adminHtml = emailShell(`
     <div style="margin-bottom:20px;">${badge('NEW ORDER', '#28a745')}</div>
     ${heading(`Order ${orderRef}`)}
-    ${paragraph(`<strong>$${data.total.toFixed(2)}</strong> via <strong>${escapeHtml(paymentMethod)}</strong> from <strong>${escapeHtml(data.firstName)} ${escapeHtml(data.lastName)}</strong>`)}
+    ${paragraph(`<strong>$${data.total.toFixed(2)} AUD</strong> via <strong>${escapeHtml(paymentMethod)}</strong> from <strong>${escapeHtml(data.firstName)} ${escapeHtml(data.lastName)}</strong>`)}
 
     ${subheading('Items')}
     ${buildOrderTable(data)}
 
     ${subheading('Customer & Shipping')}
     ${buildShippingCard(data)}
+
+    ${data.notes ? `${subheading('Order Notes')}<div style="background:${BRAND_BG};border-left:4px solid ${BRAND_ACCENT};padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:16px;"><p style="margin:0;font-size:13px;color:#333;">${escapeHtml(data.notes)}</p></div>` : ''}
 
     ${ctaButton(`Reply to ${escapeHtml(data.firstName)}`, `mailto:${escapeHtml(data.email)}`)}
   `);

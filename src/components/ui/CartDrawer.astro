@@ -23,14 +23,14 @@
     </div>
     <div class="flex justify-between text-sm text-gray-600 mb-3">
       <span>Shipping</span>
-      <span>$30.00</span>
+      <span class="text-xs italic">Calculated at checkout</span>
     </div>
     <div class="flex justify-between text-lg font-bold mb-4">
-      <span>Total</span>
-      <span id="cart-total">$30.00</span>
+      <span>Subtotal</span>
+      <span id="cart-total">$0.00</span>
     </div>
     <div id="cart-minimum-warning" class="hidden mb-3 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg text-center">
-      <p class="text-yellow-400 text-sm font-medium">Minimum order is $300. Add <span id="cart-remaining">$0</span> more to checkout.</p>
+      <p class="text-yellow-600 text-sm font-medium">Minimum order is $250 AUD. Add <span id="cart-remaining">$0</span> more to checkout.</p>
     </div>
     <a id="cart-checkout-btn" href="/checkout" class="btn-primary w-full block text-center py-3">Proceed to Checkout</a>
   </div>
@@ -38,7 +38,7 @@
 <div id="cart-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
 
 <script>
-  import { cartItems, cartOpen, removeFromCart, updateQuantity, getCartTotal, getCartCount, initCart, MINIMUM_ORDER, SHIPPING_COST } from '@utils/cart';
+  import { cartItems, cartOpen, removeFromCart, updateQuantity, getCartTotal, getCartCount, initCart, MINIMUM_ORDER } from '@utils/cart';
 
   initCart();
 
@@ -120,9 +120,9 @@
     itemsContainer.querySelectorAll('.cart-item').forEach(el => el.remove());
     itemsContainer.appendChild(frag);
 
-    // Update totals
+    // Update totals (shipping calculated at checkout)
     if (subtotalEl) subtotalEl.textContent = `$${total.toFixed(2)}`;
-    if (totalEl) totalEl.textContent = `$${(total + SHIPPING_COST).toFixed(2)}`;
+    if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
 
     // Minimum order enforcement
     const warningEl = document.getElementById('cart-minimum-warning');

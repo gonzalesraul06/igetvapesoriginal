@@ -45,5 +45,5 @@ export const siteConfig = {
   email: 'info@igetvapeshub.com',
   locale: 'en-AU',
   currency: 'AUD',
-  shippingCost: 30,
+  minimumOrder: 250,
 } as const;
