@@ -33,9 +33,9 @@ const { title, description, image, canonical, type, noindex } = Astro.props;
   </head>
   <body>
     <AgeGateModal />
-    <div class="min-h-screen flex flex-col bg-surface">
+    <div class="min-h-screen flex flex-col">
       <Header />
-      <main class="flex-1 w-full flex flex-col max-w-[1400px] mx-auto pb-20 lg:pb-0">     
+      <main class="flex-1 w-full container-site pb-20 lg:pb-0">
         <slot />
       </main>
       <Footer />

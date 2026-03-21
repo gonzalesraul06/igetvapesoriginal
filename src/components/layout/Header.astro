@@ -3,116 +3,163 @@ import { topMenuLinks, productCategories } from '@data/navigation';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-40 bg-white border-b border-gray-200">
-  <div class="px-4 py-3 max-w-[1400px] mx-auto w-full flex items-center justify-between">
-    <div class="flex items-center lg:hidden relative">
-      <button id="mobile-menu-toggle" class="p-2 text-gray-800 hover:text-gray-900 transition-colors" aria-label="Toggle menu">
+<!-- Announcement bar -->
+<div class="bg-text text-white text-center py-2 text-xs sm:text-sm font-medium tracking-wide">
+  <div class="container-site flex items-center justify-center gap-2">
+    <svg class="w-4 h-4 text-accent hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    <span>Free shipping on orders over <strong>$300 AUD</strong> &mdash; Australia-wide delivery</span>
+  </div>
+</div>
+
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-border shadow-sm">
+  <!-- Main header row -->
+  <div class="container-site py-3 lg:py-4 flex items-center justify-between gap-4">
+    <!-- Mobile menu toggle -->
+    <div class="flex items-center lg:hidden">
+      <button id="mobile-menu-toggle" class="p-2 -ml-2 text-text hover:text-accent rounded-lg hover:bg-surface transition-colors" aria-label="Toggle menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
     </div>
 
-    <a href="/" class="flex-shrink-0 flex items-center justify-center text-gray-900 font-bold text-xl lg:text-2xl tracking-wide hover:text-accent transition-colors mx-auto lg:mx-0">
-      IGET-Vapes Australia
+    <!-- Logo -->
+    <a href="/" class="flex-shrink-0 flex items-center gap-2 group mx-auto lg:mx-0">
+      <span class="text-text font-extrabold text-xl lg:text-2xl tracking-tight group-hover:text-accent transition-colors">
+        IGET<span class="text-accent">-</span>VAPES
+      </span>
+      <span class="hidden sm:inline-block text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted border-l border-border pl-2">Australia</span>
     </a>
 
-    <div class="flex items-center gap-2 lg:gap-4">
-      <a href="/account" class="hidden lg:flex p-2 text-gray-800 hover:text-gray-900 transition-colors" aria-label="My Account">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />      
+    <!-- Desktop nav links -->
+    <nav class="hidden lg:flex items-center gap-6" aria-label="Main navigation">
+      {topMenuLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            'text-sm font-medium transition-colors relative py-1',
+            currentPath === link.href
+              ? 'text-accent'
+              : 'text-gray-600 hover:text-text',
+          ]}
+        >
+          {link.name}
+          {currentPath === link.href && <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full"></span>}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Right actions -->
+    <div class="flex items-center gap-1 lg:gap-2">
+      <a href="/account" class="hidden lg:flex btn-ghost p-2" aria-label="My Account">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
         </svg>
       </a>
 
-      <button id="cart-toggle" class="p-2 text-gray-800 hover:text-gray-900 relative transition-colors" aria-label="Shopping Cart">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />    
+      <button id="cart-toggle" class="relative p-2 text-text hover:text-accent rounded-lg hover:bg-surface transition-colors" aria-label="Shopping Cart">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
         </svg>
-        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+        <span id="cart-count" class="absolute -top-0.5 -right-0.5 bg-accent text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 hidden">0</span>
       </button>
     </div>
   </div>
 
-  <nav class="hidden lg:block border-t border-gray-100 bg-gray-50">
-    <div class="max-w-[1400px] mx-auto w-full px-4 flex items-center justify-center flex-wrap gap-x-6 gap-y-2 py-3">
+  <!-- Product categories nav — desktop -->
+  <nav class="hidden lg:block border-t border-border bg-surface/60" aria-label="Product categories">
+    <div class="container-site flex items-center justify-center gap-1 py-0">
       {productCategories.map(cat => (
         <a
           href={cat.href}
           class:list={[
-            'text-[13px] font-bold uppercase tracking-wider transition-colors text-center',     
-            currentPath.startsWith(cat.href) ? 'text-blue-600' : 'text-gray-800 hover:text-blue-500',
+            'px-4 py-3 text-[13px] font-semibold tracking-wide transition-all relative group',
+            currentPath.startsWith(cat.href)
+              ? 'text-accent'
+              : 'text-gray-600 hover:text-text',
           ]}
         >
-          {cat.name.replace(/\d+\sPUFFS|SAVE$/, '')} 
-          <span class="text-[10px] font-normal text-gray-500 block -mt-1">{cat.name.match(/\d+\sPUFFS|SAVE/)?.[0] || ''}</span>
+          {cat.name.replace(/\d+\sPUFFS|SAVE$/, '').trim()}
+          {cat.name.match(/\d+\sPUFFS|SAVE/) && (
+            <span class="text-[10px] font-normal text-text-muted ml-1">{cat.name.match(/\d+\sPUFFS|SAVE/)?.[0]}</span>
+          )}
+          {currentPath.startsWith(cat.href) && <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-accent rounded-full"></span>}
+          <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-accent rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
         </a>
       ))}
     </div>
   </nav>
-
-  <nav class="hidden lg:flex items-center justify-center gap-8 px-4 py-2 border-t border-gray-100 bg-white">
-    {topMenuLinks.map(link => (
-      <a
-        href={link.href}
-        class:list={[
-          'text-[11px] font-semibold uppercase tracking-widest transition-colors',     
-          currentPath === link.href ? 'text-blue-600' : 'text-gray-500 hover:text-gray-900',
-        ]}
-      >
-        {link.name}
-      </a>
-    ))}
-  </nav>
 </header>
 
-<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 z-[45] hidden lg:hidden backdrop-blur-sm transition-opacity opacity-0"></div>
+<!-- Mobile sidebar overlay -->
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[45] hidden lg:hidden backdrop-blur-sm transition-opacity opacity-0"></div>
 
-<nav id="mobile-sidebar-nav" class="fixed top-0 left-0 bottom-0 z-[50] w-[80%] max-w-sm bg-white border-r border-gray-200 transform -translate-x-full transition-transform duration-300 flex flex-col lg:hidden shadow-2xl">
-  <div class="flex items-center justify-between p-4 border-b border-gray-100">
-    <span class="font-bold text-gray-900 text-lg">Menu</span>
-    <button id="close-mobile-menu" class="p-2 text-gray-500 hover:text-gray-900">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<!-- Mobile sidebar -->
+<nav id="mobile-sidebar-nav" class="fixed top-0 left-0 bottom-0 z-[50] w-[85%] max-w-sm bg-white transform -translate-x-full transition-transform duration-300 flex flex-col lg:hidden shadow-2xl">
+  <div class="flex items-center justify-between p-4 border-b border-border">
+    <span class="font-extrabold text-text text-lg">IGET<span class="text-accent">-</span>VAPES</span>
+    <button id="close-mobile-menu" class="p-2 text-gray-400 hover:text-text rounded-lg hover:bg-surface transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
-  
+
   <div class="flex-1 overflow-y-auto">
-    <div class="p-4 border-b border-gray-100">
-      <ul class="space-y-4">
+    <!-- Product categories -->
+    <div class="p-4">
+      <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted mb-3">Shop by Category</p>
+      <ul class="space-y-1">
         {productCategories.map(cat => (
           <li>
             <a
               href={cat.href}
               class:list={[
-                'block font-bold text-sm tracking-wide transition-colors',
+                'flex items-center justify-between py-2.5 px-3 rounded-lg text-sm font-medium transition-colors',
                 currentPath.startsWith(cat.href)
-                  ? 'text-blue-600'
-                  : 'text-gray-800',
+                  ? 'bg-accent/10 text-accent'
+                  : 'text-text hover:bg-surface',
               ]}
             >
-              {cat.name}
+              <span>{cat.name}</span>
+              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>
           </li>
         ))}
       </ul>
     </div>
-    
+
+    <div class="h-px bg-border mx-4"></div>
+
+    <!-- Page links -->
     <div class="p-4">
-      <ul class="space-y-3">
+      <ul class="space-y-1">
         {topMenuLinks.map(link => (
           <li>
-            <a href={link.href} class="block text-sm text-gray-600 font-medium hover:text-blue-600">
+            <a
+              href={link.href}
+              class:list={[
+                'block py-2.5 px-3 rounded-lg text-sm font-medium transition-colors',
+                currentPath === link.href
+                  ? 'bg-accent/10 text-accent'
+                  : 'text-gray-600 hover:bg-surface hover:text-text',
+              ]}
+            >
               {link.name}
             </a>
           </li>
         ))}
-        <li class="pt-4 border-t border-gray-100">
-            <a href="/account" class="block text-sm text-gray-900 font-bold hover:text-blue-600">
-              Account / Log In
-            </a>
-        </li>
       </ul>
+    </div>
+
+    <div class="h-px bg-border mx-4"></div>
+
+    <!-- Account -->
+    <div class="p-4">
+      <a href="/account" class="flex items-center gap-3 py-2.5 px-3 rounded-lg text-sm font-semibold text-text hover:bg-surface transition-colors">
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+        Account / Log In
+      </a>
     </div>
   </div>
 </nav>
@@ -126,18 +173,14 @@ const currentPath = Astro.url.pathname;
   function openSidebar() {
     sidebar?.classList.remove('-translate-x-full');
     overlay?.classList.remove('hidden');
-    setTimeout(() => {
-      overlay?.classList.remove('opacity-0');
-    }, 10);
+    requestAnimationFrame(() => overlay?.classList.remove('opacity-0'));
     document.body.style.overflow = 'hidden';
   }
 
   function closeSidebar() {
     sidebar?.classList.add('-translate-x-full');
     overlay?.classList.add('opacity-0');
-    setTimeout(() => {
-      overlay?.classList.add('hidden');
-    }, 300);
+    setTimeout(() => overlay?.classList.add('hidden'), 300);
     document.body.style.overflow = '';
   }
 
