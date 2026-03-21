@@ -5,7 +5,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   site: 'https://igetvapesoriginal.com',
-  output: 'hybrid',
+  output: 'static',
   adapter: cloudflare(),
   integrations: [
     sitemap({
