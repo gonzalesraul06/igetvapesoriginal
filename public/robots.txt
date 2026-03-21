@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://igetvapesoriginal.com/sitemap-index.xml
+
+Disallow: /account/
+Disallow: /checkout
+Disallow: /api/

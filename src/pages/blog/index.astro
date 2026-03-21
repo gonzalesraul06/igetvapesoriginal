@@ -1,0 +1,132 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SchemaMarkup from '@components/seo/SchemaMarkup.astro';
+import { blogPosts } from '@data/blog-posts';
+
+const siteUrl = 'https://igetvapesoriginal.com';
+
+const categories = [...new Set(blogPosts.map(p => p.category))];
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'IGET Vapes Blog — Vaping Guides, Reviews & Tips for Australian Vapers',
+  description: 'Expert vaping guides, IGET & Alibarbar product reviews, flavour rankings, and tips for Australian vapers. Your trusted source for vape information.',
+  url: `${siteUrl}/blog`,
+  publisher: {
+    '@type': 'Organization',
+    name: 'IGET Vapes Original',
+    url: siteUrl,
+    logo: `${siteUrl}/images/logo.svg`,
+  },
+  blogPost: blogPosts.slice(0, 10).map(post => ({
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    url: `${siteUrl}/blog/${post.slug}`,
+    datePublished: post.date,
+    author: { '@type': 'Organization', name: post.author },
+    image: post.image.startsWith('http') ? post.image : `${siteUrl}${post.image}`,
+  })),
+};
+---
+
+<BaseLayout
+  title="IGET Vapes Blog — Vaping Guides, Reviews & Tips | Australia's #1 Vape Resource"
+  description="Expert vaping guides, IGET & Alibarbar product reviews, flavour rankings, and tips for Australian vapers. Buy vapes online with confidence — read our trusted blog."
+>
+  <SchemaMarkup type="breadcrumb" data={{ items: [{ name: 'Home', url: siteUrl }, { name: 'Blog', url: `${siteUrl}/blog` }] }} />
+  <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
+
+  <!-- Header -->
+  <section class="mb-10">
+    <h1 class="text-3xl lg:text-4xl font-extrabold mb-3">
+      IGET Vapes Blog — <span class="text-accent">Guides, Reviews & Tips</span>
+    </h1>
+    <p class="text-gray-300 text-lg max-w-3xl">
+      Your trusted source for vaping information in Australia. Expert guides on IGET &amp; Alibarbar vapes, flavour rankings, buying advice, and everything you need to make informed vaping decisions.
+    </p>
+  </section>
+
+  <!-- Category Filter -->
+  <div class="flex flex-wrap gap-2 mb-8">
+    <button class="blog-filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-accent text-white transition-colors" data-category="all">All Posts</button>
+    {categories.map(cat => (
+      <button class="blog-filter-btn px-4 py-2 rounded-full text-sm font-medium bg-surface border border-gray-700 text-gray-300 hover:border-accent hover:text-white transition-colors" data-category={cat}>{cat}</button>
+    ))}
+  </div>
+
+  <!-- Blog Grid -->
+  <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
+    {blogPosts.map((post, idx) => (
+      <article
+        class="blog-card group"
+        data-category={post.category}
+      >
+        <a href={`/blog/${post.slug}`} class="block card border border-gray-700/50 hover:border-accent/50 transition-all duration-300 overflow-hidden h-full">
+          <div class="aspect-video overflow-hidden bg-surface">
+            <img
+              src={post.image}
+              alt={post.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading={idx < 6 ? 'eager' : 'lazy'}
+              width="400"
+              height="225"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs font-medium text-accent bg-accent/10 px-2.5 py-1 rounded-full">{post.category}</span>
+              <span class="text-xs text-gray-500">{post.readTime}</span>
+            </div>
+            <h2 class="text-lg font-bold mb-2 group-hover:text-accent transition-colors line-clamp-2">{post.title}</h2>
+            <p class="text-gray-400 text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>
+            <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-700/50">
+              <span class="text-xs text-gray-500">{new Date(post.date).toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+              <span class="text-accent text-sm font-medium group-hover:underline">Read More →</span>
+            </div>
+          </div>
+        </a>
+      </article>
+    ))}
+  </div>
+
+  <!-- SEO Content Block -->
+  <section class="mt-8 mb-12 p-6 lg:p-8 bg-surface rounded-2xl border border-gray-700">
+    <h2 class="text-xl font-bold mb-4">About the IGET Vapes Blog</h2>
+    <p class="text-gray-300 leading-relaxed mb-4">
+      The IGET Vapes Original blog is Australia's most comprehensive resource for disposable vape information. Whether you're looking to <strong>buy IGET vapes online</strong>, compare <strong>Alibarbar flavours</strong>, or understand <strong>mesh coil technology</strong>, our expert guides provide clear, accurate information to help you make the best choice.
+    </p>
+    <p class="text-gray-300 leading-relaxed mb-4">
+      We cover every IGET model — <strong>JNR Cruiser 12000</strong>, <strong>IGET One 12000</strong>, <strong>IGET Bar Pro 10000</strong>, <strong>IGET S3 Pod System</strong>, <strong>Alibarbar Ingot 9000</strong>, and <strong>Alibarbar Ice Adjust 12000</strong> — with honest reviews, flavour rankings, and practical buying advice tailored for Australian vapers.
+    </p>
+    <p class="text-gray-300 leading-relaxed">
+      Our blog also covers <strong>vape delivery to all Australian states</strong> including Sydney, Melbourne, Brisbane, Perth, Adelaide, Canberra, Hobart, and Darwin. We publish new content regularly, so bookmark this page and check back for the latest guides, reviews, and vaping tips.
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  const filterBtns = document.querySelectorAll('.blog-filter-btn');
+  const cards = document.querySelectorAll('.blog-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('active', 'bg-accent', 'text-white');
+        b.classList.add('bg-surface', 'border', 'border-gray-700', 'text-gray-300');
+      });
+      btn.classList.add('active', 'bg-accent', 'text-white');
+      btn.classList.remove('bg-surface', 'border', 'border-gray-700', 'text-gray-300');
+
+      const category = btn.getAttribute('data-category');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          (card as HTMLElement).style.display = '';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,1167 @@
+{
+  "name": "IGET Bar Plus S3 Pod Only",
+  "slug": "iget-bar-plus-s3-pod",
+  "puffs": 10000,
+  "price": 55,
+  "description": "Replacement pods for the IGET Bar Plus S3. 10,000 puffs per pod with the same great flavour range. No device needed — just swap and vape.",
+  "image": "/images/categories/iget-bar-plus-s3-pod.webp",
+  "isNew": false,
+  "flavours": [
+    {
+      "name": "Blueberry Mint",
+      "slug": "s3-pod-blueberry-mint",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-blueberry-mint.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Blueberry Mint fuses the juicy sweetness of ripe blueberries with a cool, invigorating mint finish, creating a bold and refreshingly smooth vape experience you won’t forget"
+    },
+    {
+      "name": "Blackberry Pineapple Orange",
+      "slug": "s3-pod-blackberry-pineapple-orange",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-blackberry-pineapple-orange.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Blackberry Pineapple Orange is a bold fusion of ripe blackberries, tangy pineapple, and zesty orange for a tropical, juicy burst of flavour."
+    },
+    {
+      "name": "Raspberry Grape Mango",
+      "slug": "s3-pod-raspberry-grape-mango",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-raspberry-grape-mango.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Raspberry Grape Mango offers a delicious medley of sweet raspberries, juicy grapes, and tropical mangoes for a vibrant, fruity explosion in every puff."
+    },
+    {
+      "name": "Passion Fruit Blueberry Raspberry",
+      "slug": "s3-pod-passion-fruit-blueberry-raspberry",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-passion-fruit-blueberry-raspberry.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Passion Fruit Blueberry Raspberry offers a vibrant blend of tangy passion fruit, sweet blueberries, and juicy raspberries for a bold and refreshing fruity explosion."
+    },
+    {
+      "name": "Peach Lychee Lime Ice",
+      "slug": "s3-pod-peach-lychee-lime-ice",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-peach-lychee-lime-ice.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Peach Lychee Lime Ice is a luscious mix of juicy peaches and exotic lychee, perfectly balanced with zesty lime and a refreshing icy finish."
+    },
+    {
+      "name": "Mango Monster",
+      "slug": "s3-pod-mango-monster",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-mango-monster.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Mango Monster is a tropical rush of juicy mango fused with the bold, fizzy kick of energy drink for an intense and refreshing vape."
+    },
+    {
+      "name": "Dynamic Mint",
+      "slug": "s3-pod-dynamic-mint",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-dynamic-mint.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Dynamic Mint combines the crisp, refreshing taste of cool mint with an invigorating icy kick for a clean and energising vape."
+    },
+    {
+      "name": "Double Apple",
+      "slug": "s3-pod-double-apple",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-double-apple.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Double Apple is a crisp and juicy blend of sweet red and tart green apples for a classic, refreshing taste."
+    },
+    {
+      "name": "Strawberry Kiwi Ice",
+      "slug": "s3-pod-strawberry-kiwi-ice",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-strawberry-kiwi-ice.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Strawberry Kiwi Ice - a refreshing combination of ripe strawberries and tangy kiwi, finished with a cool, icy blast for an exhilarating, fruity vape experience."
+    },
+    {
+      "name": "Blackberry Pomegranate Cherry",
+      "slug": "s3-pod-blackberry-pomegranate-cherry",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-blackberry-pomegranate-cherry.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Blackberry Pomegranate Cherry contains a unique blend of sweet cherry and pomegranates with a delicious blackberry twist."
+    },
+    {
+      "name": "Strawberry Pomegranate",
+      "slug": "s3-pod-strawberry-pomegranate",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-strawberry-pomegranate.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Strawberry Pomegranate is a unique mix of strawberries and fresh pomegranates for that tropical hit."
+    },
+    {
+      "name": "Passion Fruit Kiwi Guava",
+      "slug": "s3-pod-passion-fruit-kiwi-guava",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-passion-fruit-kiwi-guava.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Passion Fruit Kiwi Guava is a vibrant tropical medley that balances the tartness of passion fruit and tangy kiwi with a smooth, sweet guava finish."
+    },
+    {
+      "name": "Lemonade Monster",
+      "slug": "s3-pod-lemonade-monster",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-lemonade-monster.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Lemonade Monster is a zesty fusion of tangy lemonade and the bold, electrifying kick of energy drink for a refreshing and invigorating vape."
+    },
+    {
+      "name": "Mango Ice",
+      "slug": "s3-pod-mango-ice",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-mango-ice.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Mango Ice combines the juicy sweetness of ripe tropical mangoes with a refreshing icy blast for a smooth and invigorating vape."
+    },
+    {
+      "name": "Blueberry Raspberry Bubble Gum",
+      "slug": "s3-pod-blueberry-raspberry-bubble-gum",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-blueberry-raspberry-bubble-gum.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Blueberry Raspberry Bubble Gum combines the sweet juiciness of blueberries with tangy raspberries and a nostalgic bubble gum twist for a playful and satisfying vape."
+    },
+    {
+      "name": "Cherry Pomegranate",
+      "slug": "s3-pod-cherry-pomegranate",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-cherry-pomegranate.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Cherry Pomegranate offers a rich blend of sweet cherries and tart pomegranate for a bold, fruity punch."
+    },
+    {
+      "name": "Peach Ice",
+      "slug": "s3-pod-peach-ice",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-peach-ice.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Peach Ice delivers a bold and juicy burst of ripe, syrupy peach flavour, perfectly balanced with a strong, icy-cool finish. This smooth and satisfying blend is ideal for those who enjoy a vibrant, frosted fruit hit."
+    },
+    {
+      "name": "Black Forest",
+      "slug": "s3-pod-black-forest",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-black-forest.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Black Forest offers a symphony of berry goodness, seamlessly combining the succulent sweetness of ripe raspberries, blackberries, and an assortment of other berries, creating a vibrant and complex profile that delivers a fruity explosion with every satisfying puff."
+    },
+    {
+      "name": "Cola Ice",
+      "slug": "s3-pod-cola-ice",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-cola-ice.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Cola Ice delivers a crisp, sparkling classic cola base finished with a powerful menthol kick for a refreshing, soda-on-ice experience."
+    },
+    {
+      "name": "Chupa Chups Grape",
+      "slug": "s3-pod-chup-chups-grape",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-chup-chups-grape.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Chup@ Chups Grape captures the nostalgic sweetness of classic grape candy, offering a rich, fruity flavour perfectly balanced with a smooth finish. This delightful blend is perfect for those who enjoy a sweet and fruity vaping experience that transports you back to your childhood."
+    },
+    {
+      "name": "Banana Ice",
+      "slug": "s3-pod-banana-ice",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-banana-ice.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod S3 Banana Ice delivers the creamy sweetness of ripe bananas, expertly blended to create a smooth, rich flavour. This satisfying blend is perfect for those who enjoy a comforting and fruity vaping experience with a natural sweetness."
+    },
+    {
+      "name": "Chupa Chups Strawberry",
+      "slug": "s3-pod-chup-chups-strawberry",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-chup-chups-strawberry.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Chup@ Chups Strawberry captures the nostalgic sweetness of classic strawberry candy, offering a rich, fruity flavour perfectly balanced with a smooth finish. This delightful blend is perfect for those who enjoy a sweet and fruity vaping experience that transports you back to your childhood."
+    },
+    {
+      "name": "Strawberry Watermelon Ice",
+      "slug": "s3-pod-strawberry-watermelon-ice",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-strawberry-watermelon-ice.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Strawberry Watermelon ice features a refreshing mix of sweet strawberries and juicy watermelon, complemented by a cool, icy finish for a perfectly chilled, fruity vape."
+    },
+    {
+      "name": "Strawberry Raspberry",
+      "slug": "s3-pod-strawberry-raspberry",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-strawberry-raspberry.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Strawberry Raspberry is a perfect blend of sweet, ripe strawberries and tangy raspberries, delivering a mouthwatering, berry-filled vape experience."
+    },
+    {
+      "name": "Grape Ice",
+      "slug": "s3-pod-grape-ice",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-grape-ice.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Pod Grape Ice is a luscious burst of sweet and juicy grapes, perfectly balanced with a crisp, icy chill for an irresistibly refreshing vape."
+    },
+    {
+      "name": "Blackberry Ice",
+      "slug": "s3-pod-blackberry-ice",
+      "price": 55,
+      "image": "/images/products/iget-bar-plus-s3-pod/s3-pod-blackberry-ice.webp",
+      "inStock": true,
+      "rating": 5,
+      "description": "The IGET Bar Plus S3 Blackberry Ice captures the sweet and juicy flavour of ripe blackberries with no trace of bitterness, and an icy menthol finish."
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Emma L.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "The flavour on this is absolutely incredible. So authentic-tasting and smooth.",
+      "date": "2026-03-13",
+      "verified": true
+    },
+    {
+      "name": "Grace P.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "The flavour on this is absolutely incredible. So authentic-tasting and smooth.",
+      "date": "2026-03-12",
+      "verified": true
+    },
+    {
+      "name": "Madison G.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Outstanding product. The flavour profile is exactly what I was looking for. Five stars all day.",
+      "date": "2026-03-12",
+      "verified": true
+    },
+    {
+      "name": "Jack I.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "Can't believe how good this tastes. It's like the real thing. So impressed.",
+      "date": "2026-03-05",
+      "verified": true
+    },
+    {
+      "name": "Poppy W.",
+      "rating": 4,
+      "title": "Really good",
+      "text": "Great flavour overall. Only giving 4 stars because I wish it lasted a bit longer, but the taste is excellent.",
+      "date": "2026-03-01",
+      "verified": true
+    },
+    {
+      "name": "Lily M.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Exactly what I was looking for. Clean flavour, good throat hit, and lasts ages.",
+      "date": "2026-03-01",
+      "verified": true
+    },
+    {
+      "name": "Alexander F.",
+      "rating": 5,
+      "title": "Amazing quality",
+      "text": "The build quality is excellent and the flavour is even better. A premium vape experience.",
+      "date": "2026-02-24",
+      "verified": true
+    },
+    {
+      "name": "Lachlan G.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "Smooth enough to vape all day without getting tired of it. Perfect balance of flavour.",
+      "date": "2026-02-21",
+      "verified": true
+    },
+    {
+      "name": "Jade Z.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "Flavour is different class. Way better than other brands I've tried. Will be a regular buyer.",
+      "date": "2026-02-11",
+      "verified": true
+    },
+    {
+      "name": "Audrey P.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Top quality product. Love the consistency of the flavour throughout the entire device.",
+      "date": "2026-02-10",
+      "verified": true
+    },
+    {
+      "name": "Jayden I.",
+      "rating": 4,
+      "title": "Really good",
+      "text": "Really enjoy this one. The flavour is great, just slightly less intense than I expected.",
+      "date": "2026-02-09",
+      "verified": true
+    },
+    {
+      "name": "Bella P.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Arrived fast, works perfectly, and the taste is top-notch. Can't ask for more than that.",
+      "date": "2026-02-07",
+      "verified": true
+    },
+    {
+      "name": "Declan E.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "This is my go-to vape now. The flavour is incredible and it lasts forever. Highly recommend to everyone.",
+      "date": "2026-02-06",
+      "verified": true
+    },
+    {
+      "name": "Piper A.",
+      "rating": 5,
+      "title": "Best vape I've bought",
+      "text": "Just reordered for the third time. That should tell you everything you need to know.",
+      "date": "2026-02-05",
+      "verified": true
+    },
+    {
+      "name": "Bella N.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Bought this for the first time and I'm already hooked. The flavour is chef's kiss.",
+      "date": "2026-02-05",
+      "verified": true
+    },
+    {
+      "name": "Flynn Z.",
+      "rating": 5,
+      "title": "Amazing quality",
+      "text": "The build quality is excellent and the flavour is even better. A premium vape experience.",
+      "date": "2026-02-04",
+      "verified": true
+    },
+    {
+      "name": "Claire D.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Already on my second one. The flavour is consistent between devices which I really appreciate.",
+      "date": "2026-02-01",
+      "verified": true
+    },
+    {
+      "name": "Hazel X.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "This is my all-day, every-day vape. Never gets old and always tastes fresh.",
+      "date": "2026-01-24",
+      "verified": true
+    },
+    {
+      "name": "Charlie N.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "The flavour is so well balanced. I can puff on this from morning to night without it getting old.",
+      "date": "2026-01-23",
+      "verified": true
+    },
+    {
+      "name": "Sebastian I.",
+      "rating": 5,
+      "title": "Fast delivery, great product",
+      "text": "Arrived in 2 days to Melbourne. Product is exactly as described. Will order again.",
+      "date": "2026-01-13",
+      "verified": true
+    },
+    {
+      "name": "Ava A.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "This is my all-day, every-day vape. Never gets old and always tastes fresh.",
+      "date": "2026-01-13",
+      "verified": true
+    },
+    {
+      "name": "Blake L.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Outstanding product. The flavour profile is exactly what I was looking for. Five stars all day.",
+      "date": "2026-01-07",
+      "verified": true
+    },
+    {
+      "name": "Lachlan Q.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "Can't believe how good this tastes. It's like the real thing. So impressed.",
+      "date": "2026-01-03",
+      "verified": true
+    },
+    {
+      "name": "Sienna X.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Already on my second one. The flavour is consistent between devices which I really appreciate.",
+      "date": "2025-12-26",
+      "verified": true
+    },
+    {
+      "name": "Ethan I.",
+      "rating": 5,
+      "title": "Amazing quality",
+      "text": "Impressed with both the device quality and the flavour. This is worth every cent.",
+      "date": "2025-12-21",
+      "verified": true
+    },
+    {
+      "name": "Bella L.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "Can't believe how good this tastes. It's like the real thing. So impressed.",
+      "date": "2025-12-21",
+      "verified": true
+    },
+    {
+      "name": "Addison Y.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "This is my all-day, every-day vape. Never gets old and always tastes fresh.",
+      "date": "2025-12-19",
+      "verified": true
+    },
+    {
+      "name": "Jade X.",
+      "rating": 4,
+      "title": "Really good",
+      "text": "Really enjoy this one. The flavour is great, just slightly less intense than I expected.",
+      "date": "2025-12-18",
+      "verified": true
+    },
+    {
+      "name": "Sebastian A.",
+      "rating": 5,
+      "title": "Amazing quality",
+      "text": "Everything about this vape screams quality. From the first to the last puff, it's consistent.",
+      "date": "2025-12-17",
+      "verified": true
+    },
+    {
+      "name": "Layla N.",
+      "rating": 4,
+      "title": "Really good",
+      "text": "Really enjoy this one. The flavour is great, just slightly less intense than I expected.",
+      "date": "2025-12-11",
+      "verified": true
+    },
+    {
+      "name": "Matilda U.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "Can't believe how good this tastes. It's like the real thing. So impressed.",
+      "date": "2025-12-11",
+      "verified": true
+    },
+    {
+      "name": "Bonnie O.",
+      "rating": 5,
+      "title": "Best vape I've bought",
+      "text": "Premium quality vape at a fair price. The flavour is amazing and it just keeps going.",
+      "date": "2025-12-07",
+      "verified": true
+    },
+    {
+      "name": "Emma M.",
+      "rating": 5,
+      "title": "Fast delivery, great product",
+      "text": "Delivered to Brisbane really fast. The flavour is amazing and the device looks slick.",
+      "date": "2025-12-02",
+      "verified": true
+    },
+    {
+      "name": "Noah P.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Third time ordering this flavour. Never disappoints. Smooth, tasty, and reliable.",
+      "date": "2025-11-30",
+      "verified": true
+    },
+    {
+      "name": "Darcy M.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Third time ordering this flavour. Never disappoints. Smooth, tasty, and reliable.",
+      "date": "2025-11-30",
+      "verified": true
+    },
+    {
+      "name": "Rosie K.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Just placed another order. This flavour is just too good to switch away from.",
+      "date": "2025-11-22",
+      "verified": true
+    },
+    {
+      "name": "Mason R.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "The flavour on this is absolutely incredible. So authentic-tasting and smooth.",
+      "date": "2025-11-22",
+      "verified": true
+    },
+    {
+      "name": "Layla M.",
+      "rating": 4,
+      "title": "Really good",
+      "text": "Solid vape with great taste. Minus one star as it arrived a day later than expected, but product is great.",
+      "date": "2025-11-20",
+      "verified": true
+    },
+    {
+      "name": "Declan Y.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Already on my second one. The flavour is consistent between devices which I really appreciate.",
+      "date": "2025-11-15",
+      "verified": true
+    },
+    {
+      "name": "Oscar B.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "The taste is enjoyable and quite authentic. Device works well, just wish it had more puffs.",
+      "date": "2025-11-14",
+      "verified": true
+    },
+    {
+      "name": "Taylor Q.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Really impressed with the taste. It's smooth and the flavour doesn't fade as the device gets lower.",
+      "date": "2025-11-13",
+      "verified": true
+    },
+    {
+      "name": "Riley Z.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "Flavour is pretty spot on. Smooth and satisfying. A reliable choice.",
+      "date": "2025-11-12",
+      "verified": true
+    },
+    {
+      "name": "Ivy E.",
+      "rating": 5,
+      "title": "Best vape I've bought",
+      "text": "Can't fault this one. Everything from the packaging to the flavour is spot on.",
+      "date": "2025-11-08",
+      "verified": true
+    },
+    {
+      "name": "Finn X.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "Good vape, nice flavour. Performs consistently throughout the battery life.",
+      "date": "2025-11-05",
+      "verified": true
+    },
+    {
+      "name": "Daisy J.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Ordered this on a whim and now I can't stop buying it. The taste is amazing and the puff count is legit.",
+      "date": "2025-11-01",
+      "verified": true
+    },
+    {
+      "name": "Luke E.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "The flavour is bang on and the device feels quality. Already ordered my next one.",
+      "date": "2025-10-25",
+      "verified": true
+    },
+    {
+      "name": "Hannah O.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "Can't believe how good this tastes. It's like the real thing. So impressed.",
+      "date": "2025-10-23",
+      "verified": true
+    },
+    {
+      "name": "Bonnie O.",
+      "rating": 4,
+      "title": "Good value",
+      "text": "Flavour is great and the device lasts well. Good value for money compared to other brands.",
+      "date": "2025-10-22",
+      "verified": true
+    },
+    {
+      "name": "Aria R.",
+      "rating": 5,
+      "title": "Amazing quality",
+      "text": "Everything about this vape screams quality. From the first to the last puff, it's consistent.",
+      "date": "2025-10-15",
+      "verified": true
+    },
+    {
+      "name": "Stella P.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Bought this for the first time and I'm already hooked. The flavour is chef's kiss.",
+      "date": "2025-10-14",
+      "verified": true
+    },
+    {
+      "name": "Aria G.",
+      "rating": 5,
+      "title": "Fast delivery, great product",
+      "text": "Quick shipping to Sydney and the vape is top quality. Already planning my next order.",
+      "date": "2025-10-08",
+      "verified": true
+    },
+    {
+      "name": "Stella L.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Outstanding product. The flavour profile is exactly what I was looking for. Five stars all day.",
+      "date": "2025-10-08",
+      "verified": true
+    },
+    {
+      "name": "Rosie F.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Smooth draw, amazing taste, and great value for money. What more could you want?",
+      "date": "2025-10-07",
+      "verified": true
+    },
+    {
+      "name": "Noah M.",
+      "rating": 5,
+      "title": "Best vape I've bought",
+      "text": "Just reordered for the third time. That should tell you everything you need to know.",
+      "date": "2025-10-07",
+      "verified": true
+    },
+    {
+      "name": "Ryder A.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "This is my all-day, every-day vape. Never gets old and always tastes fresh.",
+      "date": "2025-10-06",
+      "verified": true
+    },
+    {
+      "name": "Darcy K.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "The taste is enjoyable and quite authentic. Device works well, just wish it had more puffs.",
+      "date": "2025-10-03",
+      "verified": true
+    },
+    {
+      "name": "Olivia K.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Perfect blend of flavour and smoothness. This is what every vape should taste like.",
+      "date": "2025-10-01",
+      "verified": true
+    },
+    {
+      "name": "Emma D.",
+      "rating": 5,
+      "title": "Amazing quality",
+      "text": "Impressed with both the device quality and the flavour. This is worth every cent.",
+      "date": "2025-09-28",
+      "verified": true
+    },
+    {
+      "name": "Harrison E.",
+      "rating": 5,
+      "title": "Best vape I've bought",
+      "text": "Just reordered for the third time. That should tell you everything you need to know.",
+      "date": "2025-09-23",
+      "verified": true
+    },
+    {
+      "name": "Maya X.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "Flavour is pretty spot on. Smooth and satisfying. A reliable choice.",
+      "date": "2025-09-05",
+      "verified": true
+    },
+    {
+      "name": "Bella W.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "The flavour on this is absolutely incredible. So authentic-tasting and smooth.",
+      "date": "2025-09-04",
+      "verified": true
+    },
+    {
+      "name": "Mason M.",
+      "rating": 5,
+      "title": "Best vape I've bought",
+      "text": "I've gone through so many brands and this is by far the best. The flavour is unmatched.",
+      "date": "2025-09-01",
+      "verified": true
+    },
+    {
+      "name": "Grace I.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Third time ordering this flavour. Never disappoints. Smooth, tasty, and reliable.",
+      "date": "2025-08-26",
+      "verified": true
+    },
+    {
+      "name": "Poppy L.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Third time ordering this flavour. Never disappoints. Smooth, tasty, and reliable.",
+      "date": "2025-08-25",
+      "verified": true
+    },
+    {
+      "name": "Harper S.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Ordered this on a whim and now I can't stop buying it. The taste is amazing and the puff count is legit.",
+      "date": "2025-08-22",
+      "verified": true
+    },
+    {
+      "name": "Cooper X.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Really impressed with the taste. It's smooth and the flavour doesn't fade as the device gets lower.",
+      "date": "2025-08-22",
+      "verified": true
+    },
+    {
+      "name": "Hazel B.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Really impressed with the taste. It's smooth and the flavour doesn't fade as the device gets lower.",
+      "date": "2025-08-15",
+      "verified": true
+    },
+    {
+      "name": "Florence C.",
+      "rating": 4,
+      "title": "Good value",
+      "text": "Decent price for a quality vape. Flavour is really enjoyable and it lasts a reasonable time.",
+      "date": "2025-08-13",
+      "verified": true
+    },
+    {
+      "name": "Toby Y.",
+      "rating": 5,
+      "title": "Best vape I've bought",
+      "text": "Just reordered for the third time. That should tell you everything you need to know.",
+      "date": "2025-08-12",
+      "verified": true
+    },
+    {
+      "name": "Bodhi R.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Best flavour I've tried so far. Smooth, satisfying, and the taste is spot on. Will definitely reorder.",
+      "date": "2025-08-05",
+      "verified": true
+    },
+    {
+      "name": "Ella I.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "My mates and I all switched to this one. The flavour is unreal and it doesn't get harsh.",
+      "date": "2025-08-03",
+      "verified": true
+    },
+    {
+      "name": "Thomas M.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Exactly what I was looking for. Clean flavour, good throat hit, and lasts ages.",
+      "date": "2025-07-29",
+      "verified": true
+    },
+    {
+      "name": "Kai B.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "Smooth enough to vape all day without getting tired of it. Perfect balance of flavour.",
+      "date": "2025-07-25",
+      "verified": true
+    },
+    {
+      "name": "Mitchell S.",
+      "rating": 4,
+      "title": "Good value",
+      "text": "Flavour is great and the device lasts well. Good value for money compared to other brands.",
+      "date": "2025-07-21",
+      "verified": true
+    },
+    {
+      "name": "Jessica W.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Already on my second one. The flavour is consistent between devices which I really appreciate.",
+      "date": "2025-07-18",
+      "verified": true
+    },
+    {
+      "name": "Darcy E.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Perfect blend of flavour and smoothness. This is what every vape should taste like.",
+      "date": "2025-07-13",
+      "verified": true
+    },
+    {
+      "name": "Amy M.",
+      "rating": 5,
+      "title": "Amazing quality",
+      "text": "Everything about this vape screams quality. From the first to the last puff, it's consistent.",
+      "date": "2025-07-13",
+      "verified": true
+    },
+    {
+      "name": "Hamish Q.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Best flavour I've tried so far. Smooth, satisfying, and the taste is spot on. Will definitely reorder.",
+      "date": "2025-07-10",
+      "verified": true
+    },
+    {
+      "name": "Ivy G.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "Flavour is pretty spot on. Smooth and satisfying. A reliable choice.",
+      "date": "2025-07-05",
+      "verified": true
+    },
+    {
+      "name": "Amelia W.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "Smooth enough to vape all day without getting tired of it. Perfect balance of flavour.",
+      "date": "2025-07-02",
+      "verified": true
+    },
+    {
+      "name": "Florence T.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "Found my perfect vape. Not too sweet, not too strong, just right. Can vape this all day.",
+      "date": "2025-07-01",
+      "verified": true
+    },
+    {
+      "name": "Ben H.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Just placed another order. This flavour is just too good to switch away from.",
+      "date": "2025-06-30",
+      "verified": true
+    },
+    {
+      "name": "Lachie C.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "Flavour is pretty spot on. Smooth and satisfying. A reliable choice.",
+      "date": "2025-06-30",
+      "verified": true
+    },
+    {
+      "name": "Angus Z.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "Good vape, nice flavour. Performs consistently throughout the battery life.",
+      "date": "2025-06-25",
+      "verified": true
+    },
+    {
+      "name": "Sarah R.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "Smooth enough to vape all day without getting tired of it. Perfect balance of flavour.",
+      "date": "2025-06-23",
+      "verified": true
+    },
+    {
+      "name": "Oscar O.",
+      "rating": 5,
+      "title": "Fast delivery, great product",
+      "text": "Got it in Perth within 3 days. Flavour is incredible, definitely ordering more.",
+      "date": "2025-06-21",
+      "verified": true
+    },
+    {
+      "name": "Xavier Z.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Exactly what I was looking for. Clean flavour, good throat hit, and lasts ages.",
+      "date": "2025-06-17",
+      "verified": true
+    },
+    {
+      "name": "Alexander T.",
+      "rating": 4,
+      "title": "Really good",
+      "text": "Very nice flavour, smooth draw. Would rate 5 but it took a few puffs to really get going.",
+      "date": "2025-06-14",
+      "verified": true
+    },
+    {
+      "name": "Finn V.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "The flavour on this is absolutely incredible. So authentic-tasting and smooth.",
+      "date": "2025-06-10",
+      "verified": true
+    },
+    {
+      "name": "Ava D.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "The flavour on this is absolutely incredible. So authentic-tasting and smooth.",
+      "date": "2025-06-08",
+      "verified": true
+    },
+    {
+      "name": "Hugo N.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Already on my second one. The flavour is consistent between devices which I really appreciate.",
+      "date": "2025-06-03",
+      "verified": true
+    },
+    {
+      "name": "Toby L.",
+      "rating": 5,
+      "title": "Best vape I've bought",
+      "text": "Just reordered for the third time. That should tell you everything you need to know.",
+      "date": "2025-05-30",
+      "verified": true
+    },
+    {
+      "name": "Ethan Q.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Arrived fast, works perfectly, and the taste is top-notch. Can't ask for more than that.",
+      "date": "2025-05-30",
+      "verified": true
+    },
+    {
+      "name": "Matilda M.",
+      "rating": 4,
+      "title": "Really good",
+      "text": "Really enjoy this one. The flavour is great, just slightly less intense than I expected.",
+      "date": "2025-05-26",
+      "verified": true
+    },
+    {
+      "name": "Bonnie B.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Just placed another order. This flavour is just too good to switch away from.",
+      "date": "2025-05-24",
+      "verified": true
+    },
+    {
+      "name": "Jayden Z.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Great purchase! The flavour is vibrant and each puff is as good as the first.",
+      "date": "2025-05-19",
+      "verified": true
+    },
+    {
+      "name": "Claire I.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "Good vape, nice flavour. Performs consistently throughout the battery life.",
+      "date": "2025-05-14",
+      "verified": true
+    },
+    {
+      "name": "Ryder D.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "Found my perfect vape. Not too sweet, not too strong, just right. Can vape this all day.",
+      "date": "2025-05-10",
+      "verified": true
+    },
+    {
+      "name": "Indiana T.",
+      "rating": 5,
+      "title": "Will buy again",
+      "text": "Just placed another order. This flavour is just too good to switch away from.",
+      "date": "2025-05-08",
+      "verified": true
+    },
+    {
+      "name": "Sophie K.",
+      "rating": 5,
+      "title": "Best vape I've bought",
+      "text": "Just reordered for the third time. That should tell you everything you need to know.",
+      "date": "2025-05-05",
+      "verified": true
+    },
+    {
+      "name": "Rosie U.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Great purchase! The flavour is vibrant and each puff is as good as the first.",
+      "date": "2025-05-04",
+      "verified": true
+    },
+    {
+      "name": "Tyler H.",
+      "rating": 5,
+      "title": "Great flavour!",
+      "text": "Great purchase! The flavour is vibrant and each puff is as good as the first.",
+      "date": "2025-04-28",
+      "verified": true
+    },
+    {
+      "name": "Caleb I.",
+      "rating": 4,
+      "title": "Really good",
+      "text": "Great flavour overall. Only giving 4 stars because I wish it lasted a bit longer, but the taste is excellent.",
+      "date": "2025-04-15",
+      "verified": true
+    },
+    {
+      "name": "Chloe Z.",
+      "rating": 4,
+      "title": "Really good",
+      "text": "Great flavour overall. Only giving 4 stars because I wish it lasted a bit longer, but the taste is excellent.",
+      "date": "2025-04-15",
+      "verified": true
+    },
+    {
+      "name": "Amy M.",
+      "rating": 5,
+      "title": "Fast delivery, great product",
+      "text": "Got it in Perth within 3 days. Flavour is incredible, definitely ordering more.",
+      "date": "2025-04-14",
+      "verified": true
+    },
+    {
+      "name": "Ryder V.",
+      "rating": 5,
+      "title": "Absolutely love it!",
+      "text": "Outstanding product. The flavour profile is exactly what I was looking for. Five stars all day.",
+      "date": "2025-04-11",
+      "verified": true
+    },
+    {
+      "name": "Aria Q.",
+      "rating": 5,
+      "title": "Fast delivery, great product",
+      "text": "Arrived in 2 days to Melbourne. Product is exactly as described. Will order again.",
+      "date": "2025-04-09",
+      "verified": true
+    },
+    {
+      "name": "Brodie S.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "The taste is enjoyable and quite authentic. Device works well, just wish it had more puffs.",
+      "date": "2025-04-02",
+      "verified": true
+    },
+    {
+      "name": "Aria V.",
+      "rating": 5,
+      "title": "Best vape I've bought",
+      "text": "This has become my daily driver. Consistent flavour, great battery, perfect size.",
+      "date": "2025-03-29",
+      "verified": true
+    },
+    {
+      "name": "Max S.",
+      "rating": 5,
+      "title": "Amazing quality",
+      "text": "Impressed with both the device quality and the flavour. This is worth every cent.",
+      "date": "2025-03-29",
+      "verified": true
+    },
+    {
+      "name": "Ryder R.",
+      "rating": 5,
+      "title": "Excellent flavour",
+      "text": "The taste is seriously next level. Every puff is flavourful and satisfying.",
+      "date": "2025-03-29",
+      "verified": true
+    },
+    {
+      "name": "Finn H.",
+      "rating": 5,
+      "title": "Amazing quality",
+      "text": "Impressed with both the device quality and the flavour. This is worth every cent.",
+      "date": "2025-03-29",
+      "verified": true
+    },
+    {
+      "name": "Liam A.",
+      "rating": 5,
+      "title": "Perfect all-day vape",
+      "text": "Smooth enough to vape all day without getting tired of it. Perfect balance of flavour.",
+      "date": "2025-03-25",
+      "verified": true
+    },
+    {
+      "name": "Audrey A.",
+      "rating": 4,
+      "title": "Tasty and satisfying",
+      "text": "Flavour is pretty spot on. Smooth and satisfying. A reliable choice.",
+      "date": "2025-03-24",
+      "verified": true
+    },
+    {
+      "name": "Madison H.",
+      "rating": 4,
+      "title": "Good value",
+      "text": "Happy with this purchase. Good balance of quality and price. Flavour is very pleasant.",
+      "date": "2025-03-22",
+      "verified": true
+    }
+  ]
+}

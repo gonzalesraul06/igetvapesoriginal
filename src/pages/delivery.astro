@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+
+const states = [
+  { name: 'New South Wales', slug: 'nsw', cities: ['Sydney', 'Newcastle', 'Wollongong', 'Central Coast', 'Coffs Harbour'] },
+  { name: 'Victoria', slug: 'vic', cities: ['Melbourne', 'Geelong', 'Ballarat', 'Bendigo', 'Shepparton'] },
+  { name: 'Queensland', slug: 'qld', cities: ['Brisbane', 'Gold Coast', 'Sunshine Coast', 'Cairns', 'Townsville'] },
+  { name: 'South Australia', slug: 'sa', cities: ['Adelaide', 'Mount Gambier', 'Whyalla'] },
+  { name: 'Western Australia', slug: 'wa', cities: ['Perth', 'Bunbury', 'Geraldton', 'Kalgoorlie'] },
+  { name: 'Tasmania', slug: 'tas', cities: ['Hobart', 'Launceston', 'Devonport'] },
+  { name: 'Northern Territory', slug: 'nt', cities: ['Darwin', 'Alice Springs'] },
+  { name: 'ACT', slug: 'act', cities: ['Canberra'] },
+];
+---
+
+<BaseLayout title="Delivery Locations — IGET Vapes Australia-Wide Delivery" description="We deliver IGET vapes to all locations across Australia including Sydney, Melbourne, Brisbane, Perth, Adelaide and regional areas.">
+  <Breadcrumbs items={[{ name: 'Delivery Locations' }]} />
+
+  <h1 class="text-3xl font-extrabold mb-3">Delivery Locations</h1>
+  <p class="text-gray-300 mb-8 max-w-2xl">We deliver Australia-wide with a flat rate of $30 per order. Whether you're in a capital city or a regional area, we've got you covered.</p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    {states.map(state => (
+      <div class="card p-4">
+        <h2 class="font-bold text-accent mb-2">{state.name}</h2>
+        <ul class="space-y-1 text-sm text-gray-300">
+          {state.cities.map(city => (
+            <li class="flex items-center gap-1.5">
+              <span class="text-green-400 text-xs">✓</span>
+              {city}
+            </li>
+          ))}
+          <li class="text-gray-500 text-xs mt-1">+ all other {state.name} areas</li>
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="card p-6 mt-8">
+    <h2 class="text-xl font-bold mb-3">Can't Find Your Location?</h2>
+    <p class="text-gray-300 text-sm">We deliver to all Australian postcodes via Australia Post. If your area isn't listed above, don't worry — we still ship to you! Delivery times to remote areas may be slightly longer (7-10 business days).</p>
+  </div>
+</BaseLayout>

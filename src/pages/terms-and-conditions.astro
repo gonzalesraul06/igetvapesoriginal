@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+---
+
+<BaseLayout title="Terms & Conditions — IGET Vapes Australia" description="Read the terms and conditions for using IGET Vapes Original website and purchasing products.">
+  <Breadcrumbs items={[{ name: 'Terms & Conditions' }]} />
+
+  <div class="max-w-3xl">
+    <h1 class="text-3xl font-extrabold mb-6">Terms & Conditions</h1>
+    <div class="prose">
+      <h2>Age Requirement</h2>
+      <p>You must be <strong>18 years of age or older</strong> to purchase products from this website. By placing an order, you confirm that you meet the legal age requirement for purchasing nicotine products in your jurisdiction.</p>
+
+      <h2>Products</h2>
+      <ul>
+        <li>All products sold on this website are genuine and sourced from authorised distributors.</li>
+        <li>Product images are for illustration purposes. Actual products may vary slightly in appearance.</li>
+        <li>Product availability is subject to change without notice.</li>
+      </ul>
+
+      <h2>Orders & Payment</h2>
+      <ul>
+        <li>All orders are subject to acceptance and availability.</li>
+        <li>Prices are listed in Australian Dollars (AUD) and include GST where applicable.</li>
+        <li>We reserve the right to refuse or cancel any order at our discretion.</li>
+        <li>Payment must be completed before orders are dispatched.</li>
+      </ul>
+
+      <h2>Shipping & Delivery</h2>
+      <p>Please refer to our <a href="/shipping-policy">Shipping Policy</a> for detailed information on delivery timeframes, rates, and tracking.</p>
+
+      <h2>Returns & Refunds</h2>
+      <ul>
+        <li>Due to the nature of our products, we do not accept returns on opened or used items.</li>
+        <li>If you receive a defective product, please contact us within 7 days of delivery with photos and your order number.</li>
+        <li>Refunds for defective products will be processed within 5-10 business days after approval.</li>
+      </ul>
+
+      <h2>Limitation of Liability</h2>
+      <p>IGET Vapes Original is not responsible for any damage or harm resulting from the misuse of products purchased from this website. Products are intended for use by adults only and should be used in accordance with the manufacturer's instructions.</p>
+
+      <h2>Intellectual Property</h2>
+      <p>All content on this website, including text, images, logos, and designs, is the property of IGET Vapes Original and is protected by Australian copyright law.</p>
+
+      <h2>Changes to Terms</h2>
+      <p>We reserve the right to update these terms at any time. Changes will be posted on this page with the updated date. Continued use of the website constitutes acceptance of the revised terms.</p>
+    </div>
+  </div>
+</BaseLayout>

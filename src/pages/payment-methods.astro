@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+---
+
+<BaseLayout title="Payment Methods — IGET Vapes Australia" description="Accepted payment methods for IGET vape purchases including bank transfer, cryptocurrency and more.">
+  <Breadcrumbs items={[{ name: 'Payment Methods' }]} />
+
+  <div class="max-w-3xl">
+    <h1 class="text-3xl font-extrabold mb-6">Payment Methods</h1>
+    <div class="prose">
+      <p>We currently accept the following payment methods for a smooth and secure checkout experience:</p>
+
+      <h2>Bank Transfer (EFT)</h2>
+      <p>Direct bank transfer is our primary payment method. Once you place an order, you'll receive our bank details to complete the payment. Orders are processed once payment is confirmed, typically within a few hours during business hours.</p>
+
+      <h2>Cryptocurrency</h2>
+      <p>We accept major cryptocurrencies including Bitcoin (BTC), Ethereum (ETH), and USDT. Crypto payments are processed instantly once confirmed on the blockchain.</p>
+
+      <h2>PayID</h2>
+      <p>For instant bank payments, you can use PayID. This allows for immediate payment confirmation and faster order processing.</p>
+
+      <h2>Important Notes</h2>
+      <ul>
+        <li>We do <strong>not</strong> accept credit cards or PayPal at this time due to payment processor restrictions on vape products.</li>
+        <li>All prices are listed in <strong>Australian Dollars (AUD)</strong>.</li>
+        <li>Payment must be received in full before orders are dispatched.</li>
+        <li>If payment is not received within 48 hours of placing an order, the order may be automatically cancelled.</li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

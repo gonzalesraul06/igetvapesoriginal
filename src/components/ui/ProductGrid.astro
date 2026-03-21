@@ -1,0 +1,43 @@
+---
+import ProductCard from '@components/ui/ProductCard.astro';
+
+interface Flavour {
+  name: string;
+  slug: string;
+  price: number;
+  image: string;
+  inStock: boolean;
+  isNew?: boolean;
+  rating?: number;
+}
+
+interface Props {
+  flavours: Flavour[];
+  categorySlug: string;
+  categoryName: string;
+}
+
+const { flavours, categorySlug, categoryName } = Astro.props;
+
+// Sort: in stock first, then alphabetically
+const sorted = [...flavours].sort((a, b) => {
+  if (a.inStock !== b.inStock) return a.inStock ? -1 : 1;
+  return a.name.localeCompare(b.name);
+});
+---
+
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+  {sorted.map(flavour => (
+    <ProductCard
+      name={flavour.name}
+      slug={flavour.slug}
+      categorySlug={categorySlug}
+      categoryName={categoryName}
+      price={flavour.price}
+      image={flavour.image}
+      inStock={flavour.inStock}
+      isNew={flavour.isNew}
+      rating={flavour.rating}
+    />
+  ))}
+</div>

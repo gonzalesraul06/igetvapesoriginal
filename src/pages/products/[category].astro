@@ -1,0 +1,462 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+import ProductGrid from '@components/ui/ProductGrid.astro';
+import SchemaMarkup from '@components/seo/SchemaMarkup.astro';
+import { formatPrice } from '@utils/formatPrice';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map(product => ({
+    params: { category: product.data.slug },
+    props: { product: product.data },
+  }));
+}
+
+const { category } = Astro.params;
+const { product } = Astro.props;
+const siteUrl = 'https://igetvapesoriginal.com';
+const categoryUrl = `${siteUrl}/products/${product.slug}`;
+
+const inStockCount = product.flavours.filter((f: any) => f.inStock).length;
+const reviews = product.reviews ?? [];
+const reviewCount = reviews.length;
+const avgRating = reviewCount > 0 ? (reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / reviewCount).toFixed(1) : '4.9';
+
+/* ── Per-category SEO data ── */
+interface CategorySEO {
+  title: string;
+  description: string;
+  h1: string;
+  h1Accent: string;
+  intro: string;
+  highlights: Array<{ icon: string; label: string; value: string }>;
+  buyingGuide: string;
+  features: Array<{ title: string; desc: string }>;
+  faqs: Array<{ q: string; a: string }>;
+  relatedLinks: Array<{ text: string; href: string }>;
+  seoContent: string;
+}
+
+const categorySEO: Record<string, CategorySEO> = {
+  'jnr-cruiser': {
+    title: 'Buy JNR Cruiser 12000 Puffs Online Australia — All Flavours | IGET Vapes',
+    description: 'Shop JNR Cruiser 12000 puffs disposable vape online in Australia. 18 bold flavours, 25ml capacity, 3500mAh rechargeable battery & dual mesh coil. Free from $65. Fast delivery Sydney, Melbourne, Brisbane & Australia-wide.',
+    h1: 'JNR Cruiser 12000 Puffs',
+    h1Accent: "Australia's Most Powerful Disposable Vape",
+    intro: 'The JNR Cruiser is the flagship device in the IGET range, delivering an industry-leading 12,000 puffs from a massive 25ml e-liquid reservoir. Featuring a 3500mAh rechargeable battery and 1.2 Ohm dual mesh coil technology, it\'s designed for vapers who demand maximum performance, rich flavour, and unmatched longevity. Choose from 18 premium flavours below.',
+    highlights: [
+      { icon: '💨', label: 'Puffs', value: '12,000' },
+      { icon: '🧪', label: 'Capacity', value: '25 ml' },
+      { icon: '🔋', label: 'Battery', value: '3500 mAh' },
+      { icon: '⚡', label: 'Coil', value: 'Dual Mesh' },
+    ],
+    buyingGuide: 'The JNR Cruiser is ideal for heavy vapers who want the highest puff count available and don\'t want to recharge frequently. At $65 per device with 12,000 puffs, you get premium vapour quality at just $0.0054 per puff. The 1.2 Ohm dual mesh coil produces rich, dense flavour with every inhale. Popular picks include Cool Mint, Watermelon Ice, and Blueberry Raspberry Ice.',
+    features: [
+      { title: '25ml E-Liquid Capacity', desc: 'The largest e-liquid reservoir in any disposable vape ensures 12,000 puffs of consistent flavour without running dry.' },
+      { title: '3500mAh Rechargeable Battery', desc: 'The most powerful battery in the IGET range. USB-C charging takes 60-90 minutes for a full charge.' },
+      { title: '1.2 Ohm Dual Mesh Coil', desc: 'Two mesh heating elements work together for double the surface area, producing richer flavour and denser vapour clouds.' },
+      { title: 'Premium Aluminium Body', desc: 'Durable aluminium alloy construction with an ergonomic design that fits comfortably in your hand.' },
+    ],
+    faqs: [
+      { q: 'How long does a JNR Cruiser 12000 last?', a: 'The JNR Cruiser delivers up to 12,000 puffs, which typically lasts 2-3 weeks for average vapers. Heavy users may get 1-2 weeks of use. The 25ml e-liquid capacity is the largest in any IGET disposable vape.' },
+      { q: 'Is the JNR Cruiser rechargeable?', a: 'Yes, the JNR Cruiser features a 3500mAh rechargeable lithium-ion battery with USB-C charging. A full charge takes approximately 60-90 minutes and provides enough power to fully vaporise all 25ml of e-liquid.' },
+      { q: 'What are the best JNR Cruiser flavours?', a: 'The most popular JNR Cruiser flavours in Australia are Cool Mint, Watermelon Ice, Blueberry Raspberry Ice, Grape Ice, and Mango Magic. Cool Fanta and Skittles are also trending choices among Australian vapers.' },
+      { q: 'How much does the JNR Cruiser cost in Australia?', a: 'The JNR Cruiser 12000 Puffs is priced at $65 AUD per device at IGET Vapes Original. With 12,000 puffs, that works out to just $0.0054 per puff — excellent value for a premium disposable vape.' },
+      { q: 'Where can I buy JNR Cruiser vapes online in Australia?', a: 'You can buy genuine JNR Cruiser 12000 puffs vapes online at IGET Vapes Original with fast Australia-wide delivery. We ship to Sydney, Melbourne, Brisbane, Perth, Adelaide, and all other cities with $30 flat-rate shipping.' },
+    ],
+    relatedLinks: [
+      { text: 'JNR Cruiser Full Review', href: '/blog/jnr-cruiser-12000-puffs-review' },
+      { text: 'Compare All IGET Models', href: '/blog/comparing-all-iget-models-2026' },
+      { text: 'Best Vapes for Heavy Users', href: '/blog/best-vapes-for-heavy-users' },
+    ],
+    seoContent: '<p>The <strong>JNR Cruiser 12000 Puffs</strong> is the ultimate disposable vape for Australian vapers who want maximum performance. With the largest e-liquid capacity (25ml) and most powerful battery (3500mAh) of any IGET device, the JNR Cruiser sets the standard for premium disposable vapes in Australia.</p><p>Every JNR Cruiser sold at IGET Vapes Original is <strong>100% authentic</strong> and sourced directly from authorised distributors. We offer fast delivery to <strong>Sydney, Melbourne, Brisbane, Perth, Adelaide, Gold Coast, Canberra, Hobart, Darwin</strong> and all regional areas across Australia with $30 flat-rate shipping.</p><p>The JNR Cruiser\'s <strong>1.2 Ohm dual mesh coil</strong> technology uses two mesh heating elements to double the vapour surface area, producing incredibly rich and consistent flavour. Whether you prefer fruity flavours like Watermelon Ice and Mango Magic, refreshing menthol options like Cool Mint, or unique choices like Cool Fanta and Skittles — the JNR Cruiser delivers an exceptional vaping experience from first puff to last.</p>',
+  },
+  'iget-one': {
+    title: 'Buy IGET One 12000 Puffs Online Australia — All Flavours | IGET Vapes',
+    description: 'Shop IGET One 12000 puffs disposable vape online in Australia. 23 sleek flavours, 18ml capacity, 2700mAh battery & 0.6 Ohm dual mesh coil for dense vapour. From $55. Fast Australia-wide delivery.',
+    h1: 'IGET One 12000 Puffs',
+    h1Accent: 'Sleek Design, Maximum Flavour',
+    intro: 'The IGET One combines 12,000 puffs of premium vaping with a sleek, modern design that stands out from the crowd. Featuring an innovative 0.6 Ohm dual mesh coil that produces some of the densest vapour clouds in the disposable vape market, the IGET One is the choice for vapers who want both performance and style. Browse all 23 flavours below.',
+    highlights: [
+      { icon: '💨', label: 'Puffs', value: '12,000' },
+      { icon: '🧪', label: 'Capacity', value: '18 ml' },
+      { icon: '🔋', label: 'Battery', value: '2700 mAh' },
+      { icon: '⚡', label: 'Coil', value: '0.6Ω Dual Mesh' },
+    ],
+    buyingGuide: 'The IGET One is perfect for vapers who want dense vapour clouds with intense flavour. The 0.6 Ohm dual mesh coil runs at a lower resistance than most disposables, producing warmer, more satisfying vapour. At $55 with 12,000 puffs, it offers outstanding value. Best sellers include Strawberry Watermelon Ice, Grape Ice, and Cherry Pomegranate.',
+    features: [
+      { title: '0.6 Ohm Dual Mesh Coil', desc: 'The lowest resistance coil in any IGET disposable — produces warmer vapour, denser clouds, and more intense flavour extraction.' },
+      { title: '18ml E-Liquid Capacity', desc: 'Generous e-liquid reservoir ensures consistent flavour delivery across all 12,000 puffs.' },
+      { title: '2700mAh Rechargeable Battery', desc: 'High-capacity battery with USB-C fast charging — full charge in 45-60 minutes.' },
+      { title: 'Transparent E-Liquid Window', desc: 'Monitor your remaining e-liquid at a glance through the built-in transparent window.' },
+    ],
+    faqs: [
+      { q: 'How many puffs does the IGET One have?', a: 'The IGET One delivers up to 12,000 puffs from an 18ml e-liquid capacity. Most users get 1-3 weeks of use depending on vaping frequency.' },
+      { q: 'What makes the IGET One different from the JNR Cruiser?', a: 'The IGET One uses a 0.6 Ohm dual mesh coil (vs 1.2 Ohm in the JNR Cruiser), producing warmer, denser vapour. It has a sleeker design with a transparent e-liquid window. The JNR Cruiser has a larger 25ml capacity vs 18ml.' },
+      { q: 'What are the best IGET One flavours?', a: 'Top-selling IGET One flavours include Strawberry Watermelon Ice, Grape Ice, Cherry Pomegranate, Blueberry Raspberry, and Blue Monster. The Cherry Monster and Tropical Orange Monster are also popular unique options.' },
+      { q: 'Is the IGET One good for cloud chasing?', a: 'Yes! The IGET One\'s 0.6 Ohm dual mesh coil produces some of the densest vapour clouds of any disposable vape. The lower resistance means warmer vapour and larger cloud production while maintaining excellent flavour.' },
+      { q: 'How much is the IGET One in Australia?', a: 'The IGET One 12000 Puffs is priced at $55 AUD at IGET Vapes Original. We ship Australia-wide with $30 flat-rate delivery to Sydney, Melbourne, Brisbane, Perth, Adelaide, and all other cities.' },
+    ],
+    relatedLinks: [
+      { text: 'IGET One Full Review', href: '/blog/iget-one-12000-puffs-review' },
+      { text: 'Compare All IGET Models', href: '/blog/comparing-all-iget-models-2026' },
+      { text: 'Best Fruity Vape Flavours', href: '/blog/best-fruity-vape-flavours' },
+    ],
+    seoContent: '<p>Buy the <strong>IGET One 12000 Puffs</strong> online at Australia\'s most trusted vape shop. The IGET One is engineered for vapers who demand both style and substance — the sleek, modern body houses a powerful 0.6 Ohm dual mesh coil that produces exceptionally dense vapour with crystal-clear flavour.</p><p>With <strong>23 premium flavours</strong> to choose from, the IGET One range covers every taste profile — fruity blends like Strawberry Watermelon Ice and Cherry Pomegranate, icy refreshers like Grape Ice and Mountain Spring Mint, and unique options like Blue Monster and Tropical Orange Monster.</p><p>IGET Vapes Original delivers genuine IGET One vapes to <strong>all Australian states and territories</strong> including Sydney, Melbourne, Brisbane, Perth, Adelaide, Gold Coast, Canberra, Hobart, and Darwin. Every device is 100% authentic with fast $30 flat-rate shipping.</p>',
+  },
+  'iget-bar-pro': {
+    title: 'Buy IGET Bar Pro 10000 Puffs Online Australia — All 26 Flavours | IGET Vapes',
+    description: 'Shop IGET Bar Pro 10000 puffs disposable vape online in Australia. 26 premium flavours, 20ml capacity, mesh coil technology. From $48. Australia\'s most popular disposable vape. Fast delivery.',
+    h1: 'IGET Bar Pro 10000 Puffs',
+    h1Accent: "Australia's #1 Best-Selling Disposable Vape",
+    intro: 'The IGET Bar Pro is Australia\'s most popular disposable vape — and for good reason. With 26 expertly crafted flavours, a generous 20ml e-liquid capacity, and advanced mesh coil technology delivering 10,000 smooth puffs, the Bar Pro strikes the perfect balance between performance, flavour variety, and value. Available from just $48.',
+    highlights: [
+      { icon: '💨', label: 'Puffs', value: '10,000' },
+      { icon: '🧪', label: 'Capacity', value: '20 ml' },
+      { icon: '🔋', label: 'Battery', value: '2000 mAh' },
+      { icon: '🎨', label: 'Flavours', value: '26' },
+    ],
+    buyingGuide: 'The IGET Bar Pro is ideal for everyday vapers who want a wide flavour selection at a great price. At $48 for 10,000 puffs, it\'s one of the best-value disposable vapes in Australia. The 1.2 Ohm mesh coil produces smooth, consistent flavour. Top picks: Strawberry Watermelon Ice, Cherry Pomegranate, Blueberry Raspberry, Grape Ice, and Orange Fanta Soda.',
+    features: [
+      { title: '26 Premium Flavours', desc: 'The widest flavour selection in the IGET range — fruity, menthol, candy, soda, and berry blends to suit every palate.' },
+      { title: '20ml E-Liquid Capacity', desc: 'Generous capacity ensures you get the full 10,000 puffs with consistent flavour from start to finish.' },
+      { title: '1.2 Ohm Mesh Coil', desc: 'Advanced mesh coil technology eliminates hot spots and delivers smooth, clean vapour with every puff.' },
+      { title: 'Compact & Pocket-Friendly', desc: 'At just 93g, the Bar Pro slips easily into any pocket or bag — perfect for on-the-go vaping.' },
+    ],
+    faqs: [
+      { q: 'How many puffs does the IGET Bar Pro have?', a: 'The IGET Bar Pro delivers up to 10,000 puffs from a 20ml e-liquid capacity. For average vapers, this typically lasts 1-2 weeks of daily use.' },
+      { q: 'What are the best IGET Bar Pro flavours in Australia?', a: 'The top 5 best-selling IGET Bar Pro flavours are: 1) Strawberry Watermelon Ice, 2) Cherry Pomegranate, 3) Blueberry Raspberry, 4) Grape Ice, and 5) Orange Fanta Soda. Fruity Skittles and Kiwi Pineapple are also hugely popular.' },
+      { q: 'How much does the IGET Bar Pro cost?', a: 'The IGET Bar Pro 10000 Puffs costs $48 AUD at IGET Vapes Original. With 10,000 puffs per device, that\'s just $0.0048 per puff — exceptional value for a premium disposable vape.' },
+      { q: 'Is the IGET Bar Pro rechargeable?', a: 'Yes, the IGET Bar Pro features a 2000mAh rechargeable battery with USB-C charging. A full charge takes approximately 40-50 minutes and provides enough power to vaporise the entire 20ml e-liquid capacity.' },
+      { q: 'Why is the IGET Bar Pro so popular in Australia?', a: 'The IGET Bar Pro combines 26 unique flavours, 10,000 puffs, and a competitive $48 price point — making it the best overall value disposable vape in Australia. The mesh coil technology delivers consistently smooth flavour, and the compact design is perfect for everyday carry.' },
+    ],
+    relatedLinks: [
+      { text: 'IGET Bar Pro Full Review & Rankings', href: '/blog/iget-bar-pro-review-all-flavours' },
+      { text: 'Best IGET Vapes 2026', href: '/blog/best-iget-vapes-australia-2026' },
+      { text: 'Best Menthol Vapes', href: '/blog/best-menthol-vapes-australia' },
+    ],
+    seoContent: '<p>The <strong>IGET Bar Pro 10000 Puffs</strong> is the undisputed best-selling disposable vape in Australia. Loved by thousands of vapers nationwide, the Bar Pro combines an impressive <strong>26 unique flavours</strong> with 10,000 puffs of smooth, mesh coil-powered vapour at an unbeatable $48 price point.</p><p>Whether you\'re a fan of fruity flavours like <strong>Strawberry Watermelon Ice</strong> and <strong>Cherry Pomegranate</strong>, refreshing menthol options like <strong>Grape Ice</strong> and <strong>Dynamic Mint</strong>, or fun soda-inspired choices like <strong>Orange Fanta Soda</strong> — the IGET Bar Pro has something for everyone.</p><p>Buy the IGET Bar Pro online at IGET Vapes Original with <strong>fast delivery to all Australian states</strong>. We deliver to Sydney, Melbourne, Brisbane, Perth, Adelaide, Canberra, Hobart, Darwin, Gold Coast, and all regional areas. Every IGET Bar Pro is 100% authentic and backed by our genuine product guarantee.</p>',
+  },
+  'iget-bar-plus-s3': {
+    title: 'Buy IGET S3 Pod System Online Australia — All Flavours | IGET Vapes',
+    description: 'Shop IGET Bar Plus S3 pod vape system in Australia. 26 flavours, 10000 puffs, 950mAh rechargeable battery, swappable pods. From $48. The smart alternative to disposable vapes.',
+    h1: 'IGET Bar Plus S3 Pod System',
+    h1Accent: 'The Refillable Revolution — Swap, Don\'t Throw',
+    intro: 'The IGET Bar Plus S3 is a game-changing pod-based vaping system that combines the convenience of disposable vapes with the economy of refillable devices. The S3 kit includes a rechargeable 950mAh battery and your first pre-filled 18ml pod delivering 10,000 puffs. When your pod is empty, simply swap to a new one — no mess, no refilling. Browse all 26 S3 kit flavours below.',
+    highlights: [
+      { icon: '💨', label: 'Puffs/Pod', value: '10,000' },
+      { icon: '🧪', label: 'Pod Capacity', value: '18 ml' },
+      { icon: '🔋', label: 'Battery', value: '950 mAh' },
+      { icon: '🔄', label: 'System', value: 'Pod Swap' },
+    ],
+    buyingGuide: 'The IGET S3 is the smartest choice for regular vapers. The kit costs $48 and includes the battery + first pod. Replacement pods are just $30, saving you $18 per refill compared to buying a new disposable. The magnetic pod system makes swapping flavours instant. Best sellers: Strawberry Watermelon Ice, Grape Ice, and Passion Fruit Kiwi Guava.',
+    features: [
+      { title: 'Magnetic Pod System', desc: 'Secure magnetic connection ensures a leak-free fit every time. Click in a new pod and start vaping instantly — no priming needed.' },
+      { title: 'Economical Refills', desc: 'Replacement S3 pods cost just $30 vs $48+ for a new disposable. Save money on every refill while reducing waste.' },
+      { title: '950mAh Rechargeable Battery', desc: 'Compact but powerful battery lasts all day. USB-C fast charging takes just 30-40 minutes.' },
+      { title: 'Fresh Coil Every Pod', desc: 'Each S3 pod includes a brand-new 1.0 Ohm mesh coil — you always get perfect, clean flavour without coil degradation.' },
+    ],
+    faqs: [
+      { q: 'How does the IGET S3 pod system work?', a: 'The IGET S3 consists of two parts: a rechargeable battery unit and pre-filled disposable pods. Click a pod onto the battery, inhale to activate, and vape. When the pod is empty, remove it, click in a new one, and continue. The battery recharges via USB-C.' },
+      { q: 'How much do IGET S3 replacement pods cost?', a: 'IGET S3 replacement pods cost just $30 AUD each, compared to $48-65 for a new disposable vape. Each pod delivers 10,000 puffs from 18ml of e-liquid with a fresh built-in mesh coil.' },
+      { q: 'Can I switch between different S3 flavour pods?', a: 'Yes! The S3 battery unit is universal — it works with any S3 flavour pod. Simply remove the current pod, click in a different flavour, and enjoy. You can switch flavours as often as you like.' },
+      { q: 'Is the IGET S3 better than disposable vapes?', a: 'For regular vapers, yes. The S3 delivers the same 10,000 puffs and flavour quality as disposables, but replacement pods cost just $30 instead of buying a new $48+ device each time. Over time, the savings add up significantly.' },
+      { q: 'What flavours does the IGET S3 come in?', a: 'The IGET S3 is available in 26 flavours including Strawberry Watermelon Ice, Grape Ice, Passion Fruit Kiwi Guava, Blueberry Raspberry Bubble Gum, Cherry Pomegranate, and many more fruity, menthol, and candy options.' },
+    ],
+    relatedLinks: [
+      { text: 'IGET S3 Full Review', href: '/blog/iget-s3-pod-system-review' },
+      { text: 'Disposable vs Refillable Guide', href: '/blog/disposable-vape-vs-refillable-australia' },
+      { text: 'Cheap Vapes Australia', href: '/blog/cheap-vapes-australia-best-value' },
+    ],
+    seoContent: '<p>The <strong>IGET Bar Plus S3</strong> is the smartest vaping system available in Australia. By separating the battery from the pod, the S3 lets you keep your rechargeable battery and simply swap in a new <strong>$30 replacement pod</strong> when your current one runs out — saving you money on every refill.</p><p>With <strong>26 premium flavours</strong> available, the S3 offers as much variety as any disposable vape. Popular choices include Strawberry Watermelon Ice, Grape Ice, Blueberry Raspberry Bubble Gum, and Passion Fruit Kiwi Guava. Each pod delivers <strong>10,000 puffs</strong> with a fresh mesh coil built in.</p><p>Buy the IGET S3 at IGET Vapes Original with <strong>fast delivery across Australia</strong> — Sydney, Melbourne, Brisbane, Perth, Adelaide, and all states. The kit ($48) includes battery + first pod. <a href="/products/iget-bar-plus-s3-pod">Browse S3 replacement pods here</a>.</p>',
+  },
+  'iget-bar-plus-s3-pod': {
+    title: 'Buy IGET S3 Replacement Pods Online Australia — All Flavours From $30 | IGET Vapes',
+    description: 'Shop IGET S3 replacement pods from $30 in Australia. 26 flavours, 10000 puffs per pod, 18ml capacity, fresh mesh coil in every pod. The most economical vape refill. Fast delivery.',
+    h1: 'IGET S3 Replacement Pods',
+    h1Accent: 'Fresh Flavour, Fresh Coil — Just $30',
+    intro: 'IGET S3 Replacement Pods are the most economical way to vape in Australia. Each pod contains 18ml of premium e-liquid delivering 10,000 puffs, with a fresh 1.0 Ohm mesh coil built into every pod. At just $30 per pod, you save $18 compared to buying a new disposable vape. Choose from 26 flavours below.',
+    highlights: [
+      { icon: '💨', label: 'Puffs', value: '10,000' },
+      { icon: '🧪', label: 'Capacity', value: '18 ml' },
+      { icon: '💰', label: 'Price', value: 'From $30' },
+      { icon: '⚡', label: 'Coil', value: 'Fresh Mesh' },
+    ],
+    buyingGuide: 'S3 pods work exclusively with the IGET Bar Plus S3 battery unit. If you don\'t have an S3 battery yet, grab the S3 Kit first. Each replacement pod costs just $30 and delivers the same 10,000 puffs as a full disposable. With a fresh mesh coil in every pod, flavour quality is always perfect. Stock up on multiple flavours and swap them throughout the day.',
+    features: [
+      { title: 'Only $30 Per Pod', desc: 'The most affordable vaping option in Australia. Save $18+ per refill compared to buying a new disposable vape each time.' },
+      { title: 'Fresh Mesh Coil in Every Pod', desc: 'Never vape on a degraded coil again. Each S3 pod includes a brand-new 1.0 Ohm mesh coil for consistently clean, pure flavour.' },
+      { title: '10,000 Puffs Per Pod', desc: 'Each 18ml pod delivers a full 10,000 puffs — the same longevity as premium disposable vapes at a fraction of the price.' },
+      { title: 'Instant Pod Swapping', desc: 'Magnetic connection lets you swap flavours in seconds. No tools, no mess, no priming — just click and vape.' },
+    ],
+    faqs: [
+      { q: 'Do S3 replacement pods work with any device?', a: 'No, IGET S3 replacement pods are designed exclusively for the IGET Bar Plus S3 battery unit. They use a proprietary magnetic connection and are not compatible with other vape devices.' },
+      { q: 'How many puffs does each S3 pod give?', a: 'Each IGET S3 replacement pod delivers approximately 10,000 puffs from 18ml of premium e-liquid, with a fresh 1.0 Ohm mesh coil built in.' },
+      { q: 'Are S3 pods cheaper than disposable vapes?', a: 'Yes, significantly. S3 replacement pods cost just $30 each, compared to $48-65 for a new disposable vape. If you vape one pod per week, you save over $900 per year compared to buying IGET Bar Pro disposables.' },
+      { q: 'Can I buy multiple S3 pod flavours?', a: 'Absolutely! We stock all 26 S3 pod flavours. Buy multiple flavours and swap between them using the same S3 battery unit. Use our Mix & Match deals for even bigger savings on bulk pod orders.' },
+      { q: 'Do I need to prime S3 pods before use?', a: 'No priming is needed. S3 pods come pre-filled and pre-wicked. Click the pod onto your S3 battery, wait 30 seconds, and start vaping.' },
+    ],
+    relatedLinks: [
+      { text: 'Get the IGET S3 Kit', href: '/products/iget-bar-plus-s3' },
+      { text: 'Cheap Vapes Australia Guide', href: '/blog/cheap-vapes-australia-best-value' },
+      { text: 'Mix & Match Bundle Deals', href: '/mix-and-match' },
+    ],
+    seoContent: '<p><strong>IGET S3 Replacement Pods</strong> are the best-value vaping option in Australia. At just <strong>$30 per pod</strong> delivering 10,000 puffs each, S3 pods cost 37-54% less than buying a new disposable vape. Every pod includes a fresh 1.0 Ohm mesh coil — you always get clean, pure flavour from the first puff.</p><p>Choose from <strong>26 premium flavours</strong> including Strawberry Watermelon Ice, Grape Ice, Passion Fruit Kiwi Guava, Blueberry Raspberry Bubble Gum, Cherry Pomegranate, and more. The magnetic pod system means you can swap flavours in seconds — no tools, no mess.</p><p>S3 pods require the <strong>IGET Bar Plus S3 battery unit</strong> (available as part of the <a href="/products/iget-bar-plus-s3">S3 Kit</a>). Order from IGET Vapes Original for fast <strong>Australia-wide delivery</strong> to Sydney, Melbourne, Brisbane, Perth, Adelaide, and all states.</p>',
+  },
+  'alibarbar-ingot': {
+    title: 'Buy Alibarbar Ingot 9000 Puffs Online Australia — All 33 Flavours | IGET Vapes',
+    description: 'Shop Alibarbar Ingot 9000 puffs disposable vape in Australia. 33 Alibarbar flavours, compact 50g design, 18ml capacity, mesh coil. From $40. All Alibarbar flavours in stock. Fast delivery.',
+    h1: 'Alibarbar Ingot 9000 Puffs',
+    h1Accent: 'Compact Power — 33 Premium Alibarbar Flavours',
+    intro: 'The Alibarbar Ingot 9000 packs impressive performance into the most compact, lightweight body in the IGET range. Weighing just 50g with 33 premium Alibarbar flavours and 9,000 puffs from an 18ml capacity, the Ingot proves that great vaping doesn\'t require a big device. At just $40, it\'s one of the best-value disposable vapes in Australia.',
+    highlights: [
+      { icon: '💨', label: 'Puffs', value: '9,000' },
+      { icon: '🧪', label: 'Capacity', value: '18 ml' },
+      { icon: '🎨', label: 'Flavours', value: '33' },
+      { icon: '⚖️', label: 'Weight', value: '50g' },
+    ],
+    buyingGuide: 'The Alibarbar Ingot is perfect for vapers who want a pocket-friendly device at a great price. At $40 for 9,000 puffs, the cost-per-puff is excellent. The compact 50g body is the lightest in the range — ideal for pocket carry. With 33 flavours, it has the widest Alibarbar flavour selection. Popular picks: Strawberry Watermelon, Grape Ice, Skittles, Cool Mint, and Kiwi Pineapple.',
+    features: [
+      { title: '33 Premium Flavours', desc: 'The largest Alibarbar flavour selection — from classic Grape Ice and Cool Mint to trending Skittles, FTP, and Ribena.' },
+      { title: 'Ultra-Compact 50g Design', desc: 'The lightest device in the IGET/Alibarbar range. Slips into any pocket, bag, or clutch without adding bulk.' },
+      { title: '18ml E-Liquid Capacity', desc: 'Despite its small size, the Ingot packs 18ml of e-liquid delivering a generous 9,000 puffs.' },
+      { title: 'Best Value at $40', desc: 'One of the most affordable disposable vapes in Australia with 9,000 puffs — just $0.0044 per puff.' },
+    ],
+    faqs: [
+      { q: 'What Alibarbar flavours does the Ingot come in?', a: 'The Alibarbar Ingot 9000 is available in 33 flavours including Strawberry Watermelon, Grape Ice, Skittles, Cool Mint, Kiwi Pineapple, Mango Ice, Ribena, FTP, Peach Ice, Strawberry Lychee Ice, and many more. It has the widest Alibarbar flavour range available.' },
+      { q: 'How many puffs does the Alibarbar Ingot 9000 last?', a: 'The Alibarbar Ingot delivers up to 9,000 puffs from an 18ml e-liquid capacity. For average vapers, this typically lasts 1-2 weeks of daily use.' },
+      { q: 'Is the Alibarbar Ingot a good vape for beginners?', a: 'Yes, the Alibarbar Ingot is excellent for beginners. It\'s draw-activated (no buttons), ultra-lightweight at just 50g, affordable at $40, and the 1.0 Ohm mesh coil provides a smooth, comfortable mouth-to-lung draw.' },
+      { q: 'How much is the Alibarbar Ingot in Australia?', a: 'The Alibarbar Ingot 9000 Puffs costs just $40 AUD at IGET Vapes Original — one of the most affordable disposable vapes available in Australia. With 9,000 puffs, that\'s just $0.0044 per puff.' },
+      { q: 'Where can I buy Alibarbar vapes in Australia?', a: 'You can buy genuine Alibarbar Ingot 9000 vapes online at IGET Vapes Original with fast Australia-wide delivery. We stock all 33 Alibarbar flavours and ship to Sydney, Melbourne, Brisbane, Perth, Adelaide, and every other city with $30 flat-rate shipping.' },
+    ],
+    relatedLinks: [
+      { text: 'All 33 Alibarbar Ingot Flavours Ranked', href: '/blog/alibarbar-ingot-all-33-flavours' },
+      { text: 'Alibarbar Complete Guide', href: '/blog/alibarbar-vapes-complete-guide' },
+      { text: 'Best Vapes Under $50', href: '/blog/best-vapes-under-50-dollars' },
+    ],
+    seoContent: '<p>The <strong>Alibarbar Ingot 9000 Puffs</strong> is the most compact and affordable vape in the Alibarbar range. With <strong>33 premium Alibarbar flavours</strong> — the widest selection of any Alibarbar device — the Ingot offers incredible variety at just $40. Popular <strong>Alibarbar flavours</strong> include Strawberry Watermelon, Grape Ice, Skittles, Cool Mint, Kiwi Pineapple, FTP, Ribena, and Mango Ice.</p><p>Weighing only <strong>50 grams</strong>, the Alibarbar Ingot is the lightest disposable vape we stock. It\'s perfect for pocket carry, nights out, or anyone who prefers a discreet, lightweight vaping device that doesn\'t sacrifice on flavour or longevity.</p><p>Buy Alibarbar Ingot vapes online at IGET Vapes Original with <strong>fast delivery across Australia</strong>. All 33 Alibarbar flavours in stock with same-day dispatch. We deliver to Sydney, Melbourne, Brisbane, Perth, Adelaide, Gold Coast, Canberra, Hobart, Darwin and all regional areas.</p>',
+  },
+  'alibarbar-ice-adjust': {
+    title: 'Buy Alibarbar Ice Adjust 12000 Puffs Online Australia — Adjustable Ice | IGET Vapes',
+    description: 'Shop Alibarbar Ice Adjust 12000 puffs with adjustable ice intensity in Australia. 15 Alibarbar flavours, twist-dial airflow control, 20ml capacity. From $50. Fast Australia-wide delivery.',
+    h1: 'Alibarbar Ice Adjust 12000 Puffs',
+    h1Accent: 'Adjustable Ice Intensity — Your Vape, Your Way',
+    intro: 'The Alibarbar Ice Adjust is unlike any other disposable vape. Featuring an innovative adjustable airflow ring, you can control the intensity of the menthol/ice sensation in real time — from a mild cool breeze to an intense arctic blast. With 12,000 puffs, 20ml capacity, and 15 premium Alibarbar flavours, it\'s the ultimate customisable vaping experience.',
+    highlights: [
+      { icon: '💨', label: 'Puffs', value: '12,000' },
+      { icon: '🧪', label: 'Capacity', value: '20 ml' },
+      { icon: '❄️', label: 'Feature', value: 'Ice Adjust' },
+      { icon: '🎨', label: 'Flavours', value: '15' },
+    ],
+    buyingGuide: 'The Alibarbar Ice Adjust is for vapers who want control over their menthol intensity. The twist ring at the base adjusts airflow continuously — clockwise for more ice, counter-clockwise for less. At $50 for 12,000 puffs, it\'s excellent value. Best sellers: Watermelon, Blueberry Blast, Mango Magic, and Strawberry Kiwi.',
+    features: [
+      { title: 'Adjustable Ice Intensity', desc: 'The twist-dial airflow ring gives you full control — dial up for an intense icy blast or dial down for a warmer, milder draw.' },
+      { title: '12,000 Puffs', desc: 'One of the highest puff counts in the Alibarbar range, matched with a generous 20ml e-liquid capacity.' },
+      { title: '15 Curated Flavours', desc: 'Every flavour is designed to work beautifully with the ice adjustment system — from fruity to candy to menthol.' },
+      { title: 'Real-Time Customisation', desc: 'Unlike fixed-intensity vapes, the Ice Adjust lets you change the cooling sensation mid-session — no need to commit to one setting.' },
+    ],
+    faqs: [
+      { q: 'How does the Alibarbar Ice Adjust work?', a: 'The Alibarbar Ice Adjust has a twist-dial ring at the base of the device. Turning it clockwise increases the menthol/ice intensity, while turning counter-clockwise reduces it. The adjustment is continuous — you can set any level from minimal cooling to maximum ice blast.' },
+      { q: 'Does adjusting ice affect nicotine strength?', a: 'No. The ice adjustment only controls airflow and cooling sensation. Nicotine strength remains constant at 5% (50mg/ml) regardless of the ice intensity setting. It does not affect e-liquid consumption speed either.' },
+      { q: 'How many puffs does the Alibarbar Ice Adjust have?', a: 'The Alibarbar Ice Adjust delivers up to 12,000 puffs from a 20ml e-liquid capacity. With the 650mAh rechargeable battery, you get the full 12,000 puffs over multiple charge cycles.' },
+      { q: 'What are the best Alibarbar Ice Adjust flavours?', a: 'Top-selling Alibarbar Ice Adjust flavours include Watermelon, Blueberry Blast, Mango Magic, Strawberry Kiwi, Skittles, and Pineapple Coconut. The ice adjustment feature makes every flavour incredibly versatile.' },
+      { q: 'How much is the Alibarbar Ice Adjust in Australia?', a: 'The Alibarbar Ice Adjust 12000 Puffs costs $50 AUD at IGET Vapes Original. We ship to all Australian states with $30 flat-rate delivery — Sydney, Melbourne, Brisbane, Perth, Adelaide, and beyond.' },
+    ],
+    relatedLinks: [
+      { text: 'Alibarbar Ice Adjust Full Review', href: '/blog/alibarbar-ice-adjust-review' },
+      { text: 'Alibarbar Complete Guide', href: '/blog/alibarbar-vapes-complete-guide' },
+      { text: 'Best Menthol Vapes Australia', href: '/blog/best-menthol-vapes-australia' },
+    ],
+    seoContent: '<p>The <strong>Alibarbar Ice Adjust 12000 Puffs</strong> is a groundbreaking disposable vape with <strong>adjustable ice intensity</strong>. The innovative twist-dial airflow ring lets you control the menthol/cooling sensation in real time — something no other disposable vape in Australia offers.</p><p>With <strong>15 premium Alibarbar flavours</strong> and 12,000 puffs from a 20ml capacity, the Ice Adjust delivers both longevity and customisation. Whether you want a barely-there cool breeze with your Mango Magic or a full arctic blast with your Watermelon — the choice is yours.</p><p>Buy the Alibarbar Ice Adjust online at IGET Vapes Original with <strong>fast Australia-wide delivery</strong>. All flavours in stock with genuine product guarantee. We deliver to Sydney, Melbourne, Brisbane, Perth, Adelaide, Canberra, Gold Coast, Hobart, Darwin and all regional areas across Australia.</p>',
+  },
+};
+
+const seo = categorySEO[product.slug] || {
+  title: `${product.name} — ${product.puffs} Puffs | Buy Online Australia`,
+  description: `Shop ${product.name} with ${product.flavours.length} flavours. ${product.puffs} puffs, from ${formatPrice(product.price)}. Fast delivery Australia-wide.`,
+  h1: product.name,
+  h1Accent: `${product.puffs.toLocaleString()} Puffs — Buy Online Australia`,
+  intro: product.description,
+  highlights: [],
+  buyingGuide: '',
+  features: [],
+  faqs: [],
+  relatedLinks: [],
+  seoContent: '',
+};
+
+const faqSchema = seo.faqs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: seo.faqs.map((f: {q: string; a: string}) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+} : null;
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: product.name,
+  description: seo.description,
+  url: categoryUrl,
+  numberOfItems: product.flavours.length,
+  itemListElement: product.flavours.slice(0, 20).map((f: any, i: number) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: `${f.name} — ${product.name}`,
+    url: `${siteUrl}/products/${product.slug}/${f.slug}`,
+  })),
+};
+
+const productGroupSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.name,
+  description: seo.intro,
+  image: product.image.startsWith('http') ? product.image : `${siteUrl}${product.image}`,
+  brand: { '@type': 'Brand', name: product.slug.startsWith('alibarbar') ? 'Alibarbar' : 'IGET' },
+  offers: {
+    '@type': 'AggregateOffer',
+    lowPrice: product.price,
+    highPrice: product.price,
+    priceCurrency: 'AUD',
+    offerCount: inStockCount,
+    availability: inStockCount > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+  },
+  aggregateRating: reviewCount > 0 ? {
+    '@type': 'AggregateRating',
+    ratingValue: avgRating,
+    reviewCount,
+  } : undefined,
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  image={product.image}
+>
+  <SchemaMarkup type="breadcrumb" data={{ items: [{ name: 'Home', url: siteUrl }, { name: product.name, url: categoryUrl }] }} />
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(productGroupSchema)} />
+  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+
+  <Breadcrumbs items={[{ name: product.name }]} />
+
+  <!-- Hero Section -->
+  <div class="mb-10">
+    <h1 class="text-3xl lg:text-4xl font-extrabold mb-2">
+      {seo.h1} — <span class="text-accent">{seo.h1Accent}</span>
+    </h1>
+    <div class="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
+      <span>{product.puffs.toLocaleString()} Puffs</span>
+      <span>•</span>
+      <span>From {formatPrice(product.price)}</span>
+      <span>•</span>
+      <span>{inStockCount} of {product.flavours.length} flavours in stock</span>
+      {reviewCount > 0 && (
+        <>
+          <span>•</span>
+          <span>★ {avgRating} ({reviewCount} reviews)</span>
+        </>
+      )}
+      {product.isNew && <span class="badge-new">New</span>}
+    </div>
+    <p class="text-gray-300 text-lg leading-relaxed max-w-4xl">{seo.intro}</p>
+  </div>
+
+  <!-- Quick Spec Highlights -->
+  {seo.highlights.length > 0 && (
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+      {seo.highlights.map((h: {icon: string; label: string; value: string}) => (
+        <div class="bg-surface rounded-xl p-4 text-center border border-gray-700">
+          <div class="text-2xl mb-1">{h.icon}</div>
+          <div class="text-xs text-gray-400">{h.label}</div>
+          <div class="font-bold text-white text-lg">{h.value}</div>
+        </div>
+      ))}
+    </div>
+  )}
+
+  <!-- Product Grid -->
+  <div class="mb-10">
+    <h2 class="text-xl font-bold mb-5">All {product.flavours.length} {product.name} Flavours</h2>
+    <ProductGrid
+      flavours={product.flavours}
+      categorySlug={product.slug}
+      categoryName={product.name}
+    />
+  </div>
+
+  <!-- Buying Guide -->
+  {seo.buyingGuide && (
+    <div class="bg-surface rounded-2xl p-6 lg:p-8 border border-gray-700 mb-10">
+      <h2 class="text-xl font-bold mb-3">Buying Guide — {product.name}</h2>
+      <p class="text-gray-300 leading-relaxed">{seo.buyingGuide}</p>
+    </div>
+  )}
+
+  <!-- Key Features -->
+  {seo.features.length > 0 && (
+    <div class="mb-10">
+      <h2 class="text-xl font-bold mb-5">Key Features</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {seo.features.map((f: {title: string; desc: string}) => (
+          <div class="bg-surface rounded-xl p-5 border border-gray-700">
+            <h3 class="font-bold text-white mb-2">{f.title}</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- FAQ Section -->
+  {seo.faqs.length > 0 && (
+    <div class="mb-10">
+      <h2 class="text-xl font-bold mb-5">Frequently Asked Questions — {product.name}</h2>
+      <div class="space-y-3">
+        {seo.faqs.map((faq: {q: string; a: string}) => (
+          <details class="bg-surface rounded-xl border border-gray-700 group">
+            <summary class="p-5 cursor-pointer flex items-center justify-between font-semibold hover:text-accent transition-colors list-none text-sm">
+              <span>{faq.q}</span>
+              <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-5 text-gray-300 text-sm leading-relaxed border-t border-gray-700/50 pt-4">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Related Blog Links -->
+  {seo.relatedLinks.length > 0 && (
+    <div class="flex flex-wrap gap-3 mb-10">
+      <span class="text-sm text-gray-400 py-2">Related Guides:</span>
+      {seo.relatedLinks.map((link: {text: string; href: string}) => (
+        <a href={link.href} class="text-sm bg-surface border border-gray-700 text-accent hover:border-accent px-4 py-2 rounded-full transition-colors">{link.text}</a>
+      ))}
+    </div>
+  )}
+
+  <!-- SEO Content Block -->
+  {seo.seoContent && (
+    <div class="bg-surface rounded-2xl p-6 lg:p-8 border border-gray-700 mb-10
+      [&_p]:text-gray-300 [&_p]:leading-relaxed [&_p]:mb-4 [&_p:last-child]:mb-0
+      [&_strong]:text-white
+      [&_a]:text-accent [&_a]:underline [&_a]:hover:text-white"
+      set:html={seo.seoContent}
+    />
+  )}
+
+  <!-- Back to all products -->
+  <div class="text-center">
+    <a href="/" class="btn-secondary">← Back to All Products</a>
+  </div>
+</BaseLayout>

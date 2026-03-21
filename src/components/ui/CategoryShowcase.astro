@@ -1,0 +1,26 @@
+---
+import { productCategories } from '@data/navigation';
+
+const cats = productCategories.filter(c => c.slug !== 'mix-and-match');
+---
+
+<section class="mb-12">
+  <h2 class="text-2xl font-bold mb-6">Shop by Category</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+    {cats.map(cat => (
+      <a href={cat.href} class="card group p-4 flex flex-col items-center text-center hover:border-accent border border-transparent transition-colors">
+        <div class="w-full aspect-square rounded-lg overflow-hidden mb-3 bg-primary/50">
+          <img
+            src={`/images/categories/${cat.slug}.webp`}
+            alt={cat.name}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+            width="200"
+            height="200"
+          />
+        </div>
+        <h3 class="text-sm font-semibold">{cat.name}</h3>
+      </a>
+    ))}
+  </div>
+</section>

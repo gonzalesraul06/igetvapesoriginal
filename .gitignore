@@ -1,0 +1,10 @@
+node_modules
+dist/
+.astro/
+.vercel/
+build-log*.txt
+scrape_output.txt
+descriptions_scraped.json
+*.cjs
+*.ps1
+MIGRATION-PLAN.md

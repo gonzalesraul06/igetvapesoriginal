@@ -1,0 +1,511 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+import StarRating from '@components/ui/StarRating.astro';
+import SchemaMarkup from '@components/seo/SchemaMarkup.astro';
+import { formatPrice } from '@utils/formatPrice';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  const paths: any[] = [];
+  products.forEach(product => {
+    product.data.flavours.forEach(flavour => {
+      paths.push({
+        params: { category: product.data.slug, product: flavour.slug },
+        props: {
+          category: product.data,
+          flavour,
+        },
+      });
+    });
+  });
+  return paths;
+}
+
+const { category, flavour } = Astro.props;
+const siteUrl = 'https://igetvapesoriginal.com';
+const productUrl = `${siteUrl}/products/${category.slug}/${flavour.slug}`;
+const itemId = `${category.slug}-${flavour.slug}`;
+const reviews = category.reviews ?? [];
+const reviewCount = reviews.length;
+const avgRating = reviewCount > 0 ? (reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / reviewCount).toFixed(1) : '5.0';
+const flavourDesc = flavour.description || category.description;
+
+// Spec data per category
+const specs: Record<string, { capacity: string; coil: string; battery: string; weight: string; nicotine: string }> = {
+  'jnr-cruiser': { capacity: '25 ml', coil: '1.2 Ohm Dual Mesh', battery: '3500 mAh', weight: '90g', nicotine: '5%' },
+  'iget-one': { capacity: '18 ml', coil: '0.6 Ohm Dual Mesh', battery: '2700 mAh', weight: '118.9g', nicotine: '5%' },
+  'iget-bar-pro': { capacity: '20 ml', coil: '1.2 Ohm Mesh', battery: '2000 mAh', weight: '93g', nicotine: '5%' },
+  'iget-bar-plus-s3': { capacity: '18 ml', coil: '1.0 Ohm Mesh', battery: '950 mAh', weight: '100.6g', nicotine: '5%' },
+  'iget-bar-plus-s3-pod': { capacity: '18 ml', coil: '1.0 Ohm Mesh', battery: 'N/A (Pod)', weight: '—', nicotine: '5%' },
+  'alibarbar-ingot': { capacity: '18 ml', coil: '1.0 Ohm Mesh', battery: '600 mAh', weight: '50g', nicotine: '5%' },
+  'alibarbar-ice-adjust': { capacity: '20 ml', coil: '1.0 Ohm Mesh', battery: '650 mAh', weight: '55g', nicotine: '5%' },
+};
+const spec = specs[category.slug] || specs['iget-bar-pro'];
+
+// Detailed product descriptions per category
+const productDetails: Record<string, { overview: string; coilDesc: string; batteryDesc: string; whatsInBox: string[]; usageTips: string[] }> = {
+  'jnr-cruiser': {
+    overview: 'The JNR Cruiser 12000 is the flagship disposable vape in the IGET lineup, delivering an industry-leading 12,000 puffs from its massive 25ml e-liquid reservoir. Designed for heavy vapers who demand all-day performance without recharging, the Cruiser features a premium aluminium alloy body with an ergonomic mouthpiece for comfortable extended sessions.',
+    coilDesc: 'Equipped with a 1.2 Ohm dual mesh coil system, the JNR Cruiser heats e-liquid evenly across a larger surface area, producing rich, dense vapour with enhanced flavour clarity. Dual mesh technology ensures consistent taste from the first puff to the 12,000th — no burnt hits or flavour degradation.',
+    batteryDesc: 'The massive 3500mAh rechargeable lithium-ion battery is the largest in any IGET device. It provides enough power to fully vaporise the entire 25ml e-liquid capacity. Recharge via the USB-C port at the base — a full charge takes approximately 60-90 minutes.',
+    whatsInBox: ['1× JNR Cruiser 12000 Puffs Device', '1× USB-C Charging Cable', '1× User Manual & Authenticity Card'],
+    usageTips: ['Remove the silicone mouthpiece cap before first use', 'Allow 2-3 seconds between puffs for optimal coil life', 'Charge when the LED indicator flashes — do not wait until fully dead', 'Store upright in a cool, dry place away from direct sunlight'],
+  },
+  'iget-one': {
+    overview: 'The IGET One 12000 delivers 12,000 satisfying puffs in a sleek, modern form factor. With an 18ml pre-filled e-liquid capacity and advanced dual mesh coil technology, it produces some of the densest vapour clouds in the disposable vape market. The transparent e-liquid window lets you monitor your remaining supply.',
+    coilDesc: 'The innovative 0.6 Ohm dual mesh coil runs at a lower resistance than most disposables, producing warmer vapour with significantly denser clouds. This sub-ohm mesh design maximises flavour extraction from every drop of e-liquid, delivering a restricted-direct-lung (RDL) draw that many experienced vapers prefer.',
+    batteryDesc: 'A high-capacity 2700mAh rechargeable battery ensures you never run out of power before your e-liquid does. The USB-C fast-charging port delivers a full charge in approximately 45-60 minutes. An LED indicator at the base shows battery status.',
+    whatsInBox: ['1× IGET One 12000 Puffs Device', '1× USB-C Charging Cable', '1× User Manual & Authenticity Card'],
+    usageTips: ['Take slow, steady draws for the best flavour experience', 'The 0.6 Ohm coil produces warm vapour — this is normal', 'Avoid chain-vaping more than 5 puffs consecutively', 'Keep the device upright to prevent e-liquid leaking from the mouthpiece'],
+  },
+  'iget-bar-pro': {
+    overview: 'The IGET Bar Pro 10000 is Australia\'s most popular disposable vape, trusted by thousands of vapers nationwide. With 10,000 puffs, a generous 20ml e-liquid capacity, and 26 expertly crafted flavours, it delivers a premium vaping experience at an exceptional price. The compact, pocket-friendly design makes it perfect for on-the-go use.',
+    coilDesc: 'The 1.2 Ohm mesh coil uses a flat mesh heating element that distributes heat evenly across the entire coil surface. This produces smooth, consistent vapour with crystal-clear flavour reproduction. Mesh coil technology eliminates the hot spots found in traditional round-wire coils, preventing burnt tastes.',
+    batteryDesc: 'The integrated 2000mAh rechargeable battery is perfectly matched to the 20ml e-liquid capacity, ensuring you can enjoy every drop. USB-C charging takes approximately 40-50 minutes. The LED light on the base indicates charging status — red while charging, green when full.',
+    whatsInBox: ['1× IGET Bar Pro 10000 Puffs Device', '1× USB-C Charging Cable', '1× Authenticity Verification Card'],
+    usageTips: ['Simply inhale to activate — no buttons needed', 'Best enjoyed with medium-strength draws', 'Charge the device when flavour intensity decreases', 'Avoid exposing to extreme heat (above 45°C) or cold'],
+  },
+  'iget-bar-plus-s3': {
+    overview: 'The IGET Bar Plus S3 is a revolutionary pod-based vaping system that combines disposable convenience with the economy of a refillable device. The S3 kit includes a 950mAh rechargeable battery unit and one pre-filled 18ml flavour pod delivering 10,000 puffs. Simply swap pods when empty — no messy refills required.',
+    coilDesc: 'Each S3 pod features a built-in 1.0 Ohm mesh coil optimised for mouth-to-lung (MTL) vaping. The mesh element provides consistent flavour delivery throughout the pod\'s entire 10,000-puff lifespan. Because the coil is integrated into the pod, you get a fresh coil with every pod change.',
+    batteryDesc: 'The compact 950mAh battery unit is designed for all-day use with efficient power management. Despite its small size, it delivers reliable performance and charges quickly via USB-C in just 30-40 minutes. The magnetic pod connection ensures a secure, leak-free fit every time.',
+    whatsInBox: ['1× IGET S3 Battery Unit (950mAh)', '1× Pre-filled Flavour Pod (18ml)', '1× USB-C Charging Cable', '1× User Guide'],
+    usageTips: ['Click the pod into the battery unit until you hear a magnetic snap', 'The S3 uses draw-activated firing — just inhale', 'Remove the pod when not in use for extended periods', 'S3 replacement pods are available separately — swap flavours anytime'],
+  },
+  'iget-bar-plus-s3-pod': {
+    overview: 'IGET S3 Replacement Pods are designed exclusively for the IGET Bar Plus S3 system. Each pod holds 18ml of premium e-liquid and delivers approximately 10,000 puffs. With a built-in fresh mesh coil in every pod, you get perfect flavour from the very first draw without any break-in period.',
+    coilDesc: 'Every replacement pod includes a brand-new 1.0 Ohm mesh coil element, ensuring you always get clean, pure flavour. Unlike traditional pod systems where coils degrade over time, the S3 pod system guarantees consistent performance because you\'re never vaping on an old, worn coil.',
+    batteryDesc: 'S3 pods are battery-free — they draw power from the IGET S3 battery unit (sold separately or in the S3 kit). Simply click the pod onto your existing S3 device and you\'re ready to vape. The pod is designed to work with the 950mAh S3 battery.',
+    whatsInBox: ['1× IGET S3 Replacement Pod (18ml)', '1× Authenticity Sticker'],
+    usageTips: ['Ensure pod is fully clicked into place before use', 'Store unused pods in a cool, dark place', 'Pods are sealed — do not attempt to refill or open', 'Each pod lasts approximately 10,000 puffs depending on usage'],
+  },
+  'alibarbar-ingot': {
+    overview: 'The Alibarbar Ingot 9000 is a compact, lightweight disposable vape that punches well above its weight. Delivering 9,000 puffs from an 18ml e-liquid capacity in a device weighing just 50g, the Ingot is perfect for vapers who want a pocket-friendly device that doesn\'t sacrifice on flavour or longevity. Available in 33 premium flavours.',
+    coilDesc: 'The 1.0 Ohm mesh coil is optimised for a smooth, satisfying mouth-to-lung draw. Mesh coil construction ensures even heat distribution across the entire heating element, providing consistent, clean flavour with every puff. The balanced 1.0 Ohm resistance delivers the perfect balance between flavour intensity and battery efficiency.',
+    batteryDesc: 'The compact 600mAh built-in battery is engineered to match the device\'s e-liquid capacity perfectly. While smaller than higher-puff devices, it\'s efficiently matched to the Ingot\'s power requirements. Recharge via USB-C when the LED indicator flashes — charging takes just 20-30 minutes.',
+    whatsInBox: ['1× Alibarbar Ingot 9000 Puffs Device', '1× USB-C Charging Cable', '1× Authenticity Card'],
+    usageTips: ['The Ingot is draw-activated — no buttons required', 'Its ultra-light 50g design is perfect for pocket carry', 'Avoid overly hard draws — gentle, steady inhales produce the best flavour', 'The compact size means shorter charge times — just 20-30 minutes'],
+  },
+  'alibarbar-ice-adjust': {
+    overview: 'The Alibarbar Ice Adjust 12000 is a unique disposable vape featuring an innovative adjustable airflow ring that lets you control the intensity of the cooling menthol sensation. Twist the airflow dial to go from a mild cool breeze to an intense icy blast — all in real time. With 12,000 puffs and 20ml capacity, it\'s the ultimate customisable vaping experience.',
+    coilDesc: 'A precision-engineered 1.0 Ohm mesh coil delivers smooth, consistent vapour at any airflow setting. The mesh heating element works in harmony with the adjustable airflow system — tighter airflow produces warmer, more concentrated flavour, while open airflow delivers cooler, airier draws with larger vapour volume.',
+    batteryDesc: 'The 650mAh rechargeable battery is optimised for the Ice Adjust\'s 12,000-puff capacity. Despite the high puff count, efficient power management ensures consistent performance throughout the device\'s lifespan. USB-C charging takes approximately 25-35 minutes.',
+    whatsInBox: ['1× Alibarbar Ice Adjust 12000 Puffs Device', '1× USB-C Charging Cable', '1× Airflow Guide Card', '1× Authenticity Card'],
+    usageTips: ['Twist the bottom ring to adjust menthol/ice intensity', 'Start with a medium setting and adjust to your preference', 'Clockwise = more ice, counter-clockwise = less ice', 'The airflow adjustment does not affect nicotine delivery — only cooling sensation'],
+  },
+};
+const details = productDetails[category.slug] || productDetails['iget-bar-pro'];
+
+// Product FAQ for ChatGPT citing / rich snippets
+const productFaqs: Record<string, Array<{q: string; a: string}>> = {
+  'jnr-cruiser': [
+    { q: `How many puffs does the JNR Cruiser 12000 last?`, a: `The JNR Cruiser delivers up to 12,000 puffs from a 25ml e-liquid capacity. For average users, this equates to approximately 2-3 weeks of daily use before the device is finished.` },
+    { q: `Is the JNR Cruiser rechargeable?`, a: `Yes, the JNR Cruiser features a 3500mAh rechargeable battery with USB-C charging. A full charge takes 60-90 minutes and provides enough power to fully vaporise the 25ml e-liquid capacity.` },
+    { q: `What nicotine strength is the JNR Cruiser?`, a: `The JNR Cruiser contains 5% (50mg/ml) nicotine salt e-liquid, which provides a smooth throat hit similar to traditional cigarettes while delivering satisfying nicotine absorption.` },
+  ],
+  'iget-one': [
+    { q: `How many puffs does the IGET One 12000 last?`, a: `The IGET One provides up to 12,000 puffs with an 18ml e-liquid capacity. Most users get 1-3 weeks of use depending on vaping frequency.` },
+    { q: `What type of coil does the IGET One use?`, a: `The IGET One uses a 0.6 Ohm dual mesh coil — one of the lowest resistance coils in any disposable vape. This produces warmer, denser vapour with exceptional flavour intensity.` },
+    { q: `Can I recharge the IGET One?`, a: `Yes, the IGET One has a 2700mAh rechargeable battery with USB-C fast charging. A full charge takes approximately 45-60 minutes.` },
+  ],
+  'iget-bar-pro': [
+    { q: `How many puffs does the IGET Bar Pro have?`, a: `The IGET Bar Pro delivers up to 10,000 puffs from a generous 20ml e-liquid capacity. This typically lasts 1-2 weeks for average vapers.` },
+    { q: `How many flavours does the IGET Bar Pro come in?`, a: `The IGET Bar Pro is available in 26 unique flavours including Strawberry Watermelon Ice, Cherry Pomegranate, Blueberry Raspberry, Grape Ice, and Orange Fanta Soda.` },
+    { q: `Is the IGET Bar Pro good for beginners?`, a: `Yes, the IGET Bar Pro is ideal for beginners. It's draw-activated (no buttons), uses a comfortable mouth-to-lung draw, and the 1.2 Ohm mesh coil produces smooth, consistent vapour.` },
+  ],
+  'iget-bar-plus-s3': [
+    { q: `How does the IGET S3 pod system work?`, a: `The IGET S3 consists of a rechargeable 950mAh battery unit and magnetic pre-filled pods. Simply click a pod onto the battery, inhale to activate, and swap to a new pod when empty. No refilling needed.` },
+    { q: `How long does an IGET S3 pod last?`, a: `Each S3 pod contains 18ml of e-liquid and delivers approximately 10,000 puffs. The battery unit is rechargeable via USB-C and lasts through multiple charges per pod.` },
+    { q: `Can I use different flavour pods with the same S3 battery?`, a: `Yes! The S3 battery unit is universal — it works with any IGET S3 flavour pod. Simply remove the current pod, click in a new flavour, and enjoy.` },
+  ],
+  'iget-bar-plus-s3-pod': [
+    { q: `Are IGET S3 pods compatible with other devices?`, a: `No, S3 replacement pods are designed exclusively for the IGET Bar Plus S3 battery unit. They use a proprietary magnetic connection and are not compatible with other vape devices.` },
+    { q: `How many puffs does each S3 replacement pod provide?`, a: `Each S3 replacement pod delivers approximately 10,000 puffs from 18ml of premium e-liquid. Each pod includes a fresh built-in 1.0 Ohm mesh coil.` },
+    { q: `Do I need to prime S3 replacement pods?`, a: `No priming is necessary. S3 pods come pre-filled and pre-wicked. Simply click the pod onto your S3 battery unit, wait 30 seconds for the coil to saturate, and start vaping.` },
+  ],
+  'alibarbar-ingot': [
+    { q: `How many puffs does the Alibarbar Ingot 9000 have?`, a: `The Alibarbar Ingot delivers up to 9,000 puffs from an 18ml e-liquid capacity. Despite its compact 50g design, it provides excellent longevity lasting 1-2 weeks for most users.` },
+    { q: `How many flavours does the Alibarbar Ingot come in?`, a: `The Alibarbar Ingot 9000 is available in 33 premium flavours including Strawberry Watermelon, Grape Ice, Skittles, Cool Mint, Kiwi Pineapple, Mango Ice, and many more.` },
+    { q: `Is the Alibarbar Ingot rechargeable?`, a: `Yes, the Ingot features a 600mAh rechargeable battery with USB-C charging. Its compact size means fast 20-30 minute charge times.` },
+  ],
+  'alibarbar-ice-adjust': [
+    { q: `How does the ice adjustment work on the Alibarbar Ice Adjust?`, a: `The Alibarbar Ice Adjust features an adjustable airflow ring at the base. Twist clockwise for a stronger menthol/ice sensation, or counter-clockwise for a milder, warmer draw. The adjustment is continuous — find your perfect setting.` },
+    { q: `How many puffs does the Alibarbar Ice Adjust 12000 provide?`, a: `The Alibarbar Ice Adjust delivers up to 12,000 puffs from a 20ml e-liquid capacity, making it one of the highest-capacity Alibarbar devices available.` },
+    { q: `Does adjusting the ice intensity affect nicotine delivery?`, a: `No, the ice adjustment only controls airflow and cooling sensation. Nicotine delivery remains consistent at 5% (50mg/ml) regardless of the ice intensity setting.` },
+  ],
+};
+const faqs = productFaqs[category.slug] || productFaqs['iget-bar-pro'];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={`${flavour.name} — ${category.name} ${category.puffs.toLocaleString()} Puffs | Buy Online Australia`}
+  description={flavourDesc.slice(0, 155)}
+  image={flavour.image}
+  type="product"
+>
+  <SchemaMarkup
+    type="product"
+    data={{
+      name: `${flavour.name} — ${category.name}`,
+      image: flavour.image.startsWith('http') ? flavour.image : `${siteUrl}${flavour.image}`,
+      description: flavourDesc,
+      brand: 'IGET',
+      price: flavour.price,
+      inStock: flavour.inStock,
+      url: productUrl,
+      rating: avgRating,
+      reviewCount,
+    }}
+  />
+  <SchemaMarkup
+    type="breadcrumb"
+    data={{
+      items: [
+        { name: 'Home', url: siteUrl },
+        { name: category.name, url: `${siteUrl}/products/${category.slug}` },
+        { name: flavour.name, url: productUrl },
+      ],
+    }}
+  />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <Breadcrumbs items={[{ name: category.name, href: `/products/${category.slug}` }, { name: flavour.name }]} />
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+    <!-- Image -->
+    <div class="relative">
+      <div class="aspect-square rounded-2xl overflow-hidden bg-surface">
+        <img
+          src={flavour.image}
+          alt={`${flavour.name} — ${category.name} ${category.puffs.toLocaleString()} Puffs Disposable Vape`}
+          class="w-full h-full object-cover"
+          loading="eager"
+          width="600"
+          height="600"
+        />
+      </div>
+      {flavour.isNew && <span class="badge-new absolute top-4 left-4 text-sm">New</span>}
+      {!flavour.inStock && (
+        <div class="absolute inset-0 rounded-2xl bg-black/50 flex items-center justify-center">
+          <span class="badge-out-of-stock text-lg px-4 py-2">Out of Stock</span>
+        </div>
+      )}
+    </div>
+
+    <!-- Details -->
+    <div>
+      <p class="text-sm text-accent font-medium mb-1">{category.name}</p>
+      <h1 class="text-2xl lg:text-3xl font-extrabold mb-2">{flavour.name}</h1>
+      <p class="text-gray-400 mb-4">{category.puffs.toLocaleString()} Puffs Per Device</p>
+
+      <div class="flex items-center gap-3 mb-4">
+        <StarRating rating={flavour.rating ?? 5} size="md" />
+        <span class="text-sm text-gray-400">{avgRating} ({reviewCount} reviews)</span>
+      </div>
+
+      <div class="text-3xl font-extrabold text-accent mb-6">{formatPrice(flavour.price)}</div>
+
+      <!-- Product Description -->
+      <div class="mb-6">
+        <p class="text-gray-300 text-sm leading-relaxed">{flavourDesc}</p>
+      </div>
+
+      <div class="space-y-3 text-sm text-gray-300 mb-8">
+        <div class="flex items-center gap-2">
+          <span class="text-green-400">✓</span>
+          <span>100% Authentic Product</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-green-400">✓</span>
+          <span>$30 Flat Rate Shipping Australia-Wide</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-green-400">✓</span>
+          <span>{category.puffs.toLocaleString()} Puffs Per Device</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-green-400">✓</span>
+          <span>Fast 1-3 Business Day Delivery</span>
+        </div>
+      </div>
+
+      {flavour.inStock ? (
+        <div class="flex items-center gap-4">
+          <div class="flex items-center border border-gray-600 rounded-lg overflow-hidden">
+            <button class="qty-dec w-10 h-10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-muted transition-colors" data-item-id={itemId}>−</button>
+            <span class="qty-val w-10 h-10 flex items-center justify-center" data-item-id={itemId}>1</span>
+            <button class="qty-inc w-10 h-10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-muted transition-colors" data-item-id={itemId}>+</button>
+          </div>
+          <button
+            class="add-to-cart btn-primary flex-1 py-3 text-base"
+            data-item-id={itemId}
+            data-category-slug={category.slug}
+            data-flavour-slug={flavour.slug}
+            data-name={flavour.name}
+            data-category-name={category.name}
+            data-price={flavour.price}
+            data-image={flavour.image}
+          >
+            Add to Cart
+          </button>
+        </div>
+      ) : (
+        <button disabled class="w-full py-3 bg-gray-700 text-gray-400 rounded-lg cursor-not-allowed text-base">
+          Currently Sold Out
+        </button>
+      )}
+    </div>
+  </div>
+
+  <!-- Specifications -->
+  <div class="mt-12">
+    <h2 class="text-xl font-bold mb-6">Specifications</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="bg-surface rounded-xl p-4 text-center border border-gray-700">
+        <div class="text-xs text-gray-400 mb-1">Puffs</div>
+        <div class="font-bold text-white">{category.puffs.toLocaleString()}</div>
+      </div>
+      <div class="bg-surface rounded-xl p-4 text-center border border-gray-700">
+        <div class="text-xs text-gray-400 mb-1">Nicotine</div>
+        <div class="font-bold text-white">{spec.nicotine}</div>
+      </div>
+      <div class="bg-surface rounded-xl p-4 text-center border border-gray-700">
+        <div class="text-xs text-gray-400 mb-1">Capacity</div>
+        <div class="font-bold text-white">{spec.capacity}</div>
+      </div>
+      <div class="bg-surface rounded-xl p-4 text-center border border-gray-700">
+        <div class="text-xs text-gray-400 mb-1">Coil</div>
+        <div class="font-bold text-white text-xs">{spec.coil}</div>
+      </div>
+      <div class="bg-surface rounded-xl p-4 text-center border border-gray-700">
+        <div class="text-xs text-gray-400 mb-1">Battery</div>
+        <div class="font-bold text-white">{spec.battery}</div>
+      </div>
+      <div class="bg-surface rounded-xl p-4 text-center border border-gray-700">
+        <div class="text-xs text-gray-400 mb-1">Weight</div>
+        <div class="font-bold text-white">{spec.weight}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detailed Product Information -->
+  <div class="mt-10 space-y-8">
+    <!-- Product Overview -->
+    <div class="bg-surface rounded-2xl p-6 border border-gray-700">
+      <h2 class="text-xl font-bold mb-3">About the {category.name}</h2>
+      <p class="text-gray-300 leading-relaxed">{details.overview}</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Coil Technology -->
+      <div class="bg-surface rounded-2xl p-6 border border-gray-700">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-accent text-lg">⚡</span>
+          <h3 class="text-lg font-bold">Coil Technology</h3>
+        </div>
+        <p class="text-gray-300 text-sm leading-relaxed">{details.coilDesc}</p>
+      </div>
+
+      <!-- Battery Information -->
+      <div class="bg-surface rounded-2xl p-6 border border-gray-700">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-accent text-lg">🔋</span>
+          <h3 class="text-lg font-bold">Battery & Charging</h3>
+        </div>
+        <p class="text-gray-300 text-sm leading-relaxed">{details.batteryDesc}</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- What's in the Box -->
+      <div class="bg-surface rounded-2xl p-6 border border-gray-700">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-accent text-lg">📦</span>
+          <h3 class="text-lg font-bold">What's in the Box</h3>
+        </div>
+        <ul class="space-y-2">
+          {details.whatsInBox.map((item: string) => (
+            <li class="flex items-start gap-2 text-sm text-gray-300">
+              <span class="text-green-400 mt-0.5">✓</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Usage Tips -->
+      <div class="bg-surface rounded-2xl p-6 border border-gray-700">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-accent text-lg">💡</span>
+          <h3 class="text-lg font-bold">Usage Tips</h3>
+        </div>
+        <ul class="space-y-2">
+          {details.usageTips.map((tip: string) => (
+            <li class="flex items-start gap-2 text-sm text-gray-300">
+              <span class="text-accent mt-0.5">→</span>
+              <span>{tip}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  {reviewCount > 0 && (
+    <div class="mt-12" id="reviews">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div>
+          <h2 class="text-xl font-bold">Customer Reviews</h2>
+          <div class="flex items-center gap-3 mt-2">
+            <StarRating rating={Math.round(parseFloat(avgRating))} size="md" />
+            <span class="text-white font-semibold">{avgRating}</span>
+            <span class="text-gray-400 text-sm">Based on {reviewCount} verified reviews</span>
+          </div>
+        </div>
+        <!-- Rating Breakdown -->
+        <div class="flex flex-col gap-1 min-w-48">
+          {[5, 4, 3, 2, 1].map(star => {
+            const count = reviews.filter((r: any) => r.rating === star).length;
+            const pct = reviewCount > 0 ? Math.round((count / reviewCount) * 100) : 0;
+            return (
+              <div class="flex items-center gap-2 text-xs">
+                <span class="w-8 text-gray-400">{star}★</span>
+                <div class="flex-1 h-2 bg-gray-700 rounded-full overflow-hidden">
+                  <div class="h-full bg-accent rounded-full" style={`width: ${pct}%`}></div>
+                </div>
+                <span class="w-8 text-right text-gray-400">{pct}%</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Review Cards (show first 10, toggle to show more) -->
+      <div id="review-list" class="space-y-4">
+        {reviews.slice(0, 10).map((review: any, idx: number) => (
+          <div class="bg-surface rounded-xl p-5 border border-gray-700">
+            <div class="flex items-start justify-between mb-2">
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <StarRating rating={review.rating} size="sm" />
+                  <span class="font-semibold text-sm text-white">{review.title}</span>
+                </div>
+                <p class="text-gray-300 text-sm leading-relaxed">{review.text}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 mt-3 text-xs text-gray-500">
+              <span class="font-medium text-gray-400">{review.name}</span>
+              {review.verified && <span class="text-green-400">✓ Verified Purchase</span>}
+              <span>{review.date}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {reviewCount > 10 && (
+        <div id="hidden-reviews" class="space-y-4 mt-4 hidden">
+          {reviews.slice(10).map((review: any) => (
+            <div class="bg-surface rounded-xl p-5 border border-gray-700">
+              <div class="flex items-start justify-between mb-2">
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <StarRating rating={review.rating} size="sm" />
+                    <span class="font-semibold text-sm text-white">{review.title}</span>
+                  </div>
+                  <p class="text-gray-300 text-sm leading-relaxed">{review.text}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 mt-3 text-xs text-gray-500">
+                <span class="font-medium text-gray-400">{review.name}</span>
+                {review.verified && <span class="text-green-400">✓ Verified Purchase</span>}
+                <span>{review.date}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button id="show-more-reviews" class="mt-6 w-full py-3 border border-gray-600 rounded-lg text-gray-300 hover:text-white hover:border-gray-400 transition-colors text-sm font-medium">
+          Show All {reviewCount} Reviews
+        </button>
+      )}
+    </div>
+  )}
+
+  <!-- Frequently Asked Questions -->
+  <div class="mt-12">
+    <h2 class="text-xl font-bold mb-6">Frequently Asked Questions</h2>
+    <div class="space-y-3">
+      {faqs.map((faq: {q: string; a: string}, i: number) => (
+        <details class="bg-surface rounded-xl border border-gray-700 group">
+          <summary class="p-5 cursor-pointer flex items-center justify-between font-semibold hover:text-accent transition-colors list-none text-sm">
+            <span>{faq.q}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-300 text-sm leading-relaxed border-t border-gray-700/50 pt-4">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+
+  <!-- Related flavours link -->
+  <div class="mt-12 text-center">
+    <a href={`/products/${category.slug}`} class="btn-secondary">← View All {category.name} Flavours</a>
+  </div>
+</BaseLayout>
+
+<script>
+  import { addToCart } from '@utils/cart';
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+
+    if (target.classList.contains('qty-dec') || target.classList.contains('qty-inc')) {
+      const id = target.dataset.itemId;
+      if (!id) return;
+      const valEl = document.querySelector(`.qty-val[data-item-id="${id}"]`);
+      if (!valEl) return;
+      let val = parseInt(valEl.textContent ?? '1');
+      if (target.classList.contains('qty-dec')) val = Math.max(1, val - 1);
+      else val = Math.min(99, val + 1);
+      valEl.textContent = String(val);
+    }
+
+    if (target.classList.contains('add-to-cart')) {
+      const { itemId, categorySlug, flavourSlug, name, categoryName, price, image } = target.dataset;
+      if (!itemId || !categorySlug || !flavourSlug || !name || !categoryName || !price || !image) return;
+      const valEl = document.querySelector(`.qty-val[data-item-id="${itemId}"]`);
+      const qty = parseInt(valEl?.textContent ?? '1');
+      addToCart({
+        id: itemId,
+        categorySlug,
+        flavourSlug,
+        name,
+        categoryName,
+        price: parseFloat(price),
+        image,
+      }, qty);
+    }
+
+    if (target.id === 'show-more-reviews') {
+      const hidden = document.getElementById('hidden-reviews');
+      if (hidden) {
+        hidden.classList.remove('hidden');
+        target.remove();
+      }
+    }
+  });
+</script>

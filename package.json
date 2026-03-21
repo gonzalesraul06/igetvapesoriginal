@@ -1,0 +1,19 @@
+{
+  "name": "igetvapesoriginal",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/vercel": "^10.0.2",
+    "@tailwindcss/vite": "^4.0.0",
+    "astro": "^6.0.8",
+    "nanostores": "^0.11.0",
+    "tailwindcss": "^4.0.0"
+  }
+}

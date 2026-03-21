@@ -1,0 +1,93 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+---
+
+<BaseLayout
+  title="Contact Us — IGET Vapes Australia | Online Vape Shop Support"
+  description="Get in touch with IGET Vapes Original — Australia's trusted online vape shop. Questions about IGET vapes, Alibarbar vapes, orders, shipping or disposable vapes? We're here to help."
+>
+  <Breadcrumbs items={[{ name: 'Contact Us' }]} />
+
+  <div class="max-w-3xl">
+    <h1 class="text-3xl font-extrabold mb-4">Contact Us — IGET Vapes Original</h1>
+    <p class="text-gray-300 mb-8">Have a question about your order, our <strong>IGET vapes</strong>, <strong>Alibarbar vapes</strong>, or shipping? Fill out the form below and we'll get back to you as soon as possible. We're Australia's friendliest online <strong>vape shop</strong>!</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+      <div class="card p-5 text-center">
+        <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-accent/10 flex items-center justify-center">
+          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 class="font-semibold text-sm mb-1">Email Us</h3>
+        <a href="mailto:info@igetvapeshub.com" class="text-accent hover:text-white text-sm font-medium transition-colors">info@igetvapeshub.com</a>
+        <p class="text-xs text-gray-400 mt-1">We respond within 24 hours</p>
+      </div>
+      <div class="card p-5 text-center">
+        <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-accent/10 flex items-center justify-center">
+          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h3 class="font-semibold text-sm mb-1">Fast Support</h3>
+        <p class="text-xs text-gray-400">Quick answers to your questions</p>
+      </div>
+      <div class="card p-5 text-center">
+        <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-accent/10 flex items-center justify-center">
+          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3 class="font-semibold text-sm mb-1">Australia-Wide</h3>
+        <p class="text-xs text-gray-400">Serving all states &amp; territories</p>
+      </div>
+    </div>
+
+    <div class="card p-6 lg:p-8">
+      <h2 class="text-xl font-bold mb-6">Send Us a Message</h2>
+      <form class="space-y-6" action="/api/contact" method="POST">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="name" class="block text-sm font-medium mb-2">Name</label>
+            <input type="text" id="name" name="name" required class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none" placeholder="Your name" />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium mb-2">Email</label>
+            <input type="email" id="email" name="email" required class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none" placeholder="your@email.com" />
+          </div>
+        </div>
+
+        <div>
+          <label for="subject" class="block text-sm font-medium mb-2">Subject</label>
+          <select id="subject" name="subject" required class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-accent focus:outline-none">
+            <option value="">Select a subject</option>
+            <option value="order">Order Inquiry</option>
+            <option value="product">Product Question (IGET / Alibarbar)</option>
+            <option value="flavours">Flavour Availability</option>
+            <option value="shipping">Shipping & Delivery</option>
+            <option value="returns">Returns & Refunds</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="order-number" class="block text-sm font-medium mb-2">Order Number (optional)</label>
+          <input type="text" id="order-number" name="orderNumber" class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none" placeholder="#12345" />
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium mb-2">Message</label>
+          <textarea id="message" name="message" required rows="5" class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none resize-y" placeholder="How can we help?"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary w-full py-3 text-base">Send Message</button>
+      </form>
+    </div>
+
+    <div class="mt-10 prose max-w-none">
+      <h2>Need Help Finding the Right Vape?</h2>
+      <p>Not sure which <strong>disposable vape</strong> is right for you? Here's a quick guide:</p>
+      <ul>
+        <li><strong>New to vaping?</strong> Try the <a href="/products/iget-bar-pro">IGET Bar Pro</a> — 26 flavours, easy to use, great vape price.</li>
+        <li><strong>Want maximum puffs?</strong> Go for the <a href="/products/jnr-cruiser">JNR Cruiser 12000</a> or <a href="/products/iget-one">IGET One 12000</a>.</li>
+        <li><strong>Looking for Alibarbar?</strong> Check out all <a href="/products/alibarbar-ingot">Alibarbar flavours</a> in Ingot and Ice Adjust ranges.</li>
+        <li><strong>On a budget?</strong> Browse our <a href="/mix-and-match">Mix & Match deals</a> for cheap vapes with bulk savings.</li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

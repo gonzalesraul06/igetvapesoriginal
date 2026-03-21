@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#16213e"/>
+  <rect x="4" y="4" width="292" height="292" rx="12" fill="none" stroke="#e94560" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="150" y="140" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="14" font-weight="600" fill="#e94560">Passion Fruit Kiwi Guava</text>
+    <text x="150" y="164" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="14" font-weight="600" fill="#e94560">IGET Bar Plus S3 Pod Only</text>
+</svg>

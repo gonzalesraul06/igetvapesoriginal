@@ -1,0 +1,165 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Checkout — IGET Vapes Australia" noindex={true}>
+  <h1 class="text-3xl font-extrabold mb-6">Checkout</h1>
+
+  <div id="checkout-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Order form -->
+    <div>
+      <h2 class="text-xl font-bold mb-4">Shipping Details</h2>
+      <form id="checkout-form" class="space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="first-name" class="block text-sm font-medium mb-1">First Name</label>
+            <input type="text" id="first-name" name="firstName" required class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none" />
+          </div>
+          <div>
+            <label for="last-name" class="block text-sm font-medium mb-1">Last Name</label>
+            <input type="text" id="last-name" name="lastName" required class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label for="checkout-email" class="block text-sm font-medium mb-1">Email</label>
+          <input type="email" id="checkout-email" name="email" required class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none" />
+        </div>
+
+        <div>
+          <label for="phone" class="block text-sm font-medium mb-1">Phone</label>
+          <input type="tel" id="phone" name="phone" required class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none" />
+        </div>
+
+        <div>
+          <label for="address" class="block text-sm font-medium mb-1">Street Address</label>
+          <input type="text" id="address" name="address" required class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="city" class="block text-sm font-medium mb-1">City / Suburb</label>
+            <input type="text" id="city" name="city" required class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none" />
+          </div>
+          <div>
+            <label for="state" class="block text-sm font-medium mb-1">State</label>
+            <select id="state" name="state" required class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-accent focus:outline-none">
+              <option value="">Select</option>
+              <option value="NSW">NSW</option>
+              <option value="VIC">VIC</option>
+              <option value="QLD">QLD</option>
+              <option value="SA">SA</option>
+              <option value="WA">WA</option>
+              <option value="TAS">TAS</option>
+              <option value="NT">NT</option>
+              <option value="ACT">ACT</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="postcode" class="block text-sm font-medium mb-1">Postcode</label>
+          <input type="text" id="postcode" name="postcode" required pattern="[0-9]{4}" class="w-full bg-primary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-accent focus:outline-none" />
+        </div>
+
+        <div class="pt-4">
+          <h2 class="text-xl font-bold mb-4">Payment Method</h2>
+          <div class="space-y-3">
+            <label class="flex items-center gap-3 p-3 border border-gray-600 rounded-lg cursor-pointer hover:border-accent transition-colors">
+              <input type="radio" name="payment" value="bank-transfer" checked class="text-accent" />
+              <span>Bank Transfer (EFT)</span>
+            </label>
+            <label class="flex items-center gap-3 p-3 border border-gray-600 rounded-lg cursor-pointer hover:border-accent transition-colors">
+              <input type="radio" name="payment" value="crypto" class="text-accent" />
+              <span>Cryptocurrency</span>
+            </label>
+            <label class="flex items-center gap-3 p-3 border border-gray-600 rounded-lg cursor-pointer hover:border-accent transition-colors">
+              <input type="radio" name="payment" value="payid" class="text-accent" />
+              <span>PayID</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary w-full py-3 text-base mt-6">Place Order</button>
+      </form>
+    </div>
+
+    <!-- Order summary -->
+    <div>
+      <div class="card p-6 sticky top-20">
+        <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+        <div id="checkout-items" class="space-y-3 mb-4">
+          <p class="text-gray-400">Loading cart...</p>
+        </div>
+        <div class="border-t border-gray-700 pt-4 space-y-2 text-sm">
+          <div class="flex justify-between text-gray-400">
+            <span>Subtotal</span>
+            <span id="checkout-subtotal">$0.00</span>
+          </div>
+          <div class="flex justify-between text-gray-400">
+            <span>Shipping</span>
+            <span>$30.00</span>
+          </div>
+          <div id="checkout-minimum-warning" class="hidden p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg text-center">
+            <p class="text-yellow-400 text-sm font-medium">Minimum order is $300. Add <span id="checkout-remaining">$0</span> more to proceed.</p>
+            <a href="/" class="text-accent text-sm hover:underline mt-1 inline-block">Continue Shopping →</a>
+          </div>
+          <div class="flex justify-between text-lg font-bold pt-2 border-t border-gray-700">
+            <span>Total</span>
+            <span id="checkout-total">$30.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { cartItems, getCartTotal, MINIMUM_ORDER, SHIPPING_COST } from '@utils/cart';
+
+    function renderCheckout() {
+      const items = Object.values(cartItems.get());
+      const container = document.getElementById('checkout-items');
+      const subtotalEl = document.getElementById('checkout-subtotal');
+      const totalEl = document.getElementById('checkout-total');
+      if (!container) return;
+
+      if (items.length === 0) {
+        container.innerHTML = '<p class="text-gray-400">Your cart is empty. <a href="/" class="text-accent hover:underline">Continue shopping</a></p>';
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div class="flex justify-between text-sm">
+          <span class="text-gray-300">${item.name} × ${item.quantity}</span>
+          <span>$${(item.price * item.quantity).toFixed(2)}</span>
+        </div>
+      `).join('');
+
+      const total = getCartTotal();
+      if (subtotalEl) subtotalEl.textContent = `$${total.toFixed(2)}`;
+      if (totalEl) totalEl.textContent = `$${(total + SHIPPING_COST).toFixed(2)}`;
+
+      // Minimum order enforcement
+      const warningEl = document.getElementById('checkout-minimum-warning');
+      const remainingEl = document.getElementById('checkout-remaining');
+      const submitBtn = document.querySelector('#checkout-form button[type="submit"]') as HTMLButtonElement;
+      if (warningEl && submitBtn) {
+        if (total < MINIMUM_ORDER && items.length > 0) {
+          warningEl.classList.remove('hidden');
+          if (remainingEl) remainingEl.textContent = `$${(MINIMUM_ORDER - total).toFixed(2)}`;
+          submitBtn.disabled = true;
+          submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+          submitBtn.textContent = `Minimum Order $${MINIMUM_ORDER} Required`;
+        } else if (items.length > 0) {
+          warningEl.classList.add('hidden');
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+          submitBtn.textContent = 'Place Order';
+        }
+      }
+    }
+
+    cartItems.subscribe(renderCheckout);
+    renderCheckout();
+  </script>
+</BaseLayout>

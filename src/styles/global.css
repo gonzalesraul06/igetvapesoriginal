@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1a1a2e;
+  --color-accent: #e94560;
+  --color-surface: #16213e;
+  --color-muted: #0f3460;
+  --color-gold: #f5a623;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-primary text-white font-sans min-h-screen;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold leading-tight;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-surface hover:bg-muted text-white font-semibold py-2 px-6 rounded-lg border border-gray-600 transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-surface rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300;
+  }
+
+  .badge {
+    @apply inline-block text-xs font-bold uppercase px-2 py-1 rounded;
+  }
+
+  .badge-new {
+    @apply inline-block text-xs font-bold uppercase px-2 py-1 rounded bg-accent text-white;
+  }
+
+  .badge-out-of-stock {
+    @apply inline-block text-xs font-bold uppercase px-2 py-1 rounded bg-gray-700 text-gray-300;
+  }
+
+  .prose {
+    @apply text-gray-300 leading-relaxed;
+  }
+
+  .prose h2 {
+    @apply text-2xl text-white mt-8 mb-4;
+  }
+
+  .prose h3 {
+    @apply text-xl text-white mt-6 mb-3;
+  }
+
+  .prose p {
+    @apply mb-4;
+  }
+
+  .prose ul {
+    @apply list-disc list-inside mb-4 space-y-1;
+  }
+
+  .prose a {
+    @apply text-accent hover:underline;
+  }
+
+  .prose table {
+    @apply w-full border-collapse mb-6;
+  }
+
+  .prose th,
+  .prose td {
+    @apply border border-gray-700 px-4 py-2 text-left;
+  }
+
+  .prose th {
+    @apply bg-surface font-semibold;
+  }
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="64" viewBox="0 0 220 64">
+  <defs>
+    <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e94560"/>
+      <stop offset="100%" stop-color="#ff6b81"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="220" height="64" rx="14" fill="#0f1629"/>
+  <rect x="3" y="3" width="214" height="58" rx="12" fill="none" stroke="url(#brandGrad)" stroke-width="2" stroke-opacity="0.6"/>
+  <text x="110" y="30" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="26" font-weight="900" letter-spacing="4" fill="url(#brandGrad)" filter="url(#glow)">IGET VAPE</text>
+  <text x="110" y="50" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="700" letter-spacing="8" fill="#ffffff" fill-opacity="0.7">ORIGINAL</text>
+  <line x1="40" y1="36" x2="80" y2="36" stroke="url(#brandGrad)" stroke-width="1" stroke-opacity="0.4"/>
+  <line x1="140" y1="36" x2="180" y2="36" stroke="url(#brandGrad)" stroke-width="1" stroke-opacity="0.4"/>
+</svg>

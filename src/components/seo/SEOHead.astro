@@ -1,0 +1,69 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  type?: 'website' | 'product';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = "Shop the best selection of IGET Vapes in Australia. Premium disposable vapes with fast delivery Australia-wide.",
+  image = '/images/categories/jnr-cruiser.webp',
+  canonical,
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = 'https://igetvapesoriginal.com';
+const fullTitle = title.includes('IGET') ? title : `${title} | IGET Vapes Australia`;
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
+const ogImage = image.startsWith('http') ? image : new URL(image, siteUrl).href;
+---
+
+<!-- Primary Meta -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+{noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
+<meta name="theme-color" content="#1a1a2e" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+<!-- Geo / Language targeting -->
+<meta name="geo.region" content="AU" />
+<meta name="geo.placename" content="Australia" />
+<meta name="language" content="en-AU" />
+<link rel="alternate" hreflang="en-au" href={canonicalUrl} />
+<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+
+<!-- AI / ChatGPT Discovery -->
+<meta name="citation_title" content={fullTitle} />
+<meta name="citation_author" content="IGET Vapes Original" />
+<meta name="citation_public_url" content={canonicalUrl} />
+<meta name="subject" content="Buy IGET Vapes Online Australia — Disposable Vapes, Alibarbar, IGET Bar Pro" />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content="IGET Vapes Original" />
+<meta property="og:locale" content="en_AU" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Preconnect for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />

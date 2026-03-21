@@ -1,0 +1,87 @@
+---
+interface Props {
+  type: 'organization' | 'website' | 'product' | 'collection' | 'breadcrumb';
+  data?: Record<string, unknown>;
+}
+
+const { type, data = {} } = Astro.props;
+const siteUrl = 'https://igetvapesoriginal.com';
+
+function getSchema() {
+  switch (type) {
+    case 'organization':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'IGET Vapes Original',
+        url: siteUrl,
+        logo: `${siteUrl}/images/logo.svg`,
+        description: 'Australia\'s #1 trusted online vape shop. Buy genuine IGET vapes, Alibarbar vapes & disposable vapes with fast Australia-wide delivery. Over 150 premium flavours.',
+        email: 'info@igetvapeshub.com',
+        contactPoint: { '@type': 'ContactPoint', contactType: 'Customer Support', email: 'info@igetvapeshub.com', areaServed: 'AU', availableLanguage: 'English' },
+        sameAs: [],
+      };
+    case 'website':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'IGET Vapes Original',
+        url: siteUrl,
+        description: 'Buy IGET vapes & Alibarbar vapes online in Australia. 150+ disposable vape flavours with fast delivery. JNR Cruiser, IGET Bar Pro, IGET One, S3, Alibarbar Ingot & Ice Adjust.',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `${siteUrl}/products/{search_term_string}`,
+          'query-input': 'required name=search_term_string',
+        },
+      };
+    case 'product':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: data.name,
+        image: data.image,
+        description: data.description,
+        brand: { '@type': 'Brand', name: data.brand ?? 'IGET' },
+        offers: {
+          '@type': 'Offer',
+          price: data.price,
+          priceCurrency: 'AUD',
+          availability: data.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+          url: data.url,
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: data.rating ?? '5',
+          reviewCount: data.reviewCount ?? '115',
+        },
+      };
+    case 'collection':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: data.name,
+        description: data.description,
+        url: data.url,
+      };
+    case 'breadcrumb':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: (data.items as Array<{ name: string; url: string }>)?.map((item, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: item.name,
+          item: item.url,
+        })),
+      };
+    default:
+      return null;
+  }
+}
+
+const schema = getSchema();
+---
+
+{schema && (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

@@ -1,0 +1,46 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+---
+
+<BaseLayout title="Shipping Policy — IGET Vapes Australia" description="Learn about our shipping rates, delivery times, and tracking for all IGET vape orders across Australia.">
+  <Breadcrumbs items={[{ name: 'Shipping Policy' }]} />
+
+  <div class="max-w-3xl">
+    <h1 class="text-3xl font-extrabold mb-6">Shipping Policy</h1>
+    <div class="prose">
+      <h2>Shipping Rates</h2>
+      <p>We offer a flat rate shipping fee of <strong>$30 AUD</strong> for all orders within Australia. This applies to all order sizes — whether you're ordering one device or ten.</p>
+
+      <h2>Processing Time</h2>
+      <p>Orders are typically processed within <strong>1-2 business days</strong> after payment confirmation. Once processed, you'll receive a tracking number via email.</p>
+
+      <h2>Delivery Timeframes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Region</th>
+            <th>Estimated Delivery</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Sydney Metro</td><td>2-3 business days</td></tr>
+          <tr><td>Melbourne Metro</td><td>2-4 business days</td></tr>
+          <tr><td>Brisbane Metro</td><td>2-4 business days</td></tr>
+          <tr><td>Other Capital Cities</td><td>3-5 business days</td></tr>
+          <tr><td>Regional Areas</td><td>5-7 business days</td></tr>
+          <tr><td>Remote Areas</td><td>7-10 business days</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Tracking</h2>
+      <p>All orders are shipped with full tracking. Once your order has been dispatched, you will receive an email with your tracking number and a link to track your parcel in real-time.</p>
+
+      <h2>Discreet Packaging</h2>
+      <p>All orders are shipped in plain, unmarked packaging for your privacy. There are no external labels or branding that indicate the contents of the package.</p>
+
+      <h2>Delivery Issues</h2>
+      <p>If your order hasn't arrived within the estimated timeframe, please <a href="mailto:info@igetvapeshub.com" class="text-accent hover:underline">email us at info@igetvapeshub.com</a> and we'll investigate with the courier. We are not responsible for delays caused by incorrect shipping addresses or courier issues beyond our control.</p>
+    </div>
+  </div>
+</BaseLayout>

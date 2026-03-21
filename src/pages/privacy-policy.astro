@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy — IGET Vapes Original | Online Vape Shop Australia"
+  description="Read the privacy policy of IGET Vapes Original — Australia's trusted online vape shop. Learn how we collect, use and protect your data when you buy IGET vapes & Alibarbar vapes online."
+>
+  <Breadcrumbs items={[{ name: 'Privacy Policy' }]} />
+
+  <div class="max-w-3xl">
+    <h1 class="text-3xl font-extrabold mb-6">Privacy Policy</h1>
+    <div class="prose">
+      <p>Your privacy is important to us. This policy outlines how IGET Vapes Original collects, uses, and protects your personal information when you use our website.</p>
+
+      <h2>Information We Collect</h2>
+      <p>We collect information you provide directly, including:</p>
+      <ul>
+        <li>Name and contact details (email, phone number)</li>
+        <li>Shipping and billing address</li>
+        <li>Order history and purchase details</li>
+        <li>Account credentials (email and password)</li>
+        <li>Age verification confirmation</li>
+      </ul>
+
+      <h2>How We Use Your Information</h2>
+      <ul>
+        <li>To process and fulfil your orders</li>
+        <li>To communicate order status and delivery updates</li>
+        <li>To verify you are of legal age to purchase</li>
+        <li>To improve our website and services</li>
+        <li>To comply with legal obligations</li>
+      </ul>
+
+      <h2>Data Protection</h2>
+      <p>We implement industry-standard security measures to protect your personal data. Your information is stored securely and is only accessible to authorised personnel who need it to perform their duties.</p>
+
+      <h2>Cookies</h2>
+      <p>Our website uses cookies to enhance your browsing experience. These include:</p>
+      <ul>
+        <li><strong>Essential cookies:</strong> Required for cart functionality and age verification</li>
+        <li><strong>Analytics cookies:</strong> Help us understand how visitors interact with our site</li>
+      </ul>
+
+      <h2>Third-Party Sharing</h2>
+      <p>We do not sell or trade your personal information. We only share your data with trusted third parties necessary for order fulfilment (e.g., shipping couriers) and as required by law.</p>
+
+      <h2>Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access your personal data</li>
+        <li>Request correction of inaccurate data</li>
+        <li>Request deletion of your data</li>
+        <li>Opt out of marketing communications</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <p>If you have questions about this privacy policy, please email us at <a href="mailto:info@igetvapeshub.com" class="text-accent hover:underline">info@igetvapeshub.com</a> or visit our <a href="/contact">contact page</a>.</p>
+    </div>
+  </div>
+</BaseLayout>

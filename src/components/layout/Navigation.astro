@@ -1,0 +1,110 @@
+---
+import { productCategories, topMenuLinks } from '@data/navigation';
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav id="sidebar-nav" class="fixed inset-y-0 left-0 z-50 w-72 bg-surface border-r border-gray-700 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 flex flex-col">
+  <!-- Logo -->
+  <div class="p-5 border-b border-gray-700">
+    <a href="/" class="flex items-center gap-2">
+      <img src="/images/logo.svg" alt="IGET Vape Original — Australia's #1 online vape shop" class="h-12 w-auto" loading="eager" />
+    </a>
+  </div>
+
+  <!-- Category Links -->
+  <div class="flex-1 overflow-y-auto py-4">
+    <ul class="space-y-0.5 px-3">
+      {productCategories.map(cat => (
+        <li>
+          <a
+            href={cat.href}
+            class:list={[
+              'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
+              currentPath.startsWith(cat.href)
+                ? 'bg-accent text-white shadow-lg shadow-accent/20'
+                : 'text-gray-300 hover:bg-muted hover:text-white',
+            ]}
+          >
+            <svg class="w-4 h-4 flex-shrink-0 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span>{cat.name}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Divider -->
+    <div class="mx-5 my-4 border-t border-gray-700/50"></div>
+
+    <!-- Pages section -->
+    <ul class="space-y-0.5 px-3">
+      {topMenuLinks.map(link => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              'block px-4 py-2.5 rounded-lg text-sm transition-colors',
+              currentPath === link.href
+                ? 'bg-accent/20 text-accent font-medium'
+                : 'text-gray-400 hover:bg-muted hover:text-white',
+            ]}
+          >
+            {link.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Footer info -->
+  <div class="p-4 border-t border-gray-700 space-y-2">
+    <div class="flex items-center gap-2 text-xs text-gray-400">
+      <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+      <span>$30 Flat Rate Shipping</span>
+    </div>
+    <div class="flex items-center gap-2 text-xs text-gray-400">
+      <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+      <span>Australia-Wide Delivery</span>
+    </div>
+    <div class="flex items-center gap-2 text-xs text-gray-400">
+      <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+      <span>100% Authentic Products</span>
+    </div>
+  </div>
+</nav>
+
+<!-- Overlay for mobile -->
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden backdrop-blur-sm"></div>
+
+<script>
+  const sidebar = document.getElementById('sidebar-nav');
+  const overlay = document.getElementById('sidebar-overlay');
+  const toggleBtn = document.getElementById('menu-toggle');
+
+  function openSidebar() {
+    sidebar?.classList.remove('-translate-x-full');
+    overlay?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar?.classList.add('-translate-x-full');
+    overlay?.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  toggleBtn?.addEventListener('click', () => {
+    const isOpen = !sidebar?.classList.contains('-translate-x-full');
+    isOpen ? closeSidebar() : openSidebar();
+  });
+
+  overlay?.addEventListener('click', closeSidebar);
+</script>
