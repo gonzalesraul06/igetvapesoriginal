@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  site: 'https://igetvapesoriginal.com',
+  site: 'https://igetvapeshub.com',
   output: 'static',
   adapter: cloudflare(),
   integrations: [
@@ -38,6 +38,6 @@ export default defineConfig({
     '/iget/orders': '/account/orders',
   },
   image: {
-    domains: ['igetvapesoriginal.com'],
+    domains: ['igetvapeshub.com'],
   },
 });

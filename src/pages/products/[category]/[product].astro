@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 }
 
 const { category, flavour } = Astro.props;
-const siteUrl = 'https://igetvapesoriginal.com';
+const siteUrl = 'https://igetvapeshub.com';
 const productUrl = `${siteUrl}/products/${category.slug}/${flavour.slug}`;
 const itemId = `${category.slug}-${flavour.slug}`;
 const reviews = category.reviews ?? [];

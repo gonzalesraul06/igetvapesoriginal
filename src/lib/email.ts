@@ -74,7 +74,7 @@ function emailShell(content: string): string {
               <p style="margin:0 0 4px;font-size:12px;color:${BRAND_MUTED};">Reply to this email or contact us at</p>
               <a href="mailto:info@igetvapeshub.com" style="color:${BRAND_ACCENT};font-size:13px;font-weight:600;text-decoration:none;">info@igetvapeshub.com</a>
               <p style="margin:16px 0 0;font-size:11px;color:#bbb;">&copy; ${new Date().getFullYear()} IGET Vapes Original &mdash; Australia's #1 Trusted Online Vape Store</p>
-              <p style="margin:4px 0 0;font-size:11px;color:#bbb;">igetvapesoriginal.com</p>
+              <p style="margin:4px 0 0;font-size:11px;color:#bbb;">igetvapeshub.com</p>
             </td></tr>
           </table>
         </td></tr>
@@ -177,7 +177,7 @@ export async function sendContactEmail(data: ContactEmailData) {
       <p style="margin:0;font-size:14px;line-height:1.7;color:#555;white-space:pre-wrap;">${escapeHtml(data.message)}</p>
     </div>
     ${paragraph(`In the meantime, feel free to browse our latest products.`)}
-    ${ctaButton('Browse Products', 'https://igetvapesoriginal.com')}
+    ${ctaButton('Browse Products', 'https://igetvapeshub.com')}
   `);
 
   const customerResult = await getResend().emails.send({

@@ -12,7 +12,7 @@ export function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const siteUrl = 'https://igetvapesoriginal.com';
+const siteUrl = 'https://igetvapeshub.com';
 const postUrl = `${siteUrl}/blog/${post.slug}`;
 const postImage = post.image.startsWith('http') ? post.image : `${siteUrl}${post.image}`;
 

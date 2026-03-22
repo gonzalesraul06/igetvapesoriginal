@@ -23,7 +23,7 @@ const {
   modifiedTime,
 } = Astro.props;
 
-const siteUrl = 'https://igetvapesoriginal.com';
+const siteUrl = 'https://igetvapeshub.com';
 const fullTitle = title.includes('IGET') ? title : `${title} | IGET Vapes Australia`;
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
 const ogImage = image.startsWith('http') ? image : new URL(image, siteUrl).href;

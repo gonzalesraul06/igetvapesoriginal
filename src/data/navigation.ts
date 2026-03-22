@@ -42,7 +42,7 @@ export const siteConfig = {
   name: 'IGET Vapes Original',
   tagline: "Australia's #1 Trusted Online IGET Vape Store",
   description: 'Shop the best selection of IGET Vapes in Australia. Premium disposable vapes including IGET Bar Pro, IGET One, JNR Cruiser and more. Fast Australia-wide delivery.',
-  url: 'https://igetvapesoriginal.com',
+  url: 'https://igetvapeshub.com',
   email: 'info@igetvapeshub.com',
   locale: 'en-AU',
   currency: 'AUD',

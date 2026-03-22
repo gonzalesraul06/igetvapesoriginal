@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 const { product } = Astro.props;
-const siteUrl = 'https://igetvapesoriginal.com';
+const siteUrl = 'https://igetvapeshub.com';
 const categoryUrl = `${siteUrl}/products/${product.slug}`;
 
 const inStockCount = product.flavours.filter((f: any) => f.inStock).length;
