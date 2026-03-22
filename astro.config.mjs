@@ -14,12 +14,23 @@ export default defineConfig({
     }),
   ],
   vite: {
-    build: {
-      rollupOptions: {
-        input: '@astrojs/cloudflare/entrypoints/server',
+    plugins: [
+      tailwindcss(),
+      {
+        name: 'cloudflare-ssr-input',
+        config(_, env) {
+          if (env.isSsrBuild) {
+            return {
+              build: {
+                rollupOptions: {
+                  input: '@astrojs/cloudflare/entrypoints/server',
+                },
+              },
+            };
+          }
+        },
       },
-    },
-    plugins: [tailwindcss()],
+    ],
     resolve: {
       alias: {
         cookie: fileURLToPath(new URL('./src/shims/cookie.ts', import.meta.url)),
