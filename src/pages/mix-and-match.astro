@@ -19,13 +19,13 @@ const bundles = [
 >
   <Breadcrumbs items={[{ name: 'Mix & Match' }]} />
 
-  <h1 class="text-2xl lg:text-3xl font-bold mb-3">Mix & Match — Save More</h1>
+  <h1 class="text-3xl lg:text-4xl font-extrabold mb-4 tracking-tight">Mix & Match — Save More</h1>
   <p class="text-text-muted mb-8 max-w-2xl">Pick any combination of flavours across all our product ranges and save on bulk orders. The more you buy, the more you save!</p>
 
   <!-- Discount tiers -->
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
     {bundles.map(bundle => (
-      <div class="card p-6 text-center border border-border hover:border-accent transition-colors">
+      <div class="card p-6 text-center border border-border hover:border-accent hover:shadow-lg transition-all duration-200 rounded-xl">
         <div class="text-3xl font-extrabold text-accent mb-1">{bundle.discount}% OFF</div>
         <p class="text-text-muted">{bundle.label} or more</p>
       </div>
@@ -36,7 +36,7 @@ const bundles = [
   <h2 class="text-2xl font-bold mb-6">Choose Your Products</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
     {products.map(p => (
-      <a href={`/products/${p.data.slug}`} class="card p-4 flex items-center gap-4 hover:border-accent border border-transparent transition-colors">
+      <a href={`/products/${p.data.slug}`} class="card p-4 flex items-center gap-4 hover:border-accent border border-border hover:shadow-md transition-all duration-200 rounded-xl">
         <img
           src={p.data.image}
           alt={`${p.data.name} — Mix & Match Vape Deals Australia`}
@@ -54,7 +54,7 @@ const bundles = [
   </div>
 
   <!-- How it works -->
-  <div class="card p-6 lg:p-8">
+  <div class="card p-6 lg:p-8 rounded-xl">
     <h2 class="text-xl font-bold mb-4">How It Works</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
       <div>

@@ -2,75 +2,130 @@
 import { footerSupport, footerService, productCategories, siteConfig } from '@data/navigation';
 ---
 
-<footer class="bg-surface mt-auto border-t border-border">
+<footer class="bg-dark text-white mt-auto">
+  <!-- Trust bar -->
+  <div class="border-b border-white/8">
+    <div class="container-site py-10">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-6">
+        <div class="flex flex-col items-center gap-3 text-center">
+          <div class="w-11 h-11 rounded-xl bg-white/8 flex items-center justify-center">
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0H6.375c-.621 0-1.125-.504-1.125-1.125V14.25m17.25 4.5V6.75a3 3 0 00-3-3H6.375c-.621 0-1.125.504-1.125 1.125v14.25"/></svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold leading-tight">Fast Delivery</p>
+            <p class="text-xs text-white/45 mt-0.5">Australia-wide shipping</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-3 text-center">
+          <div class="w-11 h-11 rounded-xl bg-white/8 flex items-center justify-center">
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold leading-tight">100% Authentic</p>
+            <p class="text-xs text-white/45 mt-0.5">Genuine products only</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-3 text-center">
+          <div class="w-11 h-11 rounded-xl bg-white/8 flex items-center justify-center">
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"/></svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold leading-tight">Discreet Packaging</p>
+            <p class="text-xs text-white/45 mt-0.5">Plain, unmarked parcels</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-3 text-center">
+          <div class="w-11 h-11 rounded-xl bg-white/8 flex items-center justify-center">
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold leading-tight">Live Support</p>
+            <p class="text-xs text-white/45 mt-0.5">Chat with us anytime</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Main footer -->
-  <div class="container-site py-10 lg:py-14">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
-      <!-- Customer Support -->
+  <div class="container-site py-12 lg:py-14">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
+      <!-- Brand column -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a href="/" class="inline-block mb-5">
+          <span class="text-white font-extrabold text-xl tracking-tight">IGET<span class="text-accent">-</span>VAPES</span>
+          <span class="block text-[10px] font-semibold uppercase tracking-[0.25em] text-white/40 mt-1">Australia</span>
+        </a>
+        <p class="text-white/50 text-sm leading-relaxed mb-5">
+          Australia's #1 trusted online vape store. Shop genuine IGET &amp; Alibarbar vapes with fast delivery to every state and territory.
+        </p>
+        <a href={`mailto:${siteConfig.email}`} class="inline-flex items-center gap-2.5 text-sm text-white/60 hover:text-accent transition-colors duration-200">
+          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          {siteConfig.email}
+        </a>
+      </div>
+
+      <!-- Shop -->
       <div>
-        <h3 class="text-sm font-bold text-text uppercase tracking-wide mb-4">Customer Support</h3>
-        <ul class="space-y-2.5">
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.15em] text-white/40 mb-5">Shop</h3>
+        <ul class="space-y-3">
+          {productCategories.slice(0, 7).map(cat => (
+            <li>
+              <a href={cat.href} class="text-white/60 hover:text-white text-sm transition-colors duration-200">{cat.name.replace(/\d+\sPUFFS|SAVE$/, '').trim()}</a>
+            </li>
+          ))}
+          <li>
+            <a href="/mix-and-match" class="text-accent hover:text-white text-sm font-medium transition-colors duration-200">Mix &amp; Match Deals &rarr;</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Guides & Blog -->
+      <div>
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.15em] text-white/40 mb-5">Guides</h3>
+        <ul class="space-y-3">
+          <li><a href="/blog/best-iget-vapes-australia-2026" class="text-white/60 hover:text-white text-sm transition-colors duration-200">Best IGET Vapes 2026</a></li>
+          <li><a href="/blog/comparing-all-iget-models-2026" class="text-white/60 hover:text-white text-sm transition-colors duration-200">Compare All Models</a></li>
+          <li><a href="/blog/alibarbar-vapes-complete-guide" class="text-white/60 hover:text-white text-sm transition-colors duration-200">Alibarbar Guide</a></li>
+          <li><a href="/blog/cheap-vapes-australia-best-value" class="text-white/60 hover:text-white text-sm transition-colors duration-200">Cheap Vapes Australia</a></li>
+          <li><a href="/blog" class="text-accent hover:text-white text-sm font-medium transition-colors duration-200">All Blog Posts &rarr;</a></li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div>
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.15em] text-white/40 mb-5">Support</h3>
+        <ul class="space-y-3">
           {footerSupport.map(link => (
             <li>
-              <a href={link.href} class="text-text-muted hover:text-text text-sm transition-colors duration-200">{link.name}</a>
+              <a href={link.href} class="text-white/60 hover:text-white text-sm transition-colors duration-200">{link.name}</a>
             </li>
           ))}
-          <li>
-            <a href={`mailto:${siteConfig.email}`} class="text-text-muted hover:text-text text-sm transition-colors duration-200">{siteConfig.email}</a>
-          </li>
         </ul>
       </div>
 
-      <!-- Customer Service -->
+      <!-- Account -->
       <div>
-        <h3 class="text-sm font-bold text-text uppercase tracking-wide mb-4">Customer Service</h3>
-        <ul class="space-y-2.5">
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.15em] text-white/40 mb-5">Account</h3>
+        <ul class="space-y-3">
           {footerService.map(link => (
             <li>
-              <a href={link.href} class="text-text-muted hover:text-text text-sm transition-colors duration-200">{link.name}</a>
+              <a href={link.href} class="text-white/60 hover:text-white text-sm transition-colors duration-200">{link.name}</a>
             </li>
           ))}
         </ul>
-      </div>
-
-      <!-- Quick Links -->
-      <div>
-        <h3 class="text-sm font-bold text-text uppercase tracking-wide mb-4">Quick Links</h3>
-        <ul class="space-y-2.5">
-          {productCategories.slice(0, 6).map(cat => (
-            <li>
-              <a href={cat.href} class="text-text-muted hover:text-text text-sm transition-colors duration-200">{cat.name.replace(/\d+\sPUFFS|SAVE$/, '').trim()}</a>
-            </li>
-          ))}
-          <li>
-            <a href="/mix-and-match" class="text-text-muted hover:text-text text-sm transition-colors duration-200">Mix & Match Deals</a>
-          </li>
-          <li>
-            <a href="/blog" class="text-text-muted hover:text-text text-sm transition-colors duration-200">Blog</a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Track Your Order -->
-      <div>
-        <h3 class="text-sm font-bold text-text uppercase tracking-wide mb-4">Track Your Order</h3>
-        <p class="text-text-muted text-sm mb-4 leading-relaxed">Enter your tracking number below to check the status of your delivery.</p>
-        <form action="https://auspost.com.au/mypost/track/#/search" method="get" target="_blank" rel="noopener noreferrer" class="flex gap-2">
-          <input type="text" name="tracking" placeholder="Tracking number" class="flex-1 px-3 py-2 text-sm border border-border bg-white text-text placeholder:text-text-light focus:outline-none focus:border-text" style="border-radius: var(--radius-sm);" />
-          <button type="submit" class="btn-primary py-2 px-4 text-xs">Track</button>
-        </form>
       </div>
     </div>
   </div>
 
   <!-- Bottom bar -->
-  <div class="bg-white border-t border-border">
-    <div class="container-site py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p class="text-text-muted text-xs">&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-      <div class="flex items-center gap-5 text-xs text-text-muted">
-        <a href="/privacy-policy" class="hover:text-text transition-colors duration-200">Privacy</a>
-        <a href="/terms-and-conditions" class="hover:text-text transition-colors duration-200">Terms</a>
-        <a href="/shipping-policy" class="hover:text-text transition-colors duration-200">Shipping</a>
+  <div class="border-t border-white/8">
+    <div class="container-site py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-white/35 text-xs">&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved. Australia's #1 Online Vape Shop.</p>
+      <div class="flex items-center gap-5 text-xs text-white/35">
+        <a href="/privacy-policy" class="hover:text-white/60 transition-colors duration-200">Privacy</a>
+        <a href="/terms-and-conditions" class="hover:text-white/60 transition-colors duration-200">Terms</a>
+        <a href="/shipping-policy" class="hover:text-white/60 transition-colors duration-200">Shipping</a>
       </div>
     </div>
   </div>

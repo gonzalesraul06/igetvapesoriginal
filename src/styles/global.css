@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Color system (matching reference site) ── */
+  /* ── Color system ── */
   --color-primary: #ffffff;
-  --color-accent: #f14b66;
-  --color-accent-dark: #d43a55;
-  --color-accent-light: #fef2f4;
-  --color-surface: #f5f5f5;
-  --color-surface-dark: #eee;
+  --color-accent: #e94560;
+  --color-accent-dark: #c7324d;
+  --color-accent-light: #fdf2f4;
+  --color-surface: #f9fafb;
+  --color-surface-dark: #f3f4f6;
   --color-muted: #dee2e6;
-  --color-gold: #fbbc04;
+  --color-gold: #f59e0b;
   --color-green: #059669;
-  --color-border: #eeeeee;
-  --color-text: #111111;
-  --color-text-muted: #666666;
-  --color-text-light: #999999;
-  --color-dark: #111111;
+  --color-border: #e5e7eb;
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-text-light: #9ca3af;
+  --color-dark: #0f172a;
 
   /* ── Typography ── */
   --font-sans: 'Montserrat', 'Arial', system-ui, sans-serif;
@@ -31,18 +31,18 @@
   --spacing-4xl: 96px;
 
   /* ── Radius scale ── */
-  --radius-sm: 3px;
-  --radius-md: 8px;
-  --radius-lg: 8px;
-  --radius-xl: 8px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --radius-full: 9999px;
 
   /* ── Shadows ── */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-xl: 0 8px 30px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 0 3px rgba(241, 75, 102, 0.15);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 0 3px rgba(233, 69, 96, 0.15);
 }
 
 @layer base {
@@ -91,71 +91,72 @@
 }
 
 @layer components {
-  /* ── Buttons (matching reference: dark bg, small radius) ── */
+  /* ── Buttons ── */
   .btn-primary {
-    @apply bg-text text-white font-bold py-3 px-6 inline-flex items-center justify-center gap-2 text-sm tracking-wide;
-    border-radius: var(--radius-sm);
-    transition: background 0.3s ease;
+    @apply bg-accent text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 inline-flex items-center justify-center gap-2 text-sm tracking-wide;
+    box-shadow: 0 2px 8px rgba(233, 69, 96, 0.25);
   }
   .btn-primary:hover {
-    @apply bg-gray-700;
+    @apply bg-accent-dark;
+    box-shadow: 0 4px 16px rgba(233, 69, 96, 0.3);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
   }
 
   .btn-accent {
-    @apply bg-text text-white font-bold py-3 px-6 inline-flex items-center justify-center gap-2 text-sm tracking-wide;
-    border-radius: var(--radius-sm);
-    transition: background 0.3s ease;
+    @apply bg-accent text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 inline-flex items-center justify-center gap-2 text-sm tracking-wide;
+    box-shadow: 0 2px 8px rgba(233, 69, 96, 0.25);
   }
   .btn-accent:hover {
-    @apply bg-gray-700;
+    @apply bg-accent-dark;
+    box-shadow: 0 4px 16px rgba(233, 69, 96, 0.3);
+    transform: translateY(-1px);
   }
 
   .btn-secondary {
-    @apply bg-white text-text font-bold py-3 px-6 border border-border inline-flex items-center justify-center gap-2 text-sm;
-    border-radius: var(--radius-sm);
-    transition: all 0.3s ease;
+    @apply bg-white text-text font-semibold py-3 px-6 rounded-lg border border-border transition-all duration-200 inline-flex items-center justify-center gap-2 text-sm;
   }
   .btn-secondary:hover {
     @apply bg-surface border-gray-300;
+    box-shadow: var(--shadow-sm);
   }
 
   .btn-ghost {
-    @apply bg-transparent text-text font-medium py-2 px-4 inline-flex items-center justify-center gap-2 text-sm;
-    border-radius: var(--radius-sm);
-    transition: background 0.3s ease;
+    @apply bg-transparent text-text font-medium py-2 px-4 rounded-lg transition-all duration-200 inline-flex items-center justify-center gap-2 text-sm;
   }
   .btn-ghost:hover {
     @apply bg-surface;
   }
 
-  /* ── Cards (clean white with subtle border) ── */
+  /* ── Cards ── */
   .card {
-    @apply bg-white border border-border overflow-hidden;
-    border-radius: var(--radius-md);
-    transition: all 0.5s ease;
+    @apply bg-white border border-border overflow-hidden transition-all duration-300;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
   }
   .card:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-muted);
+    transform: translateY(-2px);
   }
 
   .card-flat {
     @apply bg-surface border border-border overflow-hidden;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
   }
 
-  /* ── Badges (matching reference: round, accent color) ── */
+  /* ── Badges ── */
   .badge {
     @apply inline-flex items-center text-[11px] font-bold uppercase px-2.5 py-1 tracking-wider;
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-sm);
   }
 
   .badge-new {
-    @apply inline-flex items-center justify-center text-[14px] font-black uppercase bg-accent text-white;
-    border-radius: var(--radius-full);
-    width: 50px;
-    height: 50px;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    @apply inline-flex items-center text-[10px] font-bold uppercase px-2.5 py-1 tracking-wider bg-accent text-white;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
   }
 
   .badge-out-of-stock {
@@ -165,25 +166,25 @@
 
   .badge-sale {
     @apply inline-flex items-center text-[11px] font-bold uppercase px-2.5 py-1 tracking-wider bg-green text-white;
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-sm);
   }
 
   .badge-bestseller {
     @apply inline-flex items-center text-[11px] font-bold uppercase px-2.5 py-1 tracking-wider bg-gold text-white;
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-sm);
   }
 
   /* ── Layout ── */
   .container-site {
-    @apply max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-4;
+    @apply max-w-[1320px] mx-auto w-full px-5 sm:px-8 lg:px-10;
   }
 
   .section {
-    @apply py-10 lg:py-14;
+    @apply py-12 lg:py-16;
   }
 
   .section-sm {
-    @apply py-6 lg:py-10;
+    @apply py-8 lg:py-12;
   }
 
   /* ── Prose ── */
@@ -230,8 +231,8 @@
 
   /* ── Trust indicators ── */
   .trust-badge {
-    @apply inline-flex items-center gap-2 text-sm text-text-muted bg-white px-4 py-2.5 font-medium;
-    border-radius: var(--radius-sm);
+    @apply inline-flex items-center gap-2 text-sm text-gray-700 bg-surface px-4 py-2.5 font-medium;
+    border-radius: var(--radius-full);
     border: 1px solid var(--color-border);
   }
 
