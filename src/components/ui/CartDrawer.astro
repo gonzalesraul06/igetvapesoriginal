@@ -1,5 +1,5 @@
 <!-- Cart slide-out drawer - hydrated client-side -->
-<div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col">
+<div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white transform translate-x-full transition-transform duration-300 ease-out flex flex-col border-l border-border">
   <!-- Header -->
   <div class="flex items-center justify-between px-5 py-4 border-b border-border">
     <div class="flex items-center gap-2.5">
@@ -9,7 +9,7 @@
       <h2 class="text-lg font-bold text-text">Your Cart</h2>
       <span id="cart-header-count" class="text-xs font-semibold bg-accent text-white rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
     </div>
-    <button id="cart-close" class="p-2 -mr-2 text-text-muted hover:text-text rounded-lg hover:bg-surface transition-colors" aria-label="Close cart">
+    <button id="cart-close" class="p-2 -mr-2 text-text-muted hover:text-text transition-colors" aria-label="Close cart">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
@@ -42,14 +42,14 @@
       <span>Estimated Total</span>
       <span id="cart-total">$0.00</span>
     </div>
-    <div id="cart-minimum-warning" class="hidden mb-3 p-3 bg-accent/5 border border-accent/20 rounded-xl text-center">
+    <div id="cart-minimum-warning" class="hidden mb-3 p-3 bg-accent/5 border border-accent/20 text-center" style="border-radius: var(--radius-sm);">
       <p class="text-accent text-sm font-medium">Minimum order is $250 AUD. Add <span id="cart-remaining" class="font-bold">$0</span> more to checkout.</p>
     </div>
-    <a id="cart-checkout-btn" href="/checkout" class="btn-accent w-full block text-center py-3.5 text-base rounded-xl">Proceed to Checkout</a>
+    <a id="cart-checkout-btn" href="/checkout" class="btn-primary w-full block text-center py-3">Proceed to Checkout</a>
     <p class="text-center text-xs text-text-muted mt-3">Secure checkout &middot; Australian owned</p>
   </div>
 </div>
-<div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
+<div id="cart-overlay" class="fixed inset-0 bg-white/80 z-40 hidden transition-opacity duration-300"></div>
 
 <script>
   import { cartItems, cartOpen, removeFromCart, updateQuantity, getCartTotal, getCartCount, initCart, MINIMUM_ORDER } from '@utils/cart';
@@ -116,7 +116,7 @@
     const frag = document.createDocumentFragment();
     items.forEach(item => {
       const div = document.createElement('div');
-      div.className = 'cart-item flex gap-3 bg-surface rounded-xl p-3';
+      div.className = 'cart-item flex gap-3 bg-surface p-3';
       div.innerHTML = `
         <img src="${item.image}" alt="${item.name} — ${item.categoryName} Vape" class="w-16 h-16 rounded-lg object-cover flex-shrink-0" />
         <div class="flex-1 min-w-0">

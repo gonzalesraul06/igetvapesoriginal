@@ -349,46 +349,41 @@ const productGroupSchema = {
   <Breadcrumbs items={[{ name: product.name }]} />
 
   <!-- Hero Section -->
-  <div class="mb-12">
-    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-3" style="line-height: 1.1;">
-      {seo.h1} — <span class="text-accent">{seo.h1Accent}</span>
+  <div class="mb-8">
+    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-3" style="line-height: 1.2;">
+      {seo.h1}
     </h1>
-    <div class="flex flex-wrap items-center gap-3 sm:gap-4 text-sm text-text-muted mb-5">
-      <span class="inline-flex items-center gap-1.5 bg-surface px-3 py-1.5 rounded-full border border-border font-medium">{product.puffs.toLocaleString()} Puffs</span>
-      <span class="inline-flex items-center gap-1.5 bg-surface px-3 py-1.5 rounded-full border border-border font-medium">From {formatPrice(product.price)}</span>
-      <span class="inline-flex items-center gap-1.5 bg-surface px-3 py-1.5 rounded-full border border-border font-medium">
-        <span class="w-2 h-2 rounded-full bg-green"></span>
-        {inStockCount} of {product.flavours.length} in stock
+    <p class="text-sm text-text-muted mb-4">{seo.h1Accent}</p>
+    <div class="flex flex-wrap items-center gap-2 text-xs text-text-muted">
+      <span class="inline-flex items-center gap-1 bg-white px-3 py-1.5 border border-border font-medium" style="border-radius: var(--radius-sm);">{product.puffs.toLocaleString()} Puffs</span>
+      <span class="inline-flex items-center gap-1 bg-white px-3 py-1.5 border border-border font-medium" style="border-radius: var(--radius-sm);">From {formatPrice(product.price)}</span>
+      <span class="inline-flex items-center gap-1 bg-white px-3 py-1.5 border border-border font-medium" style="border-radius: var(--radius-sm);">
+        <span class="w-1.5 h-1.5 rounded-full bg-green"></span>
+        {inStockCount} in stock
       </span>
-      {reviewCount > 0 && (
-        <span class="inline-flex items-center gap-1.5 bg-surface px-3 py-1.5 rounded-full border border-border font-medium">
-          <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          {avgRating} ({reviewCount} reviews)
-        </span>
-      )}
       {product.isNew && <span class="badge-new">New</span>}
     </div>
-    <p class="text-text-muted text-base sm:text-lg max-w-4xl" style="line-height: 1.7;">{seo.intro}</p>
+    <p class="text-text-muted text-sm sm:text-base max-w-3xl" style="line-height: 1.7;">{seo.intro}</p>
   </div>
 
   <!-- Quick Spec Highlights -->
   {seo.highlights.length > 0 && (
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
       {seo.highlights.map((h: {icon: string; label: string; value: string}) => (
-        <div class="bg-surface border border-border p-5 text-center transition-all duration-200 hover:border-accent/30" style="border-radius: var(--radius-lg);">
-          <div class="text-2xl mb-1.5">{h.icon}</div>
-          <div class="text-[11px] uppercase tracking-wider font-medium text-text-muted mb-0.5">{h.label}</div>
-          <div class="font-extrabold text-text text-xl">{h.value}</div>
+        <div class="bg-white border border-border p-4 text-center" style="border-radius: var(--radius-md);">
+          <div class="text-xl mb-1">{h.icon}</div>
+          <div class="text-[10px] uppercase tracking-wider font-medium text-text-muted">{h.label}</div>
+          <div class="font-bold text-text text-lg">{h.value}</div>
         </div>
       ))}
     </div>
   )}
 
   <!-- Product Grid -->
-  <div class="mb-14">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-xl sm:text-2xl font-bold">All {product.flavours.length} {product.name} Flavours</h2>
-      <span class="text-sm text-text-muted hidden sm:block">{inStockCount} available</span>
+  <div class="mb-10">
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-lg sm:text-xl font-bold">All {product.flavours.length} {product.name} Flavours</h2>
+      <span class="text-xs text-text-muted hidden sm:block">{inStockCount} available</span>
     </div>
     <ProductGrid
       flavours={product.flavours}
@@ -399,21 +394,21 @@ const productGroupSchema = {
 
   <!-- Buying Guide -->
   {seo.buyingGuide && (
-    <div class="bg-surface p-6 sm:p-8 lg:p-10 border border-border mb-14" style="border-radius: var(--radius-xl);">
-      <h2 class="text-xl sm:text-2xl font-bold mb-4">Buying Guide — {product.name}</h2>
-      <p class="text-text-muted text-sm sm:text-base" style="line-height: 1.75;">{seo.buyingGuide}</p>
+    <div class="bg-surface p-5 sm:p-6 border border-border mb-10" style="border-radius: var(--radius-md);">
+      <h2 class="text-lg sm:text-xl font-bold mb-3">Buying Guide — {product.name}</h2>
+      <p class="text-text-muted text-sm" style="line-height: 1.75;">{seo.buyingGuide}</p>
     </div>
   )}
 
   <!-- Key Features -->
   {seo.features.length > 0 && (
-    <div class="mb-14">
-      <h2 class="text-xl sm:text-2xl font-bold mb-6">Key Features</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
+    <div class="mb-10">
+      <h2 class="text-lg sm:text-xl font-bold mb-4">Key Features</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
         {seo.features.map((f: {title: string; desc: string}) => (
-          <div class="bg-surface p-6 border border-border transition-all duration-200 hover:border-accent/30" style="border-radius: var(--radius-lg);">
-            <h3 class="font-bold text-text mb-2.5">{f.title}</h3>
-            <p class="text-text-muted text-sm" style="line-height: 1.7;">{f.desc}</p>
+          <div class="bg-white p-5 border border-border" style="border-radius: var(--radius-md);">
+            <h3 class="font-bold text-text text-sm mb-2">{f.title}</h3>
+            <p class="text-text-muted text-xs" style="line-height: 1.7;">{f.desc}</p>
           </div>
         ))}
       </div>
@@ -422,16 +417,16 @@ const productGroupSchema = {
 
   <!-- FAQ Section -->
   {seo.faqs.length > 0 && (
-    <div class="mb-14">
-      <h2 class="text-xl sm:text-2xl font-bold mb-6">Frequently Asked Questions — {product.name}</h2>
-      <div class="space-y-2.5">
+    <div class="mb-10">
+      <h2 class="text-lg sm:text-xl font-bold mb-4">Frequently Asked Questions — {product.name}</h2>
+      <div class="space-y-2">
         {seo.faqs.map((faq: {q: string; a: string}) => (
-          <details class="bg-white border border-border group hover:border-muted transition-all duration-200" style="border-radius: var(--radius-lg);">
-            <summary class="p-5 lg:p-6 cursor-pointer flex items-center justify-between font-semibold hover:text-accent transition-colors duration-200 list-none text-sm">
+          <details class="bg-white border border-border group" style="border-radius: var(--radius-md);">
+            <summary class="p-4 cursor-pointer flex items-center justify-between font-semibold hover:text-accent transition-colors duration-200 list-none text-sm">
               <span class="pr-6">{faq.q}</span>
-              <svg class="w-5 h-5 text-text-muted group-open:rotate-180 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              <svg class="w-4 h-4 text-text-muted group-open:rotate-180 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </summary>
-            <div class="px-5 pb-5 lg:px-6 lg:pb-6 text-text-muted text-sm border-t border-border pt-4" style="line-height: 1.7;">
+            <div class="px-4 pb-4 text-text-muted text-sm border-t border-border pt-3" style="line-height: 1.7;">
               {faq.a}
             </div>
           </details>
@@ -442,39 +437,39 @@ const productGroupSchema = {
 
   <!-- Related Blog Links -->
   {seo.relatedLinks.length > 0 && (
-    <div class="flex flex-wrap items-center gap-3 mb-14">
-      <span class="text-sm text-text-muted py-2 font-medium">Related Guides:</span>
+    <div class="flex flex-wrap items-center gap-2 mb-10">
+      <span class="text-xs text-text-muted py-2 font-medium">Related Guides:</span>
       {seo.relatedLinks.map((link: {text: string; href: string}) => (
-        <a href={link.href} class="text-sm bg-surface border border-border text-accent hover:border-accent/50 px-4 py-2.5 transition-all duration-200 font-medium" style="border-radius: var(--radius-full);">{link.text}</a>
+        <a href={link.href} class="text-xs bg-white border border-border text-accent hover:border-text/30 px-3 py-2 transition-all duration-200 font-medium" style="border-radius: var(--radius-sm);">{link.text}</a>
       ))}
     </div>
   )}
 
   <!-- SEO Content Block -->
   {seo.seoContent && (
-    <div class="bg-surface p-6 sm:p-8 lg:p-10 border border-border mb-14
-      [&_p]:text-text-muted [&_p]:mb-4 [&_p:last-child]:mb-0
+    <div class="bg-surface p-5 sm:p-6 border border-border mb-10
+      [&_p]:text-text-muted [&_p]:mb-3 [&_p:last-child]:mb-0 [&_p]:text-sm
       [&_strong]:text-text
       [&_a]:text-accent [&_a]:underline [&_a]:hover:text-text"
-      style="border-radius: var(--radius-xl); line-height: 1.75;"
+      style="border-radius: var(--radius-md); line-height: 1.75;"
       set:html={seo.seoContent}
     />
   )}
 
   <!-- Explore Other Models -->
-  <div class="mb-14">
-    <h2 class="text-xl sm:text-2xl font-bold mb-6">Explore Other Models</h2>
+  <div class="mb-10">
+    <h2 class="text-lg sm:text-xl font-bold mb-4">Explore Other Models</h2>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
       {productCategories.filter(c => c.slug !== product.slug && c.slug !== 'mix-and-match').map(c => (
-        <a href={c.href} class="group bg-surface border border-border hover:border-accent/40 p-4 text-center transition-all duration-200" style="border-radius: var(--radius-lg);">
-          <span class="block text-xs sm:text-sm font-semibold group-hover:text-accent transition-colors duration-200 leading-tight">
+        <a href={c.href} class="group bg-white border border-border hover:border-text/30 p-3 text-center transition-colors duration-200" style="border-radius: var(--radius-md);">
+          <span class="block text-xs font-semibold group-hover:text-accent transition-colors duration-200 leading-tight">
             {c.name.replace(/\d+\sPUFFS|SAVE$/g, '').trim()}
           </span>
         </a>
       ))}
-      <a href="/mix-and-match" class="group bg-accent-light border border-accent/20 hover:border-accent p-4 text-center transition-all duration-200" style="border-radius: var(--radius-lg);">
-        <span class="block text-xs sm:text-sm font-semibold text-accent group-hover:text-accent-dark transition-colors duration-200 leading-tight">
-          Mix & Match Deals
+      <a href="/mix-and-match" class="group bg-white border border-border hover:border-text/30 p-3 text-center transition-colors duration-200" style="border-radius: var(--radius-md);">
+        <span class="block text-xs font-semibold text-accent group-hover:text-accent-dark transition-colors duration-200 leading-tight">
+          Mix & Match
         </span>
       </a>
     </div>
@@ -482,6 +477,6 @@ const productGroupSchema = {
 
   <!-- Back to all products -->
   <div class="text-center pb-4">
-    <a href="/" class="btn-secondary py-3.5 px-8">&larr; Back to All Products</a>
+    <a href="/" class="btn-secondary py-2.5 px-6 text-sm">&larr; Back to All Products</a>
   </div>
 </BaseLayout>

@@ -21,50 +21,50 @@ const itemId = `${categorySlug}-${slug}`;
 
 <div class="card group" data-in-stock={inStock}>
   <!-- Image -->
-  <a href={productUrl} class="block relative overflow-hidden aspect-square bg-surface">
+  <a href={productUrl} class="block relative overflow-hidden aspect-square bg-white">
     <img
       src={image}
       alt={`${name} — ${categoryName} Disposable Vape Australia`}
-      class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+      class="w-full h-full object-contain p-3 transition-transform duration-500 ease-out group-hover:scale-105"
       loading="lazy"
       width="300"
       height="300"
     />
-    {isNew && <span class="badge-new absolute top-3 left-3 text-[10px]" style="box-shadow: 0 2px 8px rgba(233,69,96,0.3);">New</span>}
+    {isNew && <span class="badge-new absolute top-2 left-2">{isNew ? 'New' : ''}</span>}
     {!inStock && (
-      <div class="absolute inset-0 bg-white/85 backdrop-blur-sm flex items-center justify-center">
+      <div class="absolute inset-0 bg-white/85 flex items-center justify-center">
         <span class="badge-out-of-stock text-xs">Out of Stock</span>
       </div>
     )}
   </a>
 
   <!-- Info -->
-  <div class="p-3.5 sm:p-4">
+  <div class="p-3 sm:p-3.5 border-t border-border">
     <a href={productUrl} class="block">
       <h3 class="text-xs sm:text-sm font-semibold truncate text-text group-hover:text-accent transition-colors duration-200 leading-tight">{name}</h3>
     </a>
-    <div class="flex items-center justify-between mt-2.5">
-      <span class="text-base sm:text-lg font-bold text-accent tracking-tight">{formatPrice(price)}</span>
+    <div class="flex items-center justify-between mt-2">
+      <span class="text-base font-bold text-text tracking-tight">{formatPrice(price)}</span>
       <StarRating rating={rating} size="sm" />
     </div>
 
     {inStock ? (
-      <div class="mt-3.5 flex items-center gap-2">
-        <div class="flex items-center border border-border rounded-lg overflow-hidden bg-surface">
+      <div class="mt-3 flex items-center gap-2">
+        <div class="flex items-center border border-border overflow-hidden bg-surface" style="border-radius: var(--radius-sm);">
           <button
-            class="qty-dec w-8 h-8 flex items-center justify-center text-text-muted hover:text-text hover:bg-white transition-colors text-sm font-medium"
+            class="qty-dec w-7 h-7 flex items-center justify-center text-text-muted hover:text-text hover:bg-white transition-colors text-sm font-medium"
             data-item-id={itemId}
             aria-label="Decrease quantity"
           >&minus;</button>
-          <span class="qty-val w-8 h-8 flex items-center justify-center text-xs font-semibold text-text bg-white" data-item-id={itemId}>1</span>
+          <span class="qty-val w-7 h-7 flex items-center justify-center text-xs font-semibold text-text bg-white" data-item-id={itemId}>1</span>
           <button
-            class="qty-inc w-8 h-8 flex items-center justify-center text-text-muted hover:text-text hover:bg-white transition-colors text-sm font-medium"
+            class="qty-inc w-7 h-7 flex items-center justify-center text-text-muted hover:text-text hover:bg-white transition-colors text-sm font-medium"
             data-item-id={itemId}
             aria-label="Increase quantity"
           >+</button>
         </div>
         <button
-          class="add-to-cart flex-1 btn-accent py-2 text-xs"
+          class="add-to-cart flex-1 btn-primary py-2 text-xs"
           data-item-id={itemId}
           data-category-slug={categorySlug}
           data-flavour-slug={slug}
@@ -77,7 +77,7 @@ const itemId = `${categorySlug}-${slug}`;
         </button>
       </div>
     ) : (
-      <button disabled class="mt-3.5 w-full py-2 text-xs bg-surface text-text-muted/50 rounded-lg cursor-not-allowed font-medium border border-border">
+      <button disabled class="mt-3 w-full py-2 text-xs bg-surface text-text-muted/50 cursor-not-allowed font-medium border border-border" style="border-radius: var(--radius-sm);">
         Sold Out
       </button>
     )}
