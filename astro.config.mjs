@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { fileURLToPath } from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
@@ -13,7 +14,17 @@ export default defineConfig({
     }),
   ],
   vite: {
+    build: {
+      rollupOptions: {
+        input: '@astrojs/cloudflare/entrypoints/server',
+      },
+    },
     plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        cookie: fileURLToPath(new URL('./src/shims/cookie.ts', import.meta.url)),
+      },
+    },
   },
   redirects: {
     '/iget': '/',

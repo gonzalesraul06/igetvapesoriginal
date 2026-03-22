@@ -82,15 +82,15 @@
   }
 
   .badge-new {
-    @apply badge bg-accent text-white;
+    @apply inline-flex items-center text-[11px] font-bold uppercase px-2.5 py-1 rounded-md tracking-wide bg-accent text-white;
   }
 
   .badge-out-of-stock {
-    @apply badge bg-gray-100 text-gray-500;
+    @apply inline-flex items-center text-[11px] font-bold uppercase px-2.5 py-1 rounded-md tracking-wide bg-gray-100 text-gray-500;
   }
 
   .badge-sale {
-    @apply badge bg-green-500 text-white;
+    @apply inline-flex items-center text-[11px] font-bold uppercase px-2.5 py-1 rounded-md tracking-wide bg-green-500 text-white;
   }
 
   /* Container utility */
