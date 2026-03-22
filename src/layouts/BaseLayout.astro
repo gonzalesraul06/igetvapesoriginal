@@ -23,7 +23,7 @@ const { title, description, image, canonical, type, noindex, keywords, published
 ---
 
 <!doctype html>
-<html lang="en-AU">
+<html lang="en-AU" class="scroll-smooth">
   <head>
     <SEOHead
       title={title}
@@ -37,11 +37,11 @@ const { title, description, image, canonical, type, noindex, keywords, published
       modifiedTime={modifiedTime}
     />
   </head>
-  <body>
+  <body class="antialiased">
     <AgeGateModal />
     <div class="min-h-screen flex flex-col">
       <Header />
-      <main class="flex-1 w-full container-site pb-20 lg:pb-0">
+      <main class="flex-1 w-full container-site pb-20 lg:pb-0" style="animation: fadeIn 0.3s ease-out;">
         <slot />
       </main>
       <Footer />

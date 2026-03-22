@@ -349,43 +349,47 @@ const productGroupSchema = {
   <Breadcrumbs items={[{ name: product.name }]} />
 
   <!-- Hero Section -->
-  <div class="mb-10">
-    <h1 class="text-3xl lg:text-4xl font-extrabold mb-2">
+  <div class="mb-12">
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-3" style="line-height: 1.1;">
       {seo.h1} — <span class="text-accent">{seo.h1Accent}</span>
     </h1>
-    <div class="flex flex-wrap items-center gap-4 text-sm text-text-muted mb-4">
-      <span>{product.puffs.toLocaleString()} Puffs</span>
-      <span>•</span>
-      <span>From {formatPrice(product.price)}</span>
-      <span>•</span>
-      <span>{inStockCount} of {product.flavours.length} flavours in stock</span>
+    <div class="flex flex-wrap items-center gap-3 sm:gap-4 text-sm text-text-muted mb-5">
+      <span class="inline-flex items-center gap-1.5 bg-surface px-3 py-1.5 rounded-full border border-border font-medium">{product.puffs.toLocaleString()} Puffs</span>
+      <span class="inline-flex items-center gap-1.5 bg-surface px-3 py-1.5 rounded-full border border-border font-medium">From {formatPrice(product.price)}</span>
+      <span class="inline-flex items-center gap-1.5 bg-surface px-3 py-1.5 rounded-full border border-border font-medium">
+        <span class="w-2 h-2 rounded-full bg-green"></span>
+        {inStockCount} of {product.flavours.length} in stock
+      </span>
       {reviewCount > 0 && (
-        <>
-          <span>•</span>
-          <span>★ {avgRating} ({reviewCount} reviews)</span>
-        </>
+        <span class="inline-flex items-center gap-1.5 bg-surface px-3 py-1.5 rounded-full border border-border font-medium">
+          <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          {avgRating} ({reviewCount} reviews)
+        </span>
       )}
       {product.isNew && <span class="badge-new">New</span>}
     </div>
-    <p class="text-text-muted text-lg leading-relaxed max-w-4xl">{seo.intro}</p>
+    <p class="text-text-muted text-base sm:text-lg max-w-4xl" style="line-height: 1.7;">{seo.intro}</p>
   </div>
 
   <!-- Quick Spec Highlights -->
   {seo.highlights.length > 0 && (
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12">
       {seo.highlights.map((h: {icon: string; label: string; value: string}) => (
-        <div class="bg-surface rounded-xl p-4 text-center border border-border">
-          <div class="text-2xl mb-1">{h.icon}</div>
-          <div class="text-xs text-text-muted">{h.label}</div>
-          <div class="font-bold text-text text-lg">{h.value}</div>
+        <div class="bg-surface border border-border p-5 text-center transition-all duration-200 hover:border-accent/30" style="border-radius: var(--radius-lg);">
+          <div class="text-2xl mb-1.5">{h.icon}</div>
+          <div class="text-[11px] uppercase tracking-wider font-medium text-text-muted mb-0.5">{h.label}</div>
+          <div class="font-extrabold text-text text-xl">{h.value}</div>
         </div>
       ))}
     </div>
   )}
 
   <!-- Product Grid -->
-  <div class="mb-10">
-    <h2 class="text-xl font-bold mb-5">All {product.flavours.length} {product.name} Flavours</h2>
+  <div class="mb-14">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl sm:text-2xl font-bold">All {product.flavours.length} {product.name} Flavours</h2>
+      <span class="text-sm text-text-muted hidden sm:block">{inStockCount} available</span>
+    </div>
     <ProductGrid
       flavours={product.flavours}
       categorySlug={product.slug}
@@ -395,21 +399,21 @@ const productGroupSchema = {
 
   <!-- Buying Guide -->
   {seo.buyingGuide && (
-    <div class="bg-surface rounded-2xl p-6 lg:p-8 border border-border mb-10">
-      <h2 class="text-xl font-bold mb-3">Buying Guide — {product.name}</h2>
-      <p class="text-text-muted leading-relaxed">{seo.buyingGuide}</p>
+    <div class="bg-surface p-6 sm:p-8 lg:p-10 border border-border mb-14" style="border-radius: var(--radius-xl);">
+      <h2 class="text-xl sm:text-2xl font-bold mb-4">Buying Guide — {product.name}</h2>
+      <p class="text-text-muted text-sm sm:text-base" style="line-height: 1.75;">{seo.buyingGuide}</p>
     </div>
   )}
 
   <!-- Key Features -->
   {seo.features.length > 0 && (
-    <div class="mb-10">
-      <h2 class="text-xl font-bold mb-5">Key Features</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="mb-14">
+      <h2 class="text-xl sm:text-2xl font-bold mb-6">Key Features</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
         {seo.features.map((f: {title: string; desc: string}) => (
-          <div class="bg-surface rounded-xl p-5 border border-border">
-            <h3 class="font-bold text-text mb-2">{f.title}</h3>
-            <p class="text-text-muted text-sm leading-relaxed">{f.desc}</p>
+          <div class="bg-surface p-6 border border-border transition-all duration-200 hover:border-accent/30" style="border-radius: var(--radius-lg);">
+            <h3 class="font-bold text-text mb-2.5">{f.title}</h3>
+            <p class="text-text-muted text-sm" style="line-height: 1.7;">{f.desc}</p>
           </div>
         ))}
       </div>
@@ -418,16 +422,16 @@ const productGroupSchema = {
 
   <!-- FAQ Section -->
   {seo.faqs.length > 0 && (
-    <div class="mb-10">
-      <h2 class="text-xl font-bold mb-5">Frequently Asked Questions — {product.name}</h2>
-      <div class="space-y-3">
+    <div class="mb-14">
+      <h2 class="text-xl sm:text-2xl font-bold mb-6">Frequently Asked Questions — {product.name}</h2>
+      <div class="space-y-2.5">
         {seo.faqs.map((faq: {q: string; a: string}) => (
-          <details class="bg-surface rounded-xl border border-border group">
-            <summary class="p-5 cursor-pointer flex items-center justify-between font-semibold hover:text-accent transition-colors list-none text-sm">
-              <span>{faq.q}</span>
-              <svg class="w-5 h-5 text-text-muted group-open:rotate-180 transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          <details class="bg-white border border-border group hover:border-muted transition-all duration-200" style="border-radius: var(--radius-lg);">
+            <summary class="p-5 lg:p-6 cursor-pointer flex items-center justify-between font-semibold hover:text-accent transition-colors duration-200 list-none text-sm">
+              <span class="pr-6">{faq.q}</span>
+              <svg class="w-5 h-5 text-text-muted group-open:rotate-180 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </summary>
-            <div class="px-5 pb-5 text-text-muted text-sm leading-relaxed border-t border-border/50 pt-4">
+            <div class="px-5 pb-5 lg:px-6 lg:pb-6 text-text-muted text-sm border-t border-border pt-4" style="line-height: 1.7;">
               {faq.a}
             </div>
           </details>
@@ -438,37 +442,38 @@ const productGroupSchema = {
 
   <!-- Related Blog Links -->
   {seo.relatedLinks.length > 0 && (
-    <div class="flex flex-wrap gap-3 mb-10">
-      <span class="text-sm text-text-muted py-2">Related Guides:</span>
+    <div class="flex flex-wrap items-center gap-3 mb-14">
+      <span class="text-sm text-text-muted py-2 font-medium">Related Guides:</span>
       {seo.relatedLinks.map((link: {text: string; href: string}) => (
-        <a href={link.href} class="text-sm bg-surface border border-border text-accent hover:border-accent px-4 py-2 rounded-full transition-colors">{link.text}</a>
+        <a href={link.href} class="text-sm bg-surface border border-border text-accent hover:border-accent/50 px-4 py-2.5 transition-all duration-200 font-medium" style="border-radius: var(--radius-full);">{link.text}</a>
       ))}
     </div>
   )}
 
   <!-- SEO Content Block -->
   {seo.seoContent && (
-    <div class="bg-surface rounded-2xl p-6 lg:p-8 border border-border mb-10
-      [&_p]:text-text-muted [&_p]:leading-relaxed [&_p]:mb-4 [&_p:last-child]:mb-0
+    <div class="bg-surface p-6 sm:p-8 lg:p-10 border border-border mb-14
+      [&_p]:text-text-muted [&_p]:mb-4 [&_p:last-child]:mb-0
       [&_strong]:text-text
       [&_a]:text-accent [&_a]:underline [&_a]:hover:text-text"
+      style="border-radius: var(--radius-xl); line-height: 1.75;"
       set:html={seo.seoContent}
     />
   )}
 
   <!-- Explore Other Models -->
-  <div class="mb-10">
-    <h2 class="text-xl font-bold mb-5">Explore Other Models</h2>
+  <div class="mb-14">
+    <h2 class="text-xl sm:text-2xl font-bold mb-6">Explore Other Models</h2>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
       {productCategories.filter(c => c.slug !== product.slug && c.slug !== 'mix-and-match').map(c => (
-        <a href={c.href} class="group bg-surface rounded-xl border border-border hover:border-accent/50 p-4 text-center transition-all">
-          <span class="block text-xs sm:text-sm font-semibold group-hover:text-accent transition-colors leading-tight">
+        <a href={c.href} class="group bg-surface border border-border hover:border-accent/40 p-4 text-center transition-all duration-200" style="border-radius: var(--radius-lg);">
+          <span class="block text-xs sm:text-sm font-semibold group-hover:text-accent transition-colors duration-200 leading-tight">
             {c.name.replace(/\d+\sPUFFS|SAVE$/g, '').trim()}
           </span>
         </a>
       ))}
-      <a href="/mix-and-match" class="group bg-accent/10 rounded-xl border border-accent/30 hover:border-accent p-4 text-center transition-all">
-        <span class="block text-xs sm:text-sm font-semibold text-accent group-hover:text-accent-dark transition-colors leading-tight">
+      <a href="/mix-and-match" class="group bg-accent-light border border-accent/20 hover:border-accent p-4 text-center transition-all duration-200" style="border-radius: var(--radius-lg);">
+        <span class="block text-xs sm:text-sm font-semibold text-accent group-hover:text-accent-dark transition-colors duration-200 leading-tight">
           Mix & Match Deals
         </span>
       </a>
@@ -476,7 +481,7 @@ const productGroupSchema = {
   </div>
 
   <!-- Back to all products -->
-  <div class="text-center">
-    <a href="/" class="btn-secondary">← Back to All Products</a>
+  <div class="text-center pb-4">
+    <a href="/" class="btn-secondary py-3.5 px-8">&larr; Back to All Products</a>
   </div>
 </BaseLayout>

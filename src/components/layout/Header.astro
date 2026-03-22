@@ -4,16 +4,16 @@ const currentPath = Astro.url.pathname;
 ---
 
 <!-- Announcement bar -->
-<div class="bg-text text-white text-center py-2 text-xs sm:text-sm font-medium tracking-wide">
+<div class="bg-dark text-white text-center py-2.5 text-xs sm:text-sm font-medium tracking-wide">
   <div class="container-site flex items-center justify-center gap-2">
-    <svg class="w-4 h-4 text-accent hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-    <span>Free shipping on orders over <strong>$300 AUD</strong> &mdash; Australia-wide delivery</span>
+    <svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    <span>Free shipping on orders over <strong class="text-accent">$300 AUD</strong> &mdash; Fast Australia-wide delivery</span>
   </div>
 </div>
 
-<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-border shadow-sm">
+<header class="sticky top-0 z-40 bg-white/98 backdrop-blur-lg border-b border-border" style="box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
   <!-- Main header row -->
-  <div class="container-site py-3 lg:py-4 flex items-center justify-between gap-4">
+  <div class="container-site py-3.5 lg:py-4 flex items-center justify-between gap-6">
     <!-- Mobile menu toggle -->
     <div class="flex items-center lg:hidden">
       <button id="mobile-menu-toggle" class="p-2 -ml-2 text-text hover:text-accent rounded-lg hover:bg-surface transition-colors" aria-label="Toggle menu">
@@ -24,40 +24,39 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Logo -->
-    <a href="/" class="flex-shrink-0 flex items-center gap-2 group mx-auto lg:mx-0">
-      <span class="text-text font-extrabold text-xl lg:text-2xl tracking-tight group-hover:text-accent transition-colors">
+    <a href="/" class="flex-shrink-0 flex items-center gap-2.5 group mx-auto lg:mx-0">
+      <span class="text-text font-extrabold text-xl lg:text-2xl tracking-tight group-hover:text-accent transition-colors duration-200">
         IGET<span class="text-accent">-</span>VAPES
       </span>
-      <span class="hidden sm:inline-block text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted border-l border-border pl-2">Australia</span>
+      <span class="hidden sm:inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted border-l border-border pl-2.5 leading-none">Australia</span>
     </a>
 
     <!-- Desktop nav links -->
-    <nav class="hidden lg:flex items-center gap-6" aria-label="Main navigation">
+    <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">
       {topMenuLinks.map(link => (
         <a
           href={link.href}
           class:list={[
-            'text-sm font-medium transition-colors relative py-1',
+            'px-3 py-2 text-sm font-medium transition-all duration-200 rounded-lg relative',
             currentPath === link.href
-              ? 'text-accent'
-              : 'text-text-muted hover:text-text',
+              ? 'text-accent bg-accent-light'
+              : 'text-text-muted hover:text-text hover:bg-surface',
           ]}
         >
           {link.name}
-          {currentPath === link.href && <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full"></span>}
         </a>
       ))}
     </nav>
 
     <!-- Right actions -->
     <div class="flex items-center gap-1 lg:gap-2">
-      <a href="/account" class="hidden lg:flex btn-ghost p-2" aria-label="My Account">
+      <a href="/account" class="hidden lg:flex p-2.5 text-text-muted hover:text-text rounded-lg hover:bg-surface transition-all duration-200" aria-label="My Account">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
         </svg>
       </a>
 
-      <button id="cart-toggle" class="relative p-2 text-text hover:text-accent rounded-lg hover:bg-surface transition-colors" aria-label="Shopping Cart">
+      <button id="cart-toggle" class="relative p-2.5 text-text-muted hover:text-text rounded-lg hover:bg-surface transition-all duration-200" aria-label="Shopping Cart">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
         </svg>
@@ -67,13 +66,13 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Product categories nav — desktop -->
-  <nav class="hidden lg:block border-t border-border bg-surface/60" aria-label="Product categories">
-    <div class="container-site flex items-center justify-center gap-1 py-0">
+  <nav class="hidden lg:block border-t border-border/60 bg-surface/40" aria-label="Product categories">
+    <div class="container-site flex items-center justify-center gap-0 py-0">
       {productCategories.map(cat => (
         <a
           href={cat.href}
           class:list={[
-            'px-4 py-3 text-[13px] font-semibold tracking-wide transition-all relative group',
+            'px-4 py-3 text-[13px] font-semibold tracking-wide transition-all duration-200 relative group',
             currentPath.startsWith(cat.href)
               ? 'text-accent'
               : 'text-text-muted hover:text-text',
@@ -81,10 +80,10 @@ const currentPath = Astro.url.pathname;
         >
           {cat.name.replace(/\d+\sPUFFS|SAVE$/, '').trim()}
           {cat.name.match(/\d+\sPUFFS|SAVE/) && (
-            <span class="text-[10px] font-normal text-text-muted ml-1">{cat.name.match(/\d+\sPUFFS|SAVE/)?.[0]}</span>
+            <span class="text-[10px] font-normal text-text-light ml-1">{cat.name.match(/\d+\sPUFFS|SAVE/)?.[0]}</span>
           )}
           {currentPath.startsWith(cat.href) && <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-accent rounded-full"></span>}
-          <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-accent rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+          <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-accent rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
         </a>
       ))}
     </div>
@@ -92,56 +91,57 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <!-- Mobile sidebar overlay -->
-<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[45] hidden lg:hidden backdrop-blur-sm transition-opacity opacity-0"></div>
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[45] hidden lg:hidden backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
 
 <!-- Mobile sidebar -->
-<nav id="mobile-sidebar-nav" class="fixed top-0 left-0 bottom-0 z-[50] w-[85%] max-w-sm bg-white transform -translate-x-full transition-transform duration-300 flex flex-col lg:hidden shadow-2xl">
-  <div class="flex items-center justify-between p-4 border-b border-border">
-    <span class="font-extrabold text-text text-lg">IGET<span class="text-accent">-</span>VAPES</span>
-    <button id="close-mobile-menu" class="p-2 text-text-muted hover:text-text rounded-lg hover:bg-surface transition-colors">
+<nav id="mobile-sidebar-nav" class="fixed top-0 left-0 bottom-0 z-[50] w-[85%] max-w-sm bg-white transform -translate-x-full transition-transform duration-300 ease-out flex flex-col lg:hidden" style="box-shadow: 8px 0 32px rgba(0,0,0,0.08);">
+  <div class="flex items-center justify-between p-5 border-b border-border">
+    <span class="font-extrabold text-text text-lg tracking-tight">IGET<span class="text-accent">-</span>VAPES</span>
+    <button id="close-mobile-menu" class="p-2 text-text-muted hover:text-text rounded-lg hover:bg-surface transition-colors" aria-label="Close menu">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 
-  <div class="flex-1 overflow-y-auto">
+  <div class="flex-1 overflow-y-auto overscroll-contain">
     <!-- Product categories -->
-    <div class="p-4">
-      <p class="text-[11px] font-semibold uppercase tracking-widest text-text-muted mb-3">Shop by Category</p>
-      <ul class="space-y-1">
+    <div class="p-5 pb-3">
+      <p class="text-[11px] font-bold uppercase tracking-[0.15em] text-text-muted mb-3">Shop by Category</p>
+      <ul class="space-y-0.5">
         {productCategories.map(cat => (
           <li>
             <a
               href={cat.href}
               class:list={[
-                'flex items-center justify-between py-2.5 px-3 rounded-lg text-sm font-medium transition-colors',
+                'flex items-center justify-between py-3 px-3.5 rounded-xl text-sm font-medium transition-all duration-200',
                 currentPath.startsWith(cat.href)
-                  ? 'bg-accent/10 text-accent'
+                  ? 'bg-accent-light text-accent'
                   : 'text-text hover:bg-surface',
               ]}
             >
               <span>{cat.name}</span>
-              <svg class="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              <svg class="w-4 h-4 text-text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>
           </li>
         ))}
       </ul>
     </div>
 
-    <div class="h-px bg-border mx-4"></div>
+    <div class="h-px bg-border mx-5"></div>
 
     <!-- Page links -->
-    <div class="p-4">
-      <ul class="space-y-1">
+    <div class="p-5 pb-3">
+      <p class="text-[11px] font-bold uppercase tracking-[0.15em] text-text-muted mb-3">Pages</p>
+      <ul class="space-y-0.5">
         {topMenuLinks.map(link => (
           <li>
             <a
               href={link.href}
               class:list={[
-                'block py-2.5 px-3 rounded-lg text-sm font-medium transition-colors',
+                'block py-3 px-3.5 rounded-xl text-sm font-medium transition-all duration-200',
                 currentPath === link.href
-                  ? 'bg-accent/10 text-accent'
+                  ? 'bg-accent-light text-accent'
                   : 'text-text-muted hover:bg-surface hover:text-text',
               ]}
             >
@@ -152,11 +152,11 @@ const currentPath = Astro.url.pathname;
       </ul>
     </div>
 
-    <div class="h-px bg-border mx-4"></div>
+    <div class="h-px bg-border mx-5"></div>
 
     <!-- Account -->
-    <div class="p-4">
-      <a href="/account" class="flex items-center gap-3 py-2.5 px-3 rounded-lg text-sm font-semibold text-text hover:bg-surface transition-colors">
+    <div class="p-5">
+      <a href="/account" class="flex items-center gap-3 py-3 px-3.5 rounded-xl text-sm font-semibold text-text hover:bg-surface transition-colors">
         <svg class="w-5 h-5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
         Account / Log In
       </a>
