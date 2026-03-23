@@ -39,25 +39,25 @@ const blogSchema = {
   <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
 
   <!-- Header -->
-  <section class="mb-10">
-    <h1 class="text-3xl lg:text-4xl font-extrabold mb-4 tracking-tight">
+  <section class="page-header">
+    <h1 class="text-3xl lg:text-4xl font-extrabold mb-4 tracking-tight max-w-4xl">
       IGET Vapes Blog — <span class="text-accent">Guides, Reviews & Tips</span>
     </h1>
-    <p class="text-text-muted text-lg max-w-3xl">
+    <p class="text-text-muted text-base sm:text-lg max-w-3xl">
       Your trusted source for vaping information in Australia. Expert guides on IGET &amp; Alibarbar vapes, flavour rankings, buying advice, and everything you need to make informed vaping decisions.
     </p>
   </section>
 
   <!-- Category Filter -->
-  <div class="flex flex-wrap gap-2 mb-8">
-    <button class="blog-filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-accent text-white transition-colors" data-category="all">All Posts</button>
+  <div class="mb-8 flex flex-wrap gap-2">
+    <button class="blog-filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-accent text-white transition-colors" data-category="all" aria-pressed="true">All Posts</button>
     {categories.map(cat => (
-      <button class="blog-filter-btn px-4 py-2 rounded-full text-sm font-medium bg-surface border border-border text-text-muted hover:border-accent hover:text-text transition-colors" data-category={cat}>{cat}</button>
+      <button class="blog-filter-btn px-4 py-2 rounded-full text-sm font-medium bg-surface border border-border text-text-muted hover:border-accent hover:text-text transition-colors" data-category={cat} aria-pressed="false">{cat}</button>
     ))}
   </div>
 
   <!-- Blog Grid -->
-  <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
+  <div id="blog-grid" class="mb-12 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
     {blogPosts.map((post, idx) => (
       <article
         class="blog-card group"
@@ -74,14 +74,14 @@ const blogSchema = {
               height="225"
             />
           </div>
-          <div class="p-5">
+          <div class="flex h-full flex-col p-5">
             <div class="flex items-center gap-3 mb-3">
               <span class="text-xs font-medium text-accent bg-accent/10 px-2.5 py-1 rounded-full">{post.category}</span>
               <span class="text-xs text-text-muted">{post.readTime}</span>
             </div>
-            <h2 class="text-lg font-bold mb-2 group-hover:text-accent transition-colors line-clamp-2">{post.title}</h2>
+            <h2 class="text-lg font-bold mb-2 group-hover:text-accent transition-colors line-clamp-2 min-h-[3.2rem]">{post.title}</h2>
             <p class="text-text-muted text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>
-            <div class="flex items-center justify-between mt-4 pt-3 border-t border-border/50">
+            <div class="mt-auto flex items-center justify-between pt-4 border-t border-border/50">
               <span class="text-xs text-text-muted">{new Date(post.date).toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
               <span class="text-accent text-sm font-medium group-hover:underline">Read More →</span>
             </div>
@@ -115,9 +115,11 @@ const blogSchema = {
       filterBtns.forEach(b => {
         b.classList.remove('active', 'bg-accent', 'text-white');
         b.classList.add('bg-surface', 'border', 'border-border', 'text-text-muted');
+        b.setAttribute('aria-pressed', 'false');
       });
       btn.classList.add('active', 'bg-accent', 'text-white');
       btn.classList.remove('bg-surface', 'border', 'border-border', 'text-text-muted');
+      btn.setAttribute('aria-pressed', 'true');
 
       const category = btn.getAttribute('data-category');
       cards.forEach(card => {

@@ -15,7 +15,7 @@ const currentPath = Astro.url.pathname;
   <div class="container-site grid grid-cols-[auto_1fr_auto] items-center gap-4 py-3.5 lg:grid-cols-[auto_1fr_auto] lg:gap-6 lg:py-5">
     <!-- Mobile menu toggle -->
     <div class="flex items-center lg:hidden">
-      <button id="mobile-menu-toggle" class="p-2 -ml-2 text-text hover:text-accent rounded-lg hover:bg-surface transition-colors" aria-label="Toggle menu">
+      <button id="mobile-menu-toggle" class="p-2 -ml-2 text-text hover:text-accent rounded-lg hover:bg-surface transition-colors" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-sidebar-nav">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -75,7 +75,7 @@ const currentPath = Astro.url.pathname;
 <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[45] hidden lg:hidden backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
 
 <!-- Mobile sidebar -->
-<nav id="mobile-sidebar-nav" class="fixed top-0 left-0 bottom-0 z-[50] w-[85%] max-w-sm bg-white transform -translate-x-full transition-transform duration-300 ease-out flex flex-col lg:hidden" style="box-shadow: 8px 0 32px rgba(0,0,0,0.08);">
+<nav id="mobile-sidebar-nav" aria-hidden="true" class="fixed top-0 left-0 bottom-0 z-[50] w-[85%] max-w-sm bg-white transform -translate-x-full transition-transform duration-300 ease-out flex flex-col lg:hidden" style="box-shadow: 8px 0 32px rgba(0,0,0,0.08);">
   <div class="flex items-center justify-between p-5 border-b border-border">
     <span class="font-extrabold text-text text-lg tracking-tight">IGET<span class="text-accent">-</span>VAPES</span>
     <button id="close-mobile-menu" class="p-2 text-text-muted hover:text-text rounded-lg hover:bg-surface transition-colors" aria-label="Close menu">
@@ -150,12 +150,19 @@ const currentPath = Astro.url.pathname;
   const closeBtn = document.getElementById('close-mobile-menu');
   const sidebar = document.getElementById('mobile-sidebar-nav');
   const overlay = document.getElementById('mobile-menu-overlay');
+  const sidebarLinks = document.querySelectorAll('#mobile-sidebar-nav a');
+
+  function setExpandedState(isOpen) {
+    toggleBtn?.setAttribute('aria-expanded', String(isOpen));
+    sidebar?.setAttribute('aria-hidden', String(!isOpen));
+  }
 
   function openSidebar() {
     sidebar?.classList.remove('-translate-x-full');
     overlay?.classList.remove('hidden');
     requestAnimationFrame(() => overlay?.classList.remove('opacity-0'));
     document.body.style.overflow = 'hidden';
+    setExpandedState(true);
   }
 
   function closeSidebar() {
@@ -163,9 +170,18 @@ const currentPath = Astro.url.pathname;
     overlay?.classList.add('opacity-0');
     setTimeout(() => overlay?.classList.add('hidden'), 300);
     document.body.style.overflow = '';
+    setExpandedState(false);
   }
 
   toggleBtn?.addEventListener('click', openSidebar);
   closeBtn?.addEventListener('click', closeSidebar);
   overlay?.addEventListener('click', closeSidebar);
+  sidebarLinks.forEach((link) => link.addEventListener('click', closeSidebar));
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !sidebar?.classList.contains('-translate-x-full')) {
+      closeSidebar();
+      toggleBtn?.focus();
+    }
+  });
 </script>

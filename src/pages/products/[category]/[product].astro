@@ -183,7 +183,9 @@ const faqSchema = {
 
   <Breadcrumbs items={[{ name: category.name, href: `/products/${category.slug}` }, { name: flavour.name }]} />
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
+  <div class="page-stack">
+
+  <div class="grid grid-cols-1 gap-8 rounded-2xl border border-border bg-white p-5 sm:p-7 lg:grid-cols-2 lg:gap-14">
     <!-- Image -->
     <div class="relative">
       <div class="aspect-square overflow-hidden bg-surface rounded-2xl shadow-md">
@@ -275,7 +277,7 @@ const faqSchema = {
   </div>
 
   <!-- Specifications -->
-  <div class="mt-14">
+  <div>
     <h2 class="text-xl font-bold mb-6">Specifications</h2>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
       <div class="bg-surface p-4 text-center border border-border transition-colors duration-200 hover:border-accent/30 rounded-xl">
@@ -306,7 +308,7 @@ const faqSchema = {
   </div>
 
   <!-- Detailed Product Information -->
-  <div class="mt-14 space-y-6">
+  <div class="space-y-6">
     <!-- Product Overview -->
     <div class="bg-surface p-6 lg:p-8 border border-border rounded-2xl">
       <h2 class="text-xl font-bold mb-3">About the {category.name}</h2>
@@ -370,7 +372,7 @@ const faqSchema = {
 
   <!-- Reviews Section -->
   {reviewCount > 0 && (
-    <div class="mt-14" id="reviews">
+    <div id="reviews">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
           <h2 class="text-xl font-bold">Customer Reviews</h2>
@@ -449,7 +451,7 @@ const faqSchema = {
   )}
 
   <!-- Frequently Asked Questions -->
-  <div class="mt-14">
+  <div>
     <h2 class="text-xl font-bold mb-6">Frequently Asked Questions</h2>
     <div class="space-y-2.5">
       {faqs.map((faq: {q: string; a: string}, i: number) => (
@@ -467,8 +469,9 @@ const faqSchema = {
   </div>
 
   <!-- Related flavours link -->
-  <div class="mt-14 text-center">
+  <div class="text-center">
     <a href={`/products/${category.slug}`} class="btn-secondary py-3.5 px-8 rounded-xl">← View All {category.name} Flavours</a>
+  </div>
   </div>
 </BaseLayout>
 

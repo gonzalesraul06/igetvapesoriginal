@@ -8,7 +8,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
     <p>Complete your order details below. All fields marked are required.</p>
   </div>
 
-  <div id="checkout-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+  <div id="checkout-container" class="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-10">
     <!-- Order form -->
     <div>
       <h2 class="text-lg font-bold mb-4 text-text flex items-center gap-2">
@@ -16,7 +16,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         Shipping Details
       </h2>
       <form id="checkout-form" class="space-y-4">
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label for="first-name" class="form-label">First Name</label>
             <input type="text" id="first-name" name="firstName" required placeholder="John" class="form-input" />
@@ -47,7 +47,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
           <input type="text" id="address2" name="address2" placeholder="Unit 4, Level 2" class="form-input" />
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label for="city" class="form-label">Suburb</label>
             <input type="text" id="city" name="city" required placeholder="Sydney" class="form-input" />
@@ -130,12 +130,13 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         </div>
 
         <button type="submit" class="btn-primary w-full py-3 text-base mt-6">Place Order</button>
+        <p id="checkout-feedback" class="hidden rounded-lg border px-3 py-2 text-sm" aria-live="polite"></p>
       </form>
     </div>
 
     <!-- Order summary -->
     <div>
-      <div class="bg-surface rounded-2xl p-6 sticky top-24 border border-border">
+      <div class="bg-surface rounded-2xl p-6 border border-border xl:sticky xl:top-24">
         <h2 class="text-lg font-bold mb-4 text-text flex items-center gap-2">
           <svg class="w-5 h-5 text-text-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
           Order Summary
@@ -174,7 +175,6 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         </div>
       </div>
     </div>
-  </div>
   </div>
 
   <script>
@@ -252,9 +252,14 @@ import BaseLayout from '@layouts/BaseLayout.astro';
     checkoutForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = checkoutForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const feedbackEl = document.getElementById('checkout-feedback');
       const originalText = submitBtn.textContent;
       submitBtn.disabled = true;
       submitBtn.textContent = 'Placing Order...';
+      if (feedbackEl) {
+        feedbackEl.className = 'hidden rounded-lg border px-3 py-2 text-sm';
+        feedbackEl.textContent = '';
+      }
 
       try {
         const formData = new FormData(checkoutForm);
@@ -340,12 +345,23 @@ import BaseLayout from '@layouts/BaseLayout.astro';
             `;
           }
         } else {
-          alert(result.error || 'Failed to place order. Please try again.');
+          const message = result.error || 'Failed to place order. Please try again.';
+          if (feedbackEl) {
+            feedbackEl.className = 'rounded-lg border border-danger/20 bg-danger/5 px-3 py-2 text-sm text-danger';
+            feedbackEl.textContent = message;
+          } else {
+            alert(message);
+          }
           submitBtn.disabled = false;
           submitBtn.textContent = originalText;
         }
       } catch (err) {
-        alert('Network error. Please check your connection and try again.');
+        if (feedbackEl) {
+          feedbackEl.className = 'rounded-lg border border-danger/20 bg-danger/5 px-3 py-2 text-sm text-danger';
+          feedbackEl.textContent = 'Network error. Please check your connection and try again.';
+        } else {
+          alert('Network error. Please check your connection and try again.');
+        }
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
       }

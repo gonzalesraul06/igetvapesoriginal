@@ -38,11 +38,14 @@ const { title, description, image, canonical, type, noindex, keywords, published
     />
   </head>
   <body class="antialiased">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <AgeGateModal />
     <div class="min-h-screen flex flex-col">
       <Header />
-      <main class="flex-1 w-full container-site pt-6 pb-24 lg:pt-8 lg:pb-12" style="animation: fadeIn 0.3s ease-out;">
-        <slot />
+      <main id="main-content" class="page-main" style="animation: fadeIn 0.3s ease-out;">
+        <div class="content-shell">
+          <slot />
+        </div>
       </main>
       <Footer />
     </div>
