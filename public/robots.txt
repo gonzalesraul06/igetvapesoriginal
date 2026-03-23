@@ -56,7 +56,7 @@ User-agent: Cohere-ai
 Allow: /
 
 # Sitemaps
-Sitemap: https://igetvapeshub.com/sitemap-index.xml
+Sitemap: https://igetvapeshub.com/sitemap.xml
 
 # LLM discovery
 # See https://igetvapeshub.com/llms.txt
