@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && cp -r dist/client/* dist/ && echo 'export { default } from \"./server/entry.mjs\";' > dist/_worker.js && echo '{\"version\":1,\"include\":[\"/api/*\"],\"exclude\":[\"/*\"]}' > dist/_routes.json",
+    "build": "astro build",
     "build:win": "astro build",
     "preview": "astro preview",
     "astro": "astro"

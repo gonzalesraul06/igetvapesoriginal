@@ -1,5 +1,7 @@
 import { defineConfig } from 'astro/config';
 import { fileURLToPath } from 'node:url';
+import fs from 'node:fs';
+import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
@@ -12,6 +14,49 @@ export default defineConfig({
     sitemap({
       filter: (page) => !page.includes('/account/') && !page.includes('/checkout'),
     }),
+    {
+      name: 'cloudflare-worker-generator',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          const outDir = fileURLToPath(dir);
+          const clientDir = path.join(outDir, 'client');
+          const serverDir = path.join(outDir, 'server');
+          
+          if (!fs.existsSync(clientDir)) return;
+
+          // Tell Cloudflare to route /api/* to the server worker, and treat everything else as static
+          const routesJson = '{"version":1,"include":["/api/*"],"exclude":["/*"]}';
+
+          // Ensure it works regardless of whether the user sets their Cloudflare output dir to 'dist' or 'dist/client'
+          fs.writeFileSync(path.join(outDir, '_routes.json'), routesJson);
+          fs.writeFileSync(path.join(clientDir, '_routes.json'), routesJson);
+
+          // For 'dist' output
+          fs.writeFileSync(path.join(outDir, '_worker.js'), 'export { default } from "./server/entry.mjs";');
+          // For 'dist/client' output (worker needs to reach back up to the server bundle... wait! Cloudflare won't deploy 'server' if 'client' is the output dir!)
+          
+          // Actually, if Cloudflare builds via 'astro build', they must set output to 'dist' in Cloudflare, 
+          // because Astro creates dist/client and dist/server. Wait! If output is 'dist', then static files are in dist/client, 
+          // so Cloudflare will serve them ONLY if we move them! Let's automate the moving!!
+          
+          // Move all files from dist/client/* to dist/
+          const copyRecursiveSync = (src, dest) => {
+            const exists = fs.existsSync(src);
+            const stats = exists && fs.statSync(src);
+            const isDirectory = exists && stats.isDirectory();
+            if (isDirectory) {
+              if (!fs.existsSync(dest)) fs.mkdirSync(dest);
+              fs.readdirSync(src).forEach((childItemName) => {
+                copyRecursiveSync(path.join(src, childItemName), path.join(dest, childItemName));
+              });
+            } else {
+              fs.copyFileSync(src, dest);
+            }
+          };
+          copyRecursiveSync(clientDir, outDir);
+        }
+      }
+    }
   ],
   vite: {
     plugins: [
