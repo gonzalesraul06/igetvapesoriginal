@@ -1,12 +1,12 @@
 <!-- Age verification modal - uses localStorage to remember verification -->
-<div id="age-gate" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md hidden">
-  <div class="bg-white rounded-2xl p-8 max-w-sm w-full mx-4 text-center shadow-2xl">
-    <img src="/images/logo.svg" alt="IGET Vapes Original — Age Verification" class="h-12 w-auto mx-auto mb-6" />
-    <p class="text-text-muted text-sm mb-6 leading-relaxed">This site contains products that are not suitable for minors. Please verify that you are 18 years of age or older.</p>
-    <p class="text-text font-semibold mb-6">Are you over 18 years of age?</p>
-    <div class="flex gap-3 justify-center">
-      <button id="age-yes" class="btn-primary px-8 py-2.5 rounded-xl">Yes</button>
-      <button id="age-no" class="btn-secondary px-8 py-2.5 rounded-xl">No</button>
+<div id="age-gate" class="hidden" style="position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.9);backdrop-filter:blur(12px);display:none;">
+  <div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:101;width:90vw;max-width:400px;background:#fff;border-radius:1rem;padding:2rem;text-align:center;box-shadow:0 25px 50px rgba(0,0,0,0.25);">
+    <img src="/images/logo.svg" alt="IGET Vapes Original — Age Verification" style="height:3rem;width:auto;margin:0 auto 1.5rem;" />
+    <p style="color:#6b7280;font-size:0.875rem;margin-bottom:1.5rem;line-height:1.6;">This site contains products that are not suitable for minors. Please verify that you are 18 years of age or older.</p>
+    <p style="color:#111827;font-weight:600;margin-bottom:1.5rem;font-size:1rem;">Are you over 18 years of age?</p>
+    <div style="display:flex;gap:0.75rem;justify-content:center;">
+      <button id="age-yes" class="btn-primary" style="padding:0.625rem 2rem;border-radius:0.75rem;">Yes</button>
+      <button id="age-no" class="btn-secondary" style="padding:0.625rem 2rem;border-radius:0.75rem;">No</button>
     </div>
   </div>
 </div>
@@ -17,13 +17,19 @@
   const btnNo = document.getElementById('age-no');
 
   if (!localStorage.getItem('age-verified')) {
-    gate?.classList.remove('hidden');
+    if (gate) {
+      gate.classList.remove('hidden');
+      gate.style.display = 'block';
+    }
     document.body.style.overflow = 'hidden';
   }
 
   btnYes?.addEventListener('click', () => {
     localStorage.setItem('age-verified', 'true');
-    gate?.classList.add('hidden');
+    if (gate) {
+      gate.classList.add('hidden');
+      gate.style.display = 'none';
+    }
     document.body.style.overflow = '';
   });
 
