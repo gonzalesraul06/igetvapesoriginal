@@ -116,7 +116,7 @@
     const frag = document.createDocumentFragment();
     items.forEach(item => {
       const div = document.createElement('div');
-      div.className = 'cart-item flex gap-3 bg-surface p-3';
+      div.className = 'cart-item flex gap-3 bg-surface p-3 rounded-xl';
       div.innerHTML = `
         <img src="${item.image}" alt="${item.name} — ${item.categoryName} Vape" class="w-16 h-16 rounded-lg object-cover flex-shrink-0" />
         <div class="flex-1 min-w-0">

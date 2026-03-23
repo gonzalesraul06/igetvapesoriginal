@@ -243,8 +243,8 @@ const localBusinessSchema = {
   </section>
 
   <!-- Trust signals bar -->
-  <section class="mb-12 lg:mb-14">
-    <div class="flex flex-wrap items-center gap-3">
+  <section class="mb-10 lg:mb-14">
+    <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
       <span class="trust-badge">
         <svg class="w-4 h-4 text-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
         100% Authentic Vapes
@@ -266,11 +266,11 @@ const localBusinessSchema = {
 
   <!-- Hero Category Grid -->
   <section class="mb-14 lg:mb-20" id="hero-categories">
-    <div class="mb-8 text-center">
-      <h2 class="mb-2 text-2xl font-extrabold sm:text-3xl">Shop by Category</h2>
-      <p class="mx-auto max-w-2xl text-sm text-text-muted sm:text-base">A straighter product grid, cleaner spacing, and faster scanning across the full IGET and Alibarbar range.</p>
+    <div class="section-header">
+      <h2>Shop by Category</h2>
+      <p>Browse the full IGET and Alibarbar range with cleaner spacing and faster scanning.</p>
     </div>
-    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {categories.map((cat, idx) => (
         <a
           href={cat.href}
@@ -324,11 +324,11 @@ const localBusinessSchema = {
 
   <!-- Why Buy From Us -->
   <section class="mb-14 lg:mb-20">
-    <div class="text-center mb-8">
-      <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">Why Australians Choose Our Vape Shop</h2>
-      <p class="text-text-muted text-sm sm:text-base max-w-2xl mx-auto">Stop searching "vape shops near me" — we deliver premium disposable vapes straight to your door with the best prices in Australia.</p>
+    <div class="section-header">
+      <h2>Why Australians Choose Our Vape Shop</h2>
+      <p>Stop searching "vape shops near me" — we deliver premium disposable vapes straight to your door with the best prices in Australia.</p>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
       <div class="card p-7 text-center group">
         <div class="w-12 h-12 bg-accent/8 text-accent rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/12 transition-colors">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0H6.375c-.621 0-1.125-.504-1.125-1.125V14.25m17.25 4.5V6.75a3 3 0 00-3-3H6.375c-.621 0-1.125.504-1.125 1.125v14.25"/></svg>
@@ -382,8 +382,10 @@ const localBusinessSchema = {
 
   <!-- SEO Content: About IGET Vapes -->
   <section class="mb-14 lg:mb-20">
-    <div class="mx-auto max-w-4xl text-center">
-      <h2 class="text-2xl font-extrabold sm:text-3xl">Shop the Best Selection of IGET Vapes</h2>
+    <div class="mx-auto max-w-4xl">
+      <div class="section-header">
+        <h2>Shop the Best Selection of IGET Vapes</h2>
+      </div>
       <div class="mt-5 space-y-4 text-sm leading-relaxed text-text-muted sm:text-base">
         <p>
           At IGET Vape, we offer a wide range of products to meet the needs of every buyer across Australia, from beginner-friendly options to high-puff-count favourites. Our selection includes <strong>IGET Bar</strong>, <strong>IGET Bar Plus</strong>, <strong>IGET One</strong>, <strong>JNR Cruiser</strong>, and premium <strong>Alibarbar</strong> models.
@@ -400,9 +402,9 @@ const localBusinessSchema = {
 
   <!-- Popular Searches / Keyword Cloud -->
   <section class="mb-14 lg:mb-20">
-    <div class="mx-auto max-w-5xl rounded-2xl border border-border bg-surface p-6 sm:p-8">
+    <div class="mx-auto max-w-5xl rounded-2xl border border-border bg-surface/50 p-6 sm:p-8">
       <div class="mb-5 text-center">
-        <h2 class="text-xl font-bold sm:text-2xl">Popular Searches in Australia</h2>
+        <h2 class="text-lg font-bold sm:text-xl">Popular Searches in Australia</h2>
       </div>
       <div class="flex flex-wrap justify-center gap-2.5">
       {[
@@ -446,7 +448,10 @@ const localBusinessSchema = {
 
   <!-- FAQ Section -->
   <section class="mb-14 lg:mb-20">
-    <h2 class="text-xl sm:text-2xl font-bold mb-6">Frequently Asked Questions — IGET Vapes Australia</h2>
+    <div class="section-header text-left">
+      <h2 class="!text-left">Frequently Asked Questions</h2>
+      <p class="!mx-0 !text-left">Everything you need to know about buying IGET vapes in Australia.</p>
+    </div>
     <div class="space-y-2.5">
       {faqs.map((faq, i) => (
         <details class="group bg-white border border-border hover:border-muted transition-all duration-200" id={`faq-${i}`} style="border-radius: var(--radius-lg);">

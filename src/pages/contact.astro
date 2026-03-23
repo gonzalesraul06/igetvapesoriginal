@@ -10,8 +10,10 @@ import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
   <Breadcrumbs items={[{ name: 'Contact Us' }]} />
 
   <div class="max-w-3xl">
-    <h1 class="text-3xl lg:text-4xl font-extrabold mb-4 tracking-tight">Contact Us — IGET Vapes Original</h1>
-    <p class="text-text-muted mb-8">Have a question about your order, our <strong>IGET vapes</strong>, <strong>Alibarbar vapes</strong>, or shipping? Fill out the form below and we'll get back to you as soon as possible. We're Australia's friendliest online <strong>vape shop</strong>!</p>
+    <div class="page-header">
+      <h1>Contact Us</h1>
+      <p>Have a question about your order, our <strong>IGET vapes</strong>, <strong>Alibarbar vapes</strong>, or shipping? We're Australia's friendliest online <strong>vape shop</strong>!</p>
+    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
       <div class="card p-5 text-center">
@@ -43,18 +45,18 @@ import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
       <form id="contact-form" class="space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label for="name" class="block text-sm font-medium mb-2">Name</label>
-            <input type="text" id="name" name="name" required class="w-full bg-white border border-border rounded-lg px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" placeholder="Your name" />
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" required class="form-input" placeholder="Your name" />
           </div>
           <div>
-            <label for="email" class="block text-sm font-medium mb-2">Email</label>
-            <input type="email" id="email" name="email" required class="w-full bg-white border border-border rounded-lg px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" placeholder="your@email.com" />
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" required class="form-input" placeholder="your@email.com" />
           </div>
         </div>
 
         <div>
-          <label for="subject" class="block text-sm font-medium mb-2">Subject</label>
-          <select id="subject" name="subject" required class="w-full bg-white border border-border rounded-lg px-4 py-3 text-text focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all">
+          <label for="subject" class="form-label">Subject</label>
+          <select id="subject" name="subject" required class="form-input">
             <option value="">Select a subject</option>
             <option value="order">Order Inquiry</option>
             <option value="product">Product Question (IGET / Alibarbar)</option>
@@ -66,13 +68,13 @@ import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
         </div>
 
         <div>
-          <label for="order-number" class="block text-sm font-medium mb-2">Order Number (optional)</label>
-          <input type="text" id="order-number" name="orderNumber" class="w-full bg-white border border-border rounded-lg px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none transition-all" placeholder="#12345" />
+          <label for="order-number" class="form-label">Order Number (optional)</label>
+          <input type="text" id="order-number" name="orderNumber" class="form-input" placeholder="#12345" />
         </div>
 
         <div>
-          <label for="message" class="block text-sm font-medium mb-2">Message</label>
-          <textarea id="message" name="message" required rows="5" class="w-full bg-white border border-border rounded-lg px-4 py-3 text-text placeholder-text-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/10 focus:outline-none resize-y transition-all" placeholder="How can we help?"></textarea>
+          <label for="message" class="form-label">Message</label>
+          <textarea id="message" name="message" required rows="5" class="form-input resize-y" placeholder="How can we help?"></textarea>
         </div>
 
         <button type="submit" class="btn-primary w-full py-3">Send Message</button>

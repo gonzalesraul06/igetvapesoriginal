@@ -16,6 +16,7 @@
   --color-text-muted: #6b7280;
   --color-text-light: #9ca3af;
   --color-dark: #0f172a;
+  --color-danger: #dc2626;
 
   /* ── Typography ── */
   --font-sans: 'Montserrat', 'Arial', system-ui, sans-serif;
@@ -304,5 +305,75 @@
   /* ── Safe area for mobile bottom nav ── */
   .safe-area-bottom {
     padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  /* ── Page header pattern ── */
+  .page-header {
+    @apply pt-2 pb-8 lg:pt-4 lg:pb-10;
+  }
+  .page-header h1 {
+    @apply text-3xl lg:text-4xl font-extrabold tracking-tight mb-3;
+  }
+  .page-header p {
+    @apply text-text-muted max-w-2xl;
+  }
+
+  /* ── Form inputs ── */
+  .form-input {
+    @apply w-full bg-white border border-border px-4 py-3 text-text text-sm;
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-input::placeholder {
+    @apply text-text-light;
+  }
+  .form-input:focus {
+    @apply border-accent outline-none;
+    box-shadow: var(--shadow-glow);
+  }
+  .form-label {
+    @apply block text-sm font-medium text-text mb-1.5;
+  }
+
+  /* ── Section header pattern ── */
+  .section-header {
+    @apply text-center mb-8 lg:mb-10;
+  }
+  .section-header h2 {
+    @apply text-2xl sm:text-3xl font-extrabold mb-2;
+  }
+  .section-header p {
+    @apply mx-auto max-w-2xl text-sm text-text-muted sm:text-base;
+  }
+
+  /* ── Info card (contact/feature cards with icon) ── */
+  .info-card {
+    @apply bg-white border border-border p-6 text-center transition-all duration-200;
+    border-radius: var(--radius-lg);
+  }
+  .info-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-muted);
+  }
+  .info-card .icon-wrap {
+    @apply w-12 h-12 mx-auto mb-4 rounded-xl flex items-center justify-center;
+    background: rgba(233, 69, 96, 0.08);
+  }
+  .info-card .icon-wrap svg {
+    @apply w-5 h-5 text-accent;
+  }
+
+  /* ── Line clamp utility ── */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }

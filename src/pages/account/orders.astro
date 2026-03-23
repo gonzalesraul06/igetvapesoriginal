@@ -6,7 +6,9 @@ import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
 <BaseLayout title="My Orders — IGET Vapes Australia" noindex={true}>
   <Breadcrumbs items={[{ name: 'Account', href: '/account' }, { name: 'Orders' }]} />
 
-  <h1 class="text-3xl font-extrabold mb-6">My Orders</h1>
+  <div class="page-header">
+    <h1>My Orders</h1>
+  </div>
 
   <div class="card p-6">
     <p class="text-text-muted text-center py-8">No orders found. <a href="/" class="text-accent hover:underline">Start shopping</a></p>

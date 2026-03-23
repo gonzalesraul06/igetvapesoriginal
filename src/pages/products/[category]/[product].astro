@@ -186,7 +186,7 @@ const faqSchema = {
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
     <!-- Image -->
     <div class="relative">
-      <div class="aspect-square overflow-hidden bg-surface" class="rounded-2xl shadow-md">
+      <div class="aspect-square overflow-hidden bg-surface rounded-2xl shadow-md">
         <img
           src={flavour.image}
           alt={`${flavour.name} — ${category.name} ${category.puffs.toLocaleString()} Puffs Disposable Vape`}
@@ -198,7 +198,7 @@ const faqSchema = {
       </div>
       {flavour.isNew && <span class="badge-new absolute top-4 left-4 text-sm" style="box-shadow: 0 2px 8px rgba(233,69,96,0.3);">New</span>}
       {!flavour.inStock && (
-        <div class="absolute inset-0 bg-black/50 flex items-center justify-center" class="rounded-2xl">
+        <div class="absolute inset-0 bg-black/50 flex items-center justify-center rounded-2xl">
           <span class="badge-out-of-stock text-lg px-5 py-2.5">Out of Stock</span>
         </div>
       )}
@@ -308,14 +308,14 @@ const faqSchema = {
   <!-- Detailed Product Information -->
   <div class="mt-14 space-y-6">
     <!-- Product Overview -->
-    <div class="bg-surface p-6 lg:p-8 border border-border" class="rounded-2xl">
+    <div class="bg-surface p-6 lg:p-8 border border-border rounded-2xl">
       <h2 class="text-xl font-bold mb-3">About the {category.name}</h2>
       <p class="text-text-muted leading-relaxed" style="line-height: 1.75;">{details.overview}</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       <!-- Coil Technology -->
-      <div class="bg-surface p-6 border border-border transition-colors duration-200 hover:border-accent/20" class="rounded-2xl">
+      <div class="bg-surface p-6 border border-border transition-colors duration-200 hover:border-accent/20 rounded-2xl">
         <div class="flex items-center gap-2.5 mb-3">
           <span class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent text-sm">⚡</span>
           <h3 class="text-lg font-bold">Coil Technology</h3>
@@ -324,7 +324,7 @@ const faqSchema = {
       </div>
 
       <!-- Battery Information -->
-      <div class="bg-surface p-6 border border-border transition-colors duration-200 hover:border-accent/20" class="rounded-2xl">
+      <div class="bg-surface p-6 border border-border transition-colors duration-200 hover:border-accent/20 rounded-2xl">
         <div class="flex items-center gap-2.5 mb-3">
           <span class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent text-sm">🔋</span>
           <h3 class="text-lg font-bold">Battery & Charging</h3>
@@ -335,7 +335,7 @@ const faqSchema = {
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       <!-- What's in the Box -->
-      <div class="bg-surface p-6 border border-border transition-colors duration-200 hover:border-accent/20" class="rounded-2xl">
+      <div class="bg-surface p-6 border border-border transition-colors duration-200 hover:border-accent/20 rounded-2xl">
         <div class="flex items-center gap-2.5 mb-3">
           <span class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent text-sm">📦</span>
           <h3 class="text-lg font-bold">What's in the Box</h3>
@@ -351,7 +351,7 @@ const faqSchema = {
       </div>
 
       <!-- Usage Tips -->
-      <div class="bg-surface p-6 border border-border transition-colors duration-200 hover:border-accent/20" class="rounded-2xl">
+      <div class="bg-surface p-6 border border-border transition-colors duration-200 hover:border-accent/20 rounded-2xl">
         <div class="flex items-center gap-2.5 mb-3">
           <span class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent text-sm">💡</span>
           <h3 class="text-lg font-bold">Usage Tips</h3>

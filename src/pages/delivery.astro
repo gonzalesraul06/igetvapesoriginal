@@ -17,8 +17,10 @@ const states = [
 <BaseLayout title="Delivery Locations — IGET Vapes Australia-Wide Delivery" description="We deliver IGET vapes to all locations across Australia including Sydney, Melbourne, Brisbane, Perth, Adelaide and regional areas.">
   <Breadcrumbs items={[{ name: 'Delivery Locations' }]} />
 
-  <h1 class="text-3xl lg:text-4xl font-extrabold mb-4 tracking-tight">Delivery Locations</h1>
-  <p class="text-text-muted mb-8 max-w-2xl">We deliver Australia-wide with state-based shipping from $10 AUD per order. Whether you're in a capital city or a regional area, we've got you covered.</p>
+  <div class="page-header">
+    <h1>Delivery Locations</h1>
+    <p>We deliver Australia-wide with state-based shipping from $10 AUD per order. Capital cities and regional areas — we've got you covered.</p>
+  </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
     {states.map(state => (
