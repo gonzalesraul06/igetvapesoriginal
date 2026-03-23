@@ -21,16 +21,6 @@
   /* ── Typography ── */
   --font-sans: 'Montserrat', 'Arial', system-ui, sans-serif;
 
-  /* ── Spacing scale (4px/8px grid) ── */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 48px;
-  --spacing-3xl: 64px;
-  --spacing-4xl: 96px;
-
   /* ── Radius scale ── */
   --radius-sm: 6px;
   --radius-md: 10px;
