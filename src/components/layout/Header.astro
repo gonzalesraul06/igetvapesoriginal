@@ -2,18 +2,17 @@
 import { topMenuLinks, productCategories } from '@data/navigation';
 const currentPath = Astro.url.pathname;
 ---
-
-<!-- SEO Announcement Bar -->
-<div class="bg-dark text-white text-center py-2 text-xs sm:text-sm font-medium tracking-wide">
-  <div class="container-site flex items-center justify-center gap-2">
-    <svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-    <span>Australia's #1 Online Vape Shop &mdash; <strong class="text-accent">Free Shipping on Orders Over $300</strong> &mdash; Buy IGET Vapes, Alibarbar &amp; Disposable Vapes Online</span>
-  </div>
-</div>
-
 <header class="sticky top-0 z-40 bg-white/98 backdrop-blur-lg border-b border-border" style="box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+  <div class="hidden lg:block border-b border-border/70 bg-surface/60">
+    <div class="container-site flex items-center justify-center gap-6 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-text-muted">
+      {topMenuLinks.map(link => (
+        <a href={link.href} class="hover:text-text transition-colors duration-200">{link.name}</a>
+      ))}
+    </div>
+  </div>
+
   <!-- Main header row -->
-  <div class="container-site py-3.5 lg:py-4 flex items-center justify-between gap-4 lg:gap-6">
+  <div class="container-site grid grid-cols-[auto_1fr_auto] items-center gap-4 py-3.5 lg:grid-cols-[auto_1fr_auto] lg:gap-6 lg:py-5">
     <!-- Mobile menu toggle -->
     <div class="flex items-center lg:hidden">
       <button id="mobile-menu-toggle" class="p-2 -ml-2 text-text hover:text-accent rounded-lg hover:bg-surface transition-colors" aria-label="Toggle menu">
@@ -24,32 +23,17 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Logo -->
-    <a href="/" class="flex-shrink-0 flex items-center gap-2.5 group mx-auto lg:mx-0">
-      <span class="text-text font-extrabold text-xl lg:text-2xl tracking-tight group-hover:text-accent transition-colors duration-200">
+    <a href="/" class="mx-auto flex flex-shrink-0 items-center gap-2.5 group lg:justify-self-center">
+      <span class="text-text font-extrabold text-xl lg:text-[1.75rem] tracking-tight group-hover:text-accent transition-colors duration-200">
         IGET<span class="text-accent">-</span>VAPES
       </span>
       <span class="hidden sm:inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted border-l border-border pl-2.5 leading-none">Australia</span>
     </a>
 
-    <!-- Desktop top nav links -->
-    <nav class="hidden lg:flex items-center gap-1" aria-label="Top navigation">
-      {topMenuLinks.map(link => (
-        <a
-          href={link.href}
-          class:list={[
-            'px-3 py-2 text-sm font-medium transition-all duration-200 rounded-lg relative',
-            currentPath === link.href
-              ? 'text-accent bg-accent-light'
-              : 'text-text-muted hover:text-text hover:bg-surface',
-          ]}
-        >
-          {link.name}
-        </a>
-      ))}
-    </nav>
+    <div class="hidden lg:block"></div>
 
     <!-- Right actions -->
-    <div class="flex items-center gap-1 lg:gap-2">
+    <div class="flex items-center justify-self-end gap-1 lg:gap-2">
       <a href="/account" class="hidden lg:flex p-2.5 text-text-muted hover:text-text rounded-lg hover:bg-surface transition-all duration-200" aria-label="My Account">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
@@ -66,26 +50,23 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Product categories nav — desktop -->
-  <nav class="hidden lg:block border-t border-border/60 bg-surface/40" aria-label="Product categories">
-    <div class="container-site flex items-center justify-center gap-0 py-0">
-      {productCategories.map(cat => (
-        <a
-          href={cat.href}
-          class:list={[
-            'px-4 py-3 text-[13px] font-semibold tracking-wide transition-all duration-200 relative group',
-            currentPath.startsWith(cat.href)
-              ? 'text-accent'
-              : 'text-text-muted hover:text-text',
-          ]}
-        >
-          {cat.name.replace(/\d+\sPUFFS|SAVE$/, '').trim()}
-          {cat.name.match(/\d+\sPUFFS|SAVE/) && (
-            <span class="text-[10px] font-normal text-text-light ml-1">{cat.name.match(/\d+\sPUFFS|SAVE/)?.[0]}</span>
-          )}
-          {currentPath.startsWith(cat.href) && <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-accent rounded-full"></span>}
-          <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-accent rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-        </a>
-      ))}
+  <nav class="hidden lg:block border-t border-border/60 bg-white" aria-label="Product categories">
+    <div class="container-site py-3">
+      <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-2">
+        {productCategories.map(cat => (
+          <a
+            href={cat.href}
+            class:list={[
+              'group inline-flex min-h-[44px] items-center justify-center rounded-full border px-4 py-2 text-center transition-all duration-200',
+              currentPath.startsWith(cat.href)
+                ? 'bg-accent text-white border-accent shadow-sm'
+                : 'bg-surface text-text-muted border-border hover:bg-white hover:text-text hover:border-border/80',
+            ]}
+          >
+            <span class="text-[11px] font-bold uppercase tracking-[0.08em] leading-none">{cat.name}</span>
+          </a>
+        ))}
+      </div>
     </div>
   </nav>
 </header>
