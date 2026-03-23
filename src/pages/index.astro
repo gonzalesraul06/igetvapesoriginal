@@ -220,24 +220,43 @@ const localBusinessSchema = {
   <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
   <!-- Hero Section -->
-  <section class="mb-12 pt-8 text-center lg:mb-16 lg:pt-12">
-    <div class="mx-auto max-w-5xl">
-      <img src="/images/logo.svg" alt="IGET Vapes Australia" class="mx-auto mb-6 h-16 w-auto sm:h-20" />
-      <h1 class="mx-auto max-w-4xl text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl" style="line-height: 1.12;">
-        Shop the Best Selection of IGET Vapes at
-        <span class="block text-accent">Australia's #1 trusted online IGET Vape Store</span>
+  <section class="relative mb-12 pt-10 pb-8 lg:mb-16 lg:pt-16 lg:pb-12 overflow-hidden">
+    <!-- Subtle background gradient for premium feel -->
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent"></div>
+    
+    <div class="mx-auto max-w-5xl px-4 text-center">
+      <!-- Trust Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-border text-xs sm:text-sm font-bold text-text mb-6 shadow-sm">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green"></span>
+        </span>
+        Australia's #1 Trusted Vape Store
+      </div>
+      
+      <!-- SEO Optimized H1 -->
+      <h1 class="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-text" style="line-height: 1.15;">
+        Buy <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent-dark">IGET Vapes</span> Online in Australia
       </h1>
-      <div class="mx-auto mt-5 max-w-3xl space-y-4 text-sm leading-relaxed text-text-muted sm:text-base">
+      
+      <!-- SEO Optimized Subtitle -->
+      <div class="mx-auto mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-text-muted sm:text-lg">
         <p>
-          Welcome to <strong>IGET Vape</strong>, the premier online destination for high-quality, innovative vapes in Australia. IGET vapes are known for sleek designs, advanced technology, and bold flavour options that suit both new and experienced buyers.
+          Shop the largest range of 100% genuine disposable vapes, including <strong>IGET Bar Pro</strong>, <strong>IGET One</strong>, <strong>JNR Cruiser</strong>, and top <strong>Alibarbar</strong> flavours.
         </p>
-        <p>
-          Shop <strong>IGET Bar</strong>, <strong>IGET Bar Pro</strong>, <strong>IGET One</strong>, <strong>JNR Cruiser</strong>, and <strong>Alibarbar</strong> with fast Australia-wide delivery, simple checkout, and a cleaner shopping experience based on the reference layout you shared.
+        <p class="text-sm sm:text-base">
+          Experience premium vaping with unbeatable prices, bulk mix-and-match deals, and fast, discreet shipping to Sydney, Melbourne, Brisbane, Perth, and nationwide.
         </p>
       </div>
-      <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
-        <a href="#hero-categories" class="btn-primary px-7 py-3.5 text-sm">Shop Now</a>
-        <a href="/mix-and-match" class="btn-secondary px-7 py-3.5 text-sm">Mix &amp; Match</a>
+      
+      <!-- Calls to Action -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="#hero-categories" class="btn-primary px-8 py-3.5 text-base shadow-lg shadow-accent/20 hover:shadow-accent/40 transition-all hover:-translate-y-0.5" style="border-radius: var(--radius-xl);">
+          Shop All Vapes
+        </a>
+        <a href="/mix-and-match" class="px-8 py-3.5 text-base font-semibold text-text bg-white border-2 border-border hover:border-accent hover:text-accent transition-all" style="border-radius: var(--radius-xl);">
+          Mix &amp; Match Deals
+        </a>
       </div>
     </div>
   </section>
