@@ -1,55 +1,57 @@
 <!-- Cart slide-out drawer - hydrated client-side -->
-<div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col">
+<div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white transform translate-x-full transition-transform duration-300 ease-out flex flex-col" style="box-shadow: -8px 0 32px rgba(0,0,0,0.08);">
   <!-- Header -->
-  <div class="flex items-center justify-between px-5 py-4 border-b border-border">
-    <div class="flex items-center gap-2.5">
-      <svg class="w-5 h-5 text-text" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+  <div class="flex items-center justify-between px-6 py-5 border-b border-border/60">
+    <div class="flex items-center gap-3">
+      <svg class="w-5 h-5 text-text" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
       </svg>
-      <h2 class="text-lg font-bold text-text">Your Cart</h2>
-      <span id="cart-header-count" class="text-xs font-semibold bg-accent text-white rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+      <h2 class="text-lg font-bold text-text tracking-tight">Your Cart</h2>
+      <span id="cart-header-count" class="text-[10px] font-bold bg-accent text-white w-5 h-5 flex items-center justify-center hidden" style="border-radius: var(--radius-full);">0</span>
     </div>
-    <button id="cart-close" class="p-2 -mr-2 text-text-muted hover:text-text rounded-lg hover:bg-surface transition-colors" aria-label="Close cart">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    <button id="cart-close" class="p-2 -mr-2 text-text-muted hover:text-text transition-colors duration-200" style="border-radius: var(--radius-md);" aria-label="Close cart">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 
   <!-- Cart items -->
-  <div id="cart-items" class="flex-1 overflow-y-auto px-5 py-4 space-y-3">
+  <div id="cart-items" class="flex-1 overflow-y-auto px-6 py-5 space-y-3">
     <div id="cart-empty" class="flex flex-col items-center justify-center py-16 text-center">
-      <svg class="w-16 h-16 text-muted mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-      </svg>
-      <p class="text-text-muted font-medium mb-1">Your cart is empty</p>
-      <p class="text-sm text-text-muted/70">Browse our products and add items to get started.</p>
+      <div class="w-16 h-16 mb-5 flex items-center justify-center" style="background: var(--color-surface); border-radius: var(--radius-xl);">
+        <svg class="w-7 h-7 text-text-muted" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        </svg>
+      </div>
+      <p class="text-text font-semibold mb-1">Your cart is empty</p>
+      <p class="text-sm text-text-muted">Browse our products and add items to get started.</p>
     </div>
   </div>
 
   <!-- Footer with total -->
-  <div id="cart-footer" class="border-t border-border bg-surface/50 px-5 py-4 hidden">
-    <div class="flex justify-between text-sm text-text-muted mb-1">
+  <div id="cart-footer" class="border-t border-border/60 px-6 py-5 hidden" style="background: var(--color-surface);">
+    <div class="flex justify-between text-sm text-text-muted mb-1.5">
       <span>Subtotal</span>
-      <span id="cart-subtotal" class="font-medium text-text">$0.00</span>
+      <span id="cart-subtotal" class="font-semibold text-text">$0.00</span>
     </div>
     <div class="flex justify-between text-sm text-text-muted mb-3">
       <span>Shipping</span>
       <span class="text-xs italic">Calculated at checkout</span>
     </div>
-    <div class="h-px bg-border mb-3"></div>
-    <div class="flex justify-between text-lg font-bold text-text mb-4">
-      <span>Estimated Total</span>
+    <div class="divider mb-3"></div>
+    <div class="flex justify-between text-lg font-bold text-text mb-5">
+      <span>Total</span>
       <span id="cart-total">$0.00</span>
     </div>
-    <div id="cart-minimum-warning" class="hidden mb-3 p-3 bg-accent/5 border border-accent/20 rounded-xl text-center">
+    <div id="cart-minimum-warning" class="hidden mb-4 p-3.5 text-center" style="background: rgba(233,69,96,0.06); border: 1px solid rgba(233,69,96,0.15); border-radius: var(--radius-lg);">
       <p class="text-accent text-sm font-medium">Minimum order is $250 AUD. Add <span id="cart-remaining" class="font-bold">$0</span> more to checkout.</p>
     </div>
-    <a id="cart-checkout-btn" href="/checkout" class="btn-primary w-full block text-center py-3.5 text-base rounded-xl">Proceed to Checkout</a>
-    <p class="text-center text-xs text-text-muted mt-3">Secure checkout &middot; Australian owned</p>
+    <a id="cart-checkout-btn" href="/checkout" class="btn-primary w-full block text-center py-3.5 text-base" style="border-radius: var(--radius-lg);">Proceed to Checkout</a>
+    <p class="text-center text-[11px] text-text-muted mt-3 tracking-wide">Secure checkout &middot; Australian owned</p>
   </div>
 </div>
-<div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
+<div id="cart-overlay" class="fixed inset-0 z-40 hidden transition-opacity duration-300" style="background: rgba(8,13,26,0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);"></div>
 
 <script>
   import { cartItems, cartOpen, removeFromCart, updateQuantity, getCartTotal, getCartCount, initCart, MINIMUM_ORDER } from '@utils/cart';
@@ -84,7 +86,7 @@
   overlay?.addEventListener('click', closeCart);
 
   function renderCart() {
-    const items = Object.values(cartItems.get());
+    const items = Object.values(cartItems.get()) as any[];
     const count = getCartCount();
     const total = getCartTotal();
 
@@ -114,7 +116,7 @@
 
     // Render items
     const frag = document.createDocumentFragment();
-    items.forEach(item => {
+    items.forEach((item) => {
       const div = document.createElement('div');
       div.className = 'cart-item flex gap-3 bg-surface p-3 rounded-xl';
       div.innerHTML = `
@@ -176,7 +178,7 @@
 
   // Subscribe to store changes
   cartItems.subscribe(renderCart);
-  cartOpen.subscribe(isOpen => { if (isOpen) { openCart(); cartOpen.set(false); } });
+  cartOpen.subscribe((isOpen: boolean) => { if (isOpen) { openCart(); cartOpen.set(false); } });
 
   // Initial render
   renderCart();

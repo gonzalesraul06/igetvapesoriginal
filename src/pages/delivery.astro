@@ -3,18 +3,51 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
 
 const states = [
-  { name: 'New South Wales', slug: 'nsw', cities: ['Sydney', 'Newcastle', 'Wollongong', 'Central Coast', 'Coffs Harbour'] },
-  { name: 'Victoria', slug: 'vic', cities: ['Melbourne', 'Geelong', 'Ballarat', 'Bendigo', 'Shepparton'] },
-  { name: 'Queensland', slug: 'qld', cities: ['Brisbane', 'Gold Coast', 'Sunshine Coast', 'Cairns', 'Townsville'] },
-  { name: 'South Australia', slug: 'sa', cities: ['Adelaide', 'Mount Gambier', 'Whyalla'] },
-  { name: 'Western Australia', slug: 'wa', cities: ['Perth', 'Bunbury', 'Geraldton', 'Kalgoorlie'] },
-  { name: 'Tasmania', slug: 'tas', cities: ['Hobart', 'Launceston', 'Devonport'] },
-  { name: 'Northern Territory', slug: 'nt', cities: ['Darwin', 'Alice Springs'] },
-  { name: 'ACT', slug: 'act', cities: ['Canberra'] },
+  { name: 'New South Wales', slug: 'nsw', cities: [
+    { name: 'Sydney', slug: 'sydney' },
+    { name: 'Newcastle', slug: 'newcastle' },
+    { name: 'Wollongong', slug: 'wollongong' },
+    { name: 'Central Coast', slug: 'central-coast' },
+  ]},
+  { name: 'Victoria', slug: 'vic', cities: [
+    { name: 'Melbourne', slug: 'melbourne' },
+    { name: 'Geelong', slug: 'geelong' },
+    { name: 'Ballarat', slug: 'ballarat' },
+    { name: 'Bendigo', slug: 'bendigo' },
+  ]},
+  { name: 'Queensland', slug: 'qld', cities: [
+    { name: 'Brisbane', slug: 'brisbane' },
+    { name: 'Gold Coast', slug: 'gold-coast' },
+    { name: 'Sunshine Coast', slug: 'sunshine-coast' },
+    { name: 'Cairns', slug: 'cairns' },
+    { name: 'Townsville', slug: 'townsville' },
+    { name: 'Toowoomba', slug: 'toowoomba' },
+    { name: 'Rockhampton', slug: 'rockhampton' },
+    { name: 'Mackay', slug: 'mackay' },
+  ]},
+  { name: 'South Australia', slug: 'sa', cities: [
+    { name: 'Adelaide', slug: 'adelaide' },
+    { name: 'Mount Gambier', slug: 'mount-gambier' },
+  ]},
+  { name: 'Western Australia', slug: 'wa', cities: [
+    { name: 'Perth', slug: 'perth' },
+    { name: 'Bunbury', slug: 'bunbury' },
+  ]},
+  { name: 'Tasmania', slug: 'tas', cities: [
+    { name: 'Hobart', slug: 'hobart' },
+    { name: 'Launceston', slug: 'launceston' },
+  ]},
+  { name: 'Northern Territory', slug: 'nt', cities: [
+    { name: 'Darwin', slug: 'darwin' },
+    { name: 'Alice Springs', slug: 'alice-springs' },
+  ]},
+  { name: 'ACT', slug: 'act', cities: [
+    { name: 'Canberra', slug: 'canberra' },
+  ]},
 ];
 ---
 
-<BaseLayout title="Delivery Locations — IGET Vapes Australia-Wide Delivery" description="We deliver IGET vapes to all locations across Australia including Sydney, Melbourne, Brisbane, Perth, Adelaide and regional areas.">
+<BaseLayout title="Delivery Locations — IGET Vapes Australia-Wide Delivery" description="We deliver IGET vapes to all locations across Australia including Sydney, Melbourne, Brisbane, Perth, Adelaide and regional areas. Fast shipping from $10 AUD.">
   <Breadcrumbs items={[{ name: 'Delivery Locations' }]} />
 
   <div class="page-header">
@@ -24,23 +57,25 @@ const states = [
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
     {states.map(state => (
-      <div class="card p-4">
-        <h2 class="font-bold text-accent mb-2">{state.name}</h2>
-        <ul class="space-y-1 text-sm text-text-muted">
+      <div class="p-5" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg);">
+        <h2 class="font-bold text-accent mb-3">{state.name}</h2>
+        <ul class="space-y-1.5 text-sm">
           {state.cities.map(city => (
-            <li class="flex items-center gap-1.5">
-              <span class="text-green-500 text-xs">✓</span>
-              {city}
+            <li>
+              <a href={`/locations/${city.slug}`} class="flex items-center gap-1.5 text-text-muted hover:text-accent transition-colors duration-250">
+                <span class="text-green text-xs">✓</span>
+                {city.name}
+              </a>
             </li>
           ))}
-          <li class="text-text-muted/70 text-xs mt-1">+ all other {state.name} areas</li>
+          <li class="text-text-muted/60 text-xs mt-2">+ all other {state.name} areas</li>
         </ul>
       </div>
     ))}
   </div>
 
-  <div class="card p-6 mt-8 rounded-xl">
-    <h2 class="text-xl font-bold mb-3">Can't Find Your Location?</h2>
-    <p class="text-text-muted text-sm">We deliver to all Australian postcodes via Australia Post. If your area isn't listed above, don't worry — we still ship to you! Delivery times to remote areas may be slightly longer (7-10 business days).</p>
+  <div class="p-6 mt-8" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-xl);">
+    <h2 class="text-xl font-bold mb-3 tracking-tight">Can't Find Your Location?</h2>
+    <p class="text-text-muted text-sm" style="line-height: 1.75;">We deliver to all Australian postcodes via Australia Post. If your area isn't listed above, don't worry — we still ship to you! Delivery times to remote areas may be slightly longer (7-10 business days). <a href="/contact" class="text-accent hover:underline">Contact us</a> if you have any questions about delivery to your area.</p>
   </div>
 </BaseLayout>

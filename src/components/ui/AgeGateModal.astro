@@ -1,13 +1,17 @@
 <!-- Age verification modal -->
-<div id="age-gate" class="fixed inset-0 z-[100] hidden" style="background:rgba(0,0,0,0.88);backdrop-filter:blur(10px);">
+<div id="age-gate" class="fixed inset-0 z-[100] hidden" style="background:rgba(8,13,26,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);">
   <div class="fixed inset-0 flex items-center justify-center p-4">
-    <div class="w-full max-w-[400px] rounded-2xl bg-white p-8 text-center shadow-2xl">
-      <img src="/images/logo.svg" alt="IGET Vapes Original" class="mx-auto mb-6 h-12 w-auto" />
-      <p class="mb-6 text-sm leading-relaxed text-text-muted">This site contains products that are not suitable for minors. Please verify that you are 18 years of age or older.</p>
-      <p class="mb-6 text-base font-semibold text-text">Are you over 18 years of age?</p>
+    <div class="w-full max-w-[400px] bg-white p-8 sm:p-10 text-center" style="border-radius: var(--radius-xl); box-shadow: 0 32px 64px rgba(0,0,0,0.3);">
+      <div class="mb-7">
+        <span class="text-2xl font-extrabold tracking-tight text-text">IGET<span class="text-accent">.</span>VAPES</span>
+        <span class="block text-[9px] font-bold uppercase tracking-[0.25em] text-text-muted mt-1">Australia</span>
+      </div>
+      <div class="w-10 h-px bg-border mx-auto mb-6"></div>
+      <p class="mb-5 text-sm leading-relaxed text-text-muted">This site contains products that are not suitable for minors. Please verify that you are 18 years of age or older.</p>
+      <p class="mb-7 text-base font-semibold text-text">Are you over 18 years of age?</p>
       <div class="flex items-center justify-center gap-3">
-        <button id="age-yes" class="btn-primary rounded-xl px-8 py-2.5">Yes</button>
-        <button id="age-no" class="btn-secondary rounded-xl px-8 py-2.5">No</button>
+        <button id="age-yes" class="btn-primary px-10 py-2.5" style="border-radius: var(--radius-lg);">Yes, I am</button>
+        <button id="age-no" class="btn-secondary px-10 py-2.5" style="border-radius: var(--radius-lg);">No</button>
       </div>
     </div>
   </div>

@@ -10,8 +10,8 @@ const navItems = [
 ];
 ---
 
-<nav aria-label="Mobile quick navigation" class="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-border lg:hidden safe-area-bottom" style="box-shadow: 0 -2px 8px rgba(0,0,0,0.04);">
-  <div class="flex items-center justify-around py-1.5 px-1">
+<nav aria-label="Mobile quick navigation" class="fixed bottom-0 left-0 right-0 z-30 lg:hidden safe-area-bottom" style="background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(0,0,0,0.06); box-shadow: 0 -1px 12px rgba(0,0,0,0.04);">
+  <div class="flex items-center justify-around py-1 px-1">
     {navItems.map(item => {
       const isCart = item.href === '#cart';
       const isMenu = item.href === '#menu';
@@ -19,36 +19,36 @@ const navItems = [
 
       return isCart ? (
         <button
-          class="mobile-cart-btn flex min-h-[48px] flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-xs text-text-muted hover:text-accent transition-colors relative"
+          class="mobile-cart-btn flex min-h-[48px] flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-[10px] text-text-muted hover:text-accent transition-colors duration-200 relative"
           aria-label="Open Cart"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={item.icon} />
+          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
           </svg>
-          <span class="font-medium">{item.name}</span>
-          <span id="mobile-cart-count" class="absolute -top-0.5 right-1 bg-accent text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+          <span class="font-semibold tracking-wide">{item.name}</span>
+          <span id="mobile-cart-count" class="absolute -top-0.5 right-1 bg-accent text-white text-[9px] font-bold w-4 h-4 flex items-center justify-center hidden" style="border-radius: var(--radius-full);">0</span>
         </button>
       ) : isMenu ? (
         <button
-          class="mobile-nav-menu-btn flex min-h-[48px] flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-xs text-text-muted hover:text-accent transition-colors"
+          class="mobile-nav-menu-btn flex min-h-[48px] flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-[10px] text-text-muted hover:text-accent transition-colors duration-200"
           aria-label="Open Menu"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={item.icon} />
+          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
           </svg>
-          <span class="font-medium">{item.name}</span>
+          <span class="font-semibold tracking-wide">{item.name}</span>
         </button>
       ) : (
         <a
           href={item.href}
           class:list={[
-            'flex min-h-[48px] flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-xs transition-colors font-medium',
+            'flex min-h-[48px] flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-[10px] transition-colors duration-200 font-semibold tracking-wide',
             isActive ? 'text-accent' : 'text-text-muted hover:text-accent',
           ]}
           aria-current={isActive ? 'page' : undefined}
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={item.icon} />
+          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
           </svg>
           <span>{item.name}</span>
         </a>

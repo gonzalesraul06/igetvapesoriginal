@@ -36,14 +36,6 @@ const products = defineCollection({
   }),
 });
 
-const policies = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/policies' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-  }),
-});
-
 const locations = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/locations' }),
   schema: z.object({
@@ -53,4 +45,4 @@ const locations = defineCollection({
   }),
 });
 
-export const collections = { products, policies, locations };
+export const collections = { products, locations };

@@ -3,11 +3,11 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "build:win": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "npx astro dev",
+    "build": "npx astro build",
+    "build:win": "npx astro build",
+    "preview": "npx astro preview",
+    "astro": "npx astro"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.1.3",
