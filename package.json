@@ -7,7 +7,9 @@
     "build": "astro build",
     "build:win": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "wrangler deploy",
+    "deploy:dry": "wrangler deploy --dry-run"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.1.3",
