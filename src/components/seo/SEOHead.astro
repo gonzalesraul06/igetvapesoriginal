@@ -1,10 +1,12 @@
 ---
+import { buildMetaDescription, buildMetaTitle } from '@utils/seo';
+
 interface Props {
   title: string;
   description?: string;
   image?: string;
   canonical?: string;
-  type?: 'website' | 'product';
+  type?: 'website' | 'product' | 'article';
   noindex?: boolean;
   keywords?: string;
   publishedTime?: string;
@@ -13,18 +15,20 @@ interface Props {
 
 const {
   title,
-  description = "Buy IGET vapes online Australia. Shop 150+ disposable vape flavours — JNR Cruiser, IGET One, IGET Bar Pro, Alibarbar Ingot & more. Fast delivery Australia-wide from $30.",
+  description = 'Shop genuine IGET and Alibarbar vapes online in Australia with curated ranges, mix and match deals, and fast delivery nationwide.',
   image = '/images/categories/jnr-cruiser.webp',
   canonical,
   type = 'website',
   noindex = false,
-  keywords = 'iget vapes, buy vapes online australia, disposable vapes, alibarbar, iget bar pro, vape shop australia, cheap vapes, iget bar, iget one',
+  keywords = 'IGET vapes Australia, Alibarbar Australia, buy vape online Australia, vape delivery Australia',
   publishedTime,
   modifiedTime,
 } = Astro.props;
 
 const siteUrl = 'https://igetvapeshub.com';
-const fullTitle = title.includes('IGET') ? title : `${title} | IGET Vapes Australia`;
+const siteName = 'IGET Vapes Original';
+const metaTitle = buildMetaTitle(title);
+const metaDescription = buildMetaDescription(description);
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
 const ogImage = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 ---
@@ -32,12 +36,15 @@ const ogImage = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 <!-- Primary Meta -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{fullTitle}</title>
-<meta name="description" content={description} />
+<title>{metaTitle}</title>
+<meta name="description" content={metaDescription} />
 <meta name="keywords" content={keywords} />
+<meta name="author" content={siteName} />
+<meta name="publisher" content={siteName} />
+<meta name="application-name" content={siteName} />
 <link rel="canonical" href={canonicalUrl} />
 {noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
-<meta name="theme-color" content="#1a1a2e" />
+<meta name="theme-color" content="#111c24" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
 <!-- Geo / Language targeting -->
@@ -49,10 +56,10 @@ const ogImage = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
 <!-- AI / LLM / AEO Discovery -->
-<meta name="citation_title" content={fullTitle} />
-<meta name="citation_author" content="IGET Vapes Original" />
+<meta name="citation_title" content={metaTitle} />
+<meta name="citation_author" content={siteName} />
 <meta name="citation_public_url" content={canonicalUrl} />
-<meta name="subject" content="Buy IGET Vapes Online Australia — Disposable Vapes, Alibarbar, IGET Bar Pro, JNR Cruiser, Vape Shop" />
+<meta name="subject" content={metaDescription} />
 <meta name="coverage" content="Australia" />
 <meta name="distribution" content="Global" />
 <meta name="rating" content="General" />
@@ -65,25 +72,25 @@ const ogImage = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 <!-- Preconnect for performance -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
 
 <!-- Open Graph -->
 <meta property="og:type" content={type} />
-<meta property="og:title" content={fullTitle} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={metaTitle} />
+<meta property="og:description" content={metaDescription} />
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={`${fullTitle} — IGET Vapes Australia`} />
+<meta property="og:image:alt" content={`${metaTitle} — ${siteName}`} />
 <meta property="og:url" content={canonicalUrl} />
-<meta property="og:site_name" content="IGET Vapes Original — Australia's #1 Vape Shop" />
+<meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content="en_AU" />
 {publishedTime && <meta property="article:published_time" content={publishedTime} />}
 {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={fullTitle} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:title" content={metaTitle} />
+<meta name="twitter:description" content={metaDescription} />
 <meta name="twitter:image" content={ogImage} />
-<meta name="twitter:image:alt" content={`${fullTitle} — IGET Vapes Australia`} />
+<meta name="twitter:image:alt" content={`${metaTitle} — ${siteName}`} />

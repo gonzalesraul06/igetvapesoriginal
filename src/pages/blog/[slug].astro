@@ -51,6 +51,13 @@ if (productCategoryMap.length === 0) {
   );
 }
 
+const deliveryLinks = [
+  { name: 'Sydney delivery', href: '/locations/sydney' },
+  { name: 'Melbourne delivery', href: '/locations/melbourne' },
+  { name: 'Brisbane delivery', href: '/locations/brisbane' },
+  { name: 'Perth delivery', href: '/locations/perth' },
+];
+
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -78,21 +85,14 @@ const articleSchema = {
 ---
 
 <BaseLayout
-  title={`${post.title} | IGET Vapes Blog`}
+  title={post.title}
   description={post.excerpt}
   image={post.image}
   canonical={postUrl}
+  type="article"
+  publishedTime={post.date}
+  modifiedTime={post.date}
 >
-  <SchemaMarkup
-    type="breadcrumb"
-    data={{
-      items: [
-        { name: 'Home', url: siteUrl },
-        { name: 'Blog', url: `${siteUrl}/blog` },
-        { name: post.title, url: postUrl },
-      ],
-    }}
-  />
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 
   <Breadcrumbs items={[{ name: 'Blog', href: '/blog' }, { name: post.title }]} />
@@ -177,6 +177,17 @@ const articleSchema = {
             <span class="inline-block mt-3 text-xs text-accent font-medium">Shop Now →</span>
           </a>
         ))}
+      </div>
+    </section>
+
+    <section class="mt-10 border-t border-border pt-10">
+      <h2 class="text-xl font-bold mb-2">Australia Delivery Locations</h2>
+      <p class="text-sm text-text-muted mb-5">If you are checking availability by city, use these delivery hubs for faster location-specific guidance and shipping expectations.</p>
+      <div class="flex flex-wrap gap-3">
+        {deliveryLinks.map((link) => (
+          <a href={link.href} class="btn-secondary text-sm">{link.name}</a>
+        ))}
+        <a href="/delivery" class="btn-secondary text-sm">All delivery locations</a>
       </div>
     </section>
 

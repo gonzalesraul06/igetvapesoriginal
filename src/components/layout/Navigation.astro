@@ -1,5 +1,6 @@
 ---
 import { productCategories, footerSupport, footerService } from '@data/navigation';
+import LineIcon from '@components/ui/LineIcon.astro';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -16,7 +17,10 @@ const currentPath = Astro.url.pathname;
   <div class="lg:hidden">
     <a href="/mix-and-match" class="block">
       <div class="bg-gradient-to-r from-accent/20 to-accent/5 px-4 py-3 text-center border-b border-border">
-        <span class="text-accent font-bold text-sm">🔥 SALE — Mix & Match & Save!</span>
+        <span class="inline-flex items-center gap-2 text-accent font-bold text-sm">
+          <LineIcon name="sale" class="h-4 w-4" />
+          Mix & Match & Save
+        </span>
       </div>
     </a>
   </div>

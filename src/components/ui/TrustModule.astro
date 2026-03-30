@@ -1,0 +1,91 @@
+---
+interface StatItem {
+  label: string;
+  value: string;
+}
+
+interface LinkItem {
+  text: string;
+  href: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  reviewer?: string;
+  reviewedOn?: string;
+  bullets: string[];
+  stats?: StatItem[];
+  links?: LinkItem[];
+}
+
+const {
+  eyebrow = 'Trust and review',
+  title,
+  intro,
+  reviewer,
+  reviewedOn,
+  bullets,
+  stats = [],
+  links = [],
+} = Astro.props;
+---
+
+<section class="section-sm" data-reveal>
+  <div class="utility-panel p-6 lg:p-8">
+    <div class="grid gap-6 lg:grid-cols-[1.35fr_0.65fr] lg:items-start">
+      <div>
+        <span class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          {eyebrow}
+        </span>
+        <h2 class="mt-5 text-text">{title}</h2>
+        <p class="mt-4 max-w-3xl text-sm leading-8 text-text-muted lg:text-base">{intro}</p>
+        {(reviewer || reviewedOn) && (
+          <p class="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">
+            {reviewer && <span>Reviewed by {reviewer}</span>}
+            {reviewer && reviewedOn && <span> · </span>}
+            {reviewedOn && <span>Updated {reviewedOn}</span>}
+          </p>
+        )}
+      </div>
+
+      {stats.length > 0 && (
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          {stats.map((stat, index) => (
+            <article class="metric-card" data-reveal data-reveal-delay={String(index * 40)}>
+              <strong>{stat.value}</strong>
+              <span>{stat.label}</span>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <div class="mt-8 grid gap-4 lg:grid-cols-[1.25fr_0.75fr]">
+      <div class="grid gap-4">
+        {bullets.map((bullet, index) => (
+          <article class="highlight-card" data-reveal data-reveal-delay={String(50 + index * 40)}>
+            <p class="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-text-muted">Check {String(index + 1).padStart(2, '0')}</p>
+            <p class="mt-3 text-sm leading-8 text-text">{bullet}</p>
+          </article>
+        ))}
+      </div>
+
+      {links.length > 0 && (
+        <div class="card-flat p-6">
+          <p class="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-text-muted">Useful routes</p>
+          <div class="mt-5 grid gap-3">
+            {links.map((link) => (
+              <a href={link.href} class="btn-secondary justify-between text-sm">
+                <span>{link.text}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

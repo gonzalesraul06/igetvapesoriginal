@@ -10,44 +10,35 @@ const navItems = [
 ];
 ---
 
-<nav aria-label="Mobile quick navigation" class="fixed bottom-0 left-0 right-0 z-30 lg:hidden safe-area-bottom" style="background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(0,0,0,0.06); box-shadow: 0 -1px 12px rgba(0,0,0,0.04);">
-  <div class="flex items-center justify-around py-1 px-1">
-    {navItems.map(item => {
+<nav aria-label="Mobile quick navigation" class="mobile-bottom-nav fixed bottom-0 left-0 right-0 z-30 lg:hidden safe-area-bottom">
+  <div class="grid grid-cols-5 gap-1 px-2 py-2">
+    {navItems.map((item) => {
       const isCart = item.href === '#cart';
       const isMenu = item.href === '#menu';
       const isActive = !isCart && !isMenu && (currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)));
 
       return isCart ? (
-        <button
-          class="mobile-cart-btn flex min-h-[48px] flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-[10px] text-text-muted hover:text-accent transition-colors duration-200 relative"
-          aria-label="Open Cart"
-        >
-          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <button class="mobile-cart-btn mobile-nav-link relative min-h-[3.55rem] flex-col gap-1 text-[0.66rem]" aria-label="Open cart">
+          <svg class="h-[1.2rem] w-[1.2rem]" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
           </svg>
-          <span class="font-semibold tracking-wide">{item.name}</span>
-          <span id="mobile-cart-count" class="absolute -top-0.5 right-1 bg-accent text-white text-[9px] font-bold w-4 h-4 flex items-center justify-center hidden" style="border-radius: var(--radius-full);">0</span>
+          <span>{item.name}</span>
+          <span id="mobile-cart-count" class="absolute right-3 top-1.5 hidden min-h-[1rem] min-w-[1rem] items-center justify-center rounded-full bg-accent px-1 text-[0.55rem] font-bold text-white">0</span>
         </button>
       ) : isMenu ? (
-        <button
-          class="mobile-nav-menu-btn flex min-h-[48px] flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-[10px] text-text-muted hover:text-accent transition-colors duration-200"
-          aria-label="Open Menu"
-        >
-          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <button class="mobile-nav-menu-btn mobile-nav-link min-h-[3.55rem] flex-col gap-1 text-[0.66rem]" aria-label="Open menu">
+          <svg class="h-[1.2rem] w-[1.2rem]" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
           </svg>
-          <span class="font-semibold tracking-wide">{item.name}</span>
+          <span>{item.name}</span>
         </button>
       ) : (
         <a
           href={item.href}
-          class:list={[
-            'flex min-h-[48px] flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-[10px] transition-colors duration-200 font-semibold tracking-wide',
-            isActive ? 'text-accent' : 'text-text-muted hover:text-accent',
-          ]}
+          class:list={['mobile-nav-link min-h-[3.55rem] flex-col gap-1 text-[0.66rem]', isActive && 'is-active']}
           aria-current={isActive ? 'page' : undefined}
         >
-          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <svg class="h-[1.2rem] w-[1.2rem]" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
           </svg>
           <span>{item.name}</span>
@@ -58,30 +49,24 @@ const navItems = [
 </nav>
 
 <script>
-  document.querySelectorAll('.mobile-cart-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+  document.querySelectorAll('.mobile-cart-btn').forEach((button) => {
+    button.addEventListener('click', () => {
       document.getElementById('cart-toggle')?.click();
     });
   });
 
-  document.querySelectorAll('.mobile-nav-menu-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+  document.querySelectorAll('.mobile-nav-menu-btn').forEach((button) => {
+    button.addEventListener('click', () => {
       document.getElementById('mobile-menu-toggle')?.click();
     });
   });
 
-  // Sync cart count to mobile nav
   const observer = new MutationObserver(() => {
     const desktopCount = document.getElementById('cart-count');
     const mobileCount = document.getElementById('mobile-cart-count');
-    if (desktopCount && mobileCount) {
-      mobileCount.textContent = desktopCount.textContent ?? '0';
-      if (desktopCount.classList.contains('hidden')) {
-        mobileCount.classList.add('hidden');
-      } else {
-        mobileCount.classList.remove('hidden');
-      }
-    }
+    if (!desktopCount || !mobileCount) return;
+    mobileCount.textContent = desktopCount.textContent ?? '0';
+    mobileCount.classList.toggle('hidden', desktopCount.classList.contains('hidden'));
   });
 
   const cartCountEl = document.getElementById('cart-count');

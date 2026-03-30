@@ -324,7 +324,7 @@ export const blogPosts: BlogPost[] = [
 
 <h2>Cost Per Puff Comparison</h2>
 <ul>
-<li>S3 Pod (replacement): $30 ÷ 10,000 = $0.003/puff ⭐ Best value</li>
+<li>S3 Pod (replacement): $30 ÷ 10,000 = $0.003/puff (Best value)</li>
 <li>Alibarbar Ingot: $40 ÷ 9,000 = $0.0044/puff</li>
 <li>IGET Bar Pro: $48 ÷ 10,000 = $0.0048/puff</li>
 <li>IGET One: $55 ÷ 12,000 = $0.0046/puff</li>

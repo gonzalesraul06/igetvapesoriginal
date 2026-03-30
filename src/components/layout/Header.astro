@@ -1,150 +1,153 @@
 ﻿---
 import { topMenuLinks, productCategories } from '@data/navigation';
+
 const currentPath = Astro.url.pathname;
+const spotlightCategories = productCategories.filter((category) => category.slug !== 'mix-and-match');
+
+function compactLabel(label: string) {
+  return label.replace(/\d+\sPUFFS|SAVE/g, '').replace(/\s+/g, ' ').trim();
+}
 ---
-<header class="sticky top-0 z-40 glass border-b border-border/40" style="box-shadow: 0 1px 8px rgba(0,0,0,0.03);">
-  <!-- Top bar — desktop only -->
-  <div class="hidden lg:block border-b border-border/30">
-    <div class="container-site flex items-center justify-center gap-8 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.16em] text-text-muted">
-      {topMenuLinks.map(link => (
-        <a href={link.href} class="hover:text-accent transition-colors duration-200 py-0.5">{link.name}</a>
-      ))}
-    </div>
-  </div>
 
-  <!-- Main header row -->
-  <div class="container-site grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4 lg:grid-cols-[auto_1fr_auto] lg:gap-8 lg:py-5">
-    <!-- Mobile menu toggle -->
-    <div class="flex items-center lg:hidden">
-      <button id="mobile-menu-toggle" class="p-2 -ml-2 text-text hover:text-accent transition-colors" style="border-radius: var(--radius-md);" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-sidebar-nav">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </div>
-
-    <!-- Logo -->
-    <a href="/" class="mx-auto flex flex-shrink-0 items-center gap-3 group lg:justify-self-center">
-      <span class="text-text font-extrabold text-xl lg:text-2xl tracking-tight group-hover:text-accent transition-colors duration-200">
-        IGET<span class="text-accent">.</span>VAPES
-      </span>
-      <span class="hidden sm:inline-flex items-center text-[9.5px] font-bold uppercase tracking-[0.2em] text-text-light border-l border-border/60 pl-3 leading-none">Australia</span>
-    </a>
-
-    <div class="hidden lg:block"></div>
-
-    <!-- Right actions -->
-    <div class="flex items-center justify-self-end gap-0.5 lg:gap-1">
-      <a href="/account" class="hidden lg:flex p-2.5 text-text-muted hover:text-text hover:bg-surface/80 transition-all duration-200" style="border-radius: var(--radius-md);" aria-label="My Account">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-        </svg>
-      </a>
-
-      <button id="cart-toggle" class="relative p-2.5 text-text-muted hover:text-text hover:bg-surface/80 transition-all duration-200" style="border-radius: var(--radius-md);" aria-label="Shopping Cart">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-        </svg>
-        <span id="cart-count" class="absolute -top-0.5 -right-0.5 bg-accent text-white text-[10px] font-bold min-w-[18px] h-[18px] flex items-center justify-center px-1 hidden" style="border-radius: var(--radius-full);">0</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Product categories nav — desktop -->
-  <nav class="hidden lg:block border-t border-border/30" aria-label="Product categories">
-    <div class="container-site py-3">
-      <div class="flex flex-wrap items-center justify-center gap-2">
-        {productCategories.map(cat => (
-          <a
-            href={cat.href}
-            class:list={[
-              'group inline-flex min-h-[40px] items-center justify-center px-5 py-2 text-center transition-all duration-250',
-              currentPath.startsWith(cat.href)
-                ? 'bg-accent text-white shadow-sm'
-                : 'bg-surface/60 text-text-muted hover:bg-white hover:text-text hover:shadow-sm',
-            ]}
-            style={`border-radius: var(--radius-full);`}
-          >
-            <span class="text-[10.5px] font-bold uppercase tracking-[0.08em] leading-none">{cat.name}</span>
-          </a>
-        ))}
+<header class="site-header sticky top-0 z-40 glass">
+  <div class="utility-bar hidden md:block">
+    <div class="container-site flex items-center justify-between gap-4 py-3">
+      <p class="header-mark">
+        <span class="eyebrow-dot"></span>
+        Adults 18+ only. Genuine stock. Fast dispatch.
+      </p>
+      <div class="flex items-center gap-6 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-text-muted">
+        <span>150+ flavours</span>
+        <span>Nationwide delivery</span>
+        <a href="mailto:info@igetvapeshub.com" class="hover:text-text transition-colors">info@igetvapeshub.com</a>
       </div>
     </div>
-  </nav>
+  </div>
+
+  <div class="container-site py-4 lg:py-5">
+    <div class="grid grid-cols-[auto_1fr_auto] items-center gap-3 lg:grid-cols-[auto_1fr_auto] lg:gap-8">
+      <div class="flex items-center gap-2">
+        <button
+          id="mobile-menu-toggle"
+          class="header-action lg:hidden"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="mobile-sidebar-nav"
+        >
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+
+        <a href="/" class="header-logo">
+          <strong>IGET<span class="text-gradient">.Original</span></strong>
+          <span>Premium adult retail for Australia</span>
+        </a>
+      </div>
+
+      <nav class="hidden items-center justify-center gap-1.5 lg:flex" aria-label="Primary">
+        {topMenuLinks.map((link) => {
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          return (
+            <a href={link.href} class:list={['nav-link', isActive && 'is-active']} aria-current={isActive ? 'page' : undefined}>
+              {link.name}
+            </a>
+          );
+        })}
+      </nav>
+
+      <div class="flex items-center justify-self-end gap-2">
+        <a href="/mix-and-match" class="btn-secondary hidden xl:inline-flex">Bundle Deals</a>
+
+        <a href="/account" class="header-action hidden lg:inline-flex" aria-label="My Account">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+          </svg>
+        </a>
+
+        <button id="cart-toggle" class="header-action relative" aria-label="Shopping Cart">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+          </svg>
+          <span id="cart-count" class="absolute -right-1 -top-1 hidden min-h-[1.2rem] min-w-[1.2rem] items-center justify-center rounded-full bg-accent px-1 text-[0.62rem] font-bold text-white">0</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="hidden items-center gap-4 border-t border-border/50 pt-4 lg:flex">
+      <span class="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-text-muted">Curated Ranges</span>
+      <div class="flex flex-wrap items-center gap-2">
+        {spotlightCategories.map((category) => {
+          const isActive = currentPath.startsWith(category.href);
+          return (
+            <a href={category.href} class:list={['category-pill', isActive && 'is-active']} aria-current={isActive ? 'page' : undefined}>
+              {compactLabel(category.name)}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </div>
 </header>
 
-<!-- Mobile sidebar overlay -->
-<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/40 z-[45] hidden lg:hidden backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[45] hidden bg-black/45 opacity-0 backdrop-blur-sm transition-opacity duration-300 lg:hidden"></div>
 
-<!-- Mobile sidebar -->
-<nav id="mobile-sidebar-nav" aria-hidden="true" class="fixed top-0 left-0 bottom-0 z-[50] w-[85%] max-w-sm bg-white transform -translate-x-full transition-transform duration-300 ease-out flex flex-col lg:hidden" style="box-shadow: 8px 0 40px rgba(0,0,0,0.1);">
-  <div class="flex items-center justify-between p-6 border-b border-border/50">
-    <span class="font-extrabold text-text text-lg tracking-tight">IGET<span class="text-accent">.</span>VAPES</span>
-    <button id="close-mobile-menu" class="p-2 text-text-muted hover:text-text transition-colors" style="border-radius: var(--radius-md);" aria-label="Close menu">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+<nav
+  id="mobile-sidebar-nav"
+  aria-hidden="true"
+  class="mobile-drawer fixed inset-y-0 left-0 z-[50] flex w-[86%] max-w-sm -translate-x-full flex-col transition-transform duration-300 ease-out lg:hidden"
+>
+  <div class="flex items-center justify-between border-b border-border/50 px-6 py-6">
+    <div class="header-logo">
+      <strong>IGET<span class="text-gradient">.Original</span></strong>
+      <span>Premium adult retail</span>
+    </div>
+    <button id="close-mobile-menu" class="header-action h-10 w-10" aria-label="Close menu">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 
-  <div class="flex-1 overflow-y-auto overscroll-contain">
-    <!-- Product categories -->
-    <div class="p-6 pb-4">
-      <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-text-light mb-4">Shop by Category</p>
-      <ul class="space-y-1">
-        {productCategories.map(cat => (
-          <li>
-            <a
-              href={cat.href}
-              class:list={[
-                'flex items-center justify-between py-3 px-4 text-sm font-medium transition-all duration-200',
-                currentPath.startsWith(cat.href)
-                  ? 'bg-accent-light text-accent'
-                  : 'text-text hover:bg-surface',
-              ]}
-              style="border-radius: var(--radius-lg);"
-            >
-              <span>{cat.name}</span>
-              <svg class="w-4 h-4 text-text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </a>
-          </li>
-        ))}
-      </ul>
+  <div class="flex-1 space-y-6 overflow-y-auto px-6 py-6">
+    <div class="utility-note">
+      <p class="text-sm font-semibold text-text">Genuine devices, discreet shipping, and a clear adult-only shopping experience.</p>
     </div>
 
-    <div class="divider mx-6"></div>
-
-    <!-- Page links -->
-    <div class="p-6 pb-4">
-      <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-text-light mb-4">Pages</p>
-      <ul class="space-y-1">
-        {topMenuLinks.map(link => (
-          <li>
-            <a
-              href={link.href}
-              class:list={[
-                'block py-3 px-4 text-sm font-medium transition-all duration-200',
-                currentPath === link.href
-                  ? 'bg-accent-light text-accent'
-                  : 'text-text-muted hover:bg-surface hover:text-text',
-              ]}
-              style="border-radius: var(--radius-lg);"
-            >
+    <div>
+      <p class="mb-3 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-text-muted">Explore</p>
+      <div class="grid gap-2">
+        {topMenuLinks.map((link) => {
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          return (
+            <a href={link.href} class:list={['mobile-nav-link justify-start', isActive && 'is-active']} aria-current={isActive ? 'page' : undefined}>
               {link.name}
             </a>
-          </li>
-        ))}
-      </ul>
+          );
+        })}
+      </div>
     </div>
 
-    <div class="divider mx-6"></div>
+    <div>
+      <p class="mb-3 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-text-muted">Collections</p>
+      <div class="grid gap-2">
+        {spotlightCategories.map((category) => {
+          const isActive = currentPath.startsWith(category.href);
+          return (
+            <a href={category.href} class:list={['mobile-nav-link justify-between px-4', isActive && 'is-active']} aria-current={isActive ? 'page' : undefined}>
+              <span>{compactLabel(category.name)}</span>
+              <svg class="h-4 w-4 text-text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          );
+        })}
+      </div>
+    </div>
 
-    <!-- Account -->
-    <div class="p-6">
-      <a href="/account" class="flex items-center gap-3 py-3 px-4 text-sm font-semibold text-text hover:bg-surface transition-colors" style="border-radius: var(--radius-lg);">
-        <svg class="w-5 h-5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-        Account / Log In
-      </a>
+    <div class="grid gap-3">
+      <a href="/mix-and-match" class="btn-primary justify-center">Shop Bundle Deals</a>
+      <a href="/account" class="mobile-action-link justify-center">Account</a>
     </div>
   </div>
 </nav>
@@ -172,7 +175,7 @@ const currentPath = Astro.url.pathname;
   function closeSidebar() {
     sidebar?.classList.add('-translate-x-full');
     overlay?.classList.add('opacity-0');
-    setTimeout(() => overlay?.classList.add('hidden'), 300);
+    window.setTimeout(() => overlay?.classList.add('hidden'), 300);
     document.body.style.overflow = '';
     setExpandedState(false);
   }
@@ -183,7 +186,7 @@ const currentPath = Astro.url.pathname;
   sidebarLinks.forEach((link) => link.addEventListener('click', closeSidebar));
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && !sidebar?.classList.contains('-translate-x-full')) {
+    if (event.key === 'Escape' && sidebar && !sidebar.classList.contains('-translate-x-full')) {
       closeSidebar();
       toggleBtn?.focus();
     }

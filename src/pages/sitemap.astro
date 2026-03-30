@@ -2,22 +2,26 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
-import SchemaMarkup from '@components/seo/SchemaMarkup.astro';
 import { blogPosts } from '@data/blog-posts';
 
 const products = await getCollection('products');
-const siteUrl = 'https://igetvapeshub.com';
+const locations = await getCollection('locations');
+
+function getCityName(title: string, id: string) {
+  const derived = title.replace(/^IGET Vapes\s+/, '').split(/\s*[—–-]\s*/)[0].trim();
+  if (derived) return derived;
+  return id.split('-').map((segment) => `${segment.charAt(0).toUpperCase()}${segment.slice(1)}`).join(' ');
+}
 ---
 
 <BaseLayout
-  title="Sitemap — IGET Vapes Australia | All Pages & Products"
-  description="Browse the complete sitemap of IGET Vapes Original. Find all product categories, individual flavours, blog posts, and informational pages on Australia's #1 online vape shop."
+  title="Sitemap | IGET Vapes"
+  description="Browse the full IGET Vapes Original sitemap, including product collections, flavour pages, blog posts, and Australia delivery locations."
 >
-  <SchemaMarkup type="breadcrumb" data={{ items: [{ name: 'Home', url: siteUrl }, { name: 'Sitemap', url: `${siteUrl}/sitemap` }] }} />
   <Breadcrumbs items={[{ name: 'Sitemap' }]} />
 
   <h1 class="text-3xl font-extrabold mb-3">Sitemap</h1>
-  <p class="text-text-muted mb-10 max-w-2xl">Browse every page on IGET Vapes Original — Australia's #1 online vape shop. Find product categories, individual flavours, blog guides, and informational pages.</p>
+  <p class="text-text-muted mb-10 max-w-2xl">Browse every page on IGET Vapes Original, including product categories, flavour pages, city delivery hubs, blog guides, and key store information.</p>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     <!-- Main Pages -->
@@ -41,6 +45,21 @@ const siteUrl = 'https://igetvapeshub.com';
         <li><a href="/payment-methods" class="text-text hover:text-accent transition-colors">Payment Methods</a></li>
         <li><a href="/privacy-policy" class="text-text hover:text-accent transition-colors">Privacy Policy</a></li>
         <li><a href="/terms-and-conditions" class="text-text hover:text-accent transition-colors">Terms & Conditions</a></li>
+      </ul>
+    </div>
+
+    <!-- Delivery Locations -->
+    <div>
+      <h2 class="text-lg font-bold mb-4 text-accent">Delivery Locations</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/delivery" class="text-text hover:text-accent transition-colors font-medium">Australia Delivery Hub</a></li>
+        {locations.map((location) => (
+          <li>
+            <a href={`/locations/${location.id}`} class="text-text hover:text-accent transition-colors">
+              {getCityName(location.data.title, location.id)}
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
 

@@ -1,0 +1,372 @@
+---
+import ComparisonCards from '@components/ui/ComparisonCards.astro';
+import TrustModule from '@components/ui/TrustModule.astro';
+import { MINIMUM_ORDER } from '@utils/storeConfig';
+
+interface Category {
+  name: string;
+  slug: string;
+  href: string;
+  image: string;
+  price: number;
+  puffs: string;
+  badge?: string | null;
+  description: string;
+  highlights: string[];
+  productImages: string[];
+  angle: string;
+}
+
+interface Faq {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  categories: Category[];
+  faqs: Faq[];
+}
+
+const { categories, faqs } = Astro.props;
+
+const featured = categories.slice(0, 3);
+
+const differentiators = [
+  {
+    title: 'Curated rather than cluttered',
+    copy: 'The storefront is structured around ranges, use-cases, and bundle logic so adults can make fast, confident choices.',
+  },
+  {
+    title: 'Trust signals surfaced early',
+    copy: 'Authenticity, shipping expectations, order minimums, and support language appear before checkout friction appears.',
+  },
+  {
+    title: 'Premium by restraint',
+    copy: 'Bolder typography, warmer surfaces, and cleaner spacing replace the generic discount-store look common in the category.',
+  },
+  {
+    title: 'Designed to convert on mobile',
+    copy: 'The navigation, card hierarchy, and bottom actions stay clear on small screens where most visits become buying sessions.',
+  },
+];
+
+const processSteps = [
+  {
+    title: 'Choose a device line',
+    copy: 'Start with the format that fits how you vape: high-puff devices, compact options, or refillable pod value.',
+  },
+  {
+    title: 'Build the right order',
+    copy: `Use flavour cues, bundle deals, and quantity controls to shape an order that clears the $${MINIMUM_ORDER} minimum quickly.`,
+  },
+  {
+    title: 'Confirm and dispatch',
+    copy: 'Place the order, receive manual payment instructions, and get discreet delivery sent across Australia.',
+  },
+];
+
+const trustBullets = [
+  `The storefront surfaces adult-only rules, the $${MINIMUM_ORDER} minimum order, and delivery expectations before checkout so the buying conditions are explicit early.`,
+  'Ranges are curated around actual use-cases like heavy use, compact value, refillable savings, and dense vapour instead of forcing adults through an undifferentiated flavour wall.',
+  'Support, payment follow-up, and delivery guidance route through a live team inbox so order and shipping questions can be handled directly rather than disappearing into generic automation.',
+  'Location pages, shipping guidance, and collection-specific buying notes create a clearer purchase path for Australian customers comparing both product fit and dispatch coverage.',
+];
+
+const trustStats = [
+  { label: 'Core device families', value: '7 curated lines' },
+  { label: 'Australia delivery layer', value: '35+ city pages' },
+  { label: 'Minimum order clarity', value: `$${MINIMUM_ORDER} upfront` },
+];
+
+const trustLinks = [
+  { text: 'Delivery hub', href: '/delivery' },
+  { text: 'About the store', href: '/about' },
+  { text: 'Support and contact', href: '/contact' },
+];
+
+const comparisonItems = [
+  {
+    tag: 'Longest use',
+    title: 'Choose JNR Cruiser if you want fewer reorders.',
+    copy: 'The highest-capacity route in the catalogue, aimed at adults who want stronger all-day longevity and less frequent cart rebuilding.',
+    href: '/products/jnr-cruiser',
+    cta: 'Compare JNR Cruiser',
+  },
+  {
+    tag: 'Best overall value',
+    title: 'Choose Bar Pro if flavour range matters most.',
+    copy: 'The best mainstream balance of puff count, flavour breadth, and accessible entry price for repeat orders and mix-and-match baskets.',
+    href: '/products/iget-bar-pro',
+    cta: 'Compare Bar Pro',
+  },
+  {
+    tag: 'Lowest running cost',
+    title: 'Choose S3 if you want the smarter refill path.',
+    copy: 'Buy the battery once, then rotate through lower-cost pods when you want fresh flavour without replacing the entire device each time.',
+    href: '/products/iget-bar-plus-s3',
+    cta: 'Compare the S3 system',
+  },
+];
+
+---
+
+<section class="hero-shell mb-8 lg:mb-10" data-reveal>
+  <div class="hero-grid">
+    <div class="hero-copy" data-reveal data-reveal-delay="40">
+      <span class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Adults-only premium retail
+      </span>
+
+      <h1 class="display-title mt-6 max-w-4xl text-text">
+        A sharper way to shop
+        <span class="text-gradient">IGET and Alibarbar</span>
+        in Australia.
+      </h1>
+
+      <p class="lead-copy mt-6">
+        Genuine devices, cleaner storytelling, and a storefront designed to make adult purchase decisions feel deliberate, trustworthy, and visually refined from the first scroll.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="#collections" class="btn-primary">Shop Collections</a>
+        <a href="/mix-and-match" class="btn-secondary">Build a Bundle</a>
+      </div>
+
+      <div class="pill-row mt-8">
+        <div class="pill-chip"><span class="chip-mark"></span><span><strong>Authentic stock</strong> only</span></div>
+        <div class="pill-chip"><span class="chip-mark"></span><span><strong>Discreet</strong> shipping AU-wide</span></div>
+        <div class="pill-chip"><span class="chip-mark"></span><span><strong>150+</strong> flavours available</span></div>
+        <div class="pill-chip"><span class="chip-mark"></span><span><strong>${MINIMUM_ORDER}</strong> minimum checkout</span></div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="hero-panel" data-reveal data-reveal-delay="110">
+        <p class="text-[0.72rem] font-bold uppercase tracking-[0.18em] text-text-muted">Selected for right now</p>
+        <div class="mt-4 space-y-3">
+          {featured.map((category) => (
+            <a href={category.href} class="group flex items-center gap-3 rounded-[1.4rem] border border-border/50 bg-white/50 p-3 transition-all duration-200 hover:-translate-y-1 hover:border-accent/25 hover:shadow-[var(--shadow-sm)]">
+              <div class="flex h-20 w-20 items-center justify-center rounded-[1.2rem] bg-[linear-gradient(135deg,rgba(15,124,114,0.08),rgba(241,164,91,0.16))]">
+                <img src={category.image} alt={category.name} class="h-16 w-16 object-contain" loading="lazy" />
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-2">
+                  {category.badge && <span class="badge-new">{category.badge}</span>}
+                  <span class="collection-chip">{category.puffs}</span>
+                </div>
+                <h2 class="mt-3 text-2xl text-text transition-colors group-hover:text-accent-dark">{category.name}</h2>
+                <div class="collection-meta mt-2">
+                  <span>From ${category.price}</span>
+                  <span>Best for {category.angle}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="quote-card" data-reveal data-reveal-delay="180">
+        <p class="text-[0.72rem] font-bold uppercase tracking-[0.18em] text-white/46">Store promise</p>
+        <p class="mt-4 text-lg leading-8 text-white">
+          "The experience should feel more like a considered product launch than a generic vape catalogue. Clear proof, sharp copy, zero clutter."
+        </p>
+        <div class="mt-6 grid grid-cols-3 gap-3 text-center">
+          <div>
+            <strong class="block text-2xl">4.9/5</strong>
+            <small class="text-[0.7rem] uppercase tracking-[0.16em]">Average rating</small>
+          </div>
+          <div>
+            <strong class="block text-2xl">Same day</strong>
+            <small class="text-[0.7rem] uppercase tracking-[0.16em]">Fast packing</small>
+          </div>
+          <div>
+            <strong class="block text-2xl">Adults only</strong>
+            <small class="text-[0.7rem] uppercase tracking-[0.16em]">Age gated</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" data-reveal>
+  <div class="flex flex-wrap items-center gap-3">
+    <span class="trust-badge">100% genuine devices</span>
+    <span class="trust-badge">Discreet packaging</span>
+    <span class="trust-badge">Rechargeable premium lines</span>
+    <span class="trust-badge">Bundle-led value</span>
+  </div>
+</section>
+
+<section id="collections" class="section pt-4">
+  <div class="section-header" data-reveal>
+    <span class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Curated collections
+    </span>
+    <h2 class="mt-5 text-text">Choose the line, then lock in the flavour.</h2>
+    <p>
+      Each range is positioned by use-case, price point, and draw style so adults can compare quickly without wading through noise.
+    </p>
+  </div>
+
+  <div class="collection-grid">
+    {categories.map((category, index) => (
+      <article class="collection-card" data-reveal data-reveal-delay={String(index * 45)}>
+        <a href={category.href} class="collection-media">
+          <img src={category.image} alt={category.name} loading="lazy" />
+        </a>
+
+        <div class="mt-5 flex items-center justify-between gap-3">
+          <div class="flex flex-wrap gap-2">
+            {category.badge && <span class="badge-new">{category.badge}</span>}
+            <span class="collection-chip">{category.puffs}</span>
+          </div>
+          <p class="collection-price">${category.price}</p>
+        </div>
+
+        <h3 class="mt-4 text-3xl text-text">{category.name}</h3>
+        <p class="mt-3 text-sm leading-7 text-text-muted">{category.description}</p>
+
+        <ul class="mt-4 space-y-2 text-sm text-text-muted">
+          {category.highlights.slice(0, 3).map((highlight) => (
+            <li class="flex items-center gap-2">
+              <span class="chip-mark"></span>
+              <span>{highlight}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-6 flex items-center justify-between gap-3">
+          <span class="text-xs font-semibold uppercase tracking-[0.16em] text-text-muted">Best for {category.angle}</span>
+          <a href={category.href} class="btn-secondary">View range</a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="section">
+  <div class="story-grid">
+    <div class="utility-panel" data-reveal>
+      <span class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Creative direction
+      </span>
+      <h2 class="mt-5 text-4xl text-text lg:text-5xl">Why the experience feels different.</h2>
+      <p class="mt-4 text-base leading-8">
+        Most competitors still look like templates. This redesign treats the storefront like a premium adult product: warmer editorial tones, stronger hierarchy, clearer service proof, and a calmer purchase path.
+      </p>
+      <div class="metric-grid mt-8">
+        <div class="metric-card">
+          <strong>Trust first</strong>
+          <span>Authenticity, age gate, shipping clarity</span>
+        </div>
+        <div class="metric-card">
+          <strong>Designed to scan</strong>
+          <span>Intent-led sections and cleaner cards</span>
+        </div>
+        <div class="metric-card">
+          <strong>Conversion-led</strong>
+          <span>Bundle cues and checkout expectations</span>
+        </div>
+        <div class="metric-card">
+          <strong>Mobile weighted</strong>
+          <span>Persistent actions and reduced clutter</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-4">
+      {differentiators.map((item, index) => (
+        <article class="highlight-card" data-reveal data-reveal-delay={String(60 + index * 40)}>
+          <p class="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-text-muted">0{index + 1}</p>
+          <h3 class="mt-3 text-3xl text-text">{item.title}</h3>
+          <p class="mt-3 text-sm">{item.copy}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header" data-reveal>
+    <span class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Ordering flow
+    </span>
+    <h2 class="mt-5 text-text">A purchase journey built for clarity.</h2>
+    <p>
+      The structure should move visitors from interest to confidence fast: understand the range, configure the order, and know exactly what happens next.
+    </p>
+  </div>
+
+  <div class="process-grid">
+    {processSteps.map((step, index) => (
+      <article class="process-step" data-reveal data-reveal-delay={String(index * 50)}>
+        <span class="process-step-number">0{index + 1}</span>
+        <h3 class="text-3xl text-text">{step.title}</h3>
+        <p class="mt-3 text-sm">{step.copy}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<TrustModule
+  eyebrow="Store authority"
+  title="Why the retail layer is built to earn trust, not fake it."
+  intro="The strongest search and conversion pages explain how stock is positioned, how orders are handled, and who is accountable for support. This section makes those signals explicit."
+  reviewer="IGET Vapes Hub merchandising and support team"
+  reviewedOn="March 2026"
+  bullets={trustBullets}
+  stats={trustStats}
+  links={trustLinks}
+/>
+
+<ComparisonCards
+  eyebrow="High-intent comparison"
+  title="Start with the range that matches how you actually buy."
+  intro="Adults rarely need every model explained the same way. Most shoppers want the shortest path to the right format: longest life, broadest flavour spread, or lowest long-run spend."
+  items={comparisonItems}
+/>
+
+<section class="section-sm" data-reveal>
+  <div class="cta-band">
+    <div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+      <div>
+        <p class="text-[0.72rem] font-bold uppercase tracking-[0.18em] text-white/48">Value route</p>
+        <h2 class="mt-3 text-4xl lg:text-5xl">Want the most economical path? Start with the S3 ecosystem.</h2>
+        <p class="mt-4 max-w-2xl text-sm leading-7 lg:text-base">
+          Buy the rechargeable kit once, then rotate through replacement pods when you want fresh flavour without re-buying the battery hardware every time.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <a href="/products/iget-bar-plus-s3" class="btn-primary">Shop the S3 Kit</a>
+        <a href="/products/iget-bar-plus-s3-pod" class="btn-secondary">View replacement pods</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header" data-reveal>
+    <span class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Questions before checkout
+    </span>
+    <h2 class="mt-5 text-text">What adults ask before they order.</h2>
+    <p>
+      The answers are framed to reduce hesitation: authenticity, puff count, delivery coverage, and the best-value way to buy.
+    </p>
+  </div>
+
+  <div class="faq-list">
+    {faqs.map((faq, index) => (
+      <details class="faq-item" data-reveal data-reveal-delay={String(index * 35)}>
+        <summary>{faq.q}</summary>
+        <p>{faq.a}</p>
+      </details>
+    ))}
+  </div>
+</section>

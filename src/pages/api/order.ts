@@ -1,96 +1,168 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { sendOrderEmails } from '@lib/email';
-
-const MINIMUM_ORDER = 250;
-
-const SHIPPING_RATES: Record<string, number> = {
-  ACT: 10, NSW: 10, VIC: 10,
-  QLD: 15, SA: 15,
-  WA: 20, TAS: 20,
-  NT: 25,
-};
+import { getCollection } from 'astro:content';
+import { sendOrderEmails, getSupportEmailAddress, isEmailConfigured, type OrderLineItem } from '@lib/email';
+import { MINIMUM_ORDER, SHIPPING_RATES } from '@utils/storeConfig';
 
 const VALID_PAYMENTS = ['bank-transfer', 'payid', 'bitcoin'];
+
+interface RawOrderItem {
+  categorySlug?: unknown;
+  flavourSlug?: unknown;
+  quantity?: unknown;
+}
+
+function jsonResponse(body: Record<string, unknown>, status: number) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
+function normalizeString(value: unknown): string {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function isValidPostcode(value: string): boolean {
+  return /^[0-9]{4}$/.test(value);
+}
+
+function isRawOrderItem(value: unknown): value is RawOrderItem {
+  return typeof value === 'object' && value !== null;
+}
+
+async function buildVerifiedItems(rawItems: unknown[]): Promise<OrderLineItem[] | null> {
+  const products = await getCollection('products');
+  const productMap = new Map(products.map((entry) => [entry.data.slug, entry.data]));
+  const verifiedItems: OrderLineItem[] = [];
+
+  for (const rawItem of rawItems) {
+    if (!isRawOrderItem(rawItem)) {
+      return null;
+    }
+
+    const categorySlug = normalizeString(rawItem.categorySlug);
+    const flavourSlug = normalizeString(rawItem.flavourSlug);
+    const quantity = Number(rawItem.quantity);
+
+    if (!categorySlug || !flavourSlug || !Number.isInteger(quantity) || quantity <= 0 || quantity > 99) {
+      return null;
+    }
+
+    const product = productMap.get(categorySlug);
+    const flavour = product?.flavours.find((entry) => entry.slug === flavourSlug);
+
+    if (!product || !flavour || !flavour.inStock) {
+      return null;
+    }
+
+    verifiedItems.push({
+      categorySlug,
+      flavourSlug,
+      name: flavour.name,
+      quantity,
+      price: flavour.price,
+    });
+  }
+
+  return verifiedItems;
+}
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
 
-    const { firstName, lastName, email, phone, address, address2, city, state, postcode, notes, payment, items, subtotal } = body;
+    const firstName = normalizeString(body.firstName);
+    const lastName = normalizeString(body.lastName);
+    const email = normalizeString(body.email).toLowerCase();
+    const phone = normalizeString(body.phone);
+    const address = normalizeString(body.address);
+    const address2 = normalizeString(body.address2);
+    const city = normalizeString(body.city);
+    const state = normalizeString(body.state).toUpperCase();
+    const postcode = normalizeString(body.postcode);
+    const notes = normalizeString(body.notes);
+    const payment = normalizeString(body.payment);
+    const rawItems = Array.isArray(body.items) ? body.items : [];
+    const submittedSubtotal = typeof body.subtotal === 'number' ? body.subtotal : Number.NaN;
 
-    // Validation
     if (!firstName || !lastName || !email || !phone || !address || !city || !state || !postcode || !payment) {
-      return new Response(JSON.stringify({ error: 'All shipping fields are required.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return jsonResponse({ error: 'All shipping fields are required.' }, 400);
     }
 
-    if (!items || !Array.isArray(items) || items.length === 0) {
-      return new Response(JSON.stringify({ error: 'Cart is empty.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+    if (!rawItems.length) {
+      return jsonResponse({ error: 'Cart is empty.' }, 400);
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return new Response(JSON.stringify({ error: 'Invalid email address.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+    if (!isValidEmail(email)) {
+      return jsonResponse({ error: 'Invalid email address.' }, 400);
     }
 
-    if (!/^[0-9]{4}$/.test(postcode)) {
-      return new Response(JSON.stringify({ error: 'Invalid Australian postcode.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+    if (!isValidPostcode(postcode)) {
+      return jsonResponse({ error: 'Invalid Australian postcode.' }, 400);
     }
 
     if (!SHIPPING_RATES[state]) {
-      return new Response(JSON.stringify({ error: 'Invalid Australian state/territory.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return jsonResponse({ error: 'Invalid Australian state or territory.' }, 400);
     }
 
     if (!VALID_PAYMENTS.includes(payment)) {
-      return new Response(JSON.stringify({ error: 'Invalid payment method.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return jsonResponse({ error: 'Invalid payment method.' }, 400);
     }
 
-    // Server-side minimum order check
-    if (typeof subtotal !== 'number' || subtotal < MINIMUM_ORDER) {
-      return new Response(JSON.stringify({ error: `Minimum order is $${MINIMUM_ORDER} AUD.` }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+    const items = await buildVerifiedItems(rawItems);
+    if (!items) {
+      return jsonResponse({ error: 'One or more cart items are invalid or no longer available. Please review your cart and try again.' }, 400);
     }
 
-    // Calculate shipping server-side (don't trust client value)
+    const subtotal = Number(items.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2));
+
+    if (!Number.isFinite(submittedSubtotal) || Math.abs(submittedSubtotal - subtotal) > 0.01) {
+      return jsonResponse({ error: 'Cart prices changed before checkout. Review the order summary and submit again.' }, 409);
+    }
+
+    if (subtotal < MINIMUM_ORDER) {
+      return jsonResponse({ error: `Minimum order is $${MINIMUM_ORDER} AUD.` }, 400);
+    }
+
+    if (!isEmailConfigured()) {
+      return jsonResponse({ error: `Email service is not configured yet. Please contact us directly at ${getSupportEmailAddress()}.` }, 503);
+    }
+
     const shipping = SHIPPING_RATES[state];
-    const total = subtotal + shipping;
+    const total = Number((subtotal + shipping).toFixed(2));
 
     const orderRef = await sendOrderEmails({
-      firstName, lastName, email, phone,
+      firstName,
+      lastName,
+      email,
+      phone,
       address: address2 ? `${address}, ${address2}` : address,
-      city, state, postcode, payment, notes: notes || '',
-      items, subtotal, shipping, total,
+      city,
+      state,
+      postcode,
+      payment,
+      notes,
+      items,
+      subtotal,
+      shipping,
+      total,
     });
 
-    return new Response(JSON.stringify({ success: true, orderRef, message: 'Order placed successfully!' }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return jsonResponse({ success: true, orderRef, message: 'Order placed successfully.' }, 200);
   } catch (err: any) {
     console.error('Order submission error:', err);
-    return new Response(JSON.stringify({ error: 'Failed to place order. Please try again.' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const supportEmail = getSupportEmailAddress();
+    const message = String(err?.message || '');
+    if (message.includes('RESEND_API_KEY')) {
+      return jsonResponse({ error: `Email service not configured. Contact us directly at ${supportEmail}.` }, 500);
+    }
+
+    return jsonResponse({ error: `Failed to place the order. Please try again or email ${supportEmail}.` }, 500);
   }
 };

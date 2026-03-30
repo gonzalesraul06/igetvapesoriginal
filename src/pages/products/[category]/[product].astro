@@ -3,9 +3,13 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+import ComparisonCards from '@components/ui/ComparisonCards.astro';
+import LineIcon from '@components/ui/LineIcon.astro';
 import StarRating from '@components/ui/StarRating.astro';
 import SchemaMarkup from '@components/seo/SchemaMarkup.astro';
+import TrustModule from '@components/ui/TrustModule.astro';
 import { formatPrice } from '@utils/formatPrice';
+import { buildMetaDescription, buildMetaTitle } from '@utils/seo';
 
 export async function getStaticPaths() {
   const products = await getCollection('products');
@@ -32,6 +36,23 @@ const reviews = category.reviews ?? [];
 const reviewCount = reviews.length;
 const avgRating = reviewCount > 0 ? (reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / reviewCount).toFixed(1) : '5.0';
 const flavourDesc = flavour.description || category.description;
+const categoryMetaNames: Record<string, string> = {
+  'jnr-cruiser': 'JNR Cruiser',
+  'iget-one': 'IGET One',
+  'iget-bar-pro': 'IGET Bar Pro',
+  'iget-bar-plus-s3': 'IGET S3 Kit',
+  'iget-bar-plus-s3-pod': 'IGET S3 Pods',
+  'alibarbar-ingot': 'Alibarbar Ingot',
+  'alibarbar-ice-adjust': 'Alibarbar Ice Adjust',
+};
+const metaTitle = buildMetaTitle(`${flavour.name} | ${categoryMetaNames[category.slug] ?? category.name} Australia`);
+const metaDescription = buildMetaDescription(`${flavour.name} is available in the ${category.name} range with ${category.puffs.toLocaleString()} puffs, authentic stock, and fast Australia-wide delivery from IGET Vapes Original. ${flavourDesc}`);
+const deliveryLinks = [
+  { name: 'Sydney', href: '/locations/sydney' },
+  { name: 'Melbourne', href: '/locations/melbourne' },
+  { name: 'Brisbane', href: '/locations/brisbane' },
+  { name: 'Perth', href: '/locations/perth' },
+];
 
 // Spec data per category
 const specs: Record<string, { capacity: string; coil: string; battery: string; weight: string; nicotine: string }> = {
@@ -139,6 +160,192 @@ const productFaqs: Record<string, Array<{q: string; a: string}>> = {
 };
 const faqs = productFaqs[category.slug] || productFaqs['iget-bar-pro'];
 
+const productComparisonGuides: Record<string, Array<{ tag: string; title: string; copy: string; href: string; cta: string }>> = {
+  'jnr-cruiser': [
+    {
+      tag: 'Maximum endurance',
+      title: `Stay with ${flavour.name} if you want the biggest-capacity route.`,
+      copy: 'This flavour sits inside the highest-capacity family in the catalogue, which makes it the strongest fit for fewer reorders and longer sessions.',
+      href: `/products/${category.slug}`,
+      cta: `View all ${category.name} flavours`,
+    },
+    {
+      tag: 'Denser vapour',
+      title: 'Move to IGET One if you want a warmer coil feel.',
+      copy: 'IGET One is the cleaner alternative when vapour density and lower-resistance output matter more than the biggest reservoir.',
+      href: '/products/iget-one',
+      cta: 'Compare with IGET One',
+    },
+    {
+      tag: 'Reusable savings',
+      title: 'Move to S3 if you want the lower long-run cost.',
+      copy: 'The S3 route makes more sense for repeat buyers who would rather keep the device body and rotate replacement pods.',
+      href: '/products/iget-bar-plus-s3',
+      cta: 'Compare with S3',
+    },
+  ],
+  'iget-one': [
+    {
+      tag: 'Warm draw',
+      title: `Stay with ${flavour.name} if you want denser vapour.`,
+      copy: 'This option belongs to the range most clearly tuned for adults who prefer a warmer, more assertive draw from a sleeker device.',
+      href: `/products/${category.slug}`,
+      cta: `View all ${category.name} flavours`,
+    },
+    {
+      tag: 'Longer overall life',
+      title: 'Move to JNR Cruiser if endurance matters more.',
+      copy: 'JNR Cruiser is the better route if you are happy to trade the warmer coil profile for a larger battery and reservoir.',
+      href: '/products/jnr-cruiser',
+      cta: 'Compare with JNR Cruiser',
+    },
+    {
+      tag: 'More mainstream value',
+      title: 'Move to Bar Pro if flavour breadth and price matter most.',
+      copy: 'Bar Pro is the stronger all-round alternative when you want a broader everyday selection without leaning so hard into vapour density.',
+      href: '/products/iget-bar-pro',
+      cta: 'Compare with Bar Pro',
+    },
+  ],
+  'iget-bar-pro': [
+    {
+      tag: 'Everyday value',
+      title: `Stay with ${flavour.name} if you want the easiest repeat buy.`,
+      copy: 'This flavour sits in the catalogue sweet spot for adults balancing price, puff count, and a broad mainstream flavour bench.',
+      href: `/products/${category.slug}`,
+      cta: `View all ${category.name} flavours`,
+    },
+    {
+      tag: 'Performance step-up',
+      title: 'Move to IGET One if you want a more aggressive draw.',
+      copy: 'IGET One becomes the better pick when denser vapour and a stronger coil profile outweigh all-rounder value.',
+      href: '/products/iget-one',
+      cta: 'Compare with IGET One',
+    },
+    {
+      tag: 'Reusable route',
+      title: 'Move to S3 if you are optimising long-run spend.',
+      copy: 'S3 is the more economical route for repeat buyers who do not want to replace a full device every time they switch flavour.',
+      href: '/products/iget-bar-plus-s3',
+      cta: 'Compare with S3',
+    },
+  ],
+  'iget-bar-plus-s3': [
+    {
+      tag: 'Reusable system',
+      title: `Stay with ${flavour.name} if you want reusable hardware.`,
+      copy: 'This flavour sits inside the strongest route for buyers who want to keep the battery and lower the refill cost over time.',
+      href: `/products/${category.slug}`,
+      cta: `View all ${category.name} flavours`,
+    },
+    {
+      tag: 'Pod-only refill',
+      title: 'Move to S3 pods if you already own the battery.',
+      copy: 'The replacement pod page is the faster path when you only need the refill and not another starter kit.',
+      href: '/products/iget-bar-plus-s3-pod',
+      cta: 'Compare with S3 pods',
+    },
+    {
+      tag: 'Disposable fallback',
+      title: 'Move to Bar Pro if you prefer a simpler format.',
+      copy: 'Bar Pro is the stronger alternative if you do not want to manage a two-piece pod system and just want a straightforward disposable order.',
+      href: '/products/iget-bar-pro',
+      cta: 'Compare with Bar Pro',
+    },
+  ],
+  'iget-bar-plus-s3-pod': [
+    {
+      tag: 'Lowest refill cost',
+      title: `Stay with ${flavour.name} if you already run the S3 battery.`,
+      copy: 'This is the cleanest refill route when you are already inside the S3 system and only need a fresh flavour pod.',
+      href: `/products/${category.slug}`,
+      cta: `View all ${category.name} flavours`,
+    },
+    {
+      tag: 'Need the battery first',
+      title: 'Move to the S3 kit if you are not set up yet.',
+      copy: 'The kit page is the correct route when you need the battery hardware together with your first pod.',
+      href: '/products/iget-bar-plus-s3',
+      cta: 'Compare with the S3 kit',
+    },
+    {
+      tag: 'Disposable alternative',
+      title: 'Move to Bar Pro if you want a simpler rebuy pattern.',
+      copy: 'Bar Pro makes more sense if you prefer standard disposable restocking and do not want separate hardware to manage.',
+      href: '/products/iget-bar-pro',
+      cta: 'Compare with Bar Pro',
+    },
+  ],
+  'alibarbar-ingot': [
+    {
+      tag: 'Compact route',
+      title: `Stay with ${flavour.name} if you want lighter carry.`,
+      copy: 'This flavour is part of the compact Alibarbar line, which suits adults prioritising smaller carry size and sharp price access.',
+      href: `/products/${category.slug}`,
+      cta: `View all ${category.name} flavours`,
+    },
+    {
+      tag: 'Mainstream IGET option',
+      title: 'Move to Bar Pro if you want the broader all-rounder.',
+      copy: 'Bar Pro is the stronger benchmark if you want a more mainstream IGET alternative with a broader everyday position.',
+      href: '/products/iget-bar-pro',
+      cta: 'Compare with Bar Pro',
+    },
+    {
+      tag: 'Cooling control',
+      title: 'Move to Ice Adjust if custom airflow matters more.',
+      copy: 'Ice Adjust becomes the better Alibarbar alternative when you care more about cooling control than the lightest body.',
+      href: '/products/alibarbar-ice-adjust',
+      cta: 'Compare with Ice Adjust',
+    },
+  ],
+  'alibarbar-ice-adjust': [
+    {
+      tag: 'Adjustable cooling',
+      title: `Stay with ${flavour.name} if custom ice control is the reason you are here.`,
+      copy: 'This option belongs to the one line in the catalogue where the cooling sensation can be tuned mid-session instead of fixed at purchase.',
+      href: `/products/${category.slug}`,
+      cta: `View all ${category.name} flavours`,
+    },
+    {
+      tag: 'Smaller and cheaper',
+      title: 'Move to Ingot if compact value matters more.',
+      copy: 'Alibarbar Ingot is the cleaner alternative if you want a lighter device and lower price instead of the airflow-control feature.',
+      href: '/products/alibarbar-ingot',
+      cta: 'Compare with Ingot',
+    },
+    {
+      tag: 'Higher endurance',
+      title: 'Move to JNR Cruiser if capacity matters more than adjustability.',
+      copy: 'JNR Cruiser is the stronger option when you are willing to give up airflow control for the biggest-capacity route on the site.',
+      href: '/products/jnr-cruiser',
+      cta: 'Compare with JNR Cruiser',
+    },
+  ],
+};
+
+const comparisonItems = productComparisonGuides[category.slug] ?? productComparisonGuides['iget-bar-pro'];
+const trustBullets = [
+  `${flavour.name} inherits the full ${category.name} specification set, delivery guidance, and pricing context so buyers can evaluate the flavour inside the right hardware system instead of as an isolated SKU.`,
+  flavour.inStock
+    ? 'Stock status is surfaced directly on the page, which helps avoid dead-end checkouts and gives clearer expectations before the item reaches the cart.'
+    : 'The page keeps the flavour discoverable even when stock is low so buyers can compare alternatives instead of hitting a blank result.',
+  reviewCount > 0
+    ? `Verified review signals are carried through from the wider range so shoppers can benchmark flavour selection against actual customer feedback.`
+    : 'The range is supported with structured specification, FAQ, and delivery content so customers can answer key questions without leaving the product page.',
+  'Comparison routes to adjacent device families are placed close to the flavour detail stack so shoppers can switch paths before checkout if a different format is better suited.',
+];
+const trustStats = [
+  { label: 'Price', value: formatPrice(flavour.price) },
+  { label: 'Puffs', value: category.puffs.toLocaleString() },
+  { label: 'Rating', value: `${avgRating} / 5` },
+];
+const trustLinks = [
+  { text: `All ${category.name} flavours`, href: `/products/${category.slug}` },
+  { text: 'Delivery information', href: '/delivery' },
+  { text: 'Contact support', href: '/contact' },
+];
+
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -151,8 +358,8 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title={`${flavour.name} — ${category.name} ${category.puffs.toLocaleString()} Puffs | Buy Online Australia`}
-  description={flavourDesc.slice(0, 155)}
+  title={metaTitle}
+  description={metaDescription}
   image={flavour.image}
   type="product"
 >
@@ -162,22 +369,12 @@ const faqSchema = {
       name: `${flavour.name} — ${category.name}`,
       image: flavour.image.startsWith('http') ? flavour.image : `${siteUrl}${flavour.image}`,
       description: flavourDesc,
-      brand: 'IGET',
+      brand: category.slug.startsWith('alibarbar') ? 'Alibarbar' : 'IGET',
       price: flavour.price,
       inStock: flavour.inStock,
       url: productUrl,
       rating: avgRating,
       reviewCount,
-    }}
-  />
-  <SchemaMarkup
-    type="breadcrumb"
-    data={{
-      items: [
-        { name: 'Home', url: siteUrl },
-        { name: category.name, url: `${siteUrl}/products/${category.slug}` },
-        { name: flavour.name, url: productUrl },
-      ],
     }}
   />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
@@ -320,7 +517,9 @@ const faqSchema = {
       <!-- Coil Technology -->
       <div class="p-6 transition-colors duration-250" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-xl);">
         <div class="flex items-center gap-2.5 mb-3">
-          <span class="w-8 h-8 flex items-center justify-center text-accent text-sm" style="background: rgba(233,69,96,0.08); border-radius: var(--radius-md);">⚡</span>
+          <span class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-md)] bg-[rgba(233,69,96,0.08)] text-accent">
+            <LineIcon name="coil" class="h-4.5 w-4.5" title="Coil Technology" />
+          </span>
           <h3 class="text-lg font-bold tracking-tight">Coil Technology</h3>
         </div>
         <p class="text-text-muted text-sm" style="line-height: 1.75;">{details.coilDesc}</p>
@@ -329,7 +528,9 @@ const faqSchema = {
       <!-- Battery Information -->
       <div class="p-6 transition-colors duration-250" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-xl);">
         <div class="flex items-center gap-2.5 mb-3">
-          <span class="w-8 h-8 flex items-center justify-center text-accent text-sm" style="background: rgba(233,69,96,0.08); border-radius: var(--radius-md);">🔋</span>
+          <span class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-md)] bg-[rgba(233,69,96,0.08)] text-accent">
+            <LineIcon name="battery" class="h-4.5 w-4.5" title="Battery and Charging" />
+          </span>
           <h3 class="text-lg font-bold tracking-tight">Battery & Charging</h3>
         </div>
         <p class="text-text-muted text-sm" style="line-height: 1.75;">{details.batteryDesc}</p>
@@ -340,7 +541,9 @@ const faqSchema = {
       <!-- What's in the Box -->
       <div class="p-6 transition-colors duration-250" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-xl);">
         <div class="flex items-center gap-2.5 mb-3">
-          <span class="w-8 h-8 flex items-center justify-center text-accent text-sm" style="background: rgba(233,69,96,0.08); border-radius: var(--radius-md);">📦</span>
+          <span class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-md)] bg-[rgba(233,69,96,0.08)] text-accent">
+            <LineIcon name="box" class="h-4.5 w-4.5" title="What's in the Box" />
+          </span>
           <h3 class="text-lg font-bold tracking-tight">What's in the Box</h3>
         </div>
         <ul class="space-y-2.5">
@@ -356,7 +559,9 @@ const faqSchema = {
       <!-- Usage Tips -->
       <div class="p-6 transition-colors duration-250" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-xl);">
         <div class="flex items-center gap-2.5 mb-3">
-          <span class="w-8 h-8 flex items-center justify-center text-accent text-sm" style="background: rgba(233,69,96,0.08); border-radius: var(--radius-md);">💡</span>
+          <span class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-md)] bg-[rgba(233,69,96,0.08)] text-accent">
+            <LineIcon name="tips" class="h-4.5 w-4.5" title="Usage Tips" />
+          </span>
           <h3 class="text-lg font-bold tracking-tight">Usage Tips</h3>
         </div>
         <ul class="space-y-2.5">
@@ -370,6 +575,24 @@ const faqSchema = {
       </div>
     </div>
   </div>
+
+  <ComparisonCards
+    eyebrow="Flavour comparison"
+    title={`Where ${flavour.name} sits in the buying decision.`}
+    intro="This page should help with the final decision, not just restate specs. These routes show when to stay with this flavour and when a different product family makes more sense."
+    items={comparisonItems}
+  />
+
+  <TrustModule
+    eyebrow="Product trust signals"
+    title={`Why this ${category.name} flavour page is built to answer buying questions fast.`}
+    intro="High-intent product pages need more than a price and an add-to-cart button. They should explain stock status, delivery context, and what to compare next if the fit is not quite right."
+    reviewer="IGET Vapes Hub product and support team"
+    reviewedOn="March 2026"
+    bullets={trustBullets}
+    stats={trustStats}
+    links={trustLinks}
+  />
 
   <!-- Reviews Section -->
   {reviewCount > 0 && (
@@ -466,6 +689,17 @@ const faqSchema = {
           </div>
         </details>
       ))}
+    </div>
+  </div>
+
+  <div class="p-6 lg:p-8" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-xl);">
+    <h2 class="text-xl font-bold mb-3 tracking-tight">Popular Delivery Areas</h2>
+    <p class="text-text-muted text-sm sm:text-base mb-5" style="line-height: 1.75;">Order this flavour for metro or regional delivery across Australia, or browse our location hub for city-specific timing and shipping guidance.</p>
+    <div class="flex flex-wrap gap-3">
+      {deliveryLinks.map((link) => (
+        <a href={link.href} class="btn-secondary text-sm">{link.name} delivery</a>
+      ))}
+      <a href="/delivery" class="btn-secondary text-sm">All delivery locations</a>
     </div>
   </div>
 

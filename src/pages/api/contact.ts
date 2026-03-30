@@ -1,56 +1,71 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { sendContactEmail } from '@lib/email';
+import { sendContactEmail, getSupportEmailAddress, isEmailConfigured } from '@lib/email';
+
+function jsonResponse(body: Record<string, unknown>, status: number) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
+function normalizeString(value: unknown): string {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const contentType = request.headers.get('content-type') || '';
-    let name: string, email: string, subject: string, message: string, orderNumber: string;
+    let name = '';
+    let email = '';
+    let subject = '';
+    let message = '';
+    let orderNumber = '';
 
     if (contentType.includes('application/json')) {
       const body = await request.json();
-      name = body.name;
-      email = body.email;
-      subject = body.subject;
-      message = body.message;
-      orderNumber = body.orderNumber || '';
+      name = normalizeString(body.name);
+      email = normalizeString(body.email).toLowerCase();
+      subject = normalizeString(body.subject);
+      message = normalizeString(body.message);
+      orderNumber = normalizeString(body.orderNumber);
     } else {
       const formData = await request.formData();
-      name = formData.get('name')?.toString() || '';
-      email = formData.get('email')?.toString() || '';
-      subject = formData.get('subject')?.toString() || '';
-      message = formData.get('message')?.toString() || '';
-      orderNumber = formData.get('orderNumber')?.toString() || '';
+      name = normalizeString(formData.get('name'));
+      email = normalizeString(formData.get('email')).toLowerCase();
+      subject = normalizeString(formData.get('subject'));
+      message = normalizeString(formData.get('message'));
+      orderNumber = normalizeString(formData.get('orderNumber'));
     }
 
-    // Validation
     if (!name || !email || !subject || !message) {
-      return new Response(JSON.stringify({ error: 'All required fields must be filled.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return jsonResponse({ error: 'All required fields must be filled.' }, 400);
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return new Response(JSON.stringify({ error: 'Invalid email address.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+    if (!isValidEmail(email)) {
+      return jsonResponse({ error: 'Invalid email address.' }, 400);
+    }
+
+    if (!isEmailConfigured()) {
+      return jsonResponse({ error: `Email service is not configured yet. Please contact us directly at ${getSupportEmailAddress()}.` }, 503);
     }
 
     await sendContactEmail({ name, email, subject, message, orderNumber });
 
-    return new Response(JSON.stringify({ success: true, message: 'Message sent successfully!' }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return jsonResponse({ success: true, message: 'Message sent successfully.' }, 200);
   } catch (err: any) {
     const msg = err?.message || 'Unknown error';
     console.error('Contact form error:', msg, err);
-    return new Response(JSON.stringify({ error: msg.includes('RESEND_API_KEY') ? 'Email service not configured. Please contact us directly at info@igetvapeshub.com.' : 'Failed to send message. Please try again or email us at info@igetvapeshub.com.' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const supportEmail = getSupportEmailAddress();
+    return jsonResponse({
+      error: msg.includes('RESEND_API_KEY')
+        ? `Email service not configured. Please contact us directly at ${supportEmail}.`
+        : `Failed to send message. Please try again or email us at ${supportEmail}.`,
+    }, 500);
   }
 };

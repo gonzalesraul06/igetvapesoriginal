@@ -1,81 +1,157 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+import SchemaMarkup from '@components/seo/SchemaMarkup.astro';
+import { productCategories } from '@data/navigation';
 
-const states = [
-  { name: 'New South Wales', slug: 'nsw', cities: [
-    { name: 'Sydney', slug: 'sydney' },
-    { name: 'Newcastle', slug: 'newcastle' },
-    { name: 'Wollongong', slug: 'wollongong' },
-    { name: 'Central Coast', slug: 'central-coast' },
-  ]},
-  { name: 'Victoria', slug: 'vic', cities: [
-    { name: 'Melbourne', slug: 'melbourne' },
-    { name: 'Geelong', slug: 'geelong' },
-    { name: 'Ballarat', slug: 'ballarat' },
-    { name: 'Bendigo', slug: 'bendigo' },
-  ]},
-  { name: 'Queensland', slug: 'qld', cities: [
-    { name: 'Brisbane', slug: 'brisbane' },
-    { name: 'Gold Coast', slug: 'gold-coast' },
-    { name: 'Sunshine Coast', slug: 'sunshine-coast' },
-    { name: 'Cairns', slug: 'cairns' },
-    { name: 'Townsville', slug: 'townsville' },
-    { name: 'Toowoomba', slug: 'toowoomba' },
-    { name: 'Rockhampton', slug: 'rockhampton' },
-    { name: 'Mackay', slug: 'mackay' },
-  ]},
-  { name: 'South Australia', slug: 'sa', cities: [
-    { name: 'Adelaide', slug: 'adelaide' },
-    { name: 'Mount Gambier', slug: 'mount-gambier' },
-  ]},
-  { name: 'Western Australia', slug: 'wa', cities: [
-    { name: 'Perth', slug: 'perth' },
-    { name: 'Bunbury', slug: 'bunbury' },
-  ]},
-  { name: 'Tasmania', slug: 'tas', cities: [
-    { name: 'Hobart', slug: 'hobart' },
-    { name: 'Launceston', slug: 'launceston' },
-  ]},
-  { name: 'Northern Territory', slug: 'nt', cities: [
-    { name: 'Darwin', slug: 'darwin' },
-    { name: 'Alice Springs', slug: 'alice-springs' },
-  ]},
-  { name: 'ACT', slug: 'act', cities: [
-    { name: 'Canberra', slug: 'canberra' },
-  ]},
+interface DeliveryCity {
+  name: string;
+  slug: string;
+}
+
+interface DeliveryState {
+  name: string;
+  short: string;
+  cities: DeliveryCity[];
+}
+
+const siteUrl = 'https://igetvapeshub.com';
+const stateOrder = [
+  'New South Wales',
+  'Victoria',
+  'Queensland',
+  'South Australia',
+  'Western Australia',
+  'Tasmania',
+  'Northern Territory',
+  'Australian Capital Territory',
 ];
+
+const stateShortNames: Record<string, string> = {
+  'New South Wales': 'NSW',
+  Victoria: 'VIC',
+  Queensland: 'QLD',
+  'South Australia': 'SA',
+  'Western Australia': 'WA',
+  Tasmania: 'TAS',
+  'Northern Territory': 'NT',
+  'Australian Capital Territory': 'ACT',
+};
+
+function getCityName(title: string, id: string) {
+  const derived = title.replace(/^IGET Vapes\s+/, '').split(/\s*[—–-]\s*/)[0].trim();
+  if (derived) return derived;
+  return id.split('-').map((segment) => `${segment.charAt(0).toUpperCase()}${segment.slice(1)}`).join(' ');
+}
+
+const locations = await getCollection('locations');
+const groupedStates: DeliveryState[] = stateOrder
+  .map((state) => ({
+    name: state,
+    short: stateShortNames[state],
+    cities: locations
+      .filter((location) => location.data.state === state)
+      .map((location) => ({
+        name: getCityName(location.data.title, location.id),
+        slug: location.id,
+      }))
+      .sort((left, right) => left.name.localeCompare(right.name)),
+  }))
+  .filter((state) => state.cities.length > 0);
+
+const featuredRanges = productCategories.filter((category) => category.slug !== 'mix-and-match').slice(0, 4);
+const deliveryFaqs = [
+  {
+    q: 'Do you deliver outside capital cities?',
+    a: 'Yes. We ship to metro, regional, and remote Australian postcodes through Australia Post, with longer delivery windows for remote areas.',
+  },
+  {
+    q: 'How do shipping rates work?',
+    a: 'Shipping is state-based: $10 for ACT, NSW, and VIC; $15 for QLD and SA; $20 for WA and TAS; and $25 for NT.',
+  },
+  {
+    q: 'Where can I check city-specific delivery guidance?',
+    a: 'Each location page includes city-level delivery timing, shipping pricing, popular product links, and common support answers for that area.',
+  },
+];
+
+const locationItems = groupedStates.flatMap((state) =>
+  state.cities.map((city) => ({
+    name: `${city.name} vape delivery`,
+    url: `${siteUrl}/locations/${city.slug}`,
+  })),
+);
+
+const pageDescription = 'Browse IGET Vapes Original delivery locations across Australia, compare shipping by state, and find metro and regional ordering pages.';
 ---
 
-<BaseLayout title="Delivery Locations — IGET Vapes Australia-Wide Delivery" description="We deliver IGET vapes to all locations across Australia including Sydney, Melbourne, Brisbane, Perth, Adelaide and regional areas. Fast shipping from $10 AUD.">
+<BaseLayout title="Australia Delivery Locations | IGET Vapes" description={pageDescription}>
+  <SchemaMarkup type="collection" data={{ name: 'Australia delivery locations', description: pageDescription, url: `${siteUrl}/delivery` }} />
+  <SchemaMarkup type="itemlist" data={{ name: 'Australia delivery locations', description: 'Metro and regional delivery pages across Australia.', items: locationItems }} />
+  <SchemaMarkup type="faq" data={{ questions: deliveryFaqs }} />
   <Breadcrumbs items={[{ name: 'Delivery Locations' }]} />
 
-  <div class="page-header">
-    <h1>Delivery Locations</h1>
-    <p>We deliver Australia-wide with state-based shipping from $10 AUD per order. Capital cities and regional areas — we've got you covered.</p>
+  <div class="page-header" data-reveal>
+    <h1>Delivery Locations Across Australia</h1>
+    <p>Browse metro and regional delivery pages, check state-based shipping rates, and move straight into the products and city guides most relevant to your order.</p>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-    {states.map(state => (
-      <div class="p-5" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg);">
-        <h2 class="font-bold text-accent mb-3">{state.name}</h2>
-        <ul class="space-y-1.5 text-sm">
-          {state.cities.map(city => (
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4" data-reveal data-reveal-delay="40">
+    {groupedStates.map((state) => (
+      <section class="card p-5">
+        <div class="mb-3 flex items-center justify-between gap-3">
+          <h2 class="text-3xl text-text">{state.name}</h2>
+          <span class="collection-chip">{state.short}</span>
+        </div>
+        <ul class="space-y-2 text-sm text-text-muted">
+          {state.cities.map((city) => (
             <li>
-              <a href={`/locations/${city.slug}`} class="flex items-center gap-1.5 text-text-muted hover:text-accent transition-colors duration-250">
-                <span class="text-green text-xs">✓</span>
-                {city.name}
+              <a href={`/locations/${city.slug}`} class="flex items-start gap-2 rounded-[1rem] px-2 py-2 transition-colors duration-200 hover:bg-white/55 hover:text-text">
+                <span class="chip-mark mt-1"></span>
+                <span>{city.name}</span>
               </a>
             </li>
           ))}
-          <li class="text-text-muted/60 text-xs mt-2">+ all other {state.name} areas</li>
+          <li class="px-2 pt-2 text-xs font-semibold uppercase tracking-[0.14em] text-text-light">More suburbs and regional coverage available</li>
         </ul>
-      </div>
+      </section>
     ))}
   </div>
 
-  <div class="p-6 mt-8" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-xl);">
-    <h2 class="text-xl font-bold mb-3 tracking-tight">Can't Find Your Location?</h2>
-    <p class="text-text-muted text-sm" style="line-height: 1.75;">We deliver to all Australian postcodes via Australia Post. If your area isn't listed above, don't worry — we still ship to you! Delivery times to remote areas may be slightly longer (7-10 business days). <a href="/contact" class="text-accent hover:underline">Contact us</a> if you have any questions about delivery to your area.</p>
+  <div class="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-[1.3fr_0.9fr]" data-reveal data-reveal-delay="80">
+    <section class="card p-6 lg:p-7">
+      <h2 class="text-4xl text-text">Need a postcode not listed yet?</h2>
+      <p class="mt-4 text-sm leading-7 text-text-muted lg:text-base">
+        We deliver to all Australian postcodes via Australia Post. If your city or regional centre is not listed above yet, use the <a href="/contact" class="text-accent hover:underline">contact page</a> for a delivery check or review the <a href="/shipping-policy" class="text-accent hover:underline">shipping policy</a> for timeframes.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="/contact" class="btn-secondary text-sm">Contact support</a>
+        <a href="/shipping-policy" class="btn-secondary text-sm">Shipping policy</a>
+        <a href="/payment-methods" class="btn-secondary text-sm">Payment methods</a>
+      </div>
+    </section>
+
+    <section class="card p-6 lg:p-7">
+      <h2 class="text-4xl text-text">Popular ranges for fast dispatch</h2>
+      <div class="mt-5 space-y-3">
+        {featuredRanges.map((range) => (
+          <a href={range.href} class="block rounded-[1.2rem] border border-border/60 bg-white/60 px-4 py-4 transition-colors duration-200 hover:border-accent/40 hover:bg-white/72">
+            <p class="font-semibold text-text">{range.name}</p>
+            <p class="mt-1 text-sm text-text-muted">Browse flavours and availability before choosing your city page.</p>
+          </a>
+        ))}
+      </div>
+    </section>
   </div>
+
+  <section class="mt-10 space-y-3" data-reveal data-reveal-delay="120">
+    <h2 class="text-4xl text-text">Delivery FAQs</h2>
+    {deliveryFaqs.map((faq) => (
+      <details class="faq-item">
+        <summary>{faq.q}</summary>
+        <p>{faq.a}</p>
+      </details>
+    ))}
+  </section>
 </BaseLayout>

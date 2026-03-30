@@ -1,4 +1,6 @@
 ---
+import { buildMetaDescription } from '@utils/seo';
+
 interface Props {
   type: 'organization' | 'website' | 'product' | 'collection' | 'breadcrumb' | 'faq' | 'itemlist' | 'localbusiness';
   data?: Record<string, unknown>;
@@ -14,42 +16,38 @@ function getSchema() {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'IGET Vapes Original',
-        alternateName: 'IGET Vapes Australia',
+        alternateName: 'IGET Vape Hub',
         url: siteUrl,
         logo: `${siteUrl}/images/logo.svg`,
-        description: 'Australia\'s #1 trusted online vape shop. Buy genuine IGET vapes, Alibarbar vapes & disposable vapes with fast Australia-wide delivery. Over 150 premium flavours from $30.',
+        description: buildMetaDescription('Adult-focused online store for genuine IGET and Alibarbar vape products in Australia. Curated ranges, clear checkout rules, and Australia-wide delivery support.'),
         email: 'info@igetvapeshub.com',
         contactPoint: {
           '@type': 'ContactPoint',
-          contactType: 'Customer Support',
+          contactType: 'customer support',
           email: 'info@igetvapeshub.com',
           areaServed: 'AU',
-          availableLanguage: 'English',
-          contactOption: 'TollFree',
+          availableLanguage: ['English'],
+          url: `${siteUrl}/contact`,
         },
-        sameAs: [],
         areaServed: {
           '@type': 'Country',
           name: 'Australia',
         },
-        knowsAbout: ['IGET Vapes', 'Alibarbar Vapes', 'Disposable Vapes', 'Vaping', 'Electronic Cigarettes'],
+        knowsAbout: ['IGET vapes', 'Alibarbar vapes', 'Disposable vapes', 'Pod vape systems', 'Australia-wide vape delivery'],
       };
     case 'website':
       return {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'IGET Vapes Original',
-        alternateName: 'IGET Vapes Australia — Buy Disposable Vapes Online',
+        alternateName: 'IGET Vape Hub',
         url: siteUrl,
-        description: 'Buy IGET vapes & Alibarbar vapes online in Australia. 150+ disposable vape flavours with fast delivery. JNR Cruiser, IGET Bar Pro, IGET One, S3, Alibarbar Ingot & Ice Adjust.',
+        description: buildMetaDescription('Shop genuine IGET and Alibarbar vapes online in Australia. Compare high-puff devices, S3 pods, flavour guides, and delivery locations from one adult-focused store.'),
         inLanguage: 'en-AU',
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: {
-            '@type': 'EntryPoint',
-            urlTemplate: `${siteUrl}/products/{search_term_string}`,
-          },
-          'query-input': 'required name=search_term_string',
+        publisher: {
+          '@type': 'Organization',
+          name: 'IGET Vapes Original',
+          url: siteUrl,
         },
       };
     case 'product':
@@ -58,7 +56,7 @@ function getSchema() {
         '@type': 'Product',
         name: data.name,
         image: data.image,
-        description: data.description,
+        description: buildMetaDescription(String(data.description ?? '')),
         sku: data.sku ?? '',
         mpn: data.mpn ?? '',
         brand: { '@type': 'Brand', name: data.brand ?? 'IGET' },
@@ -98,7 +96,7 @@ function getSchema() {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: data.name,
-        description: data.description,
+        description: buildMetaDescription(String(data.description ?? '')),
         url: data.url,
         isPartOf: { '@type': 'WebSite', name: 'IGET Vapes Original', url: siteUrl },
       };
@@ -131,7 +129,7 @@ function getSchema() {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
         name: data.name,
-        description: data.description,
+        description: buildMetaDescription(String(data.description ?? '')),
         numberOfItems: (data.items as unknown[])?.length ?? 0,
         itemListElement: (data.items as Array<{ name: string; url: string; image?: string; price?: number; position?: number }>)?.map((item, i) => ({
           '@type': 'ListItem',
@@ -147,14 +145,23 @@ function getSchema() {
         '@type': 'OnlineStore',
         name: 'IGET Vapes Original',
         url: siteUrl,
-        description: 'Buy genuine IGET vapes & Alibarbar vapes online in Australia. 150+ flavours, fast Australia-wide delivery. Australia\'s #1 trusted online vape shop.',
+        logo: `${siteUrl}/images/logo.svg`,
+        description: buildMetaDescription('Adult-focused online store for genuine IGET and Alibarbar products with Australia-wide shipping, mix and match bundles, and email-based support.'),
         email: 'info@igetvapeshub.com',
         currenciesAccepted: 'AUD',
-        paymentAccepted: 'Bank Transfer, Bitcoin, PayID',
+        paymentAccepted: 'Bank Transfer, PayID, Bitcoin',
         priceRange: '$30 - $65',
         areaServed: {
           '@type': 'Country',
           name: 'Australia',
+        },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'customer support',
+          email: 'info@igetvapeshub.com',
+          areaServed: 'AU',
+          availableLanguage: ['English'],
+          url: `${siteUrl}/contact`,
         },
         aggregateRating: {
           '@type': 'AggregateRating',

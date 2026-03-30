@@ -10,8 +10,8 @@ const categories = [...new Set(blogPosts.map(p => p.category))];
 const blogSchema = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  name: 'IGET Vapes Blog — Vaping Guides, Reviews & Tips for Australian Vapers',
-  description: 'Expert vaping guides, IGET & Alibarbar product reviews, flavour rankings, and tips for Australian vapers. Your trusted source for vape information.',
+  name: 'IGET Vapes Blog',
+  description: 'Guides, reviews, flavour rankings, and delivery advice for Australian IGET and Alibarbar shoppers.',
   url: `${siteUrl}/blog`,
   publisher: {
     '@type': 'Organization',
@@ -32,8 +32,8 @@ const blogSchema = {
 ---
 
 <BaseLayout
-  title="IGET Vapes Blog — Vaping Guides, Reviews & Tips | Australia's #1 Vape Resource"
-  description="Expert vaping guides, IGET & Alibarbar product reviews, flavour rankings, and tips for Australian vapers. Buy vapes online with confidence — read our trusted blog."
+  title="IGET Vape Blog | Guides and Reviews"
+  description="Read IGET and Alibarbar buying guides, reviews, flavour rankings, and Australia delivery advice for adult shoppers."
 >
   <SchemaMarkup type="breadcrumb" data={{ items: [{ name: 'Home', url: siteUrl }, { name: 'Blog', url: `${siteUrl}/blog` }] }} />
   <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
@@ -103,6 +103,21 @@ const blogSchema = {
     <p class="text-text-muted leading-relaxed">
       Our blog also covers <strong>vape delivery to all Australian states</strong> including Sydney, Melbourne, Brisbane, Perth, Adelaide, Canberra, Hobart, and Darwin. We publish new content regularly, so bookmark this page and check back for the latest guides, reviews, and vaping tips.
     </p>
+  </section>
+
+  <section class="mb-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+    <a href="/products/iget-bar-pro" class="card p-5">
+      <h2 class="text-lg font-bold mb-2">Shop IGET Bar Pro</h2>
+      <p class="text-sm text-text-muted">Browse the most searched everyday model after reading our guides.</p>
+    </a>
+    <a href="/mix-and-match" class="card p-5">
+      <h2 class="text-lg font-bold mb-2">See Mix & Match Deals</h2>
+      <p class="text-sm text-text-muted">Move from research to bundle pricing with clearer bulk-order savings.</p>
+    </a>
+    <a href="/delivery" class="card p-5">
+      <h2 class="text-lg font-bold mb-2">Check Delivery Locations</h2>
+      <p class="text-sm text-text-muted">Find Australia-wide delivery coverage, metro timing, and regional support pages.</p>
+    </a>
   </section>
 </BaseLayout>
 

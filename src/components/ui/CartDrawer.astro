@@ -1,57 +1,79 @@
-<!-- Cart slide-out drawer - hydrated client-side -->
-<div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white transform translate-x-full transition-transform duration-300 ease-out flex flex-col" style="box-shadow: -8px 0 32px rgba(0,0,0,0.08);">
-  <!-- Header -->
-  <div class="flex items-center justify-between px-6 py-5 border-b border-border/60">
-    <div class="flex items-center gap-3">
-      <svg class="w-5 h-5 text-text" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-      </svg>
-      <h2 class="text-lg font-bold text-text tracking-tight">Your Cart</h2>
-      <span id="cart-header-count" class="text-[10px] font-bold bg-accent text-white w-5 h-5 flex items-center justify-center hidden" style="border-radius: var(--radius-full);">0</span>
+---
+import { MINIMUM_ORDER } from '@utils/storeConfig';
+---
+
+<div id="cart-drawer" class="cart-shell fixed inset-y-0 right-0 z-50 flex w-full max-w-md translate-x-full flex-col transition-transform duration-300 ease-out">
+  <div class="flex items-center justify-between border-b border-border/50 px-6 py-5">
+    <div>
+      <p class="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-text-muted">Cart</p>
+      <div class="mt-1 flex items-center gap-2">
+        <h2 class="text-2xl text-text">Your selections</h2>
+        <span id="cart-header-count" class="hidden min-h-[1.2rem] min-w-[1.2rem] items-center justify-center rounded-full bg-accent px-1 text-[0.62rem] font-bold text-white">0</span>
+      </div>
     </div>
-    <button id="cart-close" class="p-2 -mr-2 text-text-muted hover:text-text transition-colors duration-200" style="border-radius: var(--radius-md);" aria-label="Close cart">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+    <button id="cart-close" class="header-action h-10 w-10" aria-label="Close cart">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 
-  <!-- Cart items -->
-  <div id="cart-items" class="flex-1 overflow-y-auto px-6 py-5 space-y-3">
-    <div id="cart-empty" class="flex flex-col items-center justify-center py-16 text-center">
-      <div class="w-16 h-16 mb-5 flex items-center justify-center" style="background: var(--color-surface); border-radius: var(--radius-xl);">
-        <svg class="w-7 h-7 text-text-muted" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-        </svg>
+  <div class="border-b border-border/40 px-6 py-4">
+    <div class="grid grid-cols-3 gap-3 text-center">
+      <div class="rounded-[1.1rem] border border-border/50 bg-white/50 px-3 py-3">
+        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">Authentic</p>
+        <p class="mt-1 text-sm font-semibold text-text">Verified stock</p>
       </div>
-      <p class="text-text font-semibold mb-1">Your cart is empty</p>
-      <p class="text-sm text-text-muted">Browse our products and add items to get started.</p>
+      <div class="rounded-[1.1rem] border border-border/50 bg-white/50 px-3 py-3">
+        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">Dispatch</p>
+        <p class="mt-1 text-sm font-semibold text-text">Fast packing</p>
+      </div>
+      <div class="rounded-[1.1rem] border border-border/50 bg-white/50 px-3 py-3">
+        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">Checkout</p>
+        <p class="mt-1 text-sm font-semibold text-text">Manual review</p>
+      </div>
     </div>
   </div>
 
-  <!-- Footer with total -->
-  <div id="cart-footer" class="border-t border-border/60 px-6 py-5 hidden" style="background: var(--color-surface);">
-    <div class="flex justify-between text-sm text-text-muted mb-1.5">
-      <span>Subtotal</span>
-      <span id="cart-subtotal" class="font-semibold text-text">$0.00</span>
+  <div id="cart-items" class="flex-1 space-y-3 overflow-y-auto px-6 py-5">
+    <div id="cart-empty" class="flex flex-col items-center justify-center py-18 text-center">
+      <div class="flex h-18 w-18 items-center justify-center rounded-[1.6rem] border border-border/50 bg-white/55">
+        <svg class="h-8 w-8 text-text-muted" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        </svg>
+      </div>
+      <h3 class="mt-5 text-2xl text-text">Nothing here yet</h3>
+      <p class="mt-2 max-w-xs text-sm leading-7 text-text-muted">Start with a curated range, then review quantities here before moving into checkout.</p>
     </div>
-    <div class="flex justify-between text-sm text-text-muted mb-3">
-      <span>Shipping</span>
-      <span class="text-xs italic">Calculated at checkout</span>
+  </div>
+
+  <div id="cart-footer" class="hidden border-t border-border/50 px-6 py-5">
+    <div class="utility-note">
+      <div class="flex items-center justify-between text-sm text-text-muted">
+        <span>Subtotal</span>
+        <span id="cart-subtotal" class="font-semibold text-text">$0.00</span>
+      </div>
+      <div class="mt-2 flex items-center justify-between text-sm text-text-muted">
+        <span>Shipping</span>
+        <span>Calculated at checkout</span>
+      </div>
+      <div class="divider my-4"></div>
+      <div class="flex items-center justify-between text-base font-bold text-text">
+        <span>Total</span>
+        <span id="cart-total">$0.00</span>
+      </div>
     </div>
-    <div class="divider mb-3"></div>
-    <div class="flex justify-between text-lg font-bold text-text mb-5">
-      <span>Total</span>
-      <span id="cart-total">$0.00</span>
+
+    <div id="cart-minimum-warning" class="mt-4 hidden rounded-[1.2rem] border border-[rgba(15,124,114,0.18)] bg-[rgba(227,243,240,0.72)] px-4 py-4 text-sm text-accent-dark">
+      Minimum order is ${MINIMUM_ORDER} AUD. Add <span id="cart-remaining" class="font-bold">$0.00</span> more to continue.
     </div>
-    <div id="cart-minimum-warning" class="hidden mb-4 p-3.5 text-center" style="background: rgba(233,69,96,0.06); border: 1px solid rgba(233,69,96,0.15); border-radius: var(--radius-lg);">
-      <p class="text-accent text-sm font-medium">Minimum order is $250 AUD. Add <span id="cart-remaining" class="font-bold">$0</span> more to checkout.</p>
-    </div>
-    <a id="cart-checkout-btn" href="/checkout" class="btn-primary w-full block text-center py-3.5 text-base" style="border-radius: var(--radius-lg);">Proceed to Checkout</a>
-    <p class="text-center text-[11px] text-text-muted mt-3 tracking-wide">Secure checkout &middot; Australian owned</p>
+
+    <a id="cart-checkout-btn" href="/checkout" class="btn-primary mt-4 flex w-full justify-center text-base">Proceed to Checkout</a>
+    <p class="mt-3 text-center text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-text-muted">Adults only. Secure manual order confirmation.</p>
   </div>
 </div>
-<div id="cart-overlay" class="fixed inset-0 z-40 hidden transition-opacity duration-300" style="background: rgba(8,13,26,0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);"></div>
+
+<div id="cart-overlay" class="fixed inset-0 z-40 hidden bg-[rgba(16,23,29,0.48)] opacity-0 backdrop-blur-sm transition-opacity duration-300"></div>
 
 <script>
   import { cartItems, cartOpen, removeFromCart, updateQuantity, getCartTotal, getCartCount, initCart, MINIMUM_ORDER } from '@utils/cart';
@@ -72,12 +94,14 @@
   function openCart() {
     drawer?.classList.remove('translate-x-full');
     overlay?.classList.remove('hidden');
+    requestAnimationFrame(() => overlay?.classList.remove('opacity-0'));
     document.body.style.overflow = 'hidden';
   }
 
   function closeCart() {
     drawer?.classList.add('translate-x-full');
-    overlay?.classList.add('hidden');
+    overlay?.classList.add('opacity-0');
+    window.setTimeout(() => overlay?.classList.add('hidden'), 300);
     document.body.style.overflow = '';
   }
 
@@ -86,66 +110,64 @@
   overlay?.addEventListener('click', closeCart);
 
   function renderCart() {
-    const items = Object.values(cartItems.get()) as any[];
+    const items = Object.values(cartItems.get());
     const count = getCartCount();
     const total = getCartTotal();
 
-    // Update badge
     if (countEl) {
       countEl.textContent = String(count);
       countEl.classList.toggle('hidden', count === 0);
     }
+
     const headerCount = document.getElementById('cart-header-count');
     if (headerCount) {
       headerCount.textContent = String(count);
       headerCount.classList.toggle('hidden', count === 0);
     }
 
-    if (!itemsContainer || !emptyMsg || !footer) return;
+    if (!(itemsContainer instanceof HTMLElement) || !(emptyMsg instanceof HTMLElement) || !(footer instanceof HTMLElement)) {
+      return;
+    }
 
     if (items.length === 0) {
       emptyMsg.classList.remove('hidden');
       footer.classList.add('hidden');
-      // Remove all item elements
-      itemsContainer.querySelectorAll('.cart-item').forEach(el => el.remove());
+      itemsContainer.querySelectorAll('.cart-item').forEach((element) => element.remove());
       return;
     }
 
     emptyMsg.classList.add('hidden');
     footer.classList.remove('hidden');
 
-    // Render items
-    const frag = document.createDocumentFragment();
+    const fragment = document.createDocumentFragment();
     items.forEach((item) => {
-      const div = document.createElement('div');
-      div.className = 'cart-item flex gap-3 bg-surface p-3 rounded-xl';
-      div.innerHTML = `
-        <img src="${item.image}" alt="${item.name} — ${item.categoryName} Vape" class="w-16 h-16 rounded-lg object-cover flex-shrink-0" />
-        <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-text truncate">${item.name}</p>
-          <p class="text-xs text-text-muted mt-0.5">${item.categoryName}</p>
-          <div class="flex items-center gap-2 mt-2">
-            <button data-action="dec" data-id="${item.id}" class="w-7 h-7 rounded-lg bg-white border border-border text-text hover:bg-surface text-sm font-medium flex items-center justify-center transition-colors">−</button>
-            <span class="text-sm font-semibold text-text w-5 text-center">${item.quantity}</span>
-            <button data-action="inc" data-id="${item.id}" class="w-7 h-7 rounded-lg bg-white border border-border text-text hover:bg-surface text-sm font-medium flex items-center justify-center transition-colors">+</button>
+      const element = document.createElement('div');
+      element.className = 'cart-item cart-item-card flex gap-3 p-3.5';
+      element.innerHTML = `
+        <img src="${item.image}" alt="${item.name} - ${item.categoryName}" class="h-18 w-18 rounded-[1rem] object-cover bg-white/60 p-1.5" />
+        <div class="min-w-0 flex-1">
+          <p class="truncate text-sm font-semibold text-text">${item.name}</p>
+          <p class="mt-1 text-xs text-text-muted">${item.categoryName}</p>
+          <div class="mt-3 flex items-center gap-2">
+            <button data-action="dec" data-id="${item.id}" class="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-white/72 text-sm font-semibold text-text transition-colors hover:bg-white">-</button>
+            <span class="w-5 text-center text-sm font-semibold text-text">${item.quantity}</span>
+            <button data-action="inc" data-id="${item.id}" class="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-white/72 text-sm font-semibold text-text transition-colors hover:bg-white">+</button>
           </div>
         </div>
-        <div class="text-right flex flex-col justify-between items-end">
-          <p class="font-bold text-text">$${(item.price * item.quantity).toFixed(2)}</p>
-          <button data-action="remove" data-id="${item.id}" class="text-xs text-text-muted hover:text-accent transition-colors">Remove</button>
+        <div class="flex flex-col items-end justify-between text-right">
+          <p class="text-sm font-bold text-text">$${(item.price * item.quantity).toFixed(2)}</p>
+          <button data-action="remove" data-id="${item.id}" class="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted transition-colors hover:text-accent">Remove</button>
         </div>
       `;
-      frag.appendChild(div);
+      fragment.appendChild(element);
     });
 
-    itemsContainer.querySelectorAll('.cart-item').forEach(el => el.remove());
-    itemsContainer.appendChild(frag);
+    itemsContainer.querySelectorAll('.cart-item').forEach((element) => element.remove());
+    itemsContainer.appendChild(fragment);
 
-    // Update totals (shipping calculated at checkout)
     if (subtotalEl) subtotalEl.textContent = `$${total.toFixed(2)}`;
     if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
 
-    // Minimum order enforcement
     const warningEl = document.getElementById('cart-minimum-warning');
     const remainingEl = document.getElementById('cart-remaining');
     const checkoutBtn = document.getElementById('cart-checkout-btn');
@@ -163,23 +185,25 @@
     }
   }
 
-  // Event delegation for cart item actions
-  itemsContainer?.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement;
+  itemsContainer?.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
     const action = target.dataset.action;
     const id = target.dataset.id;
     if (!action || !id) return;
 
     const items = cartItems.get();
     if (action === 'inc') updateQuantity(id, (items[id]?.quantity ?? 0) + 1);
-    else if (action === 'dec') updateQuantity(id, (items[id]?.quantity ?? 0) - 1);
-    else if (action === 'remove') removeFromCart(id);
+    if (action === 'dec') updateQuantity(id, (items[id]?.quantity ?? 0) - 1);
+    if (action === 'remove') removeFromCart(id);
   });
 
-  // Subscribe to store changes
   cartItems.subscribe(renderCart);
-  cartOpen.subscribe((isOpen: boolean) => { if (isOpen) { openCart(); cartOpen.set(false); } });
+  cartOpen.subscribe((isOpen) => {
+    if (!isOpen) return;
+    openCart();
+    cartOpen.set(false);
+  });
 
-  // Initial render
   renderCart();
 </script>

@@ -6,13 +6,14 @@ import MobileNav from '@components/layout/MobileNav.astro';
 import AgeGateModal from '@components/ui/AgeGateModal.astro';
 import CartDrawer from '@components/ui/CartDrawer.astro';
 import '@styles/global.css';
+import '@styles/redesign.css';
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
   canonical?: string;
-  type?: 'website' | 'product';
+  type?: 'website' | 'product' | 'article';
   noindex?: boolean;
   keywords?: string;
   publishedTime?: string;
@@ -37,12 +38,12 @@ const { title, description, image, canonical, type, noindex, keywords, published
       modifiedTime={modifiedTime}
     />
   </head>
-  <body class="antialiased">
+  <body class="site-body antialiased">
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <AgeGateModal />
     <div class="min-h-screen flex flex-col">
       <Header />
-      <main id="main-content" class="page-main" style="animation: fadeIn 0.3s ease-out;">
+      <main id="main-content" class="page-main">
         <div class="content-shell">
           <slot />
         </div>
@@ -51,6 +52,36 @@ const { title, description, image, canonical, type, noindex, keywords, published
     </div>
     <CartDrawer />
     <MobileNav />
+    <script is:inline>
+      const revealTargets = document.querySelectorAll('[data-reveal]');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduceMotion) {
+        revealTargets.forEach((element) => element.classList.add('is-visible'));
+      } else {
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            });
+          },
+          {
+            threshold: 0.14,
+            rootMargin: '0px 0px -10% 0px',
+          },
+        );
+
+        revealTargets.forEach((element, index) => {
+          if (element instanceof HTMLElement) {
+            const explicitDelay = element.dataset.revealDelay;
+            element.style.setProperty('--reveal-delay', explicitDelay ? `${explicitDelay}ms` : `${Math.min(index * 42, 252)}ms`);
+          }
+          revealObserver.observe(element);
+        });
+      }
+    </script>
     <!--Start of Tawk.to Script-->
     <script is:inline>
       var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

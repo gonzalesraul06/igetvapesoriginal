@@ -1,524 +1,198 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import SchemaMarkup from '@components/seo/SchemaMarkup.astro';
-import { productCategories } from '@data/navigation';
+import HomeExperience from '@components/ui/HomeExperience.astro';
+import { MINIMUM_ORDER } from '@utils/storeConfig';
 
-/* ── FIXED image paths: using actual filenames on disk ── */
 const categories = [
   {
-    name: 'JNR CRUISER 12000 PUFFS',
+    name: 'JNR Cruiser 12000',
     slug: 'jnr-cruiser',
     href: '/products/jnr-cruiser',
     image: '/images/categories/jnr-cruiser.webp',
     price: 65,
-    puffs: '12,000',
-    badge: 'NEW',
-    description: 'Premium disposable vape with bold flavours — buy IGET vapes online Australia.',
+    puffs: '12,000 puffs',
+    badge: 'New',
+    description: 'High-capacity rechargeable performance for adults who want long sessions, bold flavour, and less reordering.',
     highlights: ['Cool Mint', 'Watermelon Ice', 'Blueberry Raspberry Ice'],
     productImages: [
       '/images/products/jnr-cruiser/jnr-cool-mint.webp',
       '/images/products/jnr-cruiser/jnr-watermelon-ice.webp',
       '/images/products/jnr-cruiser/jnr-blueberry-raspberry-ice.webp',
-      '/images/products/jnr-cruiser/jnr-cool-fanta.webp',
     ],
+    angle: 'heavy use',
   },
   {
-    name: 'IGET ONE 12000 PUFFS',
+    name: 'IGET One 12000',
     slug: 'iget-one',
     href: '/products/iget-one',
     image: '/images/categories/iget-one.webp',
     price: 55,
-    puffs: '12,000',
+    puffs: '12,000 puffs',
     badge: null,
-    description: 'Sleek IGET One disposable vape — 12000 puffs with premium vape flavours.',
+    description: 'A sleeker high-output device with strong vapour density and flavour visibility through the clear reservoir.',
     highlights: ['Blueberry Ice', 'Strawberry Watermelon', 'Cherry Pomegranate'],
     productImages: [
       '/images/products/iget-one/one-blueberry-ice.webp',
       '/images/products/iget-one/one-strawberry-watermelon-ice.webp',
-      '/images/products/iget-one/one-grape-ice.webp',
       '/images/products/iget-one/one-cherry-pomegranate.webp',
     ],
+    angle: 'dense vapour',
   },
   {
-    name: 'IGET BAR PRO 10000 PUFFS',
+    name: 'IGET Bar Pro 10000',
     slug: 'iget-bar-pro',
     href: '/products/iget-bar-pro',
     image: '/images/categories/iget-bar-pro.webp',
     price: 48,
-    puffs: '10,000',
+    puffs: '10,000 puffs',
     badge: null,
-    description: "Australia's favourite IGET Bar Pro — disposable vapes with 26 incredible flavours.",
+    description: 'The broadest mainstream flavour selection in the catalogue and the most balanced everyday buy for repeat orders.',
     highlights: ['Orange Fanta Soda', 'Kiwi Pineapple', 'Blueberry Raspberry'],
     productImages: [
       '/images/products/iget-bar-pro/pro-orange-fanta-soda.webp',
       '/images/products/iget-bar-pro/pro-kiwi-pineapple.webp',
-      '/images/products/iget-bar-pro/pro-strawberry-watermelon-ice.webp',
       '/images/products/iget-bar-pro/pro-blueberry-raspberry.webp',
     ],
+    angle: 'everyday value',
   },
   {
-    name: 'IGET S3 10000 PUFFS',
+    name: 'IGET S3 Kit',
     slug: 'iget-bar-plus-s3',
     href: '/products/iget-bar-plus-s3',
     image: '/images/categories/iget-bar-plus-s3.webp',
     price: 48,
-    puffs: '10,000',
+    puffs: '10,000 puffs',
     badge: null,
-    description: 'IGET Bar Plus S3 refillable pod vape system — buy online Australia.',
+    description: 'The refillable route for adults who want reusable hardware and a smarter long-term spend.',
     highlights: ['Strawberry Watermelon', 'Passion Fruit Kiwi Guava', 'Grape Ice'],
     productImages: [
       '/images/products/iget-bar-plus-s3/s3-kit-strawberry-watermelon-ice.webp',
       '/images/products/iget-bar-plus-s3/s3-kit-passion-fruit-kiwi-guava.webp',
-      '/images/products/iget-bar-plus-s3/s3-kit-blueberry-raspberry-bubble-gum.webp',
       '/images/products/iget-bar-plus-s3/s3-kit-grape-ice.webp',
     ],
+    angle: 'refillable savings',
   },
   {
-    name: 'S3 POD 10000 PUFFS',
+    name: 'S3 Replacement Pods',
     slug: 'iget-bar-plus-s3-pod',
     href: '/products/iget-bar-plus-s3-pod',
     image: '/images/categories/iget-bar-plus-s3-pod.webp',
     price: 30,
-    puffs: '10,000',
+    puffs: '10,000 puffs',
     badge: null,
-    description: 'Replacement pods for the IGET S3 system — cheap vapes for sale online.',
+    description: 'Low-cost flavour rotation for adults already running the S3 battery and looking to maximise value.',
     highlights: ['Watermelon Ice', 'Passion Fruit Kiwi Guava', 'Blueberry Bubble Gum'],
     productImages: [
       '/images/products/iget-bar-plus-s3-pod/s3-pod-strawberry-watermelon-ice.webp',
       '/images/products/iget-bar-plus-s3-pod/s3-pod-passion-fruit-kiwi-guava.webp',
-      '/images/products/iget-bar-plus-s3-pod/s3-pod-blueberry-raspberry-bubble-gum.webp',
       '/images/products/iget-bar-plus-s3-pod/s3-pod-grape-ice.webp',
     ],
+    angle: 'budget refills',
   },
   {
-    name: 'ALIBARBAR INGOT 9000 PUFFS',
+    name: 'Alibarbar Ingot 9000',
     slug: 'alibarbar-ingot',
     href: '/products/alibarbar-ingot',
     image: '/images/categories/alibarbar-ingot.webp',
     price: 40,
-    puffs: '9,000',
+    puffs: '9,000 puffs',
     badge: null,
-    description: 'Alibarbar Ingot 9000 — best alibarbar flavours in a compact vape design.',
+    description: 'Compact, lightweight, and price-accessible without losing the richer Alibarbar flavour profile.',
     highlights: ['Strawberry Watermelon', 'Kiwi Pineapple', 'Grape Ice'],
     productImages: [
       '/images/products/alibarbar-ingot/alibarbar-strawberry-watermelon.webp',
       '/images/products/alibarbar-ingot/alibarbar-kiwi-pineapple.webp',
       '/images/products/alibarbar-ingot/alibarbar-grape-ice.webp',
-      '/images/products/alibarbar-ingot/alibarbar-cool-mint.webp',
     ],
+    angle: 'compact value',
   },
   {
-    name: 'ALIBARBAR ICE ADJUST 12000 PUFFS',
+    name: 'Alibarbar Ice Adjust 12000',
     slug: 'alibarbar-ice-adjust',
     href: '/products/alibarbar-ice-adjust',
     image: '/images/categories/alibarbar-ice-adjust.webp',
     price: 50,
-    puffs: '12,000',
+    puffs: '12,000 puffs',
     badge: null,
-    description: 'Alibarbar Ice Adjust — adjustable ice intensity with premium alibarbar vape flavours.',
+    description: 'A more customisable device with adjustable cooling intensity for adults who want control over the finish.',
     highlights: ['Watermelon', 'Blueberry Blast', 'Mango Magic'],
     productImages: [
       '/images/products/alibarbar-ice-adjust/alibarbar-ice-adjust-watermelon.webp',
       '/images/products/alibarbar-ice-adjust/alibarbar-ice-adjust-blueberry-blast.webp',
       '/images/products/alibarbar-ice-adjust/alibarbar-ice-adjust-mango-magic.webp',
-      '/images/products/alibarbar-ice-adjust/alibarbar-ice-adjust-strawberry-kiwi.webp',
     ],
+    angle: 'custom ice control',
   },
 ];
 
-/* ── FAQs targeting user-searched keywords ── */
 const faqs = [
   {
-    q: 'What is an IGET vape and where can I buy IGET vapes in Australia?',
-    a: 'IGET vapes are premium disposable vaping devices from one of Australia\'s leading vape brands. You can buy IGET vapes online right here at IGET Vapes Original — Australia\'s #1 trusted vape shop. We stock IGET Bar Pro, IGET One, JNR Cruiser, IGET S3, Alibarbar Ingot and Alibarbar Ice Adjust with over 150 flavours available.',
+    q: 'Are the devices on this store genuine?',
+    a: 'Yes. The store positions authenticity as a first-order promise. Product lines are sourced from authorised supply and presented with a clear adult-only retail layer rather than grey-market marketplace clutter.',
   },
   {
-    q: 'How long does an IGET disposable vape last?',
-    a: 'The puff count varies by model. The JNR Cruiser and IGET One deliver up to 12,000 puffs, the IGET Bar Pro and IGET S3 offer up to 10,000 puffs, and the Alibarbar Ingot provides up to 9,000 puffs. For most users, a single disposable vape lasts 1–3 weeks depending on usage.',
+    q: 'Which range is best if I want the longest use between orders?',
+    a: 'JNR Cruiser and IGET One both sit in the high-puff, rechargeable end of the catalogue. They are the best place to start if you want longer use and fewer repeat orders.',
   },
   {
-    q: 'Do you deliver IGET vapes to all states in Australia?',
-    a: 'Yes! We ship Australia-wide including Sydney, Melbourne, Brisbane, Perth, Adelaide, Gold Coast, Canberra, Hobart and Darwin. Whether you searched "vape shops near me" or "vape shop Perth" or "vape shop Brisbane" — we deliver directly to your door with state-based shipping from $10 AUD and discreet packaging.',
+    q: 'What is the best value option on the site?',
+    a: 'For long-term value, the IGET S3 ecosystem is the strongest choice. Buy the rechargeable kit once, then rotate through lower-cost replacement pods when you need new flavour.',
   },
   {
-    q: 'Are your IGET vapes and Alibarbar vapes genuine?',
-    a: 'Every IGET vape and Alibarbar vape sold on our store is 100% authentic, sourced directly from authorised distributors. We guarantee genuine products — never buy from unverified vape stores. All our Alibarbar flavours, IGET Bar Pro and IGET One devices are fully quality-assured.',
+    q: 'Do you deliver across Australia?',
+    a: 'Yes. The store is set up for Australia-wide delivery with discreet packaging, clear state-based shipping rules, and manual payment confirmation after checkout.',
   },
   {
-    q: 'What Alibarbar flavours are available?',
-    a: 'We carry the full Alibarbar flavours list including Strawberry Watermelon, Grape Ice, Cool Mint, Kiwi Pineapple, Skittles, Mango Magic, and many more across both the Alibarbar Ingot 9000 and Alibarbar Ice Adjust 12000 ranges. Browse our Alibarbar categories to see every flavour.',
+    q: 'Is there a minimum order?',
+    a: `Yes. The cart and checkout enforce a $${MINIMUM_ORDER} AUD minimum order so adults know the purchasing threshold before finalising payment instructions.`,
   },
   {
-    q: 'What are the best cheap vapes for sale in Australia?',
-    a: 'Our IGET S3 Pod replacements start from just $30, making them some of the best cheap vapes available online in Australia. The Alibarbar Ingot 9000 at $40 and IGET Bar Pro at $48 also offer excellent value. Use our Mix & Match bundle deals to save even more on bulk vape orders.',
-  },
-  {
-    q: 'What are your most popular IGET vape flavours?',
-    a: 'Top-selling vape flavours include Strawberry Watermelon, Cherry Pomegranate, Blueberry Raspberry, Cool Mint, Grape Ice, Orange Fanta Soda, and Mango Ice. These are popular across IGET Bar Pro, IGET One, and Alibarbar ranges. Red Bull-inspired flavours are also trending.',
-  },
-  {
-    q: 'How do I buy vapes online from your vape shop?',
-    a: 'Simply browse our categories, add your favourite disposable vapes to cart, and checkout securely. We accept multiple payment methods. Your order ships same day or next business day with discreet packaging. No need to search "vape shop near me" — we deliver Australia-wide!',
+    q: 'How should I choose between IGET and Alibarbar?',
+    a: 'IGET is positioned as the broader, more system-led family with strong everyday and refillable options. Alibarbar sits as the more flavour-forward alternative, especially if you want compact value or adjustable ice intensity.',
   },
 ];
 
-const seoTitle = "Buy IGET Vapes Online Australia | #1 Vape Shop — Alibarbar, IGET Bar Pro, Disposable Vapes";
-const seoDescription = "Australia's #1 online vape shop. Buy IGET vapes, Alibarbar vapes, IGET Bar Pro, IGET One, JNR Cruiser & disposable vapes online. 150+ flavours, best prices from $30. Fast delivery to Sydney, Melbourne, Brisbane, Perth & all of Australia. Shop cheap vapes now!";
+const seoTitle = 'IGET and Alibarbar Vapes | Buy Online Australia';
+const seoDescription = 'Shop genuine IGET and Alibarbar vapes online in Australia. Compare bestselling devices, S3 pods, mix and match bundles, and fast delivery options.';
 
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: faqs.map(f => ({
+  mainEntity: faqs.map((faq) => ({
     '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
   })),
 };
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Buy IGET Vapes & Alibarbar Vapes Online Australia',
-  itemListElement: categories.map((cat, i) => ({
+  name: 'IGET and Alibarbar collections',
+  itemListElement: categories.map((category, index) => ({
     '@type': 'ListItem',
-    position: i + 1,
-    name: cat.name,
-    url: `https://igetvapeshub.com${cat.href}`,
+    position: index + 1,
+    name: category.name,
+    url: `https://igetvapeshub.com${category.href}`,
   })),
 };
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Store',
-  name: 'IGET Vapes Original',
-  alternateName: 'IGET Vapes Australia',
-  description: 'Australia\'s #1 online vape shop — buy genuine IGET vapes, Alibarbar vapes & disposable vapes online with fast delivery to Sydney, Melbourne, Brisbane, Perth, Adelaide & all of Australia.',
-  url: 'https://igetvapeshub.com',
-  areaServed: { '@type': 'Country', name: 'Australia' },
-  priceRange: '$30 - $65',
-  currenciesAccepted: 'AUD',
-  paymentAccepted: 'Bank Transfer, Bitcoin, PayID',
-  email: 'info@igetvapeshub.com',
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    bestRating: '5',
-    reviewCount: '150',
-  },
-};
 ---
 
 <BaseLayout
   title={seoTitle}
   description={seoDescription}
-  keywords="iget vapes, buy vape online, vape shop australia, alibarbar, iget bar, alibarbar flavours, disposable vapes australia, iget bar pro, iget one, vape shops near me, cheap vapes, alibaba vapes, kuz vape, vape warehouse, buy vape online australia, hqd vape, online vapor, vape near me, disposable vapes online australia, vape price, vape shop perth, vape shop brisbane, iget vape australia, alibarbar vape flavours, vape flavours iget, best alibarbar flavour, vapes for sale"
+  keywords="iget vapes australia, alibarbar australia, buy vape online australia, premium vape retail australia"
 >
   <SchemaMarkup type="organization" />
   <SchemaMarkup type="website" />
+  <SchemaMarkup type="localbusiness" />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
-  <!-- Hero Section -->
-  <section class="relative mb-14 lg:mb-20 overflow-hidden bg-white p-6 sm:p-8 lg:p-12" style="border-radius: var(--radius-xl); border: 1px solid var(--color-border-light); box-shadow: var(--shadow-sm);">
-    <div class="absolute inset-0 -z-10 abstract-mesh"></div>
-
-    <div class="grid gap-10 lg:grid-cols-[1fr_340px] lg:items-center">
-      <div>
-        <div class="mb-6 inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-text sm:text-sm" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-full);">
-          <span class="relative flex h-2 w-2">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-60"></span>
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-green"></span>
-          </span>
-          Australia's #1 trusted vape store
-        </div>
-
-        <h1 class="max-w-3xl text-3xl font-extrabold tracking-tight text-text sm:text-5xl lg:text-[3.5rem]" style="line-height: 1.06; letter-spacing: -0.03em;">
-          Buy <span class="text-gradient">IGET Vapes</span> Online in Australia
-        </h1>
-
-        <p class="mt-5 max-w-2xl text-sm leading-relaxed text-text-muted sm:text-base lg:text-lg" style="line-height: 1.7;">
-          Shop genuine <strong>IGET Bar Pro</strong>, <strong>IGET One</strong>, <strong>JNR Cruiser</strong>, and premium <strong>Alibarbar flavours</strong> with fast delivery, discreet packaging, and bundle savings.
-        </p>
-
-        <div class="mt-8 flex flex-wrap items-center gap-3">
-          <a href="#hero-categories" class="btn-primary px-8 py-3.5 text-sm sm:text-base" style="border-radius: var(--radius-xl);">
-            Shop All Vapes
-          </a>
-          <a href="/mix-and-match" class="btn-secondary border-2 px-8 py-3.5 text-sm sm:text-base" style="border-radius: var(--radius-xl);">
-            Mix &amp; Match Deals
-          </a>
-        </div>
-      </div>
-
-      <aside class="p-5 sm:p-6" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg);">
-        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-text-muted">Why customers choose us</p>
-        <div class="mt-4 grid grid-cols-2 gap-2.5">
-          <div class="p-3 text-center bg-white" style="border: 1px solid var(--color-border-light); border-radius: var(--radius-md);">
-            <p class="text-2xl font-extrabold text-text tracking-tight">150+</p>
-            <p class="text-[10px] font-semibold uppercase tracking-[0.1em] text-text-muted mt-0.5">Flavours</p>
-          </div>
-          <div class="p-3 text-center bg-white" style="border: 1px solid var(--color-border-light); border-radius: var(--radius-md);">
-            <p class="text-2xl font-extrabold text-text tracking-tight">4.9/5</p>
-            <p class="text-[10px] font-semibold uppercase tracking-[0.1em] text-text-muted mt-0.5">Rated</p>
-          </div>
-          <div class="p-3 text-center bg-white" style="border: 1px solid var(--color-border-light); border-radius: var(--radius-md);">
-            <p class="text-2xl font-extrabold text-text tracking-tight">$30+</p>
-            <p class="text-[10px] font-semibold uppercase tracking-[0.1em] text-text-muted mt-0.5">Entry Price</p>
-          </div>
-          <div class="p-3 text-center bg-white" style="border: 1px solid var(--color-border-light); border-radius: var(--radius-md);">
-            <p class="text-2xl font-extrabold text-text tracking-tight">AU</p>
-            <p class="text-[10px] font-semibold uppercase tracking-[0.1em] text-text-muted mt-0.5">Nationwide</p>
-          </div>
-        </div>
-
-        <ul class="mt-4 space-y-2.5 text-sm text-text-muted">
-          <li class="flex items-center gap-2.5"><span class="h-1.5 w-1.5 rounded-full bg-green flex-shrink-0"></span>Discreet packaging &amp; fast dispatch</li>
-          <li class="flex items-center gap-2.5"><span class="h-1.5 w-1.5 rounded-full bg-green flex-shrink-0"></span>$250 minimum order enforced in cart</li>
-          <li class="flex items-center gap-2.5"><span class="h-1.5 w-1.5 rounded-full bg-green flex-shrink-0"></span>Secure manual checkout confirmation</li>
-        </ul>
-      </aside>
-    </div>
-  </section>
-
-  <!-- Trust signals bar -->
-  <section class="mb-12 lg:mb-16">
-    <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
-      <span class="trust-badge">
-        <svg class="w-4 h-4 text-green flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-        100% Authentic Vapes
-      </span>
-      <span class="trust-badge">
-        <svg class="w-4 h-4 text-green flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-        Discreet Packaging
-      </span>
-      <span class="trust-badge">
-        <svg class="w-4 h-4 text-green flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-        Fast AU Delivery
-      </span>
-      <span class="trust-badge">
-        <svg class="w-4 h-4 text-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-        4.9/5 Rated (150+ Reviews)
-      </span>
-    </div>
-  </section>
-
-  <!-- Hero Category Grid -->
-  <section class="mb-16 lg:mb-24" id="hero-categories">
-    <div class="section-header">
-      <h2>Shop by Category</h2>
-      <p>Browse the full IGET and Alibarbar range — over 150 flavours across 7 product lines.</p>
-    </div>
-    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {categories.map((cat, idx) => (
-        <a
-          href={cat.href}
-          class="card group block overflow-hidden transition-all duration-300 hover:-translate-y-1"
-        >
-          <div class="p-4" style="border-bottom: 1px solid var(--color-border-light);">
-            <div class="category-hero relative" data-category={cat.slug} style="background: linear-gradient(135deg, #f8f9fb 0%, #f1f3f8 100%); border-radius: var(--radius-lg);">
-            {cat.productImages.map((img, i) => (
-              <img
-                src={img}
-                alt={`${cat.name} ${i === 0 ? '— buy online Australia' : `flavour ${i + 1}`}`}
-                class:list={[
-                  'cat-img w-full object-contain transition-opacity duration-700',
-                  'h-52 sm:h-56',
-                  i === 0 ? 'opacity-100 relative' : 'opacity-0 absolute inset-0',
-                ]}
-                loading={idx < 4 ? 'eager' : 'lazy'}
-                width="400"
-                height="400"
-              />
-            ))}
-            </div>
-          </div>
-          <div class="p-5 text-left">
-            {cat.badge && (
-              <span class="badge-new mb-3 w-fit text-[10px]">{cat.badge}</span>
-            )}
-            <h3 class="text-base font-extrabold uppercase tracking-wide text-text sm:text-lg" style="letter-spacing: 0.04em;">
-              {cat.name}
-            </h3>
-            <p class="mt-2 text-sm leading-relaxed text-text-muted">{cat.description}</p>
-            <ul class="mt-4 space-y-1.5 text-xs font-medium text-text-muted">
-              {cat.highlights.map(item => (
-                <li class="flex items-center gap-2">
-                  <span class="h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0"></span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div class="mt-5 flex items-center justify-between gap-3">
-              <span class="text-sm font-bold text-text">From ${cat.price}</span>
-              <span class="inline-flex items-center px-4 py-2 text-xs font-semibold text-white bg-accent transition-all duration-250 group-hover:bg-accent-dark" style="border-radius: var(--radius-md);">Shop Now</span>
-            </div>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- Why Buy From Us -->
-  <section class="mb-16 lg:mb-24">
-    <div class="section-header">
-      <h2>Why Australians Choose Our Vape Shop</h2>
-      <p>Stop searching "vape shops near me" — we deliver premium disposable vapes straight to your door with the best prices in Australia.</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-      <div class="card p-7 text-center group">
-        <div class="w-12 h-12 flex items-center justify-center mx-auto mb-4 transition-colors duration-250" style="background: rgba(233,69,96,0.07); border-radius: var(--radius-lg);">
-          <svg class="w-5.5 h-5.5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0H6.375c-.621 0-1.125-.504-1.125-1.125V14.25m17.25 4.5V6.75a3 3 0 00-3-3H6.375c-.621 0-1.125.504-1.125 1.125v14.25"/></svg>
-        </div>
-        <h3 class="text-base font-bold mb-2 tracking-tight">Fast Australia-Wide Delivery</h3>
-        <p class="text-sm text-text-muted leading-relaxed">Same-day dispatch before 2pm AEST. Shipping from $10 to Sydney, Melbourne, Brisbane, Perth, Adelaide &amp; all states.</p>
-      </div>
-      <div class="card p-7 text-center group">
-        <div class="w-12 h-12 flex items-center justify-center mx-auto mb-4 transition-colors duration-250" style="background: rgba(233,69,96,0.07); border-radius: var(--radius-lg);">
-          <svg class="w-5.5 h-5.5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-        </div>
-        <h3 class="text-base font-bold mb-2 tracking-tight">100% Genuine Products</h3>
-        <p class="text-sm text-text-muted leading-relaxed">Every IGET vape and Alibarbar vape is authentic, sourced from authorised distributors. No fakes, ever.</p>
-      </div>
-      <div class="card p-7 text-center group">
-        <div class="w-12 h-12 flex items-center justify-center mx-auto mb-4 transition-colors duration-250" style="background: rgba(233,69,96,0.07); border-radius: var(--radius-lg);">
-          <svg class="w-5.5 h-5.5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>
-        </div>
-        <h3 class="text-base font-bold mb-2 tracking-tight">Best Vape Prices in AU</h3>
-        <p class="text-sm text-text-muted leading-relaxed">Cheap vapes starting from $30 AUD. Save even more with Mix &amp; Match bundle deals. Best value guaranteed.</p>
-      </div>
-      <div class="card p-7 text-center group">
-        <div class="w-12 h-12 flex items-center justify-center mx-auto mb-4 transition-colors duration-250" style="background: rgba(233,69,96,0.07); border-radius: var(--radius-lg);">
-          <svg class="w-5.5 h-5.5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"/></svg>
-        </div>
-        <h3 class="text-base font-bold mb-2 tracking-tight">Discreet Packaging</h3>
-        <p class="text-sm text-text-muted leading-relaxed">All orders shipped in plain, unmarked parcels. Your privacy is our priority when you buy vapes online.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mix & Match CTA banner -->
-  <section class="mb-16 lg:mb-24">
-    <a href="/mix-and-match" class="block relative overflow-hidden bg-dark text-white p-7 sm:p-10 lg:p-12 group transition-all duration-300" style="border-radius: var(--radius-xl);">
-      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
-        <div>
-          <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-accent mb-4">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>
-            Bundle &amp; Save
-          </span>
-          <h2 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight" style="letter-spacing: -0.02em;">Mix &amp; Match Any Flavours — Save Up To 20%</h2>
-          <p class="text-white/50 text-sm mt-3 max-w-lg leading-relaxed">Build your own custom bundle across IGET, Alibarbar, or any brand. The more disposable vapes you buy, the more you save.</p>
-        </div>
-        <span class="btn-primary py-3.5 px-8 text-sm flex-shrink-0 group-hover:bg-white group-hover:text-text transition-all duration-250" style="border-radius: var(--radius-lg);">
-          Build Your Bundle &rarr;
-        </span>
-      </div>
-      <div class="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" style="background: rgba(233,69,96,0.06);"></div>
-      <div class="absolute bottom-0 left-0 w-48 h-48 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" style="background: rgba(99,102,241,0.05);"></div>
-    </a>
-  </section>
-
-  <!-- SEO Content: About IGET Vapes -->
-  <section class="mb-14 lg:mb-20">
-    <div class="mx-auto max-w-4xl">
-      <div class="section-header">
-        <h2>Shop the Best Selection of IGET Vapes</h2>
-      </div>
-      <div class="mt-5 space-y-4 text-sm leading-relaxed text-text-muted sm:text-base">
-        <p>
-          At IGET Vape, we offer a wide range of products to meet the needs of every buyer across Australia, from beginner-friendly options to high-puff-count favourites. Our selection includes <strong>IGET Bar</strong>, <strong>IGET Bar Plus</strong>, <strong>IGET One</strong>, <strong>JNR Cruiser</strong>, and premium <strong>Alibarbar</strong> models.
-        </p>
-        <p>
-          You can shop juicy flavours such as Banana Ice, Blueberry Ice, Cherry Pomegranate, Grape Ice, and more. We are committed to giving Australian customers a simple shopping experience that feels much closer to the reference store layout you asked to follow.
-        </p>
-        <p>
-          Thank you for choosing IGET Vape Australia for your vaping needs. Browse the full range above, compare models quickly, and place your order with fast delivery across the country.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Popular Searches / Keyword Cloud -->
-  <section class="mb-16 lg:mb-24">
-    <div class="mx-auto max-w-5xl p-6 sm:p-8" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-xl);">
-      <div class="mb-6 text-center">
-        <h2 class="text-lg font-bold sm:text-xl tracking-tight">Popular Searches in Australia</h2>
-      </div>
-      <div class="flex flex-wrap justify-center gap-2">
-      {[
-        'IGET Vapes', 'Alibarbar', 'IGET Bar Pro', 'IGET Bar', 'Disposable Vapes Australia',
-        'Alibarbar Flavours', 'Buy Vape Online', 'Cheap Vapes', 'Vape Shop Australia',
-        'IGET One', 'Alibarbar Vape Flavours', 'Vape Shop Perth', 'Vape Shop Brisbane',
-        'Online Vapor', 'Alibaba Vapes', 'Vape Price', 'Vapes for Sale',
-        'Disposable Vapes Online', 'IGET Bar Australia', 'Alibarbar Australia',
-        'Best Alibarbar Flavour', 'Vape Flavours IGET', 'Vape Warehouse',
-      ].map(tag => (
-        <span class="cursor-default px-3.5 py-2 text-xs font-medium text-text-muted bg-white transition-colors duration-200 hover:text-accent" style="border: 1px solid var(--color-border-light); border-radius: var(--radius-full);">{tag}</span>
-      ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Delivery Info -->
-  <section class="mb-16 lg:mb-24 p-6 sm:p-8 lg:p-10" style="background: var(--color-surface); border: 1px solid var(--color-border-light); border-radius: var(--radius-xl);">
-    <div class="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
-      <div>
-        <h2 class="text-xl font-bold sm:text-2xl tracking-tight">Vape Delivery Across All of Australia</h2>
-        <p class="mt-4 text-sm leading-relaxed text-text-muted sm:text-base" style="line-height: 1.7;">
-          We deliver <strong>IGET vapes</strong>, <strong>Alibarbar vapes</strong>, and all <strong>disposable vapes</strong> to every state and territory in Australia. Shipping starts from <strong>$10 AUD</strong>, calculated by state, with discreet packaging.
-        </p>
-        <p class="mt-3 text-sm leading-relaxed text-text-muted sm:text-base" style="line-height: 1.7;">
-          No need to search for <strong>vape shops near me</strong> or <strong>vape stores near me</strong> — we ship everywhere, including metro and regional areas across NSW, VIC, QLD, WA, SA, TAS, ACT, and NT.
-        </p>
-        <p class="mt-5">
-          <a href="/delivery" class="text-sm font-semibold text-accent hover:text-accent-dark transition-colors duration-200">View all delivery locations &rarr;</a>
-        </p>
-      </div>
-      <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-        {['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide', 'Gold Coast', 'Canberra', 'Hobart', 'Darwin', 'Cairns', 'Townsville', 'Newcastle'].map(city => (
-          <div class="bg-white px-3 py-3 text-center text-xs font-medium text-text transition-all duration-200 hover:text-accent" style="border: 1px solid var(--color-border-light); border-radius: var(--radius-md);">
-            {city}
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section class="mb-16 lg:mb-24">
-    <div class="section-header text-left">
-      <h2 class="!text-left">Frequently Asked Questions</h2>
-      <p class="!mx-0 !text-left">Everything you need to know about buying IGET vapes in Australia.</p>
-    </div>
-    <div class="space-y-3">
-      {faqs.map((faq, i) => (
-        <details class="group bg-white transition-all duration-250" id={`faq-${i}`} style="border: 1px solid var(--color-border-light); border-radius: var(--radius-lg);">
-          <summary class="p-5 lg:p-6 cursor-pointer flex items-center justify-between text-sm font-semibold text-text hover:text-accent transition-colors duration-200 list-none select-none">
-            <span class="pr-6">{faq.q}</span>
-            <svg class="w-4.5 h-4.5 text-text-muted group-open:rotate-180 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <div class="px-5 pb-5 lg:px-6 lg:pb-6 text-text-muted text-sm" style="border-top: 1px solid var(--color-border-light); padding-top: 1rem; line-height: 1.75;">
-            {faq.a}
-          </div>
-        </details>
-      ))}
-    </div>
-  </section>
-
+  <HomeExperience categories={categories} faqs={faqs} />
 </BaseLayout>
-
-<script>
-  // Product image rotator for hero category cards
-  document.querySelectorAll('.category-hero').forEach(hero => {
-    const imgs = hero.querySelectorAll('.cat-img');
-    if (imgs.length <= 1) return;
-    let current = 0;
-    setInterval(() => {
-      imgs[current].classList.replace('opacity-100', 'opacity-0');
-      imgs[current].classList.replace('relative', 'absolute');
-      current = (current + 1) % imgs.length;
-      imgs[current].classList.replace('opacity-0', 'opacity-100');
-      imgs[current].classList.replace('absolute', 'relative');
-    }, 3000);
-  });
-</script>

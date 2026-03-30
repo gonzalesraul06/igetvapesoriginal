@@ -1,56 +1,94 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+import SchemaMarkup from '@components/seo/SchemaMarkup.astro';
 ---
 
 <BaseLayout
-  title="Contact Us — IGET Vapes Australia | Online Vape Shop Support"
-  description="Get in touch with IGET Vapes Original — Australia's trusted online vape shop. Questions about IGET vapes, Alibarbar vapes, orders, shipping or disposable vapes? We're here to help."
+  title="Contact IGET Vapes Original | Australia"
+  description="Contact IGET Vapes Original for adult retail support, order updates, shipping questions, and product guidance across Australia."
 >
-  <Breadcrumbs items={[{ name: 'Contact Us' }]} />
+  <SchemaMarkup type="localbusiness" />
+  <Breadcrumbs items={[{ name: 'Contact' }]} />
 
-  <div class="max-w-3xl">
-    <div class="page-header">
-      <h1>Contact Us</h1>
-      <p>Have a question about your order, our <strong>IGET vapes</strong>, <strong>Alibarbar vapes</strong>, or shipping? We're Australia's friendliest online <strong>vape shop</strong>!</p>
-    </div>
+  <div class="contact-grid">
+    <section class="contact-panel" data-reveal>
+      <span class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Contact and support
+      </span>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-      <div class="card p-5 text-center">
-        <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-accent/10 flex items-center justify-center">
-          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-        </div>
-        <h3 class="font-semibold text-sm mb-1">Email Us</h3>
-        <a href="mailto:info@igetvapeshub.com" class="text-accent hover:text-text text-sm font-medium transition-colors">info@igetvapeshub.com</a>
-        <p class="text-xs text-text-muted mt-1">We respond within 24 hours</p>
-      </div>
-      <div class="card p-5 text-center">
-        <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-accent/10 flex items-center justify-center">
-          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <h3 class="font-semibold text-sm mb-1">Fast Support</h3>
-        <p class="text-xs text-text-muted">Quick answers to your questions</p>
-      </div>
-      <div class="card p-5 text-center">
-        <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-accent/10 flex items-center justify-center">
-          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        </div>
-        <h3 class="font-semibold text-sm mb-1">Australia-Wide</h3>
-        <p class="text-xs text-text-muted">Serving all states &amp; territories</p>
-      </div>
-    </div>
+      <h1 class="mt-5 text-5xl text-text lg:text-6xl">Talk to a real person, not a template.</h1>
+      <p class="mt-5 max-w-2xl text-base leading-8 text-text-muted">
+        Use this page for order questions, flavour availability, shipping concerns, or help choosing the right line. The tone of the site should carry through here: clear, adult, and useful.
+      </p>
 
-    <div class="card p-6 lg:p-8 rounded-xl">
-      <h2 class="text-xl font-bold mb-6">Send Us a Message</h2>
-      <form id="contact-form" class="space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="support-grid mt-8">
+        <div class="info-card p-6 text-left">
+          <div class="icon-wrap mx-0 mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h2 class="text-3xl text-text">Email-first support</h2>
+          <p class="mt-3 text-sm">Best for order changes, payment confirmations, and product-specific questions.</p>
+          <a href="mailto:info@igetvapeshub.com" class="mt-4 inline-flex text-sm font-semibold text-accent-dark hover:text-accent">info@igetvapeshub.com</a>
+        </div>
+
+        <div class="info-card p-6 text-left">
+          <div class="icon-wrap mx-0 mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h2 class="text-3xl text-text">Fast triage</h2>
+          <p class="mt-3 text-sm">Messages are reviewed quickly so urgent shipping or order issues do not sit in a queue without context.</p>
+        </div>
+
+        <div class="info-card p-6 text-left">
+          <div class="icon-wrap mx-0 mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h2 class="text-3xl text-text">Australia-wide</h2>
+          <p class="mt-3 text-sm">Support covers metro and regional delivery questions with the same adult-only checkout rules across all states.</p>
+        </div>
+
+        <div class="info-card p-6 text-left">
+          <div class="icon-wrap mx-0 mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h2 class="text-3xl text-text">Useful replies</h2>
+          <p class="mt-3 text-sm">Share your order number and the exact issue if you have one. It shortens the path from first message to solution.</p>
+        </div>
+      </div>
+
+      <div class="utility-note mt-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">What to include</p>
+        <p class="mt-3 text-sm leading-7 text-text">
+          Name, order reference if available, the range or flavour you are asking about, and whether the question is about delivery, payment instructions, or product guidance.
+        </p>
+      </div>
+    </section>
+
+    <section class="form-panel" data-reveal data-reveal-delay="80">
+      <p class="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-text-muted">Send a message</p>
+      <h2 class="mt-3 text-4xl text-text">We will route it properly.</h2>
+      <p class="mt-3 text-sm leading-7 text-text-muted">Use the form below and keep the message specific. That produces the fastest and most helpful response.</p>
+
+      <form id="contact-form" class="mt-8 space-y-5">
+        <div class="grid gap-5 md:grid-cols-2">
           <div>
             <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" name="name" required class="form-input" placeholder="Your name" />
+            <input type="text" id="name" name="name" required class="form-input" placeholder="Your full name" />
           </div>
           <div>
             <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" name="email" required class="form-input" placeholder="your@email.com" />
+            <input type="email" id="email" name="email" required class="form-input" placeholder="name@example.com" />
           </div>
         </div>
 
@@ -58,105 +96,103 @@ import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
           <label for="subject" class="form-label">Subject</label>
           <select id="subject" name="subject" required class="form-input">
             <option value="">Select a subject</option>
-            <option value="order">Order Inquiry</option>
-            <option value="product">Product Question (IGET / Alibarbar)</option>
-            <option value="flavours">Flavour Availability</option>
-            <option value="shipping">Shipping & Delivery</option>
-            <option value="returns">Returns & Refunds</option>
+            <option value="order">Order inquiry</option>
+            <option value="product">Product question</option>
+            <option value="flavours">Flavour availability</option>
+            <option value="shipping">Shipping and delivery</option>
+            <option value="returns">Returns or refunds</option>
             <option value="other">Other</option>
           </select>
         </div>
 
         <div>
-          <label for="order-number" class="form-label">Order Number (optional)</label>
-          <input type="text" id="order-number" name="orderNumber" class="form-input" placeholder="#12345" />
+          <label for="order-number" class="form-label">Order number</label>
+          <input type="text" id="order-number" name="orderNumber" class="form-input" placeholder="#12345 (optional)" />
         </div>
 
         <div>
           <label for="message" class="form-label">Message</label>
-          <textarea id="message" name="message" required rows="5" class="form-input resize-y" placeholder="How can we help?"></textarea>
+          <textarea id="message" name="message" required rows="6" class="form-input resize-y" placeholder="Tell us exactly what you need help with."></textarea>
         </div>
 
-        <button type="submit" class="btn-primary w-full py-3">Send Message</button>
+        <button type="submit" class="btn-primary flex w-full justify-center">Send message</button>
       </form>
-    </div>
 
-    <div class="mt-10 prose max-w-none">
-      <h2>Need Help Finding the Right Vape?</h2>
-      <p>Not sure which <strong>disposable vape</strong> is right for you? Here's a quick guide:</p>
-      <ul>
-        <li><strong>New to vaping?</strong> Try the <a href="/products/iget-bar-pro">IGET Bar Pro</a> — 26 flavours, easy to use, great vape price.</li>
-        <li><strong>Want maximum puffs?</strong> Go for the <a href="/products/jnr-cruiser">JNR Cruiser 12000</a> or <a href="/products/iget-one">IGET One 12000</a>.</li>
-        <li><strong>Looking for Alibarbar?</strong> Check out all <a href="/products/alibarbar-ingot">Alibarbar flavours</a> in Ingot and Ice Adjust ranges.</li>
-        <li><strong>On a budget?</strong> Browse our <a href="/mix-and-match">Mix & Match deals</a> for cheap vapes with bulk savings.</li>
-      </ul>
-    </div>
+      <div class="utility-note mt-6">
+        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">Helpful shortcuts</p>
+        <div class="mt-3 flex flex-wrap gap-3 text-sm">
+          <a href="/products/iget-bar-pro" class="btn-secondary">Browse Bar Pro</a>
+          <a href="/products/alibarbar-ingot" class="btn-secondary">Browse Alibarbar</a>
+          <a href="/delivery" class="btn-secondary">Delivery locations</a>
+          <a href="/shipping-policy" class="btn-secondary">Shipping policy</a>
+        </div>
+      </div>
+    </section>
   </div>
 
   <script>
-    function showFormError(msg: string) {
-      let el = document.getElementById('form-error');
-      if (!el) {
-        el = document.createElement('div');
-        el.id = 'form-error';
-        el.className = 'bg-red-50 border border-red-200 text-red-700 rounded p-4 text-sm flex items-start gap-3';
+    const showFormError = (message: string) => {
+      let errorElement = document.getElementById('form-error');
+      if (!errorElement) {
+        errorElement = document.createElement('div');
+        errorElement.id = 'form-error';
+        errorElement.className = 'rounded-[1.2rem] border border-[rgba(182,87,87,0.22)] bg-white/70 px-4 py-4 text-sm text-danger';
         const form = document.getElementById('contact-form');
-        form?.prepend(el);
+        form?.prepend(errorElement);
       }
-      el.innerHTML = `
-        <svg class="w-5 h-5 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
-        <span>${msg}</span>
-      `;
-      el.classList.remove('hidden');
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+      errorElement.textContent = message;
+      errorElement.classList.remove('hidden');
+      errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
 
-    const form = document.getElementById('contact-form') as HTMLFormElement;
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      const originalText = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = 'Sending...';
+    const form = document.getElementById('contact-form');
+    if (form instanceof HTMLFormElement) {
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (!(submitButton instanceof HTMLButtonElement)) return;
 
-      try {
-        const formData = new FormData(form);
-        const payload = {
-          name: formData.get('name'),
-          email: formData.get('email'),
-          subject: formData.get('subject'),
-          orderNumber: formData.get('orderNumber') || '',
-          message: formData.get('message'),
-        };
+        const originalText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
 
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
+        try {
+          const formData = new FormData(form);
+          const payload = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            subject: formData.get('subject'),
+            orderNumber: formData.get('orderNumber') || '',
+            message: formData.get('message'),
+          };
 
-        const result = await res.json();
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
 
-        if (res.ok && result.success) {
-          form.innerHTML = `
-            <div class="text-center py-8">
-              <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
-                <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          const result = await response.json();
+
+          if (response.ok && result.success) {
+            form.innerHTML = `
+              <div class="rounded-[1.6rem] border border-[rgba(15,124,114,0.18)] bg-[rgba(227,243,240,0.72)] px-6 py-10 text-center">
+                <p class="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-text-muted">Message sent</p>
+                <h3 class="mt-3 text-4xl text-text">We have it.</h3>
+                <p class="mt-3 text-sm leading-7 text-text-muted">A response will follow as soon as the support team reviews your details.</p>
               </div>
-              <h3 class="text-xl font-bold mb-2">Message Sent!</h3>
-              <p class="text-text-muted">We'll get back to you within 24 hours.</p>
-            </div>
-          `;
-        } else {
-          showFormError(result.error || 'Failed to send message. Please try again.');
-          btn.disabled = false;
-          btn.textContent = originalText;
+            `;
+            return;
+          }
+
+          showFormError(result.error || 'Unable to send the message right now. Please try again.');
+        } catch {
+          showFormError('Network error. Please check your connection and try again.');
         }
-      } catch (err) {
-        showFormError('Network error. Please check your connection and try again.');
-        btn.disabled = false;
-        btn.textContent = originalText;
-      }
-    });
+
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      });
+    }
   </script>
 </BaseLayout>
